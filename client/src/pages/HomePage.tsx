@@ -1,6 +1,6 @@
-// pages/HomePage.tsx - Fully Responsive Version
+// pages/HomePage.tsx - Web Development Agency Version
 import React, { useState, useEffect } from 'react';
-import { Play, TrendingUp, ArrowRight, CheckCircle, Quote, Users, Clock, Shield, CreditCard, TrendingUp as Growth, Target } from 'lucide-react';
+import { Play, TrendingUp, ArrowRight, CheckCircle, Quote, Users, Clock, Shield, CreditCard, Code, Palette, Zap } from 'lucide-react';
 
 interface HomePageProps {
   onGetStarted?: () => void;
@@ -19,72 +19,72 @@ const HomePage: React.FC<HomePageProps> = ({ onGetStarted }) => {
 
   const services = [
     {
-      platform: 'YouTube',
-      icon: '/src/assets/youtube.png',
-      color: 'from-red-100 to-red-200',
-      description: 'Grow your channel with targeted subscribers, views, and engagement that drives real results.',
-      features: ['Real Subscribers', 'High-Retention Views', 'Monetization Ready', 'Algorithm Optimization'],
-      stats: { followers: '2M+', engagement: '95%', clients: '1.2K' }
+      platform: 'Frontend',
+      icon: '🎨',
+      color: 'from-blue-100 to-blue-200',
+      description: 'Create stunning, responsive user interfaces with modern frameworks like React, Vue, and Angular.',
+      features: ['React Development', 'Responsive Design', 'UI/UX Implementation', 'Performance Optimization'],
+      stats: { projects: '500+', clients: '200+', satisfaction: '99%' }
     },
     {
-      platform: 'TikTok',
-      icon: '/src/assets/tiktok.png',
-      color: 'from-gray-200 to-gray-300',
-      description: 'Viral growth strategies that get your content on the For You Page and build authentic followings.',
-      features: ['Viral Content Strategy', 'FYP Optimization', 'Trending Hashtags', 'Engagement Pods'],
-      stats: { followers: '5M+', engagement: '88%', clients: '2.1K' }
+      platform: 'Backend',
+      icon: '⚙️',
+      color: 'from-green-100 to-green-200',
+      description: 'Build robust, scalable server-side solutions with Node.js, Python, PHP, and cloud technologies.',
+      features: ['API Development', 'Database Design', 'Cloud Integration', 'Security Implementation'],
+      stats: { projects: '300+', clients: '150+', uptime: '99.9%' }
     },
     {
-      platform: 'Instagram',
-      icon: '/src/assets/instagram.png',
+      platform: 'Full Stack',
+      icon: '🚀',
       color: 'from-purple-500 to-pink-500',
-      description: 'Build a stunning Instagram presence with real followers, engagement, and brand partnerships.',
-      features: ['Story Strategies', 'Reels Optimization', 'Brand Partnerships', 'Shopping Integration'],
-      stats: { followers: '3M+', engagement: '92%', clients: '1.8K' }
+      description: 'Complete web solutions from concept to deployment with modern tech stacks and best practices.',
+      features: ['End-to-End Development', 'DevOps & Deployment', 'Maintenance & Support', 'Technical Consulting'],
+      stats: { projects: '200+', clients: '100+', retention: '95%' }
     }
   ];
 
   const testimonials = [
     {
       name: "Sarah Johnson",
-      role: "Fashion Influencer",
-      platform: "Instagram",
+      role: "Startup Founder",
+      platform: "E-commerce Platform",
       image: "👩‍💼",
-      content: "In just 3 months, my Instagram grew from 5K to 50K followers. The engagement is incredible and all followers are real people who actually care about my content.",
-      stats: "5K → 50K followers in 3 months"
+      content: "They built our entire e-commerce platform in just 8 weeks. The code quality is exceptional and the site handles thousands of concurrent users flawlessly.",
+      stats: "8-week delivery, 99.9% uptime"
     },
     {
       name: "Mike Rodriguez",
-      role: "Gaming Content Creator",
-      platform: "YouTube",
+      role: "CTO",
+      platform: "SaaS Application",
       image: "👨‍💻",
-      content: "My YouTube channel finally hit monetization requirements! The subscribers are genuine gamers who actually watch my content. Revenue has increased 10x.",
-      stats: "Hit 4K watch hours + 1K subs"
+      content: "Outstanding development team! They delivered a complex SaaS application that scales beautifully. Our revenue increased 300% after launch.",
+      stats: "300% revenue increase post-launch"
     },
     {
       name: "Emma Chen",
-      role: "Dance Creator",
-      platform: "TikTok",
+      role: "Marketing Director",
+      platform: "Corporate Website",
       image: "👩‍🎨",
-      content: "Three of my videos went viral after working with this team. They understand the TikTok algorithm better than anyone. My follower count exploded overnight.",
-      stats: "3 viral videos, 500K+ followers"
+      content: "The new website increased our conversion rate by 250%. Beautiful design, lightning-fast performance, and perfect mobile responsiveness.",
+      stats: "250% conversion rate increase"
     }
   ];
 
   const features = [
-    { icon: Users, title: 'Real Users Only', description: 'No bots or fake accounts. Every follower is a real person.' },
-    { icon: Clock, title: 'Fast Delivery', description: 'See results within 24-72 hours of starting your campaign.' },
-    { icon: Shield, title: '100% Safe', description: 'Compliant with all platform guidelines. Your account stays secure.' },
-    { icon: CreditCard, title: 'Money-Back Guarantee', description: '30-day guarantee. Not satisfied? Get your money back.' },
-    { icon: Growth, title: 'Organic Growth', description: 'Natural growth patterns that look authentic to algorithms.' },
-    { icon: Target, title: 'Targeted Audience', description: 'Reach people who are genuinely interested in your content.' }
+    { icon: Code, title: 'Clean Code', description: 'Well-structured, maintainable code following industry best practices.' },
+    { icon: Clock, title: 'Fast Delivery', description: 'Agile development process with regular updates and on-time delivery.' },
+    { icon: Shield, title: 'Secure Solutions', description: 'Security-first approach with comprehensive testing and protection.' },
+    { icon: CreditCard, title: 'Fair Pricing', description: 'Transparent pricing with no hidden costs. Pay for value delivered.' },
+    { icon: Zap, title: 'High Performance', description: 'Optimized applications that load fast and scale efficiently.' },
+    { icon: Palette, title: 'Modern Design', description: 'Beautiful, user-centered designs that convert visitors to customers.' }
   ];
 
   const stats = [
-    { number: '10M+', label: 'Followers Delivered' },
-    { number: '25K+', label: 'Happy Clients' },
-    { number: '99.8%', label: 'Success Rate' },
-    { number: '24/7', label: 'Expert Support' }
+    { number: '500+', label: 'Projects Delivered' },
+    { number: '200+', label: 'Happy Clients' },
+    { number: '99.9%', label: 'Uptime Guarantee' },
+    { number: '24/7', label: 'Technical Support' }
   ];
 
   return (
@@ -103,32 +103,32 @@ const HomePage: React.FC<HomePageProps> = ({ onGetStarted }) => {
             {/* Trust Badge */}
             <div className="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 rounded-full bg-gradient-to-r from-green-100 to-blue-100 text-green-800 text-xs sm:text-sm font-medium mb-6 sm:mb-8 animate-bounce">
               <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
-              <span className="hidden sm:inline">Trusted by 25,000+ Creators Worldwide</span>
-              <span className="sm:hidden">Trusted by 25K+ Creators</span>
+              <span className="hidden sm:inline">Trusted by 200+ Companies Worldwide</span>
+              <span className="sm:hidden">Trusted by 200+ Companies</span>
             </div>
 
             {/* Main Heading */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-gray-900 mb-4 sm:mb-6 leading-tight">
-              <span className="block">Grow Your</span>
+              <span className="block">Build Your</span>
               <span className="bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 bg-clip-text text-transparent block">
-                Social Media
+                Digital Future
               </span>
               <span className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl flex items-center justify-center gap-2 sm:gap-4 mt-2">
-                <span>Empire</span>
-                <span className="animate-bounce text-lg sm:text-2xl md:text-3xl lg:text-4xl">🚀</span>
+                <span>Today</span>
+                <span className="animate-bounce text-lg sm:text-2xl md:text-3xl lg:text-4xl">💻</span>
               </span>
             </h1>
 
             {/* Subtitle */}
             <div className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed px-2">
               <p className="mb-2">
-                Professional social media marketing services for 
-                <span className="font-semibold text-red-600"> YouTube</span>,
-                <span className="font-semibold text-black"> TikTok</span>, and
-                <span className="font-semibold text-purple-600"> Instagram</span>.
+                Professional web development services for 
+                <span className="font-semibold text-blue-600"> Frontend</span>,
+                <span className="font-semibold text-green-600"> Backend</span>, and
+                <span className="font-semibold text-purple-600"> Full Stack</span> solutions.
               </p>
               <p className="text-sm sm:text-base md:text-lg font-medium text-purple-700">
-                Real followers. Real engagement. Real results.
+                Modern technology. Scalable architecture. Exceptional results.
               </p>
             </div>
 
@@ -148,28 +148,31 @@ const HomePage: React.FC<HomePageProps> = ({ onGetStarted }) => {
                 onClick={onGetStarted}
                 className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold hover:shadow-2xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 min-w-0 sm:min-w-64"
               >
-                <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5" />
-                <span>Start Growing Now</span>
+                <Code className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span>Start Your Project</span>
               </button>
               <button className="w-full sm:w-auto border-2 border-purple-600 text-purple-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold hover:bg-purple-600 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 min-w-0 sm:min-w-64">
                 <Play className="w-4 h-4 sm:w-5 sm:h-5" />
-                <span className="hidden sm:inline">Watch Success Stories</span>
-                <span className="sm:hidden">Success Stories</span>
+                <span className="hidden sm:inline">View Our Portfolio</span>
+                <span className="sm:hidden">Our Portfolio</span>
               </button>
             </div>
 
-            {/* Platform Icons */}
+            {/* Technology Icons */}
             <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8 text-gray-500">
-              <span className="text-xs sm:text-sm font-medium">Available on:</span>
+              <span className="text-xs sm:text-sm font-medium">Technologies we use:</span>
               <div className="flex space-x-6 sm:space-x-8 items-center">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center transform hover:scale-110 transition-transform cursor-pointer">
-                  <img src="/src/assets/youtube.png" alt="YouTube" className="w-full h-full object-contain" />
+                <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center transform hover:scale-110 transition-transform cursor-pointer text-2xl">
+                  ⚛️
                 </div>
-                <div className="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center transform hover:scale-110 transition-transform cursor-pointer">
-                  <img src="/src/assets/tiktok.png" alt="TikTok" className="w-full h-full object-contain" />
+                <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center transform hover:scale-110 transition-transform cursor-pointer text-2xl">
+                  🟢
                 </div>
-                <div className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center transform hover:scale-110 transition-transform cursor-pointer">
-                  <img src="/src/assets/instagram.png" alt="Instagram" className="w-full h-full object-contain" />
+                <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center transform hover:scale-110 transition-transform cursor-pointer text-2xl">
+                  🐍
+                </div>
+                <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center transform hover:scale-110 transition-transform cursor-pointer text-2xl">
+                  ☁️
                 </div>
               </div>
             </div>
@@ -182,10 +185,10 @@ const HomePage: React.FC<HomePageProps> = ({ onGetStarted }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
-              Choose Your Platform
+              Our Development Services
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
-              Specialized growth strategies tailored for each platform's unique algorithm and audience behavior.
+              From beautiful frontends to robust backends, we deliver complete web solutions that scale with your business.
             </p>
           </div>
 
@@ -193,17 +196,14 @@ const HomePage: React.FC<HomePageProps> = ({ onGetStarted }) => {
             {services.map((service, index) => (
               <div key={index} className="bg-white rounded-xl sm:rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group">
                 {/* Header */}
-                <div className={`bg-gradient-to-r ${service.color} p-4 sm:p-6 ${service.platform === 'Instagram' ? 'text-white' : 'text-gray-800'} relative overflow-hidden`}>
-                  <div className={`absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 ${service.platform === 'Instagram' ? 'bg-white' : 'bg-gray-300'} opacity-10 rounded-full -translate-y-12 sm:-translate-y-16 translate-x-12 sm:translate-x-16`}></div>
+                <div className={`bg-gradient-to-r ${service.color} p-4 sm:p-6 ${service.platform === 'Full Stack' ? 'text-white' : 'text-gray-800'} relative overflow-hidden`}>
+                  <div className={`absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 ${service.platform === 'Full Stack' ? 'bg-white' : 'bg-gray-300'} opacity-10 rounded-full -translate-y-12 sm:-translate-y-16 translate-x-12 sm:translate-x-16`}></div>
                   <div className="relative z-10">
-                    <div className={`${service.platform === 'TikTok' ? 'w-20 h-20 sm:w-24 sm:h-24' : 'w-10 h-10 sm:w-12 sm:h-12'} mb-2`}>
-                      <img src={service.icon} alt={service.platform} className="w-full h-full object-contain" />
-                    </div>
+                    <div className="text-4xl sm:text-5xl mb-2">{service.icon}</div>
                     <h3 className="text-xl sm:text-2xl font-bold mb-2">{service.platform}</h3>
                     <div className="flex flex-col sm:flex-row sm:space-x-4 text-xs sm:text-sm opacity-90">
-                      <span>{service.stats.followers} followers</span>
-                      <span>{service.stats.engagement} engagement</span>
-                      <span>{service.stats.clients} clients</span>
+                      <span>{service.stats.projects || service.stats.clients} projects</span>
+                      <span>{service.stats.satisfaction || service.stats.uptime || service.stats.retention}</span>
                     </div>
                   </div>
                 </div>
@@ -225,7 +225,7 @@ const HomePage: React.FC<HomePageProps> = ({ onGetStarted }) => {
                     onClick={onGetStarted}
                     className={`w-full bg-gradient-to-r ${service.color} text-white py-2.5 sm:py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-200 transform group-hover:scale-105 flex items-center justify-center gap-2 text-sm sm:text-base`}
                   >
-                    <span className="hidden sm:inline">Get Started with {service.platform}</span>
+                    <span className="hidden sm:inline">Start {service.platform} Project</span>
                     <span className="sm:hidden">Get Started</span>
                     <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
                   </button>
@@ -241,10 +241,10 @@ const HomePage: React.FC<HomePageProps> = ({ onGetStarted }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
-              Why Choose VISIONBOOST Agency?
+              Why Choose DevCraft Agency?
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
-              We're not just another growth service. We're your dedicated partner in building authentic, lasting social media success.
+              We're not just another development agency. We're your dedicated partner in building exceptional digital experiences.
             </p>
           </div>
 
@@ -270,10 +270,10 @@ const HomePage: React.FC<HomePageProps> = ({ onGetStarted }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
-              Success Stories
+              Client Success Stories
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
-              Real results from real creators who trusted us with their growth journey.
+              Real results from real clients who trusted us with their digital transformation.
             </p>
           </div>
 
@@ -334,28 +334,28 @@ const HomePage: React.FC<HomePageProps> = ({ onGetStarted }) => {
       <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-r from-purple-600 to-pink-600">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
-            Ready to Transform Your Social Media?
+            Ready to Build Something Amazing?
           </h2>
           <p className="text-lg sm:text-xl text-purple-100 mb-6 sm:mb-8 max-w-2xl mx-auto">
-            Join thousands of creators who've accelerated their growth with our proven strategies. Your success story starts today.
+            Join hundreds of companies who've transformed their digital presence with our expert development team. Your vision starts here.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
             <button 
               onClick={onGetStarted}
               className="w-full sm:w-auto bg-white text-purple-600 font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg hover:shadow-2xl transition-all duration-200 transform hover:scale-105"
             >
-              🚀 Start Your Growth Journey
+              💻 Start Your Project Today
             </button>
             <button className="w-full sm:w-auto border-2 border-white text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg hover:bg-white hover:text-purple-600 transition-all duration-200">
-              💬 Speak with an Expert
+              💬 Schedule a Consultation
             </button>
           </div>
           <p className="text-purple-200 text-xs sm:text-sm mt-4 sm:mt-6 space-y-1 sm:space-y-0">
-            <span className="block sm:inline">✅ No contracts</span>
+            <span className="block sm:inline">✅ Free consultation</span>
             <span className="hidden sm:inline"> • </span>
-            <span className="block sm:inline">✅ 30-day guarantee</span>
+            <span className="block sm:inline">✅ No commitment required</span>
             <span className="hidden sm:inline"> • </span>
-            <span className="block sm:inline">✅ Results within 72 hours</span>
+            <span className="block sm:inline">✅ Same-day response</span>
           </p>
         </div>
       </section>
