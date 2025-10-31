@@ -14,7 +14,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 import requests
 import dateutil.parser
-from ..models import Client, Invoice
+from ..models import Client, Invoice, User
+from ..services.notification_service import NotificationService
 
 logger = logging.getLogger(__name__)
 
@@ -44,13 +45,13 @@ def ensure_client_profile(user):
         logger.info(f"Created missing client profile for user {user.id}")
         return client
 
-# SERVER-BASED PLAN CONFIGURATION - No PayPal Plan IDs needed
-PAYPAL_PLANS = {
+SERVER_PLANS = {
     'starter': {
         'id': 'starter',
         'name': 'Starter Plan',
         'price': 100,
-        'paypal_plan_id': getattr(settings, 'PAYPAL_STARTER_PLAN_ID', 'P-5ML4271244454362WXNWU5NQ'),
+        'billing_cycle': 'monthly',
+        'paypal_plan_id': 'P-53U63963MC933251TNDOIX4A',  # ✅ YOUR ACTUAL STARTER PLAN ID
         'features': [
             '12 posts (photos/reels)',
             '12 interactive stories', 
@@ -63,7 +64,8 @@ PAYPAL_PLANS = {
         'id': 'pro', 
         'name': 'Pro Plan',
         'price': 250,
-        'paypal_plan_id': getattr(settings, 'PAYPAL_PRO_PLAN_ID', 'P-1GJ4271244454362WXNWU5NR'),
+        'billing_cycle': 'monthly',
+        'paypal_plan_id': 'P-91K448064U4101319NDOIZ4I',  # ✅ YOUR ACTUAL PRO PLAN ID
         'features': [
             '20 posts + reels',
             'Advanced promotional campaigns',
@@ -76,7 +78,8 @@ PAYPAL_PLANS = {
         'id': 'premium',
         'name': 'Premium Plan', 
         'price': 400,
-        'paypal_plan_id': getattr(settings, 'PAYPAL_PREMIUM_PLAN_ID', 'P-2GJ4271244454362WXNWU5NS'),
+        'billing_cycle': 'monthly',
+        'paypal_plan_id': 'P-6G913718359162141NDOI2QQ',  # ✅ YOUR ACTUAL PREMIUM PLAN ID
         'features': [
             'Instagram + Facebook + TikTok',
             '30+ posts (design, reels, carousel)',
@@ -86,6 +89,9 @@ PAYPAL_PLANS = {
         ]
     }
 }
+
+# Keep alias for backward compatibility with other parts of code
+PAYPAL_PLANS = SERVER_PLANS
 
 class PayPalAPIClient:
     """PayPal API client for handling authentication and requests"""
@@ -293,6 +299,18 @@ def approve_subscription(request):
             
             logger.info(f"Subscription {subscription_id} SUCCESSFULLY ACTIVATED for user {request.user.id} after PayPal confirmation")
             
+            # 🔔 NEW: Notify client of subscription activation
+            NotificationService.notify_subscription_activated(
+                client_user=request.user,
+                plan_name=current_plan
+            )
+            
+            # 🔔 NEW: Notify admins of new subscription
+            NotificationService.notify_subscription_created(
+                client=client,
+                plan_name=current_plan
+            )
+            
             return Response({
                 'success': True,
                 'subscription_id': subscription_id,
@@ -325,24 +343,33 @@ def create_subscription(request):
         plan_name = request.data.get('plan_name')
         price_id = request.data.get('price_id', '').replace('price_', '').replace('_monthly', '')
         
+        logger.info(f"Creating subscription - plan_name: {plan_name}, price_id: {price_id}")
+        logger.info(f"Request data: {request.data}")
+        
         # Find the plan
         plan_data = None
-        for plan_id, plan in PAYPAL_PLANS.items():
+        for plan_id, plan in SERVER_PLANS.items():
             if plan_id == price_id or plan['name'] == plan_name:
                 plan_data = plan
                 break
         
         if not plan_data:
+            logger.error(f"Plan not found - plan_name: {plan_name}, price_id: {price_id}")
             return Response(
-                {'error': 'Invalid plan selected'},
+                {'error': f'Invalid plan selected. Available plans: {list(SERVER_PLANS.keys())}'},
                 status=status.HTTP_400_BAD_REQUEST
             )
         
+        logger.info(f"Found plan: {plan_data['name']} (${plan_data['price']})")
+        
         if not plan_data.get('paypal_plan_id'):
+            logger.error(f"PayPal plan ID not configured for {plan_data['name']}")
             return Response(
                 {'error': f'PayPal plan ID not configured for {plan_data["name"]}'},
                 status=status.HTTP_400_BAD_REQUEST
             )
+        
+        logger.info(f"Using PayPal plan ID: {plan_data['paypal_plan_id']}")
         
         paypal_client = PayPalAPIClient()
         
@@ -371,7 +398,18 @@ def create_subscription(request):
             }
         }
         
-        subscription = paypal_client.make_request('POST', '/v1/billing/subscriptions', subscription_data)
+        logger.info(f"Creating PayPal subscription with data: {subscription_data}")
+        
+        try:
+            subscription = paypal_client.make_request('POST', '/v1/billing/subscriptions', subscription_data)
+        except Exception as paypal_error:
+            logger.error(f"PayPal API error: {paypal_error}")
+            return Response(
+                {'error': f'PayPal API error: {str(paypal_error)}'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        logger.info(f"PayPal subscription created: {subscription}")
         
         # Find approval URL
         approval_url = None
@@ -381,11 +419,13 @@ def create_subscription(request):
                 break
         
         if not approval_url:
+            logger.error("No approval URL found in PayPal response")
+            logger.error(f"PayPal response: {subscription}")
             raise Exception("No approval URL found in PayPal response")
         
         # IMPORTANT: Store subscription ID but DON'T activate yet
         try:
-            client = Client.objects.get(user=request.user)
+            client = ensure_client_profile(request.user)
             # Store the subscription ID but keep status as pending
             client.paypal_subscription_id = subscription['id']
             client.current_plan = plan_data['id']
@@ -395,8 +435,10 @@ def create_subscription(request):
             client.status = 'pending'
             client.payment_status = 'pending'
             client.save()
-        except Client.DoesNotExist:
-            logger.error(f"Client profile not found for user {request.user.id}")
+            logger.info(f"Saved subscription ID to client profile: {client.id}")
+        except Exception as db_error:
+            logger.error(f"Error saving to database: {db_error}")
+            # Continue anyway - subscription is created in PayPal
         
         logger.info(f"Created PayPal subscription {subscription['id']} for user {request.user.id} - AWAITING APPROVAL")
         
@@ -410,9 +452,9 @@ def create_subscription(request):
         })
         
     except Exception as e:
-        logger.error(f"Error creating subscription: {e}")
+        logger.error(f"Error creating subscription: {e}", exc_info=True)
         return Response(
-            {'error': 'Failed to create subscription'},
+            {'error': f'Failed to create subscription: {str(e)}'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
 
@@ -439,6 +481,12 @@ def cancel_subscription(request):
         client.save()
         
         logger.info(f"Server-managed subscription cancelled for user {request.user.id}")
+        
+        # 🔔 NEW: Notify client of cancellation
+        NotificationService.notify_subscription_cancelled(client.user)
+        
+        # 🔔 NEW: Notify admins of cancellation
+        NotificationService.notify_client_cancelled_subscription(client)
         
         return Response({
             'success': True,

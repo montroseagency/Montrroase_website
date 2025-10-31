@@ -24,9 +24,23 @@ from .views import (
     health_check
 )
 
+from .views.admin.bank_settings_views import (
+    admin_bank_settings,
+    submit_payment_verification,
+    get_pending_verifications,
+    approve_payment_verification
+)
+
+
+from .views.auth_views import (
+    RegisterView, LoginView, logout_view, current_user_view,
+    update_profile, change_password,
+    # NEW: Add verification endpoints
+    send_verification_code, verify_and_register, resend_verification_code
+)
 # Import auth views
 try:
-    from .views.auth_views import update_profile, change_password
+    from .views.profile_views import update_profile, change_password
     AUTH_VIEWS_AVAILABLE = True
 except ImportError:
     AUTH_VIEWS_AVAILABLE = False
@@ -149,6 +163,10 @@ urlpatterns = [
     path('auth/me/', current_user_view, name='current_user'),
     path('auth/change-password/', change_password, name='change_password'),
     
+    # NEW: Email verification endpoints
+    path('auth/send-verification-code/', send_verification_code, name='send_verification_code'),
+    path('auth/verify-and-register/', verify_and_register, name='verify_and_register'),
+    path('auth/resend-verification-code/', resend_verification_code, name='resend_verification_code'),
     # OAuth endpoints
     path('oauth/instagram/initiate/', initiate_instagram_oauth, name='instagram_oauth_initiate'),
     path('oauth/instagram/callback/', handle_instagram_callback, name='instagram_oauth_callback'),
@@ -181,6 +199,7 @@ urlpatterns = [
     path('billing/create-order/', create_order, name='create_order'),
     path('billing/capture-payment/', capture_payment, name='capture_payment'),
     
+    
     # Invoice payments (stub for compatibility)
     path('billing/invoices/<uuid:invoice_id>/pay/', pay_invoice_stub, name='pay_invoice'),
     
@@ -203,6 +222,12 @@ urlpatterns = [
     
     # Health check
     path('health/', health_check, name='health_check'),
+    
+        # Bank Settings and Payment Verification
+    path('admin/bank-settings/', admin_bank_settings, name='admin_bank_settings'),
+    path('billing/submit-verification/', submit_payment_verification, name='submit_verification'),
+    path('admin/pending-verifications/', get_pending_verifications, name='pending_verifications'),
+    path('admin/approve-verification/<uuid:verification_id>/', approve_payment_verification, name='approve_verification'),
     
     # Message endpoints
     path('messages/send-to-admin/', send_message_to_admin, name='send_message_to_admin'),

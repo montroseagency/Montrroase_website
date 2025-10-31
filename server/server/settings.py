@@ -128,14 +128,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
 # Media files
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -160,6 +160,11 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
+    ],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework.parsers.FormParser',
     ],
     'DATETIME_FORMAT': '%Y-%m-%dT%H:%M:%S.%fZ',
     'DATE_FORMAT': '%Y-%m-%d',
@@ -220,9 +225,17 @@ LINKEDIN_CLIENT_SECRET = config('LINKEDIN_CLIENT_SECRET', default='')
 # Encryption key for storing access tokens (32 characters)
 ENCRYPTION_KEY = config('ENCRYPTION_KEY', default='your-32-character-encryption-key-here')
 
-# ============ CELERY CONFIGURATION ============
-CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='redis://localhost:6379/0')
-CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default='redis://localhost:6379/0')
+# ============ REDIS & CACHE CONFIGURATION ============
+
+# Redis connection URL
+REDIS_URL = config('REDIS_URL', default='redis://127.0.0.1:6379')
+
+# ============ CELERY CONFIGURATION (Uses Redis) ============
+
+# Celery broker and result backend
+CELERY_BROKER_URL = f'{REDIS_URL}/0'  # Database 0 for Celery
+CELERY_RESULT_BACKEND = f'{REDIS_URL}/0'
+# Celery settings
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
@@ -243,32 +256,89 @@ CELERY_BEAT_SCHEDULE = {
     # Clean up old metrics weekly
     'cleanup-old-metrics': {
         'task': 'api.tasks.cleanup_old_metrics',
-        'schedule': crontab(minute=0, hour=2, day_of_week=0),  # Sunday at 2 AM
+        'schedule': crontab(minute=0, hour=2, day_of_week=0),
     },
     # Generate weekly reports
     'generate-weekly-reports': {
         'task': 'api.tasks.generate_weekly_reports',
-        'schedule': crontab(minute=0, hour=9, day_of_week=1),  # Monday at 9 AM
+        'schedule': crontab(minute=0, hour=9, day_of_week=1),
     },
-    # Update monthly performance data daily
-    'update-monthly-performance': {
-        'task': 'api.tasks.update_all_monthly_performance',
-        'schedule': crontab(minute=30, hour=1),  # Daily at 1:30 AM
+    # Sync all YouTube accounts every 6 hours
+    'sync-youtube-accounts': {
+        'task': 'api.tasks.sync_all_youtube_accounts',
+        'schedule': crontab(minute=0, hour='*/6'),  # Every 6 hours
+    },
+    # Sync all Instagram accounts every 4 hours
+    'sync-instagram-accounts': {
+        'task': 'api.tasks.sync_all_instagram_accounts',
+        'schedule': crontab(minute=0, hour='*/4'),  # Every 4 hours
+    },
+    # Aggregate monthly performance daily at 2 AM
+    'aggregate-monthly-performance': {
+        'task': 'api.tasks.aggregate_monthly_performance',
+        'schedule': crontab(minute=0, hour=2),  # Daily at 2 AM
+    },
+    # Check overdue invoices daily at 9 AM
+    'check-overdue-invoices': {
+        'task': 'api.tasks.notification_tasks.check_overdue_invoices',
+        'schedule': crontab(hour=9, minute=0),  # Run daily at 9 AM
+    },
+    # Check upcoming invoice due dates daily at 9 AM
+    'check-upcoming-invoices': {
+        'task': 'api.tasks.notification_tasks.check_upcoming_invoice_due_dates',
+        'schedule': crontab(hour=9, minute=0),  # Run daily at 9 AM
+    },
+    # Check overdue tasks daily at 9 AM
+    'check-overdue-tasks': {
+        'task': 'api.tasks.notification_tasks.check_overdue_tasks',
+        'schedule': crontab(hour=9, minute=0),  # Run daily at 9 AM
+    },
+    # Send monthly performance reports on 1st of month at 10 AM
+    'send-monthly-reports': {
+        'task': 'api.tasks.notification_tasks.send_performance_reports',
+        'schedule': crontab(day_of_month=1, hour=10, minute=0),  # 1st of month at 10 AM
     },
 }
 
-# Cache configuration
+# ============ CACHE TIMEOUTS ============
+
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 600  # 10 minutes
+CACHE_MIDDLEWARE_KEY_PREFIX = 'visionboost_middleware'
+
+# Custom cache timeouts for different data types
+CACHE_TIMEOUTS = {
+    'verification_code': 600,      # 10 minutes
+    'user_session': 3600,          # 1 hour
+    'api_response': 300,           # 5 minutes
+    'dashboard_stats': 180,        # 3 minutes
+    'social_metrics': 900,         # 15 minutes
+}
+
+# Cache configuration using Redis
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': config('REDIS_URL', default='redis://127.0.0.1:6379/1'),
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': f'{REDIS_URL}/1',  # Use database 1 for cache
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            'CONNECTION_POOL_KWARGS': {
+                'max_connections': 50,
+                'retry_on_timeout': True,
+            },
+            'SOCKET_CONNECT_TIMEOUT': 5,
+            'SOCKET_TIMEOUT': 5,
+            'COMPRESSOR': 'django_redis.compressors.zlib.ZlibCompressor',
+            'IGNORE_EXCEPTIONS': True,  # Don't crash if Redis is down
         },
-        'KEY_PREFIX': 'smma_cache',
+        'KEY_PREFIX': 'visionboost',
         'TIMEOUT': 300,  # 5 minutes default timeout
     }
 }
+
+# Session cache (optional but recommended)
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'default'
 
 # Use local memory cache for development
 if DEBUG:
@@ -355,6 +425,7 @@ LOGGING = {
         },
     },
 }
+
 
 # Create logs directory if it doesn't exist
 os.makedirs(BASE_DIR / 'logs', exist_ok=True)
@@ -473,7 +544,7 @@ if DEBUG:
 # Production overrides
 else:
     # Add production domain to CORS and CSRF settings
-    PRODUCTION_DOMAIN = config('PRODUCTION_DOMAIN', default='https://visionboost.agency')
+    PRODUCTION_DOMAIN = config('PRODUCTION_DOMAIN', default='https://montrose.agency')
     
     CORS_ALLOWED_ORIGINS.extend([
         PRODUCTION_DOMAIN,

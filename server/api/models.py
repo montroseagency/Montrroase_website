@@ -21,6 +21,7 @@ class User(AbstractUser):
     company = models.CharField(max_length=255, blank=True, null=True)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
+    bio = models.TextField(max_length=500, blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -277,7 +278,7 @@ class Task(models.Model):
 
 
 class ContentPost(models.Model):
-    """Content management for social media posts"""
+    """Content management for social media posts - Instagram, YouTube, TikTok only"""
     STATUS_CHOICES = [
         ('draft', 'Draft'),
         ('pending-approval', 'Pending Approval'),
@@ -287,34 +288,77 @@ class ContentPost(models.Model):
     
     PLATFORM_CHOICES = [
         ('instagram', 'Instagram'),
-        ('tiktok', 'TikTok'),
         ('youtube', 'YouTube'),
-        ('linkedin', 'LinkedIn'),
-        ('twitter', 'Twitter'),
-        ('facebook', 'Facebook'),
+        ('tiktok', 'TikTok'),
     ]
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='content')
+    
+    # Link to specific social media account
+    social_account = models.ForeignKey(
+        SocialMediaAccount, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True,
+        related_name='content_posts',
+        help_text='Linked social media account'
+    )
+    
     platform = models.CharField(max_length=20, choices=PLATFORM_CHOICES)
-    content = models.TextField()
+    title = models.CharField(max_length=255, help_text='Post title')
+    content = models.TextField(help_text='Post description/caption')
     scheduled_date = models.DateTimeField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
-    image_url = models.URLField(blank=True, null=True)
+    
+    # Messages and URLs
+    admin_message = models.TextField(blank=True, help_text='Message to admin from client')
+    post_url = models.URLField(blank=True, null=True, help_text='URL of posted content (set by admin)')
+    
+    # Metrics (populated after posting)
     engagement_rate = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
-    approved_by = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+    likes = models.IntegerField(default=0)
+    comments = models.IntegerField(default=0)
+    shares = models.IntegerField(default=0)
+    views = models.IntegerField(default=0)
+    
+    # Approval tracking
+    approved_by = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name='approved_content')
     approved_at = models.DateTimeField(blank=True, null=True)
     posted_at = models.DateTimeField(blank=True, null=True)
+    
+    # Timestamps
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.platform} - {self.client.name} - {self.scheduled_date.date()}"
+        return f"{self.platform} - {self.client.name} - {self.title or self.scheduled_date.date()}"
 
     class Meta:
         ordering = ['-scheduled_date']
 
-
+class ContentImage(models.Model):
+    """Images for content posts"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    content_post = models.ForeignKey(ContentPost, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='content_images/%Y/%m/')
+    caption = models.CharField(max_length=255, blank=True)
+    order = models.IntegerField(default=0)
+    created_at = models.DateTimeField(default=timezone.now)
+    
+    class Meta:
+        ordering = ['order', 'created_at']
+    
+    def __str__(self):
+        return f"Image {self.order} for {self.content_post.title or self.content_post.id}"
+    
+    @property
+    def image_url(self):
+        """Get full URL of image"""
+        if self.image:
+            return self.image.url
+        return None
+    
 class PerformanceData(models.Model):
     """Performance analytics for clients"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -376,6 +420,51 @@ class Invoice(models.Model):
     class Meta:
         ordering = ['-created_at']
 
+class AdminBankSettings(models.Model):
+    """Admin bank account settings for receiving payments"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    admin_full_name = models.CharField(max_length=255, help_text="Full name for bank transfer")
+    iban = models.CharField(max_length=34, help_text="IBAN number for receiving payments")
+    bank_name = models.CharField(max_length=255, blank=True, help_text="Bank name (optional)")
+    swift_code = models.CharField(max_length=11, blank=True, help_text="SWIFT/BIC code (optional)")
+    additional_info = models.TextField(blank=True, help_text="Additional payment instructions")
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = "Admin Bank Settings"
+        verbose_name_plural = "Admin Bank Settings"
+    
+    def __str__(self):
+        return f"Bank Settings - {self.admin_full_name}"
+
+
+class PaymentVerification(models.Model):
+    """Track client payment verifications"""
+    STATUS_CHOICES = [
+        ('pending', 'Pending Verification'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='payment_verifications')
+    plan = models.CharField(max_length=50)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    client_full_name = models.CharField(max_length=255, help_text="Client's full name for verification")
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    submitted_at = models.DateTimeField(default=timezone.now)
+    approved_at = models.DateTimeField(blank=True, null=True)
+    approved_by = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name='approved_verifications')
+    notes = models.TextField(blank=True)
+    
+    class Meta:
+        ordering = ['-submitted_at']
+    
+    def __str__(self):
+        return f"Payment Verification - {self.client.name} - {self.status}"
+    
 class TeamMember(models.Model):
     """Team members working on client accounts"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

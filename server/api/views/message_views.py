@@ -9,9 +9,100 @@ import logging
 
 from ..models import User, Client, Message
 from ..serializers import MessageSerializer
+from ..services.notification_service import NotificationService  # NEW IMPORT
 
 logger = logging.getLogger(__name__)
 
+from rest_framework import generics, status, permissions
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.decorators import action
+from django.contrib.auth import authenticate, login, logout
+from django.db.models import Sum, Count, Q, Avg
+from django.utils import timezone
+from datetime import datetime, timedelta
+import calendar
+import logging
+from django.urls import path
+from celery import shared_task
+
+# Import serializers from the correct location
+from ..serializers import (
+    UserSerializer, UserRegistrationSerializer, UserLoginSerializer,
+    ClientSerializer, TaskSerializer, ContentPostSerializer,
+    PerformanceDataSerializer, MessageSerializer, InvoiceSerializer,
+    TeamMemberSerializer, ProjectSerializer, FileSerializer,
+    NotificationSerializer, DashboardStatsSerializer,
+    ClientDashboardStatsSerializer, BulkTaskUpdateSerializer,
+    BulkContentApprovalSerializer, FileUploadSerializer,
+    SocialMediaAccountSerializer, RealTimeMetricsSerializer
+)
+
+logger = logging.getLogger(__name__)
+
+from ..models import (
+    User, Client, Task, ContentPost, PerformanceData,
+    Message, Invoice, TeamMember, Project, File, Notification,
+    SocialMediaAccount, RealTimeMetrics
+)
+
+
+class MessageViewSet(ModelViewSet):
+    """Message management viewset"""
+    serializer_class = MessageSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def get_queryset(self):
+        return Message.objects.filter(
+            Q(sender=self.request.user) | Q(receiver=self.request.user)
+        ).order_by('-timestamp')
+    
+    def perform_create(self, serializer):
+        message = serializer.save(sender=self.request.user)
+        
+        # 🔔 NEW: Notify recipient of new message
+        sender_name = f"{self.request.user.first_name} {self.request.user.last_name}" if self.request.user.first_name else self.request.user.email
+        NotificationService.notify_message_received(
+            recipient_user=message.receiver,
+            sender_name=sender_name
+        )
+    
+    @action(detail=True, methods=['post'])
+    def mark_read(self, request, pk=None):
+        """Mark message as read"""
+        message = self.get_object()
+        if message.receiver == request.user:
+            message.read = True
+            message.save()
+            return Response({'message': 'Message marked as read'})
+        else:
+            return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
+    
+    @action(detail=False, methods=['get'])
+    def conversations(self, request):
+        """Get conversation list"""
+        # Get unique conversation partners
+        conversations = Message.objects.filter(
+            Q(sender=request.user) | Q(receiver=request.user)
+        ).values(
+            'sender', 'receiver', 'sender__first_name', 'sender__last_name',
+            'receiver__first_name', 'receiver__last_name'
+        ).distinct()
+        
+        # Process conversations to get unique partners
+        partners = set()
+        for conv in conversations:
+            if conv['sender'] != request.user.id:
+                partners.add((conv['sender'], f"{conv['sender__first_name']} {conv['sender__last_name']}"))
+            if conv['receiver'] != request.user.id:
+                partners.add((conv['receiver'], f"{conv['receiver__first_name']} {conv['receiver__last_name']}"))
+        
+        return Response([{'id': p[0], 'name': p[1]} for p in partners])
+    
+    
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def send_message_to_admin(request):
@@ -33,6 +124,10 @@ def send_message_to_admin(request):
             receiver=admin_user,
             content=content
         )
+        
+        # 🔔 NEW: Notify admin of new message
+        sender_name = f"{request.user.first_name} {request.user.last_name}" if request.user.first_name else request.user.email
+        NotificationService.notify_message_to_admin(sender_name)
         
         logger.info(f"Message sent from {request.user.username} to admin {admin_user.username}")
         
@@ -56,9 +151,6 @@ def send_message_to_client(request):
         client_id = request.data.get('client_id')
         content = request.data.get('content')
         
-        logger.info(f"Admin {request.user.username} sending message to client {client_id}")
-        logger.info(f"Message content: {content}")
-        
         if not content or not client_id:
             return Response({'error': 'Client ID and message content are required'}, 
                           status=status.HTTP_400_BAD_REQUEST)
@@ -68,10 +160,7 @@ def send_message_to_client(request):
             client = Client.objects.get(id=client_id)
             client_user = client.user
             
-            logger.info(f"Found client: {client.name} with user: {client_user.username}")
-            
         except Client.DoesNotExist:
-            logger.error(f"Client not found with ID: {client_id}")
             return Response({'error': 'Client not found'}, 
                           status=status.HTTP_404_NOT_FOUND)
         
@@ -80,6 +169,13 @@ def send_message_to_client(request):
             sender=request.user,
             receiver=client_user,
             content=content
+        )
+        
+        # 🔔 NEW: Notify client of new message
+        sender_name = f"{request.user.first_name} {request.user.last_name}" if request.user.first_name else "Admin"
+        NotificationService.notify_message_received(
+            recipient_user=client_user,
+            sender_name=sender_name
         )
         
         logger.info(f"Message created successfully with ID: {message.id}")
