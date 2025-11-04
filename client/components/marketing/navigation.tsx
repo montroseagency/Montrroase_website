@@ -36,25 +36,22 @@ export default function Navigation() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-soft'
-          : 'bg-transparent'
+          ? 'bg-white shadow-md'
+          : 'bg-white'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
-            <div className="relative">
-              <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-lg transform group-hover:scale-105 transition-transform duration-200">
-                <span className="text-white font-bold text-2xl">M</span>
-              </div>
-              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-accent-500 rounded-full border-2 border-white"></div>
+          <Link href="/" className="flex items-center space-x-2 group">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shadow-sm">
+              <span className="text-white font-bold text-xl">M</span>
             </div>
-            <div className="hidden sm:block">
-              <span className="text-2xl font-display font-bold bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">
+            <div>
+              <span className="text-xl font-bold text-gray-900">
                 Montrose
               </span>
-              <p className="text-xs text-neutral-600 font-medium tracking-wide">
+              <p className="text-xs text-gray-600">
                 Social Media Growth
               </p>
             </div>
@@ -66,12 +63,10 @@ export default function Navigation() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   isActive(item.href)
-                    ? 'text-primary-600 bg-primary-50'
-                    : isScrolled
-                    ? 'text-neutral-700 hover:text-primary-600 hover:bg-primary-50'
-                    : 'text-neutral-800 hover:text-primary-600 hover:bg-white/10'
+                    ? 'text-blue-600 bg-blue-50'
+                    : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
                 }`}
               >
                 {item.name}
@@ -80,16 +75,16 @@ export default function Navigation() {
           </div>
 
           {/* CTA Buttons */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-3">
             <Link
               href="/auth/login"
-              className="px-5 py-2.5 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors duration-200"
+              className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors"
             >
               Log In
             </Link>
             <Link
               href="/auth/register"
-              className="px-6 py-2.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white text-sm font-semibold rounded-lg shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 transform hover:-translate-y-0.5 transition-all duration-200"
+              className="px-6 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
             >
               Get Started
             </Link>
@@ -98,7 +93,7 @@ export default function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg text-neutral-700 hover:bg-primary-50 transition-colors duration-200"
+            className="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100"
             aria-label="Toggle menu"
           >
             <svg
@@ -122,34 +117,34 @@ export default function Navigation() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-neutral-200 shadow-lg animate-slide-down">
+        <div className="lg:hidden bg-white border-t border-gray-200">
           <div className="px-4 py-4 space-y-2">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors duration-200 ${
+                className={`block px-4 py-3 rounded-lg text-base font-medium ${
                   isActive(item.href)
-                    ? 'text-primary-600 bg-primary-50'
-                    : 'text-neutral-700 hover:text-primary-600 hover:bg-primary-50'
+                    ? 'text-blue-600 bg-blue-50'
+                    : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
                 }`}
               >
                 {item.name}
               </Link>
             ))}
-            <div className="pt-4 space-y-2 border-t border-neutral-200">
+            <div className="pt-4 space-y-2 border-t border-gray-200">
               <Link
                 href="/auth/login"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block px-4 py-3 text-center text-base font-medium text-primary-600 bg-primary-50 rounded-lg hover:bg-primary-100 transition-colors duration-200"
+                className="block px-4 py-3 text-center text-base font-medium text-blue-600 bg-blue-50 rounded-lg"
               >
                 Log In
               </Link>
               <Link
                 href="/auth/register"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block px-4 py-3 text-center text-base font-semibold text-white bg-gradient-to-r from-primary-600 to-primary-700 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+                className="block px-4 py-3 text-center text-base font-semibold text-white bg-blue-600 rounded-lg"
               >
                 Get Started
               </Link>
