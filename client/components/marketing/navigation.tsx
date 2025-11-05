@@ -1,99 +1,75 @@
+// client/components/marketing/navigation.tsx
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 export default function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Features', href: '/services' },
-    { name: 'Pricing', href: '/pricing' },
+    { name: 'Services', href: '/services' },
+    { name: 'How It Works', href: '#how-it-works' },
     { name: 'Portfolio', href: '/portfolio' },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'Pricing', href: '/pricing' },
+    { name: 'Testimonials', href: '#testimonials' },
   ];
 
   const isActive = (href: string) => {
+    if (href.startsWith('#')) return false;
     if (href === '/') return pathname === '/';
     return pathname.startsWith(href);
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white shadow-md'
-          : 'bg-white'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shadow-sm">
-              <span className="text-white font-bold text-xl">M</span>
-            </div>
-            <div>
-              <span className="text-xl font-bold text-gray-900">
-                Montrose
-              </span>
-              <p className="text-xs text-gray-600">
-                Social Media Growth
-              </p>
-            </div>
+    <nav className="px-6 py-6 mx-auto relative z-10 max-w-7xl">
+      <div className="items-center justify-between flex">
+        {/* Logo */}
+        <Link href="/" className="items-center flex space-x-2">
+          <div className="w-10 h-10 bg-sky-600 dark:bg-sky-500 rounded-lg items-center justify-center flex">
+            <span className="text-white font-bold text-xl">M</span>
+          </div>
+          <span className="text-2xl font-bold text-gray-900 dark:text-white">Montrose</span>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <div className="md:flex items-center hidden space-x-8">
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={`transition-colors ${
+                isActive(item.href)
+                  ? 'text-sky-600 dark:text-sky-400'
+                  : 'text-gray-600 dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400'
+              }`}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </div>
+
+        {/* CTA Buttons */}
+        <div className="items-center flex space-x-4">
+          <Link
+            href="/auth/login"
+            className="hidden dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors md:block px-6 py-2.5 text-gray-700 font-medium"
+          >
+            Sign In
           </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  isActive(item.href)
-                    ? 'text-blue-600 bg-blue-50'
-                    : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="hidden lg:flex items-center space-x-3">
-            <Link
-              href="/auth/login"
-              className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors"
-            >
-              Log In
-            </Link>
-            <Link
-              href="/auth/register"
-              className="px-6 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
-            >
-              Get Started
-            </Link>
-          </div>
+          <Link
+            href="/auth/register"
+            className="hover:bg-sky-700 dark:hover:bg-sky-600 transition-all px-6 py-2.5 bg-sky-600 dark:bg-sky-500 text-white rounded-lg shadow-lg shadow-sky-500/30"
+          >
+            Get Started
+          </Link>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100"
+            className="md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             aria-label="Toggle menu"
           >
             <svg
@@ -117,39 +93,28 @@ export default function Navigation() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-200">
-          <div className="px-4 py-4 space-y-2">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`block px-4 py-3 rounded-lg text-base font-medium ${
-                  isActive(item.href)
-                    ? 'text-blue-600 bg-blue-50'
-                    : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <div className="pt-4 space-y-2 border-t border-gray-200">
-              <Link
-                href="/auth/login"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block px-4 py-3 text-center text-base font-medium text-blue-600 bg-blue-50 rounded-lg"
-              >
-                Log In
-              </Link>
-              <Link
-                href="/auth/register"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block px-4 py-3 text-center text-base font-semibold text-white bg-blue-600 rounded-lg"
-              >
-                Get Started
-              </Link>
-            </div>
-          </div>
+        <div className="md:hidden mt-6 space-y-4 pb-6">
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`block px-4 py-2 rounded-lg transition-colors ${
+                isActive(item.href)
+                  ? 'text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-900/20'
+                  : 'text-gray-600 dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400'
+              }`}
+            >
+              {item.name}
+            </Link>
+          ))}
+          <Link
+            href="/auth/login"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors font-medium"
+          >
+            Sign In
+          </Link>
         </div>
       )}
     </nav>

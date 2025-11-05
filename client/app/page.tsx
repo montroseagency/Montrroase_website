@@ -1,3 +1,4 @@
+// client/app/page.tsx
 import Navigation from '@/components/marketing/navigation';
 import Footer from '@/components/marketing/footer';
 import Link from 'next/link';
@@ -7,8 +8,8 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
       <Navigation />
       
-      {/* Hero Section - Built directly into page */}
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-50 pt-20">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-white to-blue-50 pt-24 pb-20">
         {/* Background Pattern */}
         <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none">
           <div 
@@ -19,48 +20,49 @@ export default function HomePage() {
           />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             
             {/* Left Column - Content */}
-            <div className="text-center lg:text-left space-y-8">
+            <div className="space-y-10">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-blue-100">
-                <span className="relative flex h-2 w-2">
+              <div className="inline-flex items-center gap-3 bg-white px-5 py-3 rounded-full shadow-sm border border-blue-100">
+                <span className="relative flex h-2.5 w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-500"></span>
                 </span>
-                <span className="text-sm font-medium text-gray-700">Real-Time Social Media Analytics</span>
+                <span className="text-sm font-semibold text-gray-700">
+                  Real-Time Social Media Analytics
+                </span>
               </div>
 
               {/* Main Headline */}
-              <div className="space-y-4">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight">
-                  <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+              <div className="space-y-6">
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight tracking-tight">
+                  <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent block mb-2">
                     Grow Your Social Media
                   </span>
-                  <br />
-                  <span className="text-gray-900">Like Never Before</span>
+                  <span className="text-gray-900 block">Like Never Before</span>
                 </h1>
                 
-                <p className="text-xl text-gray-600 leading-relaxed max-w-2xl">
+                <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed max-w-2xl">
                   Transform your social media presence with professional content management, real-time analytics, and proven growth strategies. Join businesses growing 10x faster.
                 </p>
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-6 py-4">
+              <div className="grid grid-cols-3 gap-8 py-6">
                 <div>
-                  <div className="text-4xl font-bold text-blue-600">150+</div>
-                  <div className="text-sm text-gray-600 mt-1">Active Clients</div>
+                  <div className="text-4xl lg:text-5xl font-bold text-blue-600 mb-2">150+</div>
+                  <div className="text-sm text-gray-600">Active Clients</div>
                 </div>
                 <div>
-                  <div className="text-4xl font-bold text-blue-600">2M+</div>
-                  <div className="text-sm text-gray-600 mt-1">Followers Grown</div>
+                  <div className="text-4xl lg:text-5xl font-bold text-blue-600 mb-2">2M+</div>
+                  <div className="text-sm text-gray-600">Followers Grown</div>
                 </div>
                 <div>
-                  <div className="text-4xl font-bold text-blue-600">98%</div>
-                  <div className="text-sm text-gray-600 mt-1">Satisfaction</div>
+                  <div className="text-4xl lg:text-5xl font-bold text-blue-600 mb-2">98%</div>
+                  <div className="text-sm text-gray-600">Satisfaction</div>
                 </div>
               </div>
 
@@ -68,20 +70,20 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/auth/register"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-xl shadow-lg hover:bg-blue-700 transition-all hover:shadow-xl hover:-translate-y-0.5"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white text-lg font-semibold rounded-xl shadow-lg hover:bg-blue-700 transition-all hover:shadow-xl hover:-translate-y-0.5"
                 >
                   Start Growing Today
                 </Link>
                 <Link
                   href="/pricing"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl shadow-md hover:shadow-lg border-2 border-blue-100 hover:border-blue-300 transition-all"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 text-lg font-semibold rounded-xl shadow-md hover:shadow-lg border-2 border-blue-100 hover:border-blue-300 transition-all"
                 >
                   View Pricing
                 </Link>
               </div>
 
               {/* Trust Badges */}
-              <div className="flex flex-wrap items-center gap-6 text-sm text-gray-600">
+              <div className="flex flex-wrap items-center gap-8 text-sm text-gray-600 pt-4">
                 <div className="flex items-center gap-2">
                   <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
@@ -98,47 +100,47 @@ export default function HomePage() {
             </div>
 
             {/* Right Column - Dashboard Mockup */}
-            <div className="relative">
-              <div className="bg-white rounded-2xl shadow-2xl p-6 border border-gray-100">
+            <div className="relative lg:mt-0 mt-12">
+              <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
                 {/* Dashboard Header */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center">
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center justify-between mb-8">
+                  <div className="flex items-center gap-4">
+                    <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center shadow-md">
+                      <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-800">Analytics Dashboard</h3>
-                      <p className="text-xs text-gray-500">Real-time insights</p>
+                      <h3 className="font-bold text-gray-900 text-lg">Analytics Dashboard</h3>
+                      <p className="text-sm text-gray-500">Real-time insights</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="relative flex h-2 w-2">
+                    <span className="relative flex h-3 w-3">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                     </span>
-                    <span className="text-xs text-green-600 font-medium">Live</span>
+                    <span className="text-sm text-green-600 font-semibold">Live</span>
                   </div>
                 </div>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-xl">
-                    <p className="text-sm text-blue-700 font-medium mb-1">Followers</p>
-                    <p className="text-3xl font-bold text-blue-900">24.5K</p>
-                    <p className="text-xs text-green-600 mt-2 flex items-center gap-1">
-                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                <div className="grid grid-cols-2 gap-6 mb-8">
+                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl">
+                    <p className="text-sm text-blue-700 font-semibold mb-2">Followers</p>
+                    <p className="text-3xl font-bold text-blue-900 mb-2">24.5K</p>
+                    <p className="text-sm text-green-600 flex items-center gap-1">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
                       </svg>
                       +12.5%
                     </p>
                   </div>
-                  <div className="bg-gradient-to-br from-cyan-50 to-cyan-100 p-4 rounded-xl">
-                    <p className="text-sm text-cyan-700 font-medium mb-1">Engagement</p>
-                    <p className="text-3xl font-bold text-cyan-900">8.4%</p>
-                    <p className="text-xs text-green-600 mt-2 flex items-center gap-1">
-                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="bg-gradient-to-br from-cyan-50 to-cyan-100 p-6 rounded-xl">
+                    <p className="text-sm text-cyan-700 font-semibold mb-2">Engagement</p>
+                    <p className="text-3xl font-bold text-cyan-900 mb-2">8.4%</p>
+                    <p className="text-sm text-green-600 flex items-center gap-1">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
                       </svg>
                       +3.2%
@@ -147,41 +149,41 @@ export default function HomePage() {
                 </div>
 
                 {/* Chart */}
-                <div className="h-32 bg-gradient-to-r from-blue-100 via-blue-50 to-cyan-100 rounded-xl flex items-end justify-around p-4 gap-2">
+                <div className="h-40 bg-gradient-to-r from-blue-100 via-blue-50 to-cyan-100 rounded-xl flex items-end justify-around p-6 gap-3">
                   {[40, 65, 45, 80, 60, 90, 75].map((height, i) => (
                     <div
                       key={i}
-                      className="flex-1 bg-gradient-to-t from-blue-600 to-blue-400 rounded-t-lg transition-all hover:from-blue-700 hover:to-blue-500"
+                      className="flex-1 bg-gradient-to-t from-blue-600 to-blue-400 rounded-t-lg transition-all hover:from-blue-700 hover:to-blue-500 shadow-sm"
                       style={{ height: `${height}%` }}
                     />
                   ))}
                 </div>
               </div>
 
-              {/* Floating Cards - Only visible on desktop */}
-              <div className="absolute -top-4 -right-4 bg-white rounded-xl shadow-lg p-4 max-w-[200px] hidden lg:block">
+              {/* Floating Cards */}
+              <div className="absolute -top-6 -right-6 bg-white rounded-xl shadow-lg p-5 max-w-[220px] hidden lg:block">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
                     <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500">Content Posted</p>
+                    <p className="text-xs text-gray-500 mb-1">Content Posted</p>
                     <p className="font-bold text-gray-800">Instagram</p>
                   </div>
                 </div>
               </div>
 
-              <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-4 max-w-[220px] hidden lg:block">
+              <div className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-lg p-5 max-w-[240px] hidden lg:block">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
                     <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                     </svg>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500">Growth Rate</p>
+                    <p className="text-xs text-gray-500 mb-1">Growth Rate</p>
                     <p className="font-bold text-green-600">+15.3% this week</p>
                   </div>
                 </div>
@@ -193,15 +195,15 @@ export default function HomePage() {
 
       {/* Features Section */}
       <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
               Everything You Need to{' '}
               <span className="bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">
                 Dominate Social Media
               </span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600">
               Professional tools and expert strategies to grow your brand across all platforms
             </p>
           </div>
@@ -269,11 +271,11 @@ export default function HomePage() {
                 description: 'Enterprise-grade security with encrypted data storage. Your social accounts are safe with us.'
               },
             ].map((feature, index) => (
-              <div key={index} className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl border border-gray-100 transition-all duration-300 hover:-translate-y-1">
-                <div className={`w-14 h-14 bg-gradient-to-br ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+              <div key={index} className="group bg-white rounded-2xl p-8 shadow-md hover:shadow-2xl border border-gray-100 transition-all duration-300 hover:-translate-y-2">
+                <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-md`}>
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">
                   {feature.title}
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
@@ -287,28 +289,28 @@ export default function HomePage() {
 
       {/* CTA Section */}
       <section className="py-24 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
             Ready to Transform Your Social Media?
           </h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
             Join hundreds of businesses already growing their online presence with Montrose
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/auth/register"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
+              className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
             >
               Start Free Trial
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 bg-blue-500/20 backdrop-blur-sm text-white font-semibold rounded-xl border-2 border-white/30 hover:border-white/60 hover:-translate-y-1 transition-all"
+              className="inline-flex items-center justify-center px-8 py-4 bg-blue-500/20 backdrop-blur-sm text-white text-lg font-semibold rounded-xl border-2 border-white/30 hover:border-white/60 hover:-translate-y-1 transition-all"
             >
               Contact Sales
             </Link>
           </div>
-          <p className="text-blue-200 text-sm mt-6">
+          <p className="text-blue-200 text-sm mt-8">
             No credit card required • 14-day free trial • Cancel anytime
           </p>
         </div>
