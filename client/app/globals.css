@@ -1,83 +1,77 @@
-/* All @import statements MUST come first */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
-/* CSS Variables - Montrose Brand Colors */
-:root {
+/* CSS Variables - Theme Configuration */
+@theme {
   /* Base Colors */
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-background: #ffffff;
+  --color-foreground: #171717;
   
   /* Primary Colors (Blue) */
-  --primary-50: #eff6ff;
-  --primary-100: #dbeafe;
-  --primary-200: #bfdbfe;
-  --primary-300: #93c5fd;
-  --primary-400: #60a5fa;
-  --primary-500: #3b82f6;
-  --primary-600: #2563eb;
-  --primary-700: #1d4ed8;
-  --primary-800: #1e40af;
-  --primary-900: #1e3a8a;
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
   
   /* Accent Colors (Red) */
-  --accent-50: #fef2f2;
-  --accent-100: #fee2e2;
-  --accent-200: #fecaca;
-  --accent-300: #fca5a5;
-  --accent-400: #f87171;
-  --accent-500: #ef4444;
-  --accent-600: #dc2626;
-  --accent-700: #b91c1c;
-  --accent-800: #991b1b;
-  --accent-900: #7f1d1d;
+  --color-accent-50: #fef2f2;
+  --color-accent-100: #fee2e2;
+  --color-accent-200: #fecaca;
+  --color-accent-300: #fca5a5;
+  --color-accent-400: #f87171;
+  --color-accent-500: #ef4444;
+  --color-accent-600: #dc2626;
+  --color-accent-700: #b91c1c;
+  --color-accent-800: #991b1b;
+  --color-accent-900: #7f1d1d;
   
   /* Neutral Colors */
-  --neutral-50: #fafafa;
-  --neutral-100: #f5f5f5;
-  --neutral-200: #e5e5e5;
-  --neutral-300: #d4d4d4;
-  --neutral-400: #a3a3a3;
-  --neutral-500: #737373;
-  --neutral-600: #525252;
-  --neutral-700: #404040;
-  --neutral-800: #262626;
-  --neutral-900: #171717;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #171717;
   
-  /* Fonts */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-display: 'Poppins', system-ui, sans-serif;
+  /* Fonts - Using system fonts (no external imports needed) */
+  --font-sans: system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Ubuntu', sans-serif;
+  --font-display: system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Ubuntu', sans-serif;
   
   /* Shadows */
   --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --shadow-card-hover: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Keep light theme for professional appearance */
-    --background: #ffffff;
-    --foreground: #171717;
-  }
-}
-
-/* Reset */
-* {
+/* Global Resets */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
   font-family: var(--font-sans);
+  background: var(--color-background);
+  color: var(--color-foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
 }
 
 /* Custom Scrollbar */
@@ -87,36 +81,36 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--neutral-100);
+  background: var(--color-neutral-100);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-600);
+  background: var(--color-primary-600);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-700);
+  background: var(--color-primary-700);
 }
 
 /* Selection */
 ::selection {
-  background: var(--primary-600);
+  background: var(--color-primary-600);
   color: white;
 }
 
 ::-moz-selection {
-  background: var(--primary-600);
+  background: var(--color-primary-600);
   color: white;
 }
 
 /* Focus Styles */
 *:focus-visible {
-  outline: 2px solid var(--primary-500);
+  outline: 2px solid var(--color-primary-500);
   outline-offset: 2px;
 }
 
-/* Smooth Animations */
+/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -203,9 +197,9 @@ body {
   }
 }
 
-/* Gradient Text */
+/* Gradient Text Utilities */
 .gradient-text {
-  background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+  background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-700) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -213,23 +207,20 @@ body {
 }
 
 .gradient-text-accent {
-  background: linear-gradient(135deg, var(--accent-600) 0%, var(--primary-600) 100%);
+  background: linear-gradient(135deg, var(--color-accent-600) 0%, var(--color-primary-600) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
 }
 
-/* Utility Classes */
-.text-balance {
-  text-wrap: balance;
-}
-
+/* Backdrop Blur Utility */
 .backdrop-blur-custom {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
+/* Shadow Utilities */
 .shadow-card {
   box-shadow: var(--shadow-card);
 }
@@ -239,8 +230,6 @@ body {
 }
 
 /* Line Clamp Utilities */
-/* Note: Use Tailwind's line-clamp-{n} utilities instead for better browser support */
-/* These are fallbacks for older browsers */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -257,6 +246,11 @@ body {
   overflow: hidden;
 }
 
+/* Text Balance */
+.text-balance {
+  text-wrap: balance;
+}
+
 /* Print Styles */
 @media print {
   body {
@@ -268,25 +262,35 @@ body {
   }
 }
 
-/* Custom Tailwind Color Extensions */
-@layer utilities {
-  .text-primary {
-    color: var(--primary-600);
+/* Smooth transitions for interactive elements */
+a,
+button {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Image optimization */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Utility classes for common patterns */
+.container-padding {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-padding {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
-  
-  .bg-primary {
-    background-color: var(--primary-600);
-  }
-  
-  .border-primary {
-    border-color: var(--primary-600);
-  }
-  
-  .text-accent {
-    color: var(--accent-600);
-  }
-  
-  .bg-accent {
-    background-color: var(--accent-600);
+}
+
+@media (min-width: 1024px) {
+  .container-padding {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
