@@ -1,3 +1,5 @@
+"use client";
+
 import Navigation from '@/components/marketing/navigation';
 import Footer from '@/components/marketing/footer';
 import Section, { SectionHeader } from '@/components/common/section';
