@@ -515,11 +515,11 @@ def validate_paypal_config():
             missing_settings.append(setting)
     
     if missing_settings and not DEBUG:
-        print(f"⚠️  Missing PayPal configuration: {', '.join(missing_settings)}")
+        print(f"[!] Missing PayPal configuration: {', '.join(missing_settings)}")
         print("   PayPal payments will not work until these are configured.")
     elif not missing_settings:
         env_type = "Sandbox" if "sandbox" in PAYPAL_BASE_URL else "Live"
-        print(f"✅ PayPal configuration validated ({env_type} environment)")
+        print(f"[OK] PayPal configuration validated ({env_type} environment)")
 
 # Validate configuration on startup (only in production)
 if not DEBUG:
@@ -537,9 +537,9 @@ if DEBUG:
     CSRF_TRUSTED_ORIGINS = [FRONTEND_URL]
     
     # PayPal debug mode
-    print("🔧 Development mode: Using PayPal Sandbox")
+    print("[*] Development mode: Using PayPal Sandbox")
     if PAYPAL_CLIENT_ID and "sandbox" not in PAYPAL_BASE_URL:
-        print("⚠️  Warning: PayPal Client ID suggests sandbox but BASE_URL is not sandbox")
+        print("[!] Warning: PayPal Client ID suggests sandbox but BASE_URL is not sandbox")
 
 # Production overrides
 else:
@@ -558,4 +558,4 @@ else:
     
     # Ensure PayPal is in live mode for production
     if "sandbox" in PAYPAL_BASE_URL:
-        print("⚠️  Warning: Using PayPal Sandbox in production mode")
+        print("[!] Warning: Using PayPal Sandbox in production mode")

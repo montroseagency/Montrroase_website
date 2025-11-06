@@ -1,0 +1,45 @@
+=== LOGIN 400 ERROR - FIXES APPLIED ===
+
+ISSUE IDENTIFIED:
+The Next.js client was receiving 400 Bad Request when attempting to log in
+because there were NO USER ACCOUNTS in the Django database.
+
+ROOT CAUSE:
+1. Database was empty (0 users)
+2. When trying to authenticate, Django correctly rejected the request
+3. Error message: "Unable to log in with provided credentials"
+
+FIXES APPLIED:
+
+1. Fixed server\server\settings.py (Unicode Emoji Issue)
+   - Line 522: Changed "✅" to "[OK]"
+   - Line 540: Changed "🔧" to "[*]"
+   - Line 542: Changed "⚠️" to "[!]"
+   - Line 518: Changed "⚠️" to "[!]"
+   - Line 561: Changed "⚠️" to "[!]"
+   Reason: Windows Console uses CP1252 encoding, which doesn't support emoji
+
+2. Created Test Users in Database
+   - Client: test@example.com / TestPassword123! (role: client)
+   - Admin: admin@example.com / AdminPassword123! (role: admin)
+   Reason: Without test users, no one could log in
+
+VERIFICATION:
+✓ Users created successfully
+✓ Both users authenticate correctly with Django
+✓ Server settings fixed and Django management commands work
+✓ API endpoint structure verified as correct
+✓ CORS configuration verified as correct
+✓ Serializers verified as correct
+
+NEXT STEPS:
+1. Start Django server: python manage.py runserver 127.0.0.1:8000
+2. Start Next.js client: npm run dev (in client folder)
+3. Navigate to http://localhost:3000/auth/login
+4. Test login with provided credentials
+5. Should redirect to dashboard on success
+
+For detailed information, see:
+- LOGIN_DEBUG_REPORT.md (detailed analysis)
+- TEST_CREDENTIALS.md (quick reference)
+

@@ -12672,3 +12672,22 @@ INFO 2025-10-04 03:09:53,730 autoreload 15240 13116 Watching for file changes wi
 INFO 2025-10-25 20:59:02,737 autoreload 14852 14084 Watching for file changes with StatReloader
 INFO 2025-10-25 21:26:53,157 autoreload 14852 14084 C:\Users\User\Documents\GitHub\followers_tt\server\server\settings.py changed, reloading.
 INFO 2025-10-25 21:26:54,074 autoreload 3084 7280 Watching for file changes with StatReloader
+INFO 2025-11-06 17:32:34,456 autoreload 13688 12272 Watching for file changes with StatReloader
+WARNING 2025-11-06 17:32:35,100 auth_views 13688 12272 Email service not available
+INFO 2025-11-06 17:35:31,392 autoreload 9868 14164 Watching for file changes with StatReloader
+INFO 2025-11-06 17:37:05,458 basehttp 9868 8700 "OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+WARNING 2025-11-06 17:37:06,140 log 9868 8700 Bad Request: /api/auth/login/
+WARNING 2025-11-06 17:37:06,140 basehttp 9868 8700 "POST /api/auth/login/ HTTP/1.1" 400 68
+WARNING 2025-11-06 17:43:21,943 log 9868 6132 Bad Request: /api/auth/login/
+WARNING 2025-11-06 17:43:21,944 basehttp 9868 6132 "POST /api/auth/login/ HTTP/1.1" 400 68
+WARNING 2025-11-06 17:43:49,638 log 9868 13788 Bad Request: /api/auth/login/
+WARNING 2025-11-06 17:43:49,638 basehttp 9868 13788 "POST /api/auth/login/ HTTP/1.1" 400 68
+INFO 2025-11-06 17:43:51,092 autoreload 9868 14164 C:\Users\User\Documents\GitHub\Montrroase_website\server\server\settings.py changed, reloading.
+INFO 2025-11-06 17:43:52,044 autoreload 11792 7756 Watching for file changes with StatReloader
+WARNING 2025-11-06 17:44:04,287 log 11792 12508 Bad Request: /api/auth/login/
+WARNING 2025-11-06 17:44:04,287 basehttp 11792 12508 "POST /api/auth/login/ HTTP/1.1" 400 68
+INFO 2025-11-06 17:44:10,345 autoreload 11792 7756 C:\Users\User\Documents\GitHub\Montrroase_website\server\server\settings.py changed, reloading.
+INFO 2025-11-06 17:44:11,553 autoreload 1140 2460 Watching for file changes with StatReloader
+INFO 2025-11-06 17:44:36,123 autoreload 1140 2460 C:\Users\User\Documents\GitHub\Montrroase_website\server\server\settings.py changed, reloading.
+INFO 2025-11-06 17:44:37,027 autoreload 12916 1644 Watching for file changes with StatReloader
+INFO 2025-11-06 17:47:16,011 autoreload 8204 7156 Watching for file changes with StatReloader
