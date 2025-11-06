@@ -1,8 +1,5 @@
 import Navigation from '@/components/marketing/navigation';
 import Footer from '@/components/marketing/footer';
-import Section, { SectionHeader } from '@/components/common/section';
-import FeatureCard from '@/components/common/feature-card';
-import Button from '@/components/ui/button';
 import Link from 'next/link';
 
 export default function ServicesPage() {
@@ -15,7 +12,7 @@ export default function ServicesPage() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
         </svg>
       ),
-      iconColor: 'from-primary-500 to-primary-700',
+      iconColor: 'from-blue-500 to-blue-700',
       features: [
         'TikTok & Instagram Reels Strategy',
         'Facebook & Meta Ads Management',
@@ -33,7 +30,7 @@ export default function ServicesPage() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
       ),
-      iconColor: 'from-accent-500 to-accent-700',
+      iconColor: 'from-red-500 to-red-700',
       features: [
         'Custom Website Design & Development',
         'E-commerce Solutions (Shopify, WooCommerce)',
@@ -84,171 +81,203 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
-      
+
       {/* Hero Section */}
-      <Section background="gradient" padding="xl" className="pt-32">
-        <div className="text-center max-w-4xl mx-auto">
-          <div className="inline-flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-sm border border-primary-100 mb-6">
-            <span className="flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-primary-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-600"></span>
-            </span>
-            <span className="text-sm font-medium text-neutral-700">
-              Full-Service Digital Agency
-            </span>
-          </div>
-          
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-neutral-900 mb-6">
-            Comprehensive Services to{' '}
-            <span className="gradient-text">Accelerate Your Growth</span>
-          </h1>
-          
-          <p className="text-xl text-neutral-600 mb-8 leading-relaxed">
-            From strategy to execution, we provide everything you need to build, grow, 
-            and scale your online presence. One platform, unlimited possibilities.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/auth/register">
-              <Button size="lg">
+      <section className="relative min-h-[70vh] flex items-center bg-gradient-to-br from-blue-50 via-white to-blue-50 pt-32 pb-20">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233b82f6' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            }}
+          />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="inline-flex items-center gap-3 bg-white px-5 py-3 rounded-full shadow-sm border border-blue-100 mb-8">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-500"></span>
+              </span>
+              <span className="text-sm font-semibold text-gray-700">
+                Full-Service Digital Agency
+              </span>
+            </div>
+
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
+              <span className="text-gray-900 block mb-2">Comprehensive Services to</span>
+              <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent block">
+                Accelerate Your Growth
+              </span>
+            </h1>
+
+            <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed mb-10 max-w-3xl mx-auto">
+              From strategy to execution, we provide everything you need to build, grow,
+              and scale your online presence. One platform, unlimited possibilities.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/auth/register"
+                className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white text-lg font-semibold rounded-xl shadow-lg hover:bg-blue-700 transition-all hover:shadow-xl hover:-translate-y-0.5"
+              >
                 Get Started Free
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button variant="outline" size="lg">
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 text-lg font-semibold rounded-xl shadow-md hover:shadow-lg border-2 border-blue-100 hover:border-blue-300 transition-all"
+              >
                 Schedule Consultation
-              </Button>
-            </Link>
+              </Link>
+            </div>
           </div>
         </div>
-      </Section>
+      </section>
 
       {/* Services Grid */}
-      <Section padding="xl">
-        <SectionHeader 
-          title="Everything You Need in One Platform"
-          subtitle="Integrated services designed to work together seamlessly, giving you the tools and support to succeed online."
-        />
-        
-        <div className="grid lg:grid-cols-2 gap-8">
-          {services.map((service, index) => (
-            <div key={index} className="bg-white rounded-2xl p-8 shadow-card hover:shadow-card-hover border border-neutral-100 transition-all duration-300">
-              <div className={`w-16 h-16 bg-gradient-to-br ${service.iconColor} rounded-xl flex items-center justify-center mb-6`}>
-                {service.icon}
-              </div>
-              
-              <h3 className="text-2xl font-bold text-neutral-900 mb-4">
-                {service.title}
-              </h3>
-              
-              <p className="text-neutral-600 mb-6 leading-relaxed">
-                {service.description}
-              </p>
-              
-              <div className="space-y-3">
-                <p className="text-sm font-semibold text-neutral-900 mb-3">
-                  What's Included:
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+              Everything You Need in{' '}
+              <span className="bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">
+                One Platform
+              </span>
+            </h2>
+            <p className="text-xl text-gray-600">
+              Integrated services designed to work together seamlessly, giving you the tools and support to succeed online.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            {services.map((service, index) => (
+              <div key={index} className="group bg-white rounded-2xl p-8 shadow-md hover:shadow-2xl border border-gray-100 transition-all duration-300 hover:-translate-y-2">
+                <div className={`w-16 h-16 bg-gradient-to-br ${service.iconColor} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-md`}>
+                  {service.icon}
+                </div>
+
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  {service.title}
+                </h3>
+
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  {service.description}
                 </p>
-                <ul className="grid sm:grid-cols-2 gap-2">
-                  {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start text-sm text-neutral-700">
-                      <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+
+                <div className="space-y-3">
+                  <p className="text-sm font-semibold text-gray-900 mb-3">
+                    What's Included:
+                  </p>
+                  <ul className="grid sm:grid-cols-2 gap-2">
+                    {service.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-start text-sm text-gray-700">
+                        <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </Section>
+      </section>
 
       {/* How It Works */}
-      <Section background="gray" padding="xl">
-        <SectionHeader 
-          title="How Montrose Works"
-          subtitle="A simple, proven process to take your business from zero to hero."
-        />
-        
-        <div className="grid md:grid-cols-4 gap-6">
-          {[
-            {
-              step: '01',
-              title: 'Sign Up',
-              description: 'Create your account and access your personal dashboard in minutes.',
-            },
-            {
-              step: '02',
-              title: 'Choose Services',
-              description: 'Select the services you need and get an AI-powered estimate instantly.',
-            },
-            {
-              step: '03',
-              title: 'We Execute',
-              description: 'Our expert team gets to work while you track progress in real-time.',
-            },
-            {
-              step: '04',
-              title: 'You Grow',
-              description: 'Watch your metrics soar as we optimize and scale your online presence.',
-            },
-          ].map((step, index) => (
-            <div key={index} className="relative">
-              <div className="bg-white rounded-xl p-6 shadow-card border border-neutral-100 h-full">
-                <div className="text-5xl font-bold text-primary-100 mb-4">
-                  {step.step}
+      <section className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+              How{' '}
+              <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                Montrose Works
+              </span>
+            </h2>
+            <p className="text-xl text-gray-600">
+              A simple, proven process to take your business from zero to hero.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-6">
+            {[
+              {
+                step: '01',
+                title: 'Sign Up',
+                description: 'Create your account and access your personal dashboard in minutes.',
+              },
+              {
+                step: '02',
+                title: 'Choose Services',
+                description: 'Select the services you need and get an AI-powered estimate instantly.',
+              },
+              {
+                step: '03',
+                title: 'We Execute',
+                description: 'Our expert team gets to work while you track progress in real-time.',
+              },
+              {
+                step: '04',
+                title: 'You Grow',
+                description: 'Watch your metrics soar as we optimize and scale your online presence.',
+              },
+            ].map((step, index) => (
+              <div key={index} className="relative">
+                <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100 h-full hover:shadow-xl transition-all duration-300">
+                  <div className="text-5xl font-bold text-blue-100 mb-4">
+                    {step.step}
+                  </div>
+                  <h4 className="text-lg font-bold text-gray-900 mb-2">
+                    {step.title}
+                  </h4>
+                  <p className="text-gray-600 text-sm">
+                    {step.description}
+                  </p>
                 </div>
-                <h4 className="text-lg font-bold text-neutral-900 mb-2">
-                  {step.title}
-                </h4>
-                <p className="text-neutral-600 text-sm">
-                  {step.description}
-                </p>
+                {index < 3 && (
+                  <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
+                    <svg className="w-6 h-6 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                )}
               </div>
-              {index < 3 && (
-                <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
-                  <svg className="w-6 h-6 text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </Section>
+      </section>
 
       {/* CTA Section */}
-      <Section padding="xl" className="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800">
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-display font-bold text-white mb-6">
+      <section className="py-24 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800">
+        <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
             Ready to Transform Your Business?
           </h2>
-          <p className="text-xl text-primary-100 mb-8">
+          <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
             Join hundreds of businesses already growing with Montrose. Get started today with our 14-day free trial.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/auth/register">
-              <Button size="lg" className="bg-white text-primary-600 hover:bg-neutral-50">
-                Start Your Free Trial
-              </Button>
+            <Link
+              href="/auth/register"
+              className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
+            >
+              Start Your Free Trial
             </Link>
-            <Link href="/pricing">
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="border-2 border-white text-white hover:bg-white/10"
-              >
-                View Pricing Plans
-              </Button>
+            <Link
+              href="/pricing"
+              className="inline-flex items-center justify-center px-8 py-4 bg-blue-500/20 backdrop-blur-sm text-white text-lg font-semibold rounded-xl border-2 border-white/30 hover:border-white/60 hover:-translate-y-1 transition-all"
+            >
+              View Pricing Plans
             </Link>
           </div>
-          <p className="text-primary-200 text-sm mt-6">
+          <p className="text-blue-200 text-sm mt-8">
             No credit card required • Cancel anytime • Full access to all features
           </p>
         </div>
-      </Section>
+      </section>
 
       <Footer />
     </div>
