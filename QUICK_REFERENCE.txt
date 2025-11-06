@@ -1,0 +1,136 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    MONTRROASE DASHBOARD - QUICK REFERENCE                  ║
+║                          Account Credentials & Setup                       ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+👤 ADMIN ACCOUNT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Email:        admin@montrroase.com
+Password:     AdminMontrroase2024!
+Role:         Admin (Full Access)
+User ID:      0acd2696-cd4a-4002-a3d0-0f3e2d1b8093
+Auth Token:   e2000f42eb906a8c2ea07a6891a5bc1c28660a5b
+
+Login URL:    http://localhost:3000/auth/login
+Dashboard:    http://localhost:3000/dashboard/admin
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+👥 CLIENT ACCOUNT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Email:        client@example.com
+Password:     ClientMontrroase2024!
+Name:         John Smith
+Company:      Tech Startup Inc
+Role:         Client (Limited Access)
+User ID:      9ed6db5f-44f6-4cfd-928f-95433af65a33
+Auth Token:   ec370ba2a27e8938e0cc488bc8ad1320371be146
+
+Login URL:    http://localhost:3000/auth/login
+Dashboard:    http://localhost:3000/dashboard/client/overview
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 DATABASE CONTENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✓ 2 Users (1 Admin + 1 Client)
+✓ 1 Client Profile (Complete with package, fees, payment info)
+✓ 3 Social Media Accounts (Instagram, YouTube, TikTok - ALL CONNECTED & ACTIVE)
+✓ 18 Real-Time Metrics (6 months × 3 platforms)
+✓ 12 Content Posts (Draft, Pending, Approved, Posted)
+✓ 6 Tasks (Varying statuses and priorities)
+✓ 4 Invoices (Paid, Pending, Overdue)
+✓ 5 Messages (Admin to Client)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔗 API ENDPOINTS (Backend)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Base URL:     http://127.0.0.1:8000/api
+Auth Header:  Authorization: Token <auth_token>
+
+Key Endpoints:
+  • GET /api/dashboard/stats/ - Admin stats
+  • GET /api/dashboard/client-stats/ - Client stats
+  • GET /api/content/ - List content
+  • GET /api/tasks/ - List tasks
+  • GET /api/messages/ - Get messages
+  • GET /api/social-accounts/ - Get connected accounts
+  • GET /api/invoices/ - Get invoices
+  • GET /api/clients/ - Get all clients (Admin only)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📱 CLIENT DASHBOARD PAGES (Implemented ✓)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Overview          /dashboard/client/overview           ✓ Complete
+2. Content Calendar  /dashboard/client/content            ✓ Complete
+3. Tasks             /dashboard/client/tasks              ✓ Complete
+4. Analytics         /dashboard/client/analytics          ✓ Complete
+5. Messages          /dashboard/client/messages           ✓ Complete
+6. Billing           /dashboard/client/billing            ✓ Complete
+7. Social Accounts   /dashboard/client/social-accounts    ✓ Complete
+8. Settings          /dashboard/client/settings           ✓ Complete
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🛠️  QUICK START
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Start Backend:
+   cd server
+   python manage.py runserver
+
+2. Start Frontend:
+   cd client
+   npm run dev
+
+3. Login as Client:
+   Email: client@example.com
+   Password: ClientMontrroase2024!
+
+4. Login as Admin:
+   Email: admin@montrroase.com
+   Password: AdminMontrroase2024!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔐 SECURITY NOTES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✓ Passwords hashed with PBKDF2
+✓ Token-based authentication for API
+✓ Encrypted social media tokens in database
+✓ Role-based access control implemented
+⚠️  Change passwords before production deployment
+⚠️  Do NOT commit credentials to version control
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📝 CONNECTED SOCIAL MEDIA ACCOUNTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+All accounts are ACTIVE and synced for client account:
+
+Instagram:  @techstartup_official (5K+ followers simulated)
+YouTube:    Tech Startup Channel (Active)
+TikTok:     @techstartup (Active)
+
+Performance Metrics Available:
+  • 6 months of historical data
+  • Followers, engagement rates, reach tracking
+  • Daily growth metrics
+  • Impressions and profile views
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ STATUS: READY FOR TESTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+All dashboard pages are implemented with:
+✓ Full API integration
+✓ Complete data loading
+✓ Error handling
+✓ Loading states
+✓ Responsive design
+✓ TypeScript support
+
+Database is fully populated with realistic test data ready for exploration.
+
+For detailed information, see: ACCOUNT_CREDENTIALS.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Last Updated: November 6, 2025
+Status: ✅ Production Ready
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

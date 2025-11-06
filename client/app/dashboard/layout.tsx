@@ -41,7 +41,7 @@ export default function DashboardLayout({
       <Sidebar />
 
       {/* Main Content */}
-      <div className="flex-1 md:ml-0 flex flex-col overflow-hidden">
+      <div className="flex-1 md:ml-64 flex flex-col overflow-hidden">
         {/* Topbar */}
         <Topbar />
 

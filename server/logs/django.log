@@ -12691,3 +12691,628 @@ INFO 2025-11-06 17:44:11,553 autoreload 1140 2460 Watching for file changes with
 INFO 2025-11-06 17:44:36,123 autoreload 1140 2460 C:\Users\User\Documents\GitHub\Montrroase_website\server\server\settings.py changed, reloading.
 INFO 2025-11-06 17:44:37,027 autoreload 12916 1644 Watching for file changes with StatReloader
 INFO 2025-11-06 17:47:16,011 autoreload 8204 7156 Watching for file changes with StatReloader
+WARNING 2025-11-06 17:55:03,148 auth_views 7956 9312 Email service not available
+INFO 2025-11-06 17:58:20,322 autoreload 8852 15416 Watching for file changes with StatReloader
+INFO 2025-11-06 17:58:26,691 basehttp 8852 11528 "POST /api/auth/login/ HTTP/1.1" 200 265
+INFO 2025-11-06 18:00:08,329 basehttp 8852 11528 "OPTIONS /api/auth/me/ HTTP/1.1" 200 0
+INFO 2025-11-06 18:00:08,342 basehttp 8852 11528 "GET /api/auth/me/ HTTP/1.1" 200 205
+INFO 2025-11-06 18:00:08,380 basehttp 8852 11528 "OPTIONS /api/dashboard/client-stats/ HTTP/1.1" 200 0
+WARNING 2025-11-06 18:00:08,404 log 8852 11528 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 18:00:08,404 basehttp 8852 11528 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 18:00:08,412 log 8852 3424 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 18:00:08,413 basehttp 8852 3424 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 18:00:19,435 log 8852 3424 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 18:00:19,436 basehttp 8852 3424 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 18:00:19,440 log 8852 11528 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 18:00:19,440 basehttp 8852 11528 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 18:00:21,706 log 8852 11528 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 18:00:21,707 basehttp 8852 11528 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 18:00:21,713 log 8852 3424 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 18:00:21,714 basehttp 8852 3424 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 18:00:28,242 log 8852 3424 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 18:00:28,242 basehttp 8852 3424 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 18:00:28,249 log 8852 11528 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 18:00:28,249 basehttp 8852 11528 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+INFO 2025-11-06 18:02:32,085 basehttp 8852 14724 "OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+INFO 2025-11-06 18:02:32,693 basehttp 8852 14724 "POST /api/auth/login/ HTTP/1.1" 200 265
+INFO 2025-11-06 18:02:32,950 basehttp 8852 14724 "OPTIONS /api/dashboard/client-stats/ HTTP/1.1" 200 0
+INFO 2025-11-06 18:02:32,954 basehttp 8852 8260 "OPTIONS /api/dashboard/client-stats/ HTTP/1.1" 200 0
+WARNING 2025-11-06 18:02:32,954 log 8852 14724 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 18:02:32,954 basehttp 8852 14724 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 18:02:32,965 log 8852 14724 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 18:02:32,966 basehttp 8852 14724 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 18:02:53,285 log 8852 14724 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 18:02:53,286 basehttp 8852 14724 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 18:02:53,291 log 8852 14724 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 18:02:53,292 basehttp 8852 14724 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 18:03:02,029 log 8852 14724 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 18:03:02,030 basehttp 8852 14724 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 18:03:02,035 log 8852 14724 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 18:03:02,035 basehttp 8852 14724 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 18:03:09,842 log 8852 14724 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 18:03:09,843 basehttp 8852 14724 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 18:03:09,851 log 8852 14724 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 18:03:09,851 basehttp 8852 14724 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 18:05:09,163 log 8852 14724 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 18:05:09,163 basehttp 8852 14724 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 18:05:09,163 log 8852 14724 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 18:05:09,163 basehttp 8852 14724 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+INFO 2025-11-06 21:34:13,245 autoreload 880 14248 Watching for file changes with StatReloader
+INFO 2025-11-06 21:34:14,159 basehttp 880 13352 "OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+INFO 2025-11-06 21:34:14,804 basehttp 880 13352 "POST /api/auth/login/ HTTP/1.1" 200 265
+INFO 2025-11-06 21:34:15,743 basehttp 880 15380 "OPTIONS /api/dashboard/client-stats/ HTTP/1.1" 200 0
+INFO 2025-11-06 21:34:15,743 basehttp 880 13352 "OPTIONS /api/dashboard/client-stats/ HTTP/1.1" 200 0
+WARNING 2025-11-06 21:34:15,757 log 880 15380 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 21:34:15,758 basehttp 880 15380 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 21:34:15,767 log 880 15380 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 21:34:15,785 basehttp 880 15380 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 21:35:58,143 log 880 15380 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 21:35:58,144 basehttp 880 15380 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+WARNING 2025-11-06 21:35:58,150 log 880 15380 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 21:35:58,151 basehttp 880 15380 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+INFO 2025-11-06 21:36:05,663 basehttp 880 15380 "OPTIONS /api/auth/me/ HTTP/1.1" 200 0
+INFO 2025-11-06 21:36:05,670 basehttp 880 15380 "GET /api/auth/me/ HTTP/1.1" 200 205
+INFO 2025-11-06 21:41:25,029 basehttp 880 4272 "POST /api/auth/login/ HTTP/1.1" 200 265
+INFO 2025-11-06 21:41:25,614 basehttp 880 4272 "OPTIONS /api/social-accounts/ HTTP/1.1" 200 0
+INFO 2025-11-06 21:41:25,629 basehttp 880 4272 "OPTIONS /api/messages/ HTTP/1.1" 200 0
+INFO 2025-11-06 21:41:25,631 basehttp 880 7820 "OPTIONS /api/content/ HTTP/1.1" 200 0
+INFO 2025-11-06 21:41:25,636 basehttp 880 4272 "OPTIONS /api/invoices/ HTTP/1.1" 200 0
+INFO 2025-11-06 21:41:25,638 basehttp 880 12088 "OPTIONS /api/invoices/ HTTP/1.1" 200 0
+INFO 2025-11-06 21:41:25,648 basehttp 880 7820 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-06 21:41:25,649 basehttp 880 4104 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-06 21:41:25,657 basehttp 880 2644 "OPTIONS /api/content/ HTTP/1.1" 200 0
+ERROR 2025-11-06 21:41:25,663 oauth_views 880 4272 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:41:25,663 log 880 4272 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:41:25,673 basehttp 880 4272 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:41:25,673 basehttp 880 7820 "GET /api/content/ HTTP/1.1" 200 52
+WARNING 2025-11-06 21:41:25,681 log 880 14452 Not Found: /api/dashboard/client-stats/
+INFO 2025-11-06 21:41:25,689 basehttp 880 2644 "GET /api/tasks/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:41:25,695 oauth_views 880 4272 Failed to get connected accounts: User has no client_profile.
+INFO 2025-11-06 21:41:25,696 basehttp 880 12088 "GET /api/messages/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:41:25,699 basehttp 880 4104 "GET /api/invoices/ HTTP/1.1" 200 52
+WARNING 2025-11-06 21:41:25,699 basehttp 880 14452 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+ERROR 2025-11-06 21:41:25,713 log 880 4272 Internal Server Error: /api/social-accounts/
+INFO 2025-11-06 21:41:25,719 basehttp 880 7820 "GET /api/content/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:41:25,725 basehttp 880 2644 "GET /api/tasks/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:41:25,729 basehttp 880 4272 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:41:25,739 basehttp 880 4104 "GET /api/invoices/ HTTP/1.1" 200 52
+WARNING 2025-11-06 21:41:25,744 log 880 14452 Not Found: /api/dashboard/client-stats/
+INFO 2025-11-06 21:41:25,747 basehttp 880 12088 "GET /api/messages/ HTTP/1.1" 200 52
+WARNING 2025-11-06 21:41:25,748 basehttp 880 14452 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+INFO 2025-11-06 21:41:27,768 basehttp 880 14452 "GET /api/content/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:41:27,769 oauth_views 880 12088 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:41:27,771 log 880 12088 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:41:27,775 basehttp 880 12088 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:41:27,785 basehttp 880 14452 "GET /api/content/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:41:27,790 oauth_views 880 12088 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:41:27,791 log 880 12088 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:41:27,792 basehttp 880 12088 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:41:28,779 basehttp 880 12088 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:41:28,797 basehttp 880 12088 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:41:30,377 basehttp 880 12088 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:41:30,387 basehttp 880 12088 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:41:33,865 basehttp 880 12088 "GET /api/content/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:41:33,865 oauth_views 880 14452 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:41:33,867 log 880 14452 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:41:33,870 basehttp 880 14452 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:41:33,877 basehttp 880 12088 "GET /api/content/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:41:33,880 oauth_views 880 14452 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:41:33,881 log 880 14452 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:41:33,882 basehttp 880 14452 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:41:38,493 basehttp 880 14452 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:41:38,507 basehttp 880 14452 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:41:41,974 basehttp 880 14452 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:41:41,981 basehttp 880 14452 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:41:42,605 basehttp 880 14452 "GET /api/content/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:41:42,605 oauth_views 880 12088 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:41:42,606 log 880 12088 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:41:42,610 basehttp 880 12088 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:41:42,616 basehttp 880 14452 "GET /api/content/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:41:42,618 oauth_views 880 12088 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:41:42,618 log 880 12088 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:41:42,619 basehttp 880 12088 "GET /api/social-accounts/ HTTP/1.1" 500 33
+ERROR 2025-11-06 21:41:43,149 oauth_views 880 14452 Failed to get connected accounts: User has no client_profile.
+WARNING 2025-11-06 21:41:43,151 log 880 12088 Not Found: /api/dashboard/client-stats/
+ERROR 2025-11-06 21:41:43,151 log 880 14452 Internal Server Error: /api/social-accounts/
+INFO 2025-11-06 21:41:43,153 basehttp 880 2644 "GET /api/invoices/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:41:43,153 basehttp 880 7820 "GET /api/tasks/ HTTP/1.1" 200 52
+WARNING 2025-11-06 21:41:43,154 basehttp 880 12088 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+ERROR 2025-11-06 21:41:43,154 basehttp 880 14452 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:41:43,158 basehttp 880 4272 "GET /api/messages/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:41:43,176 basehttp 880 2644 "GET /api/invoices/ HTTP/1.1" 200 52
+WARNING 2025-11-06 21:41:43,178 log 880 7820 Not Found: /api/dashboard/client-stats/
+ERROR 2025-11-06 21:41:43,180 oauth_views 880 14452 Failed to get connected accounts: User has no client_profile.
+INFO 2025-11-06 21:41:43,183 basehttp 880 12088 "GET /api/tasks/ HTTP/1.1" 200 52
+WARNING 2025-11-06 21:41:43,183 basehttp 880 7820 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+ERROR 2025-11-06 21:41:43,184 log 880 14452 Internal Server Error: /api/social-accounts/
+INFO 2025-11-06 21:41:43,189 basehttp 880 4104 "GET /api/content/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:41:43,192 basehttp 880 4272 "GET /api/messages/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:41:43,193 basehttp 880 14452 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:41:43,203 basehttp 880 4104 "GET /api/content/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:41:43,885 oauth_views 880 14452 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:41:43,886 log 880 14452 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:41:43,886 basehttp 880 14452 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:41:43,894 basehttp 880 4104 "GET /api/content/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:41:43,901 basehttp 880 4272 "GET /api/content/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:41:43,902 oauth_views 880 14452 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:41:43,902 log 880 14452 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:41:43,903 basehttp 880 14452 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:41:54,923 basehttp 880 14452 "GET /api/auth/me/ HTTP/1.1" 200 205
+ERROR 2025-11-06 21:41:54,986 oauth_views 880 4272 Failed to get connected accounts: User has no client_profile.
+INFO 2025-11-06 21:41:54,986 basehttp 880 14452 "GET /api/content/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:41:54,986 log 880 4272 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:41:54,986 basehttp 880 4272 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:41:55,007 basehttp 880 14452 "GET /api/content/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:41:55,007 oauth_views 880 4272 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:41:55,009 log 880 4272 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:41:55,009 basehttp 880 4272 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:44:09,940 basehttp 880 4272 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:44:09,947 basehttp 880 4272 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:44:10,670 basehttp 880 4272 "OPTIONS /api/performance/ HTTP/1.1" 200 0
+INFO 2025-11-06 21:44:10,677 basehttp 880 14452 "OPTIONS /api/performance/ HTTP/1.1" 200 0
+ERROR 2025-11-06 21:44:10,681 oauth_views 880 4104 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:44:10,683 log 880 4104 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:44:10,686 basehttp 880 4104 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:44:10,686 basehttp 880 4272 "GET /api/performance/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:44:10,695 oauth_views 880 4272 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:44:10,696 log 880 4272 Internal Server Error: /api/social-accounts/
+INFO 2025-11-06 21:44:10,699 basehttp 880 4104 "GET /api/performance/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:44:10,699 basehttp 880 4272 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:44:11,222 basehttp 880 4272 "GET /api/invoices/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:44:11,229 basehttp 880 4272 "GET /api/invoices/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:44:11,903 basehttp 880 4272 "GET /api/messages/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:44:11,910 basehttp 880 4272 "GET /api/messages/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:44:12,735 oauth_views 880 4272 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:44:12,736 log 880 4272 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:44:12,736 basehttp 880 4272 "GET /api/social-accounts/ HTTP/1.1" 500 33
+ERROR 2025-11-06 21:44:12,742 oauth_views 880 4272 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:44:12,742 log 880 4272 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:44:12,743 basehttp 880 4272 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:44:13,389 basehttp 880 4272 "GET /api/messages/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:44:13,398 basehttp 880 4272 "GET /api/messages/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:44:15,047 oauth_views 880 4272 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:44:15,047 log 880 4272 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:44:15,048 basehttp 880 4272 "GET /api/social-accounts/ HTTP/1.1" 500 33
+ERROR 2025-11-06 21:44:15,054 oauth_views 880 4272 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:44:15,054 log 880 4272 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:44:15,055 basehttp 880 4272 "GET /api/social-accounts/ HTTP/1.1" 500 33
+ERROR 2025-11-06 21:44:16,772 oauth_views 880 4272 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:44:16,773 log 880 4272 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:44:16,774 basehttp 880 4272 "GET /api/social-accounts/ HTTP/1.1" 500 33
+ERROR 2025-11-06 21:44:16,779 oauth_views 880 4272 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:44:16,780 log 880 4272 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:44:16,780 basehttp 880 4272 "GET /api/social-accounts/ HTTP/1.1" 500 33
+ERROR 2025-11-06 21:44:22,257 oauth_views 880 4272 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:44:22,257 log 880 4272 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:44:22,258 basehttp 880 4272 "GET /api/social-accounts/ HTTP/1.1" 500 33
+ERROR 2025-11-06 21:44:22,263 oauth_views 880 4272 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:44:22,264 log 880 4272 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:44:22,265 basehttp 880 4272 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:44:22,884 basehttp 880 4272 "GET /api/messages/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:44:22,892 basehttp 880 4272 "GET /api/messages/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:44:23,718 basehttp 880 4272 "GET /api/invoices/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:44:23,728 basehttp 880 4272 "GET /api/invoices/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:44:24,221 basehttp 880 4272 "GET /api/performance/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:44:24,222 oauth_views 880 4104 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:44:24,225 log 880 4104 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:44:24,226 basehttp 880 4104 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:44:24,231 basehttp 880 4272 "GET /api/performance/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:44:24,233 oauth_views 880 4104 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:44:24,234 log 880 4104 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:44:24,234 basehttp 880 4104 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:44:24,688 basehttp 880 4104 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:44:24,695 basehttp 880 4104 "GET /api/tasks/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:44:25,187 oauth_views 880 4272 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:44:25,189 log 880 4272 Internal Server Error: /api/social-accounts/
+INFO 2025-11-06 21:44:25,190 basehttp 880 4104 "GET /api/content/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:44:25,190 basehttp 880 4272 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:44:25,201 basehttp 880 4104 "GET /api/content/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:44:25,202 oauth_views 880 4272 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:44:25,203 log 880 4272 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:44:25,203 basehttp 880 4272 "GET /api/social-accounts/ HTTP/1.1" 500 33
+WARNING 2025-11-06 21:44:25,618 log 880 4272 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-06 21:44:25,631 basehttp 880 4272 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+INFO 2025-11-06 21:44:25,640 basehttp 880 7820 "GET /api/messages/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:44:25,648 basehttp 880 14452 "GET /api/content/ HTTP/1.1" 200 52
+WARNING 2025-11-06 21:44:25,653 log 880 4272 Not Found: /api/dashboard/client-stats/
+ERROR 2025-11-06 21:44:25,653 oauth_views 880 4104 Failed to get connected accounts: User has no client_profile.
+INFO 2025-11-06 21:44:25,654 basehttp 880 2644 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:44:25,654 basehttp 880 12088 "GET /api/invoices/ HTTP/1.1" 200 52
+WARNING 2025-11-06 21:44:25,657 basehttp 880 4272 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+ERROR 2025-11-06 21:44:25,658 log 880 4104 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:44:25,673 basehttp 880 4104 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:44:25,673 basehttp 880 7820 "GET /api/messages/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:44:25,685 basehttp 880 2644 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:44:25,687 basehttp 880 14452 "GET /api/content/ HTTP/1.1" 200 52
+INFO 2025-11-06 21:44:25,688 basehttp 880 12088 "GET /api/invoices/ HTTP/1.1" 200 52
+ERROR 2025-11-06 21:44:25,692 oauth_views 880 4104 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-06 21:44:25,693 log 880 4104 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-06 21:44:25,695 basehttp 880 4104 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-06 21:47:42,545 basehttp 880 4104 "GET /api/auth/me/ HTTP/1.1" 200 205
+INFO 2025-11-06 21:51:14,544 basehttp 880 4104 "OPTIONS /api/auth/logout/ HTTP/1.1" 200 0
+WARNING 2025-11-06 21:51:14,557 log 880 4104 Unauthorized: /api/auth/logout/
+WARNING 2025-11-06 21:51:14,558 basehttp 880 4104 "POST /api/auth/logout/ HTTP/1.1" 401 27
+INFO 2025-11-06 21:51:34,515 basehttp 880 4104 "POST /api/auth/login/ HTTP/1.1" 200 273
+INFO 2025-11-06 21:53:32,827 basehttp 880 4104 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 21:54:06,768 basehttp 880 4104 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 21:54:06,876 basehttp 880 4104 "OPTIONS /api/dashboard/stats/ HTTP/1.1" 200 0
+INFO 2025-11-06 21:54:06,896 basehttp 880 4104 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 21:54:06,900 basehttp 880 13096 "OPTIONS /api/clients/ HTTP/1.1" 200 0
+INFO 2025-11-06 21:54:06,999 basehttp 880 4104 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 21:54:07,015 basehttp 880 8652 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 21:54:07,022 basehttp 880 11196 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 21:54:07,027 basehttp 880 13096 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 21:54:07,038 basehttp 880 7140 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 21:54:07,072 basehttp 880 4104 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 21:54:07,083 basehttp 880 8652 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 21:54:07,083 basehttp 880 13096 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 21:54:07,095 basehttp 880 7140 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 21:54:15,416 basehttp 880 7140 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 21:54:15,511 basehttp 880 13096 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 21:54:15,511 basehttp 880 11196 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 21:54:15,533 basehttp 880 7140 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 21:54:15,538 basehttp 880 8652 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 21:54:15,564 basehttp 880 4104 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 21:54:15,577 basehttp 880 16244 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 21:54:15,587 basehttp 880 7140 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 21:54:15,588 basehttp 880 13096 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 21:54:15,602 basehttp 880 8652 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 21:54:15,614 basehttp 880 11196 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 21:54:22,450 basehttp 880 11196 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 21:54:22,522 basehttp 880 8652 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 21:54:22,546 basehttp 880 11196 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 21:54:22,546 basehttp 880 16244 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 21:54:22,557 basehttp 880 7140 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 21:54:22,577 basehttp 880 8652 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 21:54:22,618 basehttp 880 13096 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 21:54:22,620 basehttp 880 16244 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 21:54:22,628 basehttp 880 11196 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 21:54:22,638 basehttp 880 7140 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 21:54:22,645 basehttp 880 8652 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 21:59:28,753 basehttp 880 3144 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 21:59:28,766 basehttp 880 3144 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 21:59:33,333 basehttp 880 3144 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 21:59:33,397 basehttp 880 3144 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 21:59:33,413 basehttp 880 3144 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 21:59:40,903 basehttp 880 3144 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 21:59:40,978 basehttp 880 3144 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 21:59:40,996 basehttp 880 3144 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 21:59:45,702 basehttp 880 3144 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 21:59:49,578 basehttp 880 3144 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 21:59:49,641 basehttp 880 9488 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 21:59:49,643 basehttp 880 16368 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 21:59:49,661 basehttp 880 14140 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 21:59:49,673 basehttp 880 3144 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 21:59:49,676 basehttp 880 9488 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 21:59:49,701 basehttp 880 8716 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 21:59:49,703 basehttp 880 16368 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 21:59:49,711 basehttp 880 3144 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 21:59:49,725 basehttp 880 14140 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 21:59:49,736 basehttp 880 8716 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 21:59:52,121 basehttp 880 8716 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 21:59:52,150 basehttp 880 14140 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 21:59:53,762 basehttp 880 8716 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 21:59:53,769 basehttp 880 14140 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 21:59:53,780 basehttp 880 8716 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 21:59:53,795 basehttp 880 14140 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 21:59:58,728 basehttp 880 14140 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 21:59:58,737 basehttp 880 14140 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:00:19,414 basehttp 880 14140 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 22:01:39,219 basehttp 880 14140 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 22:01:52,440 basehttp 880 8716 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:01:52,450 basehttp 880 14140 "GET /api/messages/ HTTP/1.1" 200 1896
+INFO 2025-11-06 22:01:52,458 basehttp 880 8716 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:01:52,470 basehttp 880 14140 "GET /api/messages/ HTTP/1.1" 200 1896
+INFO 2025-11-06 22:01:54,145 basehttp 880 14140 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 22:01:54,162 basehttp 880 14140 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 22:01:59,515 basehttp 880 14140 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 22:01:59,572 basehttp 880 14140 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 22:01:59,585 basehttp 880 14140 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 22:02:14,957 basehttp 880 14140 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 22:02:15,005 basehttp 880 8716 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:02:15,005 basehttp 880 8716 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:02:15,005 basehttp 880 14140 "GET /api/messages/ HTTP/1.1" 200 1896
+INFO 2025-11-06 22:02:15,035 basehttp 880 14140 "GET /api/messages/ HTTP/1.1" 200 1896
+INFO 2025-11-06 22:02:17,748 basehttp 880 14140 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 22:02:17,763 basehttp 880 14140 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 22:02:20,327 basehttp 880 11852 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 22:02:21,802 basehttp 880 5064 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:02:21,812 basehttp 880 5064 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:02:21,821 basehttp 880 11852 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 22:02:21,834 basehttp 880 11852 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 22:02:22,750 basehttp 880 11852 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 22:02:22,766 basehttp 880 11852 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 22:02:23,467 basehttp 880 11852 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:02:23,475 basehttp 880 11852 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:02:24,448 basehttp 880 11852 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 22:02:24,496 basehttp 880 11852 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:02:24,496 basehttp 880 11852 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:02:42,563 basehttp 880 11852 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 22:02:42,610 basehttp 880 11852 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 22:02:42,611 basehttp 880 11852 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 22:02:44,861 basehttp 880 11852 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 22:02:44,873 basehttp 880 11852 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 22:02:56,845 basehttp 880 11852 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 22:02:56,900 basehttp 880 11852 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 22:02:56,919 basehttp 880 11852 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 22:02:58,685 basehttp 880 5064 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:02:58,697 basehttp 880 11852 "GET /api/messages/ HTTP/1.1" 200 1896
+INFO 2025-11-06 22:02:58,698 basehttp 880 5064 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:02:58,714 basehttp 880 11852 "GET /api/messages/ HTTP/1.1" 200 1896
+INFO 2025-11-06 22:03:37,049 basehttp 880 11852 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:03:37,064 basehttp 880 11852 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:03:52,119 basehttp 880 5064 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:03:52,131 basehttp 880 11852 "GET /api/messages/ HTTP/1.1" 200 1896
+INFO 2025-11-06 22:03:52,131 basehttp 880 5064 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:03:52,152 basehttp 880 5064 "GET /api/messages/ HTTP/1.1" 200 1896
+INFO 2025-11-06 22:04:06,998 basehttp 880 5064 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 22:04:07,110 basehttp 880 5064 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:04:07,128 basehttp 880 5064 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:04:29,961 basehttp 880 11852 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:04:29,969 basehttp 880 5064 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 22:04:29,977 basehttp 880 15456 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 22:04:29,992 basehttp 880 11852 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:04:30,002 basehttp 880 2976 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 22:04:30,012 basehttp 880 556 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 22:04:30,026 basehttp 880 5064 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 22:04:30,040 basehttp 880 11852 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 22:04:30,050 basehttp 880 15456 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 22:04:30,050 basehttp 880 2976 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 22:45:17,791 basehttp 880 11184 "OPTIONS /api/auth/me/ HTTP/1.1" 200 0
+WARNING 2025-11-06 22:45:17,795 log 880 11184 Unauthorized: /api/auth/me/
+WARNING 2025-11-06 22:45:17,795 basehttp 880 11184 "GET /api/auth/me/ HTTP/1.1" 401 27
+INFO 2025-11-06 22:45:42,623 basehttp 880 11184 "OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+INFO 2025-11-06 22:45:43,239 basehttp 880 11184 "POST /api/auth/login/ HTTP/1.1" 200 273
+INFO 2025-11-06 22:45:43,566 basehttp 880 11184 "OPTIONS /api/dashboard/stats/ HTTP/1.1" 200 0
+INFO 2025-11-06 22:45:43,574 basehttp 880 10048 "OPTIONS /api/dashboard/stats/ HTTP/1.1" 200 0
+INFO 2025-11-06 22:45:43,576 basehttp 880 11184 "OPTIONS /api/clients/ HTTP/1.1" 200 0
+INFO 2025-11-06 22:45:43,582 basehttp 880 3264 "OPTIONS /api/invoices/ HTTP/1.1" 200 0
+INFO 2025-11-06 22:45:43,582 basehttp 880 9660 "OPTIONS /api/content/ HTTP/1.1" 200 0
+INFO 2025-11-06 22:45:43,583 basehttp 880 11184 "OPTIONS /api/content/ HTTP/1.1" 200 0
+INFO 2025-11-06 22:45:43,583 basehttp 880 10048 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-06 22:45:43,585 basehttp 880 15204 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-06 22:45:43,585 basehttp 880 15280 "OPTIONS /api/clients/ HTTP/1.1" 200 0
+INFO 2025-11-06 22:45:43,591 basehttp 880 9660 "OPTIONS /api/invoices/ HTTP/1.1" 200 0
+INFO 2025-11-06 22:45:43,614 basehttp 880 3264 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:45:43,689 basehttp 880 11184 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 22:45:43,706 basehttp 880 9660 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:45:43,712 basehttp 880 15280 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 22:45:43,714 basehttp 880 10048 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 22:45:43,720 basehttp 880 15204 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 22:45:43,742 basehttp 880 3264 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 22:45:43,748 basehttp 880 9660 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 22:45:43,755 basehttp 880 15280 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 22:45:43,760 basehttp 880 10048 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 22:45:45,736 basehttp 880 10048 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 22:45:45,749 basehttp 880 15280 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:45:45,754 basehttp 880 9660 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 22:45:45,761 basehttp 880 10048 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:45:54,848 basehttp 880 10048 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 22:45:54,865 basehttp 880 9660 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 22:45:57,684 basehttp 880 9660 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 22:45:57,696 basehttp 880 10048 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 22:45:59,438 basehttp 880 10048 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 22:45:59,455 basehttp 880 9660 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 22:46:02,629 basehttp 880 9660 "OPTIONS /api/messages/ HTTP/1.1" 200 0
+INFO 2025-11-06 22:46:02,631 basehttp 880 10048 "OPTIONS /api/messages/ HTTP/1.1" 200 0
+INFO 2025-11-06 22:46:02,679 basehttp 880 10048 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:46:02,686 basehttp 880 9660 "GET /api/messages/ HTTP/1.1" 200 1896
+INFO 2025-11-06 22:46:02,760 basehttp 880 3264 "GET /api/messages/ HTTP/1.1" 200 1896
+INFO 2025-11-06 22:46:02,761 basehttp 880 15280 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:47:27,121 basehttp 880 15280 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 22:47:27,213 basehttp 880 3264 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:47:27,229 basehttp 880 15280 "GET /api/messages/ HTTP/1.1" 200 1896
+INFO 2025-11-06 22:47:27,236 basehttp 880 9660 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:47:27,254 basehttp 880 3264 "GET /api/messages/ HTTP/1.1" 200 1896
+INFO 2025-11-06 22:47:34,315 basehttp 880 9660 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:47:34,336 basehttp 880 10048 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 22:47:34,355 basehttp 880 3264 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 22:47:34,368 basehttp 880 15204 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 22:47:34,380 basehttp 880 11184 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:47:34,390 basehttp 880 15280 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 22:47:34,419 basehttp 880 3264 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 22:47:34,435 basehttp 880 9660 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 22:47:34,437 basehttp 880 10048 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 22:47:34,445 basehttp 880 11184 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 22:47:41,003 basehttp 880 11184 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 22:47:41,024 basehttp 880 10048 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 22:47:41,854 basehttp 880 10048 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:47:41,854 basehttp 880 11184 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:51:19,367 basehttp 880 10048 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:51:19,386 basehttp 880 11184 "GET /api/messages/ HTTP/1.1" 200 1896
+INFO 2025-11-06 22:51:19,386 basehttp 880 9660 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:51:19,407 basehttp 880 10048 "GET /api/messages/ HTTP/1.1" 200 1896
+INFO 2025-11-06 22:51:23,459 basehttp 880 10048 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:51:23,468 basehttp 880 9660 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:51:27,745 basehttp 880 10048 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:51:27,755 basehttp 880 11184 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:51:27,760 basehttp 880 9660 "GET /api/messages/ HTTP/1.1" 200 1896
+INFO 2025-11-06 22:51:27,778 basehttp 880 11184 "GET /api/messages/ HTTP/1.1" 200 1896
+INFO 2025-11-06 22:53:09,482 basehttp 880 11184 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 22:53:09,518 basehttp 880 11184 "OPTIONS /api/messages/admin-conversations/ HTTP/1.1" 200 0
+INFO 2025-11-06 22:53:09,523 basehttp 880 9660 "OPTIONS /api/messages/admin-conversations/ HTTP/1.1" 200 0
+INFO 2025-11-06 22:53:09,525 message_views 880 11184 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:09,534 message_views 880 11184 Found 1 conversations
+INFO 2025-11-06 22:53:09,536 basehttp 880 11184 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:53:09,541 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:09,558 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:53:09,559 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:53:10,752 basehttp 880 9660 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 22:53:10,805 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:10,815 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:53:10,815 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:53:10,815 message_views 880 11184 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:10,830 message_views 880 11184 Found 1 conversations
+INFO 2025-11-06 22:53:10,832 basehttp 880 11184 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:53:28,785 basehttp 880 11184 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:53:28,798 basehttp 880 9660 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:53:31,924 basehttp 880 9660 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 22:53:31,924 basehttp 880 11184 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 22:53:32,331 message_views 880 11184 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:32,336 message_views 880 11184 Found 1 conversations
+INFO 2025-11-06 22:53:32,337 basehttp 880 11184 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:53:32,342 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:32,349 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:53:32,350 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:53:35,677 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:35,697 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:53:35,698 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:53:36,120 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:36,130 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:53:36,131 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:53:36,282 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:36,284 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:53:36,284 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:53:36,632 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:36,638 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:53:36,639 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:53:36,774 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:36,783 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:53:36,783 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:53:36,916 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:36,923 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:53:36,924 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:53:37,049 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:37,052 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:53:37,052 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:53:37,196 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:37,206 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:53:37,207 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:53:37,329 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:37,332 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:53:37,332 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:53:37,468 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:37,478 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:53:37,479 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:53:37,613 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:37,620 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:53:37,621 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:53:37,742 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:37,746 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:53:37,746 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:53:37,878 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:53:37,880 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:53:37,880 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:54:42,574 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:54:42,587 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:54:42,588 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:54:42,617 basehttp 880 9660 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:54:55,743 basehttp 880 9660 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 22:54:55,796 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:54:55,803 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:54:55,804 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:54:55,809 message_views 880 11184 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:54:55,819 basehttp 880 9660 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:54:55,819 message_views 880 11184 Found 1 conversations
+INFO 2025-11-06 22:54:55,821 basehttp 880 11184 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:54:55,849 basehttp 880 11184 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:54:58,278 basehttp 880 11184 "OPTIONS /api/messages/conversation/undefined/ HTTP/1.1" 200 0
+WARNING 2025-11-06 22:54:58,325 log 880 11184 Not Found: /api/messages/conversation/undefined/
+WARNING 2025-11-06 22:54:58,325 basehttp 880 11184 "GET /api/messages/conversation/undefined/ HTTP/1.1" 404 33757
+INFO 2025-11-06 22:56:18,302 message_views 880 11184 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:56:18,320 message_views 880 11184 Found 1 conversations
+INFO 2025-11-06 22:56:18,321 basehttp 880 11184 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:56:18,332 basehttp 880 11184 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:56:33,687 basehttp 880 11184 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 22:56:33,697 basehttp 880 9660 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 22:56:34,669 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:56:34,675 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:56:34,676 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:56:34,682 message_views 880 11184 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:56:34,693 basehttp 880 9660 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:56:34,695 message_views 880 11184 Found 1 conversations
+INFO 2025-11-06 22:56:34,696 basehttp 880 11184 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:56:34,709 basehttp 880 11184 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:56:36,012 basehttp 880 11184 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 22:56:36,056 message_views 880 11184 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:56:36,060 message_views 880 11184 Found 1 conversations
+INFO 2025-11-06 22:56:36,060 basehttp 880 11184 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:56:36,071 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:56:36,081 basehttp 880 11184 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:56:36,084 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:56:36,085 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:56:36,100 basehttp 880 9660 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:56:37,812 basehttp 880 9660 "OPTIONS /api/auth/logout/ HTTP/1.1" 200 0
+INFO 2025-11-06 22:56:37,834 basehttp 880 9660 "POST /api/auth/logout/ HTTP/1.1" 200 37
+INFO 2025-11-06 22:56:49,852 basehttp 880 9660 "POST /api/auth/login/ HTTP/1.1" 200 273
+INFO 2025-11-06 22:56:50,150 basehttp 880 9660 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 22:56:50,152 basehttp 880 11184 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:56:50,154 basehttp 880 5752 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 22:56:50,165 basehttp 880 9188 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 22:56:50,187 basehttp 880 9660 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:56:50,189 basehttp 880 1428 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 22:56:50,208 basehttp 880 15692 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 22:56:50,215 basehttp 880 5752 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 22:56:50,217 basehttp 880 11184 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 22:56:50,228 basehttp 880 9660 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 22:56:50,780 message_views 880 9660 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:56:50,786 message_views 880 9660 Found 1 conversations
+INFO 2025-11-06 22:56:50,787 basehttp 880 9660 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:56:50,793 message_views 880 11184 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 22:56:50,803 basehttp 880 9660 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 22:56:50,805 message_views 880 11184 Found 1 conversations
+INFO 2025-11-06 22:56:50,806 basehttp 880 11184 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 22:56:50,823 basehttp 880 11184 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 23:01:54,119 message_views 880 16216 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 23:01:54,127 message_views 880 16216 Found 1 conversations
+INFO 2025-11-06 23:01:54,128 basehttp 880 16216 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 23:01:54,164 basehttp 880 16216 "OPTIONS /api/messages/conversation/9ed6db5f-44f6-4cfd-928f-95433af65a33/ HTTP/1.1" 200 0
+INFO 2025-11-06 23:01:54,168 message_views 880 16216 User admin@montrroase.com fetching messages with user 9ed6db5f-44f6-4cfd-928f-95433af65a33
+INFO 2025-11-06 23:01:54,170 message_views 880 16216 Found other user: client@example.com
+INFO 2025-11-06 23:01:54,173 message_views 880 16216 Found 5 messages
+INFO 2025-11-06 23:01:54,190 basehttp 880 16216 "GET /api/messages/conversation/9ed6db5f-44f6-4cfd-928f-95433af65a33/ HTTP/1.1" 200 1846
+INFO 2025-11-06 23:02:09,749 basehttp 880 16216 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 23:02:09,764 basehttp 880 8380 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 23:02:10,759 message_views 880 8380 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 23:02:10,767 message_views 880 8380 Found 1 conversations
+INFO 2025-11-06 23:02:10,768 basehttp 880 8380 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 23:02:10,774 message_views 880 16216 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 23:02:10,781 message_views 880 16216 Found 1 conversations
+INFO 2025-11-06 23:02:10,782 basehttp 880 16216 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 705
+INFO 2025-11-06 23:02:10,788 message_views 880 16216 User admin@montrroase.com fetching messages with user 9ed6db5f-44f6-4cfd-928f-95433af65a33
+INFO 2025-11-06 23:02:10,789 message_views 880 16216 Found other user: client@example.com
+INFO 2025-11-06 23:02:10,791 message_views 880 16216 Found 5 messages
+INFO 2025-11-06 23:02:10,805 basehttp 880 16216 "GET /api/messages/conversation/9ed6db5f-44f6-4cfd-928f-95433af65a33/ HTTP/1.1" 200 1846
+INFO 2025-11-06 23:02:10,810 message_views 880 8380 User admin@montrroase.com fetching messages with user 9ed6db5f-44f6-4cfd-928f-95433af65a33
+INFO 2025-11-06 23:02:10,811 message_views 880 8380 Found other user: client@example.com
+INFO 2025-11-06 23:02:10,812 message_views 880 8380 Found 5 messages
+INFO 2025-11-06 23:02:10,825 basehttp 880 8380 "GET /api/messages/conversation/9ed6db5f-44f6-4cfd-928f-95433af65a33/ HTTP/1.1" 200 1846
+INFO 2025-11-06 23:03:44,500 basehttp 880 13840 "OPTIONS /api/messages/send-to-client/ HTTP/1.1" 200 0
+INFO 2025-11-06 23:03:44,555 message_views 880 13840 Message created successfully with ID: 815e496d-44d7-4bb4-af3d-bed7a157b978
+INFO 2025-11-06 23:03:44,557 basehttp 880 13840 "POST /api/messages/send-to-client/ HTTP/1.1" 201 270
+INFO 2025-11-06 23:03:44,563 message_views 880 13840 User admin@montrroase.com fetching messages with user 9ed6db5f-44f6-4cfd-928f-95433af65a33
+INFO 2025-11-06 23:03:44,564 message_views 880 13840 Found other user: client@example.com
+INFO 2025-11-06 23:03:44,566 message_views 880 13840 Found 6 messages
+INFO 2025-11-06 23:03:44,582 basehttp 880 13840 "GET /api/messages/conversation/9ed6db5f-44f6-4cfd-928f-95433af65a33/ HTTP/1.1" 200 2117
+INFO 2025-11-06 23:10:43,057 basehttp 880 9968 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-06 23:10:43,112 message_views 880 9968 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 23:10:43,124 message_views 880 9968 Found 1 conversations
+INFO 2025-11-06 23:10:43,125 basehttp 880 9968 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 607
+INFO 2025-11-06 23:10:43,131 message_views 880 9968 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-06 23:10:43,143 message_views 880 9968 Found 1 conversations
+INFO 2025-11-06 23:10:43,144 basehttp 880 9968 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 607
+INFO 2025-11-06 23:10:43,160 message_views 880 9968 User admin@montrroase.com fetching messages with user 9ed6db5f-44f6-4cfd-928f-95433af65a33
+INFO 2025-11-06 23:10:43,163 message_views 880 9968 Found other user: client@example.com
+INFO 2025-11-06 23:10:43,165 message_views 880 9968 Found 6 messages
+INFO 2025-11-06 23:10:43,191 basehttp 880 9968 "GET /api/messages/conversation/9ed6db5f-44f6-4cfd-928f-95433af65a33/ HTTP/1.1" 200 2117
+INFO 2025-11-06 23:10:43,213 message_views 880 9968 User admin@montrroase.com fetching messages with user 9ed6db5f-44f6-4cfd-928f-95433af65a33
+INFO 2025-11-06 23:10:43,215 message_views 880 9968 Found other user: client@example.com
+INFO 2025-11-06 23:10:43,218 message_views 880 9968 Found 6 messages
+INFO 2025-11-06 23:10:43,241 basehttp 880 9968 "GET /api/messages/conversation/9ed6db5f-44f6-4cfd-928f-95433af65a33/ HTTP/1.1" 200 2117
+INFO 2025-11-06 23:10:52,894 basehttp 880 9968 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 23:10:52,909 basehttp 880 4512 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 23:10:57,470 basehttp 880 9968 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 23:10:57,478 basehttp 880 4512 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 23:10:57,484 basehttp 880 12956 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 23:10:57,495 basehttp 880 9968 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 23:11:03,942 basehttp 880 12956 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 23:11:03,953 basehttp 880 9968 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 23:11:03,970 basehttp 880 13600 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 23:11:03,972 basehttp 880 12592 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-06 23:11:03,989 basehttp 880 4512 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 23:11:03,993 basehttp 880 12956 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-06 23:11:04,000 basehttp 880 14700 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 23:11:04,020 basehttp 880 9968 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-06 23:11:04,023 basehttp 880 12592 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-06 23:11:04,037 basehttp 880 12956 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-06 23:11:09,904 basehttp 880 12956 "POST /api/auth/logout/ HTTP/1.1" 200 37
