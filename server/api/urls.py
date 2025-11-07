@@ -5,24 +5,26 @@ from rest_framework.routers import DefaultRouter
 from .views import (
     # Authentication views
     RegisterView, LoginView, logout_view, current_user_view,
-    
+
     # Dashboard stats views
     dashboard_stats_view, client_dashboard_stats_view,
-    
+
     # ViewSets
     ClientViewSet, TaskViewSet, ContentPostViewSet,
     PerformanceDataViewSet, MessageViewSet, InvoiceViewSet,
     FileViewSet, NotificationViewSet, SocialMediaAccountViewSet,
-    
+
     # Real-time metrics
     get_realtime_metrics,
-    
+
     # Analytics views
     analytics_overview, client_performance_report,
-    
+
     # Health check
     health_check
 )
+
+from .views.gallery_views import ImageGalleryViewSet
 
 from .views.admin.bank_settings_views import (
     admin_bank_settings,
@@ -154,6 +156,7 @@ router.register(r'invoices', InvoiceViewSet, basename='invoice')
 router.register(r'files', FileViewSet, basename='file')
 router.register(r'notifications', NotificationViewSet, basename='notification')
 router.register(r'social-accounts', SocialMediaAccountViewSet, basename='social-account')
+router.register(r'gallery', ImageGalleryViewSet, basename='gallery')
 
 urlpatterns = [
     # Authentication endpoints

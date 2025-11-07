@@ -552,3 +552,31 @@ class Notification(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+
+class ImageGalleryItem(models.Model):
+    """Image gallery item with layout positioning and sizing"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    title = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='gallery/')
+
+    # Layout attributes
+    grid_column = models.IntegerField(default=1)  # Width in grid units
+    grid_row = models.IntegerField(default=1)    # Height in grid units
+    flex_width = models.CharField(max_length=20, default='1fr')  # CSS flex value
+    display_order = models.IntegerField(default=0)  # For ordering
+
+    # Additional metadata
+    alt_text = models.CharField(max_length=255, blank=True)
+    caption = models.TextField(blank=True)
+    is_active = models.BooleanField(default=True)
+
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['display_order']
+
+    def __str__(self):
+        return f"{self.title} ({self.grid_column}x{self.grid_row})"

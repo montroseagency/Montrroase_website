@@ -12,9 +12,8 @@ export default function Navigation() {
   const navigation = [
     { name: 'Services', href: '/services' },
     { name: 'Portfolio', href: '/portfolio' },
+    { name: 'Courses', href: '/courses' },
     { name: 'Pricing', href: '/pricing' },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
   ];
 
   const isActive = (href: string) => {

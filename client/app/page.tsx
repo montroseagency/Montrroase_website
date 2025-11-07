@@ -1,286 +1,236 @@
-// client/app/page.tsx
+'use client';
+
+import { useState, useEffect, useRef } from 'react';
 import Navigation from '@/components/marketing/navigation';
 import Footer from '@/components/marketing/footer';
+import ImageCarousel from '@/components/image-carousel';
 import Link from 'next/link';
 
 export default function HomePage() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [scrollY, setScrollY] = useState(0);
+  const [cursorGlow, setCursorGlow] = useState({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Track mouse position for parallax
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+      setCursorGlow({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Parallax transform values
+  const parallaxX = (mousePosition.x - window.innerWidth / 2) * 0.01;
+  const parallaxY = (mousePosition.y - window.innerHeight / 2) * 0.01;
+
+  // Images are now hardcoded in the ImageCarousel component
+  // for precise layout control
+
   return (
-    <div className="min-h-screen bg-white">
+    <div ref={containerRef} className="min-h-screen bg-gradient-to-b from-black via-slate-950 to-black overflow-hidden">
+      {/* Custom Cursor Glow */}
+      <div
+        className="fixed w-80 h-80 pointer-events-none z-0 opacity-30"
+        style={{
+          left: `${cursorGlow.x - 160}px`,
+          top: `${cursorGlow.y - 160}px`,
+          background: 'radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%)',
+          filter: 'blur(40px)',
+          transition: 'all 0.2s ease-out',
+        }}
+      />
+
       <Navigation />
-      
+
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-white to-blue-50 pt-24 pb-20">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none">
-          <div 
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233b82f6' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          />
+      <section className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden">
+        {/* Animated Particle Field Background */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(30)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-white rounded-full opacity-20"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animation: `float ${4 + Math.random() * 6}s ease-in-out infinite`,
+                animationDelay: `${Math.random() * 2}s`,
+                transform: `translate(${parallaxX * 0.5}px, ${parallaxY * 0.5}px)`,
+              }}
+            />
+          ))}
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            
-            {/* Left Column - Content */}
-            <div className="space-y-10">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-3 bg-white px-5 py-3 rounded-full shadow-sm border border-blue-100">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-500"></span>
-                </span>
-                <span className="text-sm font-semibold text-gray-700">
-                  Real-Time Social Media Analytics
-                </span>
-              </div>
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
 
-              {/* Main Headline */}
-              <div className="space-y-6">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight tracking-tight">
-                  <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent block mb-2">
-                    Grow Your Social Media
-                  </span>
-                  <span className="text-gray-900 block">Like Never Before</span>
-                </h1>
-                
-                <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed max-w-2xl">
-                  Transform your social media presence with professional content management, real-time analytics, and proven growth strategies. Join businesses growing 10x faster.
-                </p>
-              </div>
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
+          {/* Main Headline */}
+          <div className="space-y-8 mb-12">
+            <h1
+              className="text-6xl sm:text-7xl lg:text-8xl font-black leading-tight tracking-tighter text-white"
+              style={{
+                transform: `translate(${parallaxX * 0.2}px, ${parallaxY * 0.2}px)`,
+                transition: 'transform 0.2s ease-out',
+                textShadow: '0 0 40px rgba(255, 255, 255, 0.1)',
+              }}
+            >
+              DESIGN THAT
+              <br />
+              <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+                CONNECTS
+              </span>
+            </h1>
 
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-8 py-6">
-                <div>
-                  <div className="text-4xl lg:text-5xl font-bold text-blue-600 mb-2">150+</div>
-                  <div className="text-sm text-gray-600">Active Clients</div>
-                </div>
-                <div>
-                  <div className="text-4xl lg:text-5xl font-bold text-blue-600 mb-2">2M+</div>
-                  <div className="text-sm text-gray-600">Followers Grown</div>
-                </div>
-                <div>
-                  <div className="text-4xl lg:text-5xl font-bold text-blue-600 mb-2">98%</div>
-                  <div className="text-sm text-gray-600">Satisfaction</div>
-                </div>
-              </div>
+            <p className="text-xl sm:text-2xl text-gray-400 leading-relaxed max-w-3xl mx-auto opacity-90">
+              Building brands that move, inspire & convert. We craft digital experiences that resonate with your audience and drive real results.
+            </p>
+          </div>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/auth/register"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white text-lg font-semibold rounded-xl shadow-lg hover:bg-blue-700 transition-all hover:shadow-xl hover:-translate-y-0.5"
-                >
-                  Start Growing Today
-                </Link>
-                <Link
-                  href="/pricing"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 text-lg font-semibold rounded-xl shadow-md hover:shadow-lg border-2 border-blue-100 hover:border-blue-300 transition-all"
-                >
-                  View Pricing
-                </Link>
-              </div>
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+            <Link
+              href="/auth/register"
+              className="group relative px-8 py-4 rounded-lg font-semibold text-white overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-white/20"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                backdropFilter: 'blur(20px)',
+              }}
+            >
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                Start a Project
+                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            </Link>
 
-              {/* Trust Badges */}
-              <div className="flex flex-wrap items-center gap-8 text-sm text-gray-600 pt-4">
-                <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span>No credit card required</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span>Cancel anytime</span>
-                </div>
-              </div>
-            </div>
+            <Link
+              href="/auth/register"
+              className="group px-8 py-4 rounded-lg font-semibold text-white border border-white/20 hover:border-white/40 transition-all duration-300 hover:bg-white/5"
+            >
+              Join Courses
+            </Link>
+          </div>
 
-            {/* Right Column - Dashboard Mockup */}
-            <div className="relative lg:mt-0 mt-12">
-              <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
-                {/* Dashboard Header */}
-                <div className="flex items-center justify-between mb-8">
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center shadow-md">
-                      <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-gray-900 text-lg">Analytics Dashboard</h3>
-                      <p className="text-sm text-gray-500">Real-time insights</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="relative flex h-3 w-3">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                    </span>
-                    <span className="text-sm text-green-600 font-semibold">Live</span>
-                  </div>
-                </div>
-
-                {/* Stats Grid */}
-                <div className="grid grid-cols-2 gap-6 mb-8">
-                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl">
-                    <p className="text-sm text-blue-700 font-semibold mb-2">Followers</p>
-                    <p className="text-3xl font-bold text-blue-900 mb-2">24.5K</p>
-                    <p className="text-sm text-green-600 flex items-center gap-1">
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                      </svg>
-                      +12.5%
-                    </p>
-                  </div>
-                  <div className="bg-gradient-to-br from-cyan-50 to-cyan-100 p-6 rounded-xl">
-                    <p className="text-sm text-cyan-700 font-semibold mb-2">Engagement</p>
-                    <p className="text-3xl font-bold text-cyan-900 mb-2">8.4%</p>
-                    <p className="text-sm text-green-600 flex items-center gap-1">
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                      </svg>
-                      +3.2%
-                    </p>
-                  </div>
-                </div>
-
-                {/* Chart */}
-                <div className="h-40 bg-gradient-to-r from-blue-100 via-blue-50 to-cyan-100 rounded-xl flex items-end justify-around p-6 gap-3">
-                  {[40, 65, 45, 80, 60, 90, 75].map((height, i) => (
-                    <div
-                      key={i}
-                      className="flex-1 bg-gradient-to-t from-blue-600 to-blue-400 rounded-t-lg transition-all hover:from-blue-700 hover:to-blue-500 shadow-sm"
-                      style={{ height: `${height}%` }}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {/* Floating Cards */}
-              <div className="absolute -top-6 -right-6 bg-white rounded-xl shadow-lg p-5 max-w-[220px] hidden lg:block">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-xs text-gray-500 mb-1">Content Posted</p>
-                    <p className="font-bold text-gray-800">Instagram</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-lg p-5 max-w-[240px] hidden lg:block">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-xs text-gray-500 mb-1">Growth Rate</p>
-                    <p className="font-bold text-green-600">+15.3% this week</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          {/* Scroll Indicator */}
+          <div className="flex items-center justify-center gap-2 text-gray-500 text-sm animate-pulse">
+            <span>Scroll to explore</span>
+            <svg className="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
-              Everything You Need to{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">
-                Dominate Social Media
+      {/* Full-Width Interactive Image Grid - 2 rows, 800px max height */}
+      <ImageCarousel images={[]} />
+
+      {/* About Preview Section - positioned after 300vh masonry grid */}
+      <section className="relative py-32 px-6 sm:px-8 lg:px-12 overflow-hidden bg-black">
+        <div className="max-w-4xl mx-auto text-center space-y-12">
+          {/* Gradient Background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none" />
+
+          <div className="relative z-10 space-y-6">
+            <h2 className="text-5xl sm:text-6xl font-black text-white leading-tight">
+              We are
+              <br />
+              <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+                MONTROSE
               </span>
             </h2>
-            <p className="text-xl text-gray-600">
-              Professional tools and expert strategies to grow your brand across all platforms
-            </p>
-          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <p className="text-xl text-gray-400 leading-relaxed max-w-2xl mx-auto">
+              A multidisciplinary team blending creativity, code, and marketing to make brands unforgettable. We don't just create—we transform visions into digital experiences that captivate, engage, and convert.
+            </p>
+
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-2 text-white font-semibold hover:gap-3 transition-all duration-300 group"
+            >
+              Explore our services
+              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Highlights */}
+      <section className="relative py-32 px-6 sm:px-8 lg:px-12 bg-black">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-5xl sm:text-6xl font-black text-white mb-16 text-center">
+            What We
+            <br />
+            <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+              OFFER
+            </span>
+          </h2>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: (
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                  </svg>
-                ),
-                color: 'from-blue-500 to-blue-700',
-                title: 'Real-Time Analytics',
-                description: 'Track followers, engagement, and growth metrics across all platforms with live updates and insights.'
+                icon: '🎨',
+                title: 'Website Design',
+                description: 'Stunning, responsive digital experiences that convert visitors into customers.',
               },
               {
-                icon: (
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                ),
-                color: 'from-red-500 to-red-700',
-                title: 'Professional Content',
-                description: 'High-quality posts, reels, and stories designed by experts to maximize engagement and conversions.'
+                icon: '📱',
+                title: 'Web Development',
+                description: 'Fast, scalable, and secure websites built with cutting-edge technology.',
               },
               {
-                icon: (
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                  </svg>
-                ),
-                color: 'from-green-500 to-green-700',
-                title: 'Growth Strategies',
-                description: 'Proven tactics for organic growth, including hashtag research, optimal posting times, and audience targeting.'
+                icon: '🎯',
+                title: 'Branding',
+                description: 'Complete brand identity that tells your story and stands out from the competition.',
               },
               {
-                icon: (
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                ),
-                color: 'from-purple-500 to-purple-700',
-                title: 'Content Calendar',
-                description: 'Plan and schedule posts in advance with our intuitive calendar. Never miss an important posting opportunity.'
+                icon: '⚡',
+                title: 'AI Automation',
+                description: 'Intelligent solutions that streamline workflows and boost productivity.',
               },
-              {
-                icon: (
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                ),
-                color: 'from-orange-500 to-orange-700',
-                title: 'Audience Insights',
-                description: 'Understand your audience demographics, interests, and behavior to create content that resonates.'
-              },
-              {
-                icon: (
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                ),
-                color: 'from-pink-500 to-pink-700',
-                title: 'Secure & Reliable',
-                description: 'Enterprise-grade security with encrypted data storage. Your social accounts are safe with us.'
-              },
-            ].map((feature, index) => (
-              <div key={index} className="group bg-white rounded-2xl p-8 shadow-md hover:shadow-2xl border border-gray-100 transition-all duration-300 hover:-translate-y-2">
-                <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-md`}>
-                  {feature.icon}
+            ].map((service, index) => (
+              <div
+                key={index}
+                className="group relative p-8 rounded-2xl transition-all duration-300 cursor-pointer"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  backdropFilter: 'blur(10px)',
+                }}
+              >
+                <div className="space-y-4 relative z-10">
+                  <div className="text-5xl">{service.icon}</div>
+                  <h3 className="text-xl font-bold text-white">{service.title}</h3>
+                  <p className="text-gray-400 leading-relaxed">{service.description}</p>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {feature.description}
-                </p>
+
+                {/* Hover Glow */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{
+                  background: 'radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%)',
+                  filter: 'blur(20px)',
+                }} />
+
+                {/* Border on hover */}
+                <div className="absolute inset-0 rounded-2xl border border-white/10 group-hover:border-white/30 transition-colors duration-300 pointer-events-none" />
               </div>
             ))}
           </div>
@@ -288,33 +238,82 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800">
-        <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            Ready to Transform Your Social Media?
-          </h2>
-          <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
-            Join hundreds of businesses already growing their online presence with Montrose
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/auth/register"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
-            >
-              Start Free Trial
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 bg-blue-500/20 backdrop-blur-sm text-white text-lg font-semibold rounded-xl border-2 border-white/30 hover:border-white/60 hover:-translate-y-1 transition-all"
-            >
-              Contact Sales
-            </Link>
+      <section className="relative py-32 px-6 sm:px-8 lg:px-12 overflow-hidden bg-black">
+        {/* Background Elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/10 rounded-full blur-3xl opacity-20" />
+        </div>
+
+        <div className="relative max-w-3xl mx-auto text-center z-10">
+          <div
+            className="p-12 rounded-2xl transition-all duration-300"
+            style={{
+              background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              backdropFilter: 'blur(20px)',
+              boxShadow: '0 0 60px rgba(255,255,255,0.05)',
+            }}
+          >
+            <h2 className="text-5xl sm:text-6xl font-black text-white mb-6 leading-tight">
+              Let's build something
+              <br />
+              <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+                EXTRAORDINARY
+              </span>
+            </h2>
+
+            <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+              Ready to transform your vision into reality? Let's collaborate and create something remarkable together.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Link
+                href="/auth/register"
+                className="group px-8 py-4 bg-gradient-to-r from-white/20 to-white/10 rounded-lg font-semibold text-white border border-white/30 hover:border-white/60 transition-all duration-300 hover:shadow-2xl hover:shadow-white/20 text-center"
+              >
+                Start a Project
+              </Link>
+
+              <Link
+                href="/pricing"
+                className="group px-8 py-4 bg-transparent rounded-lg font-semibold text-white border border-white/20 hover:border-white/40 transition-all duration-300 text-center"
+              >
+                View Pricing
+              </Link>
+            </div>
           </div>
-          <p className="text-blue-200 text-sm mt-8">
-            No credit card required • 14-day free trial • Cancel anytime
-          </p>
         </div>
       </section>
+
+      {/* Keyframe animations */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+
+        @keyframes glow {
+          0%, 100% {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+          }
+          50% {
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+          }
+        }
+
+        @keyframes pulse-glow {
+          0%, 100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.8;
+          }
+        }
+      `}</style>
 
       <Footer />
     </div>

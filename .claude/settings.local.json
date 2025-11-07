@@ -6,7 +6,14 @@
       "Bash(python -c:*)",
       "Bash(python -m json.tool:*)",
       "Bash(del db.sqlite3)",
-      "Bash(python manage.py migrate:*)"
+      "Bash(python manage.py migrate:*)",
+      "Bash(for:*)",
+      "Bash(do identify \"$file\")",
+      "Bash(echo:*)",
+      "Bash(done)",
+      "Bash(python manage.py shell:*)",
+      "Bash(python manage.py:*)",
+      "Bash(python test_gallery_api.py:*)"
     ],
     "deny": [],
     "ask": []

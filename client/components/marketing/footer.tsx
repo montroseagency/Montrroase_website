@@ -28,38 +28,38 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gradient-to-br from-neutral-900 via-neutral-900 to-neutral-800 text-neutral-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <footer className="relative bg-gradient-to-b from-black/50 via-black to-black text-gray-400 border-t border-white/10">
+      <div className="absolute inset-0 bg-gradient-to-t from-white/5 via-transparent to-transparent pointer-events-none" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-16 mb-12">
           {/* Brand Section */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center space-x-3 group mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-lg">
+            <Link href="/" className="flex items-center space-x-3 group mb-8">
+              <div className="w-12 h-12 bg-gradient-to-br from-white/20 to-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm border border-white/20 shadow-lg shadow-white/10 group-hover:shadow-white/20 transition-all duration-300">
                 <span className="text-white font-bold text-2xl">M</span>
               </div>
               <div>
-                <span className="text-2xl font-display font-bold text-white">
-                  Montrose
+                <span className="text-2xl font-bold text-white tracking-tight">
+                  MONTROSE
                 </span>
-                <p className="text-xs text-neutral-400 font-medium">
-                  Social Media Growth
+                <p className="text-xs text-gray-500 font-medium">
+                  Design That Connects
                 </p>
               </div>
             </Link>
-            <p className="text-neutral-400 leading-relaxed mb-6 max-w-md">
-              Empowering businesses to grow their social media presence with
-              real-time analytics, professional content management, and proven
-              growth strategies.
+            <p className="text-gray-400 leading-relaxed mb-8 max-w-md">
+              A multidisciplinary team blending creativity, code, and marketing to make brands unforgettable. We craft digital experiences that captivate, engage, and convert.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-3">
               {footerLinks.social.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-neutral-800 hover:bg-primary-600 flex items-center justify-center transition-all duration-200 hover:-translate-y-1"
+                  className="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10 hover:border-white/30 flex items-center justify-center transition-all duration-300 text-white/70 hover:text-white"
                   aria-label={social.name}
                 >
                   <SocialIcon icon={social.icon} />
@@ -70,15 +70,15 @@ export default function Footer() {
 
           {/* Product Links */}
           <div>
-            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-6">
               Product
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {footerLinks.product.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-neutral-400 hover:text-primary-400 transition-colors duration-200 text-sm"
+                    className="text-gray-400 hover:text-white transition-colors duration-200 text-sm font-medium"
                   >
                     {link.name}
                   </Link>
@@ -89,15 +89,15 @@ export default function Footer() {
 
           {/* Company Links */}
           <div>
-            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-6">
               Company
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-neutral-400 hover:text-primary-400 transition-colors duration-200 text-sm"
+                    className="text-gray-400 hover:text-white transition-colors duration-200 text-sm font-medium"
                   >
                     {link.name}
                   </Link>
@@ -108,15 +108,15 @@ export default function Footer() {
 
           {/* Legal Links */}
           <div>
-            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-6">
               Legal
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {footerLinks.legal.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-neutral-400 hover:text-primary-400 transition-colors duration-200 text-sm"
+                    className="text-gray-400 hover:text-white transition-colors duration-200 text-sm font-medium"
                   >
                     {link.name}
                   </Link>
@@ -126,15 +126,16 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Divider */}
+        <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8" />
+
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-neutral-800">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-neutral-500 text-sm">
-              © {new Date().getFullYear()} Montrose. All rights reserved.
-            </p>
-            <div className="flex items-center space-x-6 text-sm text-neutral-500">
-              <span>Made with ❤️ for growing businesses</span>
-            </div>
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <p className="text-gray-500 text-sm">
+            © {new Date().getFullYear()} MONTROSE. All rights reserved.
+          </p>
+          <div className="flex items-center space-x-6 text-sm text-gray-500">
+            <span>Crafted with intention</span>
           </div>
         </div>
       </div>

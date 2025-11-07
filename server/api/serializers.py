@@ -5,9 +5,9 @@ from django.utils import timezone
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from .models import (
-    ContentImage, User, Client, Task, ContentPost, PerformanceData, 
+    ContentImage, User, Client, Task, ContentPost, PerformanceData,
     Message, Invoice, TeamMember, Project, File, Notification,
-    SocialMediaAccount, RealTimeMetrics  # Add these imports
+    SocialMediaAccount, RealTimeMetrics, ImageGalleryItem  # Add these imports
 )
 
 class UserSerializer(serializers.ModelSerializer):
@@ -421,3 +421,27 @@ class FileUploadSerializer(serializers.ModelSerializer):
         validated_data['uploaded_by'] = self.context['request'].user
         validated_data['size'] = validated_data['file'].size
         return super().create(validated_data)
+
+
+# Image Gallery Serializers
+class ImageGalleryItemSerializer(serializers.ModelSerializer):
+    """Serializer for gallery items with image handling"""
+    image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ImageGalleryItem
+        fields = [
+            'id', 'title', 'image', 'image_url', 'grid_column', 'grid_row',
+            'flex_width', 'display_order', 'alt_text', 'caption', 'is_active',
+            'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at']
+
+    def get_image_url(self, obj):
+        """Return full URL for image"""
+        if obj.image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.image.url)
+            return obj.image.url
+        return None

@@ -246,3 +246,42 @@ For more details, see:
 - `TEST_CREDENTIALS.md` - Available test accounts
 - `LOGIN_DEBUG_REPORT.md` - Technical details
 - `DASHBOARD_COMPLETE.md` - Dashboard implementation status
+
+## Image Gallery Feature (NEW)
+
+### Quick Start - Gallery Management
+
+**Access Admin Dashboard:**
+```
+http://localhost:3000/dashboard/admin/gallery
+```
+
+**Add Image (Quick):**
+1. Click "+ Add New Image"
+2. Fill form (title, upload image, set flex width)
+3. Click "Create"
+
+**View on Homepage:**
+```
+http://localhost:3000
+```
+Scroll to image gallery section - your images appear in two-row layout
+
+### Gallery Endpoints
+- **Homepage Gallery:** `http://localhost:3000`
+- **Admin Dashboard:** `http://localhost:3000/dashboard/admin/gallery`
+- **API:** `http://localhost:8000/api/gallery/`
+
+### Gallery Features
+- Two-row dynamic layout (800px height)
+- Cursor-following glow effects
+- Admin CRUD operations
+- Flex sizing control (0.5fr to 2.5fr)
+- Hover animations with captions
+- Real-time preview
+
+### Gallery Documentation
+See these files for full details:
+- `GALLERY_SETUP.md` - Complete setup guide
+- `GALLERY_IMPLEMENTATION_SUMMARY.md` - Implementation details
+- `server/test_gallery_api.py` - Run to test API

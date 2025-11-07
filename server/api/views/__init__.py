@@ -98,6 +98,14 @@ except ImportError:
     FILE_VIEWS_AVAILABLE = False
     FileViewSetFromFile = None
 
+# ============ GALLERY VIEWS ============
+try:
+    from .gallery_views import ImageGalleryViewSet
+    GALLERY_VIEWS_AVAILABLE = True
+except ImportError:
+    GALLERY_VIEWS_AVAILABLE = False
+    ImageGalleryViewSet = None
+
 # ============ PAYPAL BILLING VIEWS ============
 try:
     from .paypal_billing_views import (
@@ -161,6 +169,7 @@ __all__ = [
     'ClientViewSet', 'TaskViewSet', 'ContentPostViewSet',
     'PerformanceDataViewSet', 'MessageViewSet', 'InvoiceViewSet',
     'FileViewSet', 'NotificationViewSet', 'SocialMediaAccountViewSet',
+    'ImageGalleryViewSet',
     
     # Analytics and metrics  
     'get_realtime_metrics', 'analytics_overview', 'client_performance_report',

@@ -13316,3 +13316,267 @@ INFO 2025-11-06 23:11:04,020 basehttp 880 9968 "GET /api/invoices/ HTTP/1.1" 200
 INFO 2025-11-06 23:11:04,023 basehttp 880 12592 "GET /api/tasks/ HTTP/1.1" 200 3284
 INFO 2025-11-06 23:11:04,037 basehttp 880 12956 "GET /api/content/ HTTP/1.1" 200 8596
 INFO 2025-11-06 23:11:09,904 basehttp 880 12956 "POST /api/auth/logout/ HTTP/1.1" 200 37
+WARNING 2025-11-07 00:30:14,453 auth_views 6988 1688 Email service not available
+WARNING 2025-11-07 00:30:39,092 auth_views 11692 12568 Email service not available
+WARNING 2025-11-07 00:31:16,782 auth_views 1852 7164 Email service not available
+INFO 2025-11-07 00:31:55,193 autoreload 10648 15820 Watching for file changes with StatReloader
+INFO 2025-11-07 00:32:21,255 basehttp 10648 7828 "POST /api/auth/login/ HTTP/1.1" 200 273
+INFO 2025-11-07 00:32:22,500 basehttp 10648 7828 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-07 00:32:22,537 basehttp 10648 1568 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-07 00:32:22,540 basehttp 10648 9476 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-07 00:32:22,559 basehttp 10648 17332 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-07 00:32:22,561 basehttp 10648 16940 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-07 00:32:22,568 basehttp 10648 1236 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-07 00:32:22,570 basehttp 10648 7828 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-07 00:32:22,589 basehttp 10648 17332 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-07 00:32:22,609 basehttp 10648 16940 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-07 00:32:22,610 basehttp 10648 1568 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-07 00:32:38,479 basehttp 10648 1568 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-07 00:32:38,479 basehttp 10648 16940 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-07 00:32:39,617 basehttp 10648 16940 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-07 00:32:39,642 basehttp 10648 1568 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-07 00:32:40,838 basehttp 10648 16940 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-07 00:32:40,848 basehttp 10648 1568 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-07 00:32:40,862 basehttp 10648 17332 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-07 00:32:40,880 basehttp 10648 16940 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-07 00:32:42,069 basehttp 10648 16940 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-07 00:32:42,086 basehttp 10648 17332 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-07 00:32:42,954 basehttp 10648 17332 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-07 00:32:42,963 basehttp 10648 16940 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-07 00:32:44,067 message_views 10648 16940 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-07 00:32:44,078 message_views 10648 16940 Found 1 conversations
+INFO 2025-11-07 00:32:44,079 basehttp 10648 16940 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 607
+INFO 2025-11-07 00:32:44,084 message_views 10648 17332 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-07 00:32:44,094 message_views 10648 17332 Found 1 conversations
+INFO 2025-11-07 00:32:44,095 basehttp 10648 17332 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 607
+INFO 2025-11-07 00:32:44,106 message_views 10648 17332 User admin@montrroase.com fetching messages with user 9ed6db5f-44f6-4cfd-928f-95433af65a33
+INFO 2025-11-07 00:32:44,107 message_views 10648 17332 Found other user: client@example.com
+INFO 2025-11-07 00:32:44,107 message_views 10648 17332 Found 6 messages
+INFO 2025-11-07 00:32:44,127 basehttp 10648 17332 "GET /api/messages/conversation/9ed6db5f-44f6-4cfd-928f-95433af65a33/ HTTP/1.1" 200 2117
+INFO 2025-11-07 00:32:44,131 message_views 10648 16940 User admin@montrroase.com fetching messages with user 9ed6db5f-44f6-4cfd-928f-95433af65a33
+INFO 2025-11-07 00:32:44,132 message_views 10648 16940 Found other user: client@example.com
+INFO 2025-11-07 00:32:44,135 message_views 10648 16940 Found 6 messages
+INFO 2025-11-07 00:32:44,150 basehttp 10648 16940 "GET /api/messages/conversation/9ed6db5f-44f6-4cfd-928f-95433af65a33/ HTTP/1.1" 200 2117
+INFO 2025-11-07 00:32:53,761 basehttp 10648 16940 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-07 00:32:54,130 basehttp 10648 15508 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:32:54,130 basehttp 10648 15508 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:33:33,948 autoreload 10648 15820 C:\Users\User\Documents\GitHub\Montrroase_website\server\api\views\gallery_views.py changed, reloading.
+INFO 2025-11-07 00:33:35,183 autoreload 7068 12944 Watching for file changes with StatReloader
+INFO 2025-11-07 00:34:42,521 basehttp 7068 7164 "POST /api/auth/login/ HTTP/1.1" 200 273
+INFO 2025-11-07 00:34:42,799 basehttp 7068 7164 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-07 00:34:42,824 basehttp 7068 14888 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-07 00:34:42,827 basehttp 7068 17396 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-07 00:34:42,842 basehttp 7068 17116 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-07 00:34:42,842 basehttp 7068 13580 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-07 00:34:42,850 basehttp 7068 5888 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-07 00:34:42,856 basehttp 7068 14888 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-07 00:34:42,870 basehttp 7068 17396 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-07 00:34:42,880 basehttp 7068 7164 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-07 00:34:42,886 basehttp 7068 13580 "GET /api/tasks/ HTTP/1.1" 200 3284
+WARNING 2025-11-07 00:34:56,233 auth_views 13520 8272 Email service not available
+WARNING 2025-11-07 00:35:10,761 auth_views 1424 10908 Email service not available
+INFO 2025-11-07 00:35:13,313 basehttp 7068 16844 "GET /api/gallery/ HTTP/1.1" 200 717
+WARNING 2025-11-07 00:35:28,320 auth_views 14948 16456 Email service not available
+INFO 2025-11-07 00:35:30,871 basehttp 7068 7656 "GET /api/gallery/ HTTP/1.1" 200 717
+INFO 2025-11-07 00:35:33,394 basehttp 7068 8480 "GET /api/gallery/?page=1 HTTP/1.1" 200 717
+INFO 2025-11-07 00:35:35,929 basehttp 7068 14412 "GET /api/gallery/ HTTP/1.1" 200 717
+WARNING 2025-11-07 00:36:44,015 auth_views 8056 16728 Email service not available
+INFO 2025-11-07 00:37:41,652 basehttp 7068 13580 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-07 00:37:41,845 basehttp 7068 7164 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-07 00:37:41,859 basehttp 7068 5888 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-07 00:37:41,871 basehttp 7068 17396 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-07 00:37:41,874 basehttp 7068 17116 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-07 00:37:41,887 basehttp 7068 13580 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-07 00:37:41,899 basehttp 7068 14888 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-07 00:37:41,909 basehttp 7068 7164 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-07 00:37:41,920 basehttp 7068 5888 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-07 00:37:41,922 basehttp 7068 17116 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-07 00:37:41,933 basehttp 7068 13580 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-07 00:39:54,121 basehttp 7068 13580 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-07 00:39:54,489 basehttp 7068 4816 "GET /api/gallery/ HTTP/1.1" 200 717
+INFO 2025-11-07 00:39:54,490 basehttp 7068 4816 "GET /api/gallery/ HTTP/1.1" 200 717
+INFO 2025-11-07 00:40:20,525 basehttp 7068 13580 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-07 00:40:20,590 basehttp 7068 4816 "GET /api/gallery/ HTTP/1.1" 200 717
+INFO 2025-11-07 00:40:20,600 basehttp 7068 8656 "GET /api/gallery/ HTTP/1.1" 200 717
+INFO 2025-11-07 00:41:13,112 basehttp 7068 8656 "OPTIONS /api/gallery/6fa790f1-6f61-4270-9133-015119c58efa/ HTTP/1.1" 200 0
+WARNING 2025-11-07 00:41:13,118 log 7068 8656 Unauthorized: /api/gallery/6fa790f1-6f61-4270-9133-015119c58efa/
+WARNING 2025-11-07 00:41:13,122 basehttp 7068 8656 "PATCH /api/gallery/6fa790f1-6f61-4270-9133-015119c58efa/ HTTP/1.1" 401 58
+INFO 2025-11-07 00:42:45,190 basehttp 7068 13580 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-07 00:42:45,257 basehttp 7068 8656 "GET /api/gallery/ HTTP/1.1" 200 717
+INFO 2025-11-07 00:42:45,268 basehttp 7068 4816 "GET /api/gallery/ HTTP/1.1" 200 717
+WARNING 2025-11-07 00:44:24,092 log 7068 4816 Unauthorized: /api/gallery/6fa790f1-6f61-4270-9133-015119c58efa/
+WARNING 2025-11-07 00:44:24,097 basehttp 7068 4816 "PATCH /api/gallery/6fa790f1-6f61-4270-9133-015119c58efa/ HTTP/1.1" 401 58
+WARNING 2025-11-07 00:45:25,586 log 7068 4816 Unauthorized: /api/gallery/6fa790f1-6f61-4270-9133-015119c58efa/
+WARNING 2025-11-07 00:45:25,596 basehttp 7068 4816 "PATCH /api/gallery/6fa790f1-6f61-4270-9133-015119c58efa/ HTTP/1.1" 401 27
+INFO 2025-11-07 00:45:30,573 basehttp 7068 13580 "OPTIONS /api/auth/me/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:45:30,591 basehttp 7068 13580 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-07 00:45:30,706 basehttp 7068 4816 "GET /api/gallery/ HTTP/1.1" 200 717
+INFO 2025-11-07 00:45:30,715 basehttp 7068 8656 "GET /api/gallery/ HTTP/1.1" 200 717
+WARNING 2025-11-07 00:45:36,689 log 7068 8656 Unauthorized: /api/gallery/6fa790f1-6f61-4270-9133-015119c58efa/
+WARNING 2025-11-07 00:45:36,692 basehttp 7068 8656 "PATCH /api/gallery/6fa790f1-6f61-4270-9133-015119c58efa/ HTTP/1.1" 401 27
+INFO 2025-11-07 00:46:04,552 basehttp 7068 13580 "POST /api/auth/logout/ HTTP/1.1" 200 37
+INFO 2025-11-07 00:46:23,310 basehttp 7068 13580 "OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:46:24,065 basehttp 7068 13580 "POST /api/auth/login/ HTTP/1.1" 200 273
+INFO 2025-11-07 00:46:24,915 basehttp 7068 6808 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:46:24,915 basehttp 7068 1428 "OPTIONS /api/clients/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:46:24,915 basehttp 7068 11456 "OPTIONS /api/content/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:46:24,915 basehttp 7068 13580 "OPTIONS /api/dashboard/stats/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:46:24,915 basehttp 7068 1860 "OPTIONS /api/invoices/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:46:24,926 basehttp 7068 1428 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:46:24,928 basehttp 7068 17028 "OPTIONS /api/dashboard/stats/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:46:24,928 basehttp 7068 6808 "OPTIONS /api/content/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:46:24,929 basehttp 7068 11456 "OPTIONS /api/clients/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:46:24,939 basehttp 7068 13580 "OPTIONS /api/invoices/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:46:24,963 basehttp 7068 1428 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-07 00:46:24,985 basehttp 7068 6808 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-07 00:46:24,985 basehttp 7068 13580 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-07 00:46:24,993 basehttp 7068 17028 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-07 00:46:24,999 basehttp 7068 11456 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-07 00:46:25,018 basehttp 7068 1860 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-07 00:46:25,056 basehttp 7068 13580 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-07 00:46:25,059 basehttp 7068 1428 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-07 00:46:25,059 basehttp 7068 17028 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-07 00:46:25,077 basehttp 7068 11456 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-07 00:46:25,630 basehttp 7068 8656 "GET /api/gallery/ HTTP/1.1" 200 717
+INFO 2025-11-07 00:46:25,630 basehttp 7068 4816 "GET /api/gallery/ HTTP/1.1" 200 717
+INFO 2025-11-07 00:46:28,441 autoreload 7068 12944 C:\Users\User\Documents\GitHub\Montrroase_website\server\api\views\gallery_views.py changed, reloading.
+INFO 2025-11-07 00:46:29,639 autoreload 12580 6264 Watching for file changes with StatReloader
+INFO 2025-11-07 00:47:38,594 basehttp 12580 15884 "PATCH /api/gallery/6fa790f1-6f61-4270-9133-015119c58efa/ HTTP/1.1" 200 414
+INFO 2025-11-07 00:47:39,032 basehttp 12580 4072 "GET /media/gallery/app.png HTTP/1.1" 200 1935912
+INFO 2025-11-07 00:47:48,495 basehttp 12580 15884 "OPTIONS /api/gallery/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:47:48,559 basehttp 12580 15884 "POST /api/gallery/ HTTP/1.1" 201 373
+INFO 2025-11-07 00:47:48,581 basehttp 12580 4072 "GET /media/gallery/car.png HTTP/1.1" 200 1651236
+INFO 2025-11-07 00:47:55,792 basehttp 12580 15884 "OPTIONS /api/gallery/26d3d8e9-e749-4bc3-859d-e2f2c1588790/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:47:55,850 basehttp 12580 15884 "PATCH /api/gallery/26d3d8e9-e749-4bc3-859d-e2f2c1588790/ HTTP/1.1" 200 424
+INFO 2025-11-07 00:47:55,874 basehttp 12580 4072 "GET /media/gallery/dashboard.png HTTP/1.1" 200 1351122
+INFO 2025-11-07 00:47:58,790 basehttp 12580 15884 "GET /api/gallery/ HTTP/1.1" 200 891
+INFO 2025-11-07 00:47:59,551 basehttp 12580 15884 "GET /api/gallery/ HTTP/1.1" 200 891
+INFO 2025-11-07 00:48:00,018 basehttp 12580 15884 "GET /api/gallery/ HTTP/1.1" 200 891
+INFO 2025-11-07 00:48:00,160 basehttp 12580 15884 "GET /api/gallery/ HTTP/1.1" 200 891
+INFO 2025-11-07 00:48:02,649 basehttp 12580 15884 "DELETE /api/gallery/26d3d8e9-e749-4bc3-859d-e2f2c1588790/ HTTP/1.1" 204 0
+INFO 2025-11-07 00:48:05,735 basehttp 12580 15884 "DELETE /api/gallery/6fa790f1-6f61-4270-9133-015119c58efa/ HTTP/1.1" 204 0
+INFO 2025-11-07 00:48:11,629 basehttp 12580 15884 "POST /api/gallery/ HTTP/1.1" 201 389
+INFO 2025-11-07 00:48:11,651 basehttp 12580 4072 "GET /media/gallery/car_IgI7N39.png HTTP/1.1" 200 1651236
+INFO 2025-11-07 00:48:16,501 basehttp 12580 15884 "POST /api/gallery/ HTTP/1.1" 201 381
+INFO 2025-11-07 00:48:16,529 basehttp 12580 4072 "GET /media/gallery/watches.png HTTP/1.1" 200 1853806
+INFO 2025-11-07 00:48:31,220 basehttp 12580 15884 "POST /api/gallery/ HTTP/1.1" 201 377
+INFO 2025-11-07 00:48:31,249 basehttp 12580 4072 "GET /media/gallery/yacht.png HTTP/1.1" 200 2311137
+INFO 2025-11-07 00:48:49,784 basehttp 12580 15884 "POST /api/gallery/ HTTP/1.1" 201 389
+INFO 2025-11-07 00:48:49,826 basehttp 12580 4072 "GET /media/gallery/modernhouse.png HTTP/1.1" 200 1339495
+INFO 2025-11-07 00:49:00,504 basehttp 12580 15884 "POST /api/gallery/ HTTP/1.1" 201 385
+INFO 2025-11-07 00:49:00,538 basehttp 12580 4072 "GET /media/gallery/furniture.png HTTP/1.1" 200 1929686
+INFO 2025-11-07 00:49:06,909 basehttp 12580 15884 "POST /api/gallery/ HTTP/1.1" 201 379
+INFO 2025-11-07 00:49:06,946 basehttp 12580 4072 "GET /media/gallery/travel.png HTTP/1.1" 200 2707468
+INFO 2025-11-07 00:49:15,562 basehttp 12580 15884 "POST /api/gallery/ HTTP/1.1" 201 389
+INFO 2025-11-07 00:49:15,566 basehttp 12580 4072 "GET /media/gallery/app_lyYVzAP.png HTTP/1.1" 200 1935912
+INFO 2025-11-07 00:49:25,468 basehttp 12580 15884 "POST /api/gallery/ HTTP/1.1" 201 383
+INFO 2025-11-07 00:49:25,497 basehttp 12580 4072 "GET /media/gallery/jewllery.png HTTP/1.1" 200 2396148
+INFO 2025-11-07 00:49:34,752 basehttp 12580 15884 "POST /api/gallery/ HTTP/1.1" 201 375
+INFO 2025-11-07 00:49:34,779 basehttp 12580 4072 "GET /media/gallery/slim.png HTTP/1.1" 200 765464
+INFO 2025-11-07 00:49:37,863 basehttp 12580 15884 "OPTIONS /api/gallery/aea49a80-9226-4a64-bf53-857bc5473a10/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:49:37,867 basehttp 12580 15884 "OPTIONS /api/gallery/1477c4da-779a-49a8-ba59-c5d4bba94b74/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:49:37,869 basehttp 12580 15884 "OPTIONS /api/gallery/94a64162-6ff4-4c88-8534-6eb4a0f0f985/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:49:37,871 basehttp 12580 15884 "OPTIONS /api/gallery/baae1cea-f213-4f00-8f57-197f08d9c0f5/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:49:37,873 basehttp 12580 15884 "OPTIONS /api/gallery/b8e7170b-4f95-4c85-ba81-0c6614a1a3fa/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:49:37,876 basehttp 12580 15884 "OPTIONS /api/gallery/4f7e8216-11fd-4e64-ac3e-8ab2a87fe756/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:49:37,878 basehttp 12580 15884 "OPTIONS /api/gallery/9a71602f-4996-4c88-ad58-fa4f5e01d340/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:49:37,880 basehttp 12580 15884 "OPTIONS /api/gallery/d61d4157-6044-4093-b59c-ac8352e103fb/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:49:37,882 basehttp 12580 15884 "OPTIONS /api/gallery/498f8261-0e19-4c7b-bcce-c15f500751df/ HTTP/1.1" 200 0
+WARNING 2025-11-07 00:49:37,890 log 12580 15884 Not Found: /api/gallery/aea49a80-9226-4a64-bf53-857bc5473a10/
+WARNING 2025-11-07 00:49:37,890 basehttp 12580 15884 "PATCH /api/gallery/aea49a80-9226-4a64-bf53-857bc5473a10/ HTTP/1.1" 404 23
+WARNING 2025-11-07 00:49:37,896 log 12580 15884 Not Found: /api/gallery/1477c4da-779a-49a8-ba59-c5d4bba94b74/
+WARNING 2025-11-07 00:49:37,897 basehttp 12580 15884 "PATCH /api/gallery/1477c4da-779a-49a8-ba59-c5d4bba94b74/ HTTP/1.1" 404 23
+WARNING 2025-11-07 00:49:37,903 log 12580 15884 Not Found: /api/gallery/94a64162-6ff4-4c88-8534-6eb4a0f0f985/
+WARNING 2025-11-07 00:49:37,904 basehttp 12580 15884 "PATCH /api/gallery/94a64162-6ff4-4c88-8534-6eb4a0f0f985/ HTTP/1.1" 404 23
+WARNING 2025-11-07 00:49:37,910 log 12580 15884 Not Found: /api/gallery/baae1cea-f213-4f00-8f57-197f08d9c0f5/
+WARNING 2025-11-07 00:49:37,910 basehttp 12580 15884 "PATCH /api/gallery/baae1cea-f213-4f00-8f57-197f08d9c0f5/ HTTP/1.1" 404 23
+WARNING 2025-11-07 00:49:37,916 log 12580 15884 Not Found: /api/gallery/b8e7170b-4f95-4c85-ba81-0c6614a1a3fa/
+WARNING 2025-11-07 00:49:37,916 basehttp 12580 15884 "PATCH /api/gallery/b8e7170b-4f95-4c85-ba81-0c6614a1a3fa/ HTTP/1.1" 404 23
+WARNING 2025-11-07 00:49:37,923 log 12580 15884 Not Found: /api/gallery/4f7e8216-11fd-4e64-ac3e-8ab2a87fe756/
+WARNING 2025-11-07 00:49:37,923 basehttp 12580 15884 "PATCH /api/gallery/4f7e8216-11fd-4e64-ac3e-8ab2a87fe756/ HTTP/1.1" 404 23
+WARNING 2025-11-07 00:49:37,929 log 12580 15884 Not Found: /api/gallery/9a71602f-4996-4c88-ad58-fa4f5e01d340/
+WARNING 2025-11-07 00:49:37,930 basehttp 12580 15884 "PATCH /api/gallery/9a71602f-4996-4c88-ad58-fa4f5e01d340/ HTTP/1.1" 404 23
+WARNING 2025-11-07 00:49:37,935 log 12580 15884 Not Found: /api/gallery/d61d4157-6044-4093-b59c-ac8352e103fb/
+WARNING 2025-11-07 00:49:37,937 basehttp 12580 15884 "PATCH /api/gallery/d61d4157-6044-4093-b59c-ac8352e103fb/ HTTP/1.1" 404 23
+WARNING 2025-11-07 00:49:37,941 log 12580 15884 Not Found: /api/gallery/498f8261-0e19-4c7b-bcce-c15f500751df/
+WARNING 2025-11-07 00:49:37,942 basehttp 12580 15884 "PATCH /api/gallery/498f8261-0e19-4c7b-bcce-c15f500751df/ HTTP/1.1" 404 23
+INFO 2025-11-07 00:49:48,762 basehttp 12580 16592 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-07 00:49:48,808 basehttp 12580 15884 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:49:48,816 basehttp 12580 6480 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:51:38,503 basehttp 12580 6480 "GET /api/gallery/ HTTP/1.1" 200 52
+WARNING 2025-11-07 00:52:08,803 log 12580 6480 Not Found: /api/gallery/aea49a80-9226-4a64-bf53-857bc5473a10/
+WARNING 2025-11-07 00:52:08,805 basehttp 12580 6480 "PATCH /api/gallery/aea49a80-9226-4a64-bf53-857bc5473a10/ HTTP/1.1" 404 23
+WARNING 2025-11-07 00:52:08,806 log 12580 15884 Not Found: /api/gallery/1477c4da-779a-49a8-ba59-c5d4bba94b74/
+WARNING 2025-11-07 00:52:08,810 basehttp 12580 15884 "PATCH /api/gallery/1477c4da-779a-49a8-ba59-c5d4bba94b74/ HTTP/1.1" 404 23
+WARNING 2025-11-07 00:52:08,816 log 12580 6480 Not Found: /api/gallery/94a64162-6ff4-4c88-8534-6eb4a0f0f985/
+WARNING 2025-11-07 00:52:08,817 basehttp 12580 6480 "PATCH /api/gallery/94a64162-6ff4-4c88-8534-6eb4a0f0f985/ HTTP/1.1" 404 23
+WARNING 2025-11-07 00:52:08,818 log 12580 15884 Not Found: /api/gallery/baae1cea-f213-4f00-8f57-197f08d9c0f5/
+WARNING 2025-11-07 00:52:08,819 basehttp 12580 15884 "PATCH /api/gallery/baae1cea-f213-4f00-8f57-197f08d9c0f5/ HTTP/1.1" 404 23
+WARNING 2025-11-07 00:52:08,826 log 12580 6480 Not Found: /api/gallery/b8e7170b-4f95-4c85-ba81-0c6614a1a3fa/
+WARNING 2025-11-07 00:52:08,827 basehttp 12580 6480 "PATCH /api/gallery/b8e7170b-4f95-4c85-ba81-0c6614a1a3fa/ HTTP/1.1" 404 23
+WARNING 2025-11-07 00:52:08,830 log 12580 15884 Not Found: /api/gallery/4f7e8216-11fd-4e64-ac3e-8ab2a87fe756/
+WARNING 2025-11-07 00:52:08,832 basehttp 12580 15884 "PATCH /api/gallery/4f7e8216-11fd-4e64-ac3e-8ab2a87fe756/ HTTP/1.1" 404 23
+WARNING 2025-11-07 00:52:08,838 log 12580 6480 Not Found: /api/gallery/9a71602f-4996-4c88-ad58-fa4f5e01d340/
+WARNING 2025-11-07 00:52:08,839 basehttp 12580 6480 "PATCH /api/gallery/9a71602f-4996-4c88-ad58-fa4f5e01d340/ HTTP/1.1" 404 23
+WARNING 2025-11-07 00:52:08,840 log 12580 15884 Not Found: /api/gallery/d61d4157-6044-4093-b59c-ac8352e103fb/
+WARNING 2025-11-07 00:52:08,843 basehttp 12580 15884 "PATCH /api/gallery/d61d4157-6044-4093-b59c-ac8352e103fb/ HTTP/1.1" 404 23
+WARNING 2025-11-07 00:52:08,847 log 12580 6480 Not Found: /api/gallery/498f8261-0e19-4c7b-bcce-c15f500751df/
+WARNING 2025-11-07 00:52:08,848 basehttp 12580 6480 "PATCH /api/gallery/498f8261-0e19-4c7b-bcce-c15f500751df/ HTTP/1.1" 404 23
+INFO 2025-11-07 00:52:13,059 basehttp 12580 16592 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-07 00:52:13,183 basehttp 12580 6480 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:52:13,183 basehttp 12580 15884 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:52:22,220 basehttp 12580 16592 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-07 00:52:22,270 basehttp 12580 15884 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:52:22,272 basehttp 12580 6480 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:54:26,597 autoreload 12580 6264 C:\Users\User\Documents\GitHub\Montrroase_website\server\api\views\gallery_views.py changed, reloading.
+INFO 2025-11-07 00:54:27,847 autoreload 8824 17076 Watching for file changes with StatReloader
+INFO 2025-11-07 00:54:36,151 autoreload 8824 17076 C:\Users\User\Documents\GitHub\Montrroase_website\server\api\views\gallery_views.py changed, reloading.
+INFO 2025-11-07 00:54:37,257 autoreload 3000 11940 Watching for file changes with StatReloader
+INFO 2025-11-07 00:54:51,083 basehttp 3000 16424 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-07 00:54:51,427 basehttp 3000 17332 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:54:51,427 basehttp 3000 17332 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:54:56,459 basehttp 3000 17332 "POST /api/gallery/ HTTP/1.1" 201 389
+INFO 2025-11-07 00:55:05,315 basehttp 3000 16548 "GET /media/gallery/car_dt3OsOq.png HTTP/1.1" 200 1651236
+INFO 2025-11-07 00:55:08,020 basehttp 3000 17332 "OPTIONS /api/gallery/3dfe30fa-070d-4e51-a111-2fa295be8b32/ HTTP/1.1" 200 0
+WARNING 2025-11-07 00:55:08,026 log 3000 17332 Unsupported Media Type: /api/gallery/3dfe30fa-070d-4e51-a111-2fa295be8b32/
+WARNING 2025-11-07 00:55:08,026 basehttp 3000 17332 "PATCH /api/gallery/3dfe30fa-070d-4e51-a111-2fa295be8b32/ HTTP/1.1" 415 68
+INFO 2025-11-07 00:56:37,177 autoreload 3000 11940 C:\Users\User\Documents\GitHub\Montrroase_website\server\api\views\gallery_views.py changed, reloading.
+INFO 2025-11-07 00:56:38,175 autoreload 10928 10416 Watching for file changes with StatReloader
+INFO 2025-11-07 00:56:42,929 autoreload 10928 10416 C:\Users\User\Documents\GitHub\Montrroase_website\server\api\views\gallery_views.py changed, reloading.
+INFO 2025-11-07 00:56:43,953 autoreload 1464 15224 Watching for file changes with StatReloader
+WARNING 2025-11-07 00:56:56,965 log 1464 13276 Not Found: /api/gallery/3dfe30fa-070d-4e51-a111-2fa295be8b32/
+WARNING 2025-11-07 00:56:56,966 basehttp 1464 13276 "PATCH /api/gallery/3dfe30fa-070d-4e51-a111-2fa295be8b32/ HTTP/1.1" 404 23
+INFO 2025-11-07 00:57:06,535 basehttp 1464 9968 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-07 00:57:06,592 basehttp 1464 13276 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:57:06,592 basehttp 1464 14852 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:57:12,147 basehttp 1464 14852 "POST /api/gallery/ HTTP/1.1" 201 389
+INFO 2025-11-07 00:57:16,032 basehttp 1464 4596 "GET /media/gallery/car_ozLm4IK.png HTTP/1.1" 200 1651236
+INFO 2025-11-07 00:57:17,544 basehttp 1464 14852 "OPTIONS /api/gallery/0b7b6af2-ee3a-432f-8d93-65ec3c9f6fab/ HTTP/1.1" 200 0
+WARNING 2025-11-07 00:57:17,554 log 1464 14852 Not Found: /api/gallery/0b7b6af2-ee3a-432f-8d93-65ec3c9f6fab/
+WARNING 2025-11-07 00:57:17,554 basehttp 1464 14852 "PATCH /api/gallery/0b7b6af2-ee3a-432f-8d93-65ec3c9f6fab/ HTTP/1.1" 404 23
+WARNING 2025-11-07 00:57:28,222 log 1464 14852 Not Found: /api/gallery/0b7b6af2-ee3a-432f-8d93-65ec3c9f6fab/
+WARNING 2025-11-07 00:57:28,222 basehttp 1464 14852 "DELETE /api/gallery/0b7b6af2-ee3a-432f-8d93-65ec3c9f6fab/ HTTP/1.1" 404 23
+INFO 2025-11-07 00:57:58,684 basehttp 1464 9968 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-07 00:57:58,752 basehttp 1464 14852 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:57:58,761 basehttp 1464 13276 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:58:07,674 basehttp 1464 13276 "POST /api/gallery/ HTTP/1.1" 201 431
+INFO 2025-11-07 00:58:08,862 basehttp 1464 4596 "GET /media/gallery/modernhouse_f17h3Vm.png HTTP/1.1" 200 1339495
+INFO 2025-11-07 00:58:10,629 basehttp 1464 13276 "OPTIONS /api/gallery/02ccc9d6-360c-41db-a0b7-61a019845aeb/ HTTP/1.1" 200 0
+WARNING 2025-11-07 00:58:10,637 log 1464 13276 Not Found: /api/gallery/02ccc9d6-360c-41db-a0b7-61a019845aeb/
+WARNING 2025-11-07 00:58:10,637 basehttp 1464 13276 "PATCH /api/gallery/02ccc9d6-360c-41db-a0b7-61a019845aeb/ HTTP/1.1" 404 23
+INFO 2025-11-07 00:59:07,665 autoreload 1464 15224 C:\Users\User\Documents\GitHub\Montrroase_website\server\api\views\gallery_views.py changed, reloading.
+INFO 2025-11-07 00:59:08,979 autoreload 2668 1184 Watching for file changes with StatReloader
+INFO 2025-11-07 00:59:16,762 basehttp 2668 6400 "PATCH /api/gallery/02ccc9d6-360c-41db-a0b7-61a019845aeb/ HTTP/1.1" 200 431
+INFO 2025-11-07 00:59:26,067 basehttp 2668 6208 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-07 00:59:26,176 basehttp 2668 6400 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:59:26,184 basehttp 2668 12668 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:59:32,521 basehttp 2668 6208 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-07 00:59:32,580 basehttp 2668 12668 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:59:32,586 basehttp 2668 6400 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:59:42,004 basehttp 2668 6400 "POST /api/gallery/ HTTP/1.1" 201 397
+INFO 2025-11-07 00:59:43,750 basehttp 2668 1148 "GET /media/gallery/watches_BheT0OL.png HTTP/1.1" 200 1853806
+INFO 2025-11-07 00:59:44,511 basehttp 2668 6400 "OPTIONS /api/gallery/61ff99ae-b3a0-4637-9c7b-d208e16a959a/ HTTP/1.1" 200 0
+INFO 2025-11-07 00:59:44,546 basehttp 2668 6400 "PATCH /api/gallery/61ff99ae-b3a0-4637-9c7b-d208e16a959a/ HTTP/1.1" 200 397
+INFO 2025-11-07 00:59:50,369 basehttp 2668 6208 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-07 00:59:50,399 basehttp 2668 6400 "GET /api/gallery/ HTTP/1.1" 200 52
+INFO 2025-11-07 00:59:50,414 basehttp 2668 12668 "GET /api/gallery/ HTTP/1.1" 200 52
