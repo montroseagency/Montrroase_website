@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Navigation from '@/components/marketing/navigation';
 import Footer from '@/components/marketing/footer';
 import ImageCarousel from '@/components/image-carousel';
+import MasonryParallaxGrid from '@/components/masonry-parallax-grid';
 import Link from 'next/link';
 
 export default function HomePage() {
@@ -139,8 +140,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Full-Width Interactive Image Grid - 2 rows, 800px max height */}
-      <ImageCarousel images={[]} />
+      {/* Framer-style Masonry Parallax Grid */}
+      <section className="relative py-20 bg-black">
+        <MasonryParallaxGrid
+          parallaxSpeeds={[0.3, 0.5, 0.7]}
+          autoScroll={false}
+          gap="1rem"
+          cardRadius={10}
+          className="min-h-[600px]"
+        />
+      </section>
 
       {/* About Preview Section - positioned after 300vh masonry grid */}
       <section className="relative py-32 px-6 sm:px-8 lg:px-12 overflow-hidden bg-black">

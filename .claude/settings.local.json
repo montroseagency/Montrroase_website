@@ -13,7 +13,9 @@
       "Bash(done)",
       "Bash(python manage.py shell:*)",
       "Bash(python manage.py:*)",
-      "Bash(python test_gallery_api.py:*)"
+      "Bash(python test_gallery_api.py:*)",
+      "Bash(source venv/bin/activate)",
+      "Bash(python manage.py runserver:*)"
     ],
     "deny": [],
     "ask": []

@@ -24,8 +24,6 @@ from .views import (
     health_check
 )
 
-from .views.gallery_views import ImageGalleryViewSet
-
 from .views.admin.bank_settings_views import (
     admin_bank_settings,
     submit_payment_verification,
@@ -156,7 +154,6 @@ router.register(r'invoices', InvoiceViewSet, basename='invoice')
 router.register(r'files', FileViewSet, basename='file')
 router.register(r'notifications', NotificationViewSet, basename='notification')
 router.register(r'social-accounts', SocialMediaAccountViewSet, basename='social-account')
-router.register(r'gallery', ImageGalleryViewSet, basename='gallery')
 
 urlpatterns = [
     # Authentication endpoints

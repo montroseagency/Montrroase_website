@@ -35,64 +35,38 @@ export default function ImageCarousel() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Fetch gallery items from API
+  // Static gallery items from public folder
   useEffect(() => {
-    const fetchGallery = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        console.log('Fetching gallery from http://localhost:8000/api/gallery/');
+    const staticItems: GalleryItem[] = [
+      { id: '1', title: 'App Design', image_url: '/images/hero/app.png', grid_column: 1, grid_row: 50, flex_width: '1', display_order: 0, alt_text: 'App Design', caption: 'Modern app interface', is_active: true },
+      { id: '2', title: 'Car Showcase', image_url: '/images/hero/car.png', grid_column: 1, grid_row: 50, flex_width: '1', display_order: 1, alt_text: 'Car Showcase', caption: 'Luxury car presentation', is_active: true },
+      { id: '3', title: 'Dashboard', image_url: '/images/hero/dashboard.png', grid_column: 1, grid_row: 50, flex_width: '1', display_order: 2, alt_text: 'Dashboard', caption: 'Analytics dashboard', is_active: true },
+      { id: '4', title: 'Furniture', image_url: '/images/hero/furniture.png', grid_column: 1, grid_row: 50, flex_width: '1', display_order: 3, alt_text: 'Furniture', caption: 'Interior design', is_active: true },
+      { id: '5', title: 'Jewellery', image_url: '/images/hero/jewllery.png', grid_column: 1, grid_row: 50, flex_width: '1', display_order: 4, alt_text: 'Jewellery', caption: 'Luxury jewellery', is_active: true },
+      { id: '6', title: 'Modern House', image_url: '/images/hero/modernhouse.png', grid_column: 1, grid_row: 50, flex_width: '1', display_order: 5, alt_text: 'Modern House', caption: 'Architecture showcase', is_active: true },
+      { id: '7', title: 'Slim Design', image_url: '/images/hero/slim.png', grid_column: 1, grid_row: 50, flex_width: '1', display_order: 6, alt_text: 'Slim Design', caption: 'Minimalist design', is_active: true },
+      { id: '8', title: 'Travel', image_url: '/images/hero/travel.png', grid_column: 1, grid_row: 50, flex_width: '1', display_order: 7, alt_text: 'Travel', caption: 'Travel experience', is_active: true },
+      { id: '9', title: 'Watches', image_url: '/images/hero/watches.png', grid_column: 1, grid_row: 50, flex_width: '1', display_order: 8, alt_text: 'Watches', caption: 'Timepiece collection', is_active: true },
+      { id: '10', title: 'Yacht', image_url: '/images/hero/yacht.png', grid_column: 1, grid_row: 50, flex_width: '1', display_order: 9, alt_text: 'Yacht', caption: 'Luxury yacht', is_active: true },
+    ];
 
-        const response = await fetch('http://localhost:8000/api/gallery/');
-        console.log('Response status:', response.status);
-
-        if (!response.ok) {
-          throw new Error(`API error: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log('Fetched data:', data);
-
-        // Handle paginated response
-        let items: GalleryItem[] = [];
-        if (Array.isArray(data)) {
-          items = data;
-        } else if (data.results && Array.isArray(data.results)) {
-          items = data.results;
-        }
-
-        console.log('Parsed items:', items);
-
-        // Filter for items with images and sort by display_order
-        const validItems = items
-          .filter((item: GalleryItem) => item.image_url)
-          .sort((a: GalleryItem, b: GalleryItem) => a.display_order - b.display_order);
-
-        console.log('Valid items with images:', validItems);
-
-        setGalleryItems(validItems);
-
-        if (validItems.length === 0) {
-          setError('No gallery items with images found');
-        }
-      } catch (error) {
-        const errorMsg = error instanceof Error ? error.message : 'Unknown error';
-        console.error('Error fetching gallery:', error);
-        setError(errorMsg);
-        setGalleryItems([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchGallery();
+    setGalleryItems(staticItems);
+    setLoading(false);
   }, []);
 
   // Split items: first 5 in row 1, next 5 in row 2
   const row1 = galleryItems.slice(0, 5);
   const row2 = galleryItems.slice(5, 10);
 
-  // Image row component
+  // Calculate row heights from grid_row percentages (default 50/50 split)
+  const TOTAL_HEIGHT = 800; // Fixed total gallery height
+  const row1HeightPercent = row1[0]?.grid_row || 50;
+  const row2HeightPercent = row2[0]?.grid_row || (100 - row1HeightPercent);
+
+  const row1Height = (row1HeightPercent / 100) * TOTAL_HEIGHT;
+  const row2Height = (row2HeightPercent / 100) * TOTAL_HEIGHT;
+
+  // Image row component with dynamic sizing
   const Row = ({ items, rowHeight }: { items: GalleryItem[]; rowHeight: number }) => (
     <div
       className="flex w-full gap-0"
@@ -100,15 +74,21 @@ export default function ImageCarousel() {
         height: `${rowHeight}px`,
       }}
     >
-      {items.map((item) => (
-        <div
-          key={item.id}
-          className="group relative overflow-hidden cursor-pointer bg-slate-900"
-          style={{
-            flex: item.flex_width || '1',
-            height: '100%',
-          }}
-        >
+      {items.map((item) => {
+        // Parse flex_width - handle both string and number formats
+        const flexValue = typeof item.flex_width === 'string'
+          ? item.flex_width.replace('fr', '').trim()
+          : item.flex_width || '1';
+
+        return (
+          <div
+            key={item.id}
+            className="group relative overflow-hidden cursor-pointer bg-slate-900"
+            style={{
+              flex: flexValue,
+              height: '100%',
+            }}
+          >
           {/* Image */}
           <img
             src={item.image_url || ''}
@@ -141,8 +121,9 @@ export default function ImageCarousel() {
               </p>
             )}
           </div>
-        </div>
-      ))}
+          </div>
+        );
+      })}
     </div>
   );
 
@@ -205,7 +186,6 @@ export default function ImageCarousel() {
         >
           <div className="text-center">
             <p className="text-gray-400">No gallery items available</p>
-            <p className="text-gray-500 text-xs mt-2">Add images from the admin gallery</p>
           </div>
         </div>
       </section>
@@ -229,21 +209,21 @@ export default function ImageCarousel() {
         }}
       />
 
-      {/* Gallery container - 800px total height */}
+      {/* Gallery container - Fixed total height with dynamic row heights */}
       <div
         className="relative w-full bg-black"
         style={{
-          height: '800px',
+          height: `${TOTAL_HEIGHT}px`,
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
         }}
       >
-        {/* Row 1: Images 1-5 (400px) */}
-        {row1.length > 0 && <Row items={row1} rowHeight={400} />}
+        {/* Row 1: Images 1-5 (Dynamic height based on grid_row) */}
+        {row1.length > 0 && <Row items={row1} rowHeight={row1Height} />}
 
-        {/* Row 2: Images 6-10 (400px) */}
-        {row2.length > 0 && <Row items={row2} rowHeight={400} />}
+        {/* Row 2: Images 6-10 (Dynamic height based on grid_row) */}
+        {row2.length > 0 && <Row items={row2} rowHeight={row2Height} />}
       </div>
 
       {/* Fade-out gradient at bottom */}
