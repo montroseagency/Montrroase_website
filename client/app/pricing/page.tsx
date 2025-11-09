@@ -133,20 +133,11 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-black">
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 bg-gradient-to-br from-blue-50 via-white to-blue-50">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233b82f6' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          />
-        </div>
+      <section className="relative pt-32 pb-20 bg-black">
 
         <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
           <div className="text-center max-w-4xl mx-auto space-y-8">
@@ -162,11 +153,11 @@ export default function PricingPage() {
               <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent block mb-2">
                 Plans That Scale
               </span>
-              <span className="text-gray-900 block">With Your Success</span>
+              <span className="text-white block">With Your Success</span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-xl sm:text-2xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
               Start free, upgrade when ready. All plans include access to our powerful dashboard and expert support.
             </p>
           </div>
@@ -174,7 +165,7 @@ export default function PricingPage() {
       </section>
 
       {/* Pricing Cards */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-black">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {plans.map((plan, index) => (
@@ -195,13 +186,13 @@ export default function PricingPage() {
       </section>
 
       {/* Add-ons Section */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-gray-100">
+      <section className="py-24 bg-black">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
               Add-Ons & Extras
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-300">
               Enhance your plan with additional services tailored to your needs.
             </p>
           </div>
@@ -225,13 +216,13 @@ export default function PricingPage() {
       </section>
 
       {/* Comparison Table */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-black">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
               Feature Comparison
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-300">
               See exactly what's included in each plan.
             </p>
           </div>
@@ -331,13 +322,13 @@ export default function PricingPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-gray-100">
+      <section className="py-24 bg-black">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
               Frequently Asked Questions
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-300">
               Got questions? We've got answers.
             </p>
           </div>

@@ -79,20 +79,11 @@ export default function ServicesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-black">
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center bg-gradient-to-br from-blue-50 via-white to-blue-50 pt-32 pb-20">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233b82f6' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          />
-        </div>
+      <section className="relative min-h-[70vh] flex items-center bg-black pt-32 pb-20">
 
         <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
           <div className="text-center max-w-4xl mx-auto">
@@ -107,13 +98,13 @@ export default function ServicesPage() {
             </div>
 
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              <span className="text-gray-900 block mb-2">Comprehensive Services to</span>
+              <span className="text-white block mb-2">Comprehensive Services to</span>
               <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent block">
                 Accelerate Your Growth
               </span>
             </h1>
 
-            <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed mb-10 max-w-3xl mx-auto">
+            <p className="text-xl sm:text-2xl text-gray-300 leading-relaxed mb-10 max-w-3xl mx-auto">
               From strategy to execution, we provide everything you need to build, grow,
               and scale your online presence. One platform, unlimited possibilities.
             </p>
@@ -137,16 +128,16 @@ export default function ServicesPage() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-black">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
               Everything You Need in{' '}
               <span className="bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">
                 One Platform
               </span>
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-300">
               Integrated services designed to work together seamlessly, giving you the tools and support to succeed online.
             </p>
           </div>
@@ -188,16 +179,16 @@ export default function ServicesPage() {
       </section>
 
       {/* How It Works */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+      <section className="py-24 bg-black">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
               How{' '}
               <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
                 Montrose Works
               </span>
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-300">
               A simple, proven process to take your business from zero to hero.
             </p>
           </div>

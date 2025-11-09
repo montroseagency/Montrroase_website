@@ -98,20 +98,11 @@ export default function PortfolioPage() {
     : projects.filter(p => p.category === activeFilter);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-black">
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 bg-gradient-to-br from-blue-50 via-white to-blue-50">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233b82f6' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          />
-        </div>
+      <section className="relative pt-32 pb-20 bg-black">
 
         <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
           <div className="text-center max-w-4xl mx-auto space-y-8">
@@ -127,11 +118,11 @@ export default function PortfolioPage() {
               <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent block mb-2">
                 Projects That Drive
               </span>
-              <span className="text-gray-900 block">Real Results</span>
+              <span className="text-white block">Real Results</span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-xl sm:text-2xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
               Explore our portfolio of successful websites and digital projects. From startups to established businesses, we've helped brands grow online.
             </p>
           </div>
@@ -139,7 +130,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* Stats */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-black">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
             {[
@@ -152,7 +143,7 @@ export default function PortfolioPage() {
                 <div className="text-4xl lg:text-5xl font-bold text-blue-600 mb-2">
                   {stat.value}
                 </div>
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-gray-300">
                   {stat.label}
                 </div>
               </div>
@@ -162,7 +153,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* Filter Buttons */}
-      <section className="py-12 bg-white">
+      <section className="py-12 bg-black">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex flex-wrap justify-center gap-3">
             {filters.map((filter) => (
@@ -183,7 +174,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* Portfolio Grid */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-black">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map((project, index) => (
@@ -194,7 +185,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* Testimonial */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-gray-100">
+      <section className="py-24 bg-black">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="max-w-4xl mx-auto text-center">
             <div className="flex justify-center mb-6">
@@ -204,7 +195,7 @@ export default function PortfolioPage() {
                 </svg>
               ))}
             </div>
-            <blockquote className="text-2xl sm:text-3xl font-medium text-gray-900 mb-6 leading-relaxed">
+            <blockquote className="text-2xl sm:text-3xl font-medium text-white mb-6 leading-relaxed">
               "Montrose transformed our online presence. Our new website increased conversions by 340% in just three months. The ROI has been incredible."
             </blockquote>
             <div className="flex items-center justify-center">
@@ -212,8 +203,8 @@ export default function PortfolioPage() {
                 SM
               </div>
               <div className="text-left">
-                <p className="font-semibold text-gray-900">Sarah Mitchell</p>
-                <p className="text-gray-600">CEO, TechFlow Solutions</p>
+                <p className="font-semibold text-white">Sarah Mitchell</p>
+                <p className="text-gray-300">CEO, TechFlow Solutions</p>
               </div>
             </div>
           </div>
