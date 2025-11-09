@@ -25,8 +25,8 @@
 
 'use client';
 
-import { useState, useEffect, useRef, useMemo } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState, useEffect, useRef, useMemo, useCallback, memo } from 'react';
+import { motion } from 'framer-motion';
 
 interface ImageItem {
   id: string;
@@ -74,22 +74,37 @@ export default function MasonryParallaxGrid({
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [mouseX, setMouseX] = useState(0.5); // Start at center (shows columns 1-3)
 
-  // Track mouse position for horizontal carousel control
+  // Track mouse position for horizontal carousel control (throttled for performance)
   useEffect(() => {
+    let rafId: number | null = null;
+    let lastMouseX = 0.5;
+
     const handleMouseMove = (e: MouseEvent) => {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        // Normalize mouse X position relative to container (0 to 1)
-        const normalizedX = (e.clientX - rect.left) / rect.width;
-        setMouseX(normalizedX);
+      if (containerRef.current && rafId === null) {
+        rafId = requestAnimationFrame(() => {
+          const rect = containerRef.current?.getBoundingClientRect();
+          if (rect) {
+            // Normalize mouse X position relative to container (0 to 1)
+            const normalizedX = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+            // Only update if changed significantly (reduce re-renders)
+            if (Math.abs(normalizedX - lastMouseX) > 0.01) {
+              lastMouseX = normalizedX;
+              setMouseX(normalizedX);
+            }
+          }
+          rafId = null;
+        });
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
-  // Duplicate images to get ~10 per column
+  // Duplicate images to get ~10 per column for seamless loop
   const duplicatedImages = useMemo(() => {
     // Repeat images to get approximately 10 per column (5 columns * 10 = 50 images needed)
     const targetTotal = 50;
@@ -113,10 +128,8 @@ export default function MasonryParallaxGrid({
     return cols;
   }, [duplicatedImages]);
 
-  // Duplicate columns for infinite vertical scroll
-  const duplicatedColumns = useMemo(() => {
-    return [columns, columns]; // Double for seamless infinite scroll
-  }, [columns]);
+  // Store single set height for seamless looping
+  const singleSetHeightRef = useRef<number>(0);
 
   // Calculate horizontal offset based on mouse position
   // Mouse at left (0) shows columns 0-2, mouse at right (1) shows columns 2-4
@@ -139,62 +152,74 @@ export default function MasonryParallaxGrid({
     return offset;
   }, [mouseX]);
 
-  // Auto-scroll vertically and infinite scroll loop
+  // Auto-scroll vertically with seamless infinite loop
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    // Initialize scroll position to middle
+    // Wait for content to render and measure height
     const initScroll = () => {
-      const singleSetHeight = container.scrollHeight / 2;
-      if (singleSetHeight > 0) {
-        container.scrollTop = singleSetHeight;
-      }
-    };
-    const timeoutId = setTimeout(initScroll, 100);
+      // Use ResizeObserver to get accurate height
+      const resizeObserver = new ResizeObserver(() => {
+        if (container.scrollHeight > 0) {
+          // Height of a single set (first set of columns)
+          const firstSet = container.querySelector('.column-set-1');
+          if (firstSet) {
+            singleSetHeightRef.current = (firstSet as HTMLElement).offsetHeight;
+          } else {
+            // Fallback: use half of total height (since we have 2 sets)
+            singleSetHeightRef.current = container.scrollHeight / 2;
+          }
+          // Start at top for seamless loop
+          container.scrollTop = 0;
+        }
+      });
+      resizeObserver.observe(container);
 
-    // Auto-scroll animation
+      return () => resizeObserver.disconnect();
+    };
+
+    const cleanupResize = initScroll();
+
+    // Auto-scroll animation with seamless loop
     let animationFrameId: number;
     let lastTime = performance.now();
+    let scrollPosition = 0;
 
     const animate = (currentTime: number) => {
       const delta = currentTime - lastTime;
       lastTime = currentTime;
 
-      if (container) {
-        const scrollTop = container.scrollTop;
-        const scrollHeight = container.scrollHeight;
-        const singleSetHeight = scrollHeight / 2;
+      if (container && singleSetHeightRef.current > 0) {
+        // Increment scroll position
+        scrollPosition += (autoScrollSpeed * delta) / 16;
 
-        if (singleSetHeight <= 0) {
-          animationFrameId = requestAnimationFrame(animate);
-          return;
+        // Seamless loop: when we reach the end of first set, reset to 0
+        // This creates the illusion that items from top appear at bottom
+        if (scrollPosition >= singleSetHeightRef.current) {
+          scrollPosition = scrollPosition - singleSetHeightRef.current;
         }
 
-        // Auto-scroll down
-        const newScrollTop = scrollTop + (autoScrollSpeed * delta) / 16;
-
-        // Handle infinite scroll loop
-        if (newScrollTop >= singleSetHeight * 2) {
-          // Loop back to start of second set
-          container.scrollTop = newScrollTop - singleSetHeight;
-        } else {
-          container.scrollTop = newScrollTop;
-        }
+        // Apply scroll position
+        container.scrollTop = scrollPosition;
       }
 
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    animationFrameId = requestAnimationFrame(animate);
+    // Start animation after a short delay to ensure content is rendered
+    const startTimeout = setTimeout(() => {
+      animationFrameId = requestAnimationFrame(animate);
+    }, 200);
 
     return () => {
-      clearTimeout(timeoutId);
+      clearTimeout(startTimeout);
+      if (cleanupResize) cleanupResize();
       if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
       }
     };
-  }, [duplicatedColumns, autoScrollSpeed]);
+  }, [columns, autoScrollSpeed]);
 
   if (images.length === 0) {
     return (
@@ -262,38 +287,65 @@ export default function MasonryParallaxGrid({
           }
         `}</style>
         
-        {duplicatedColumns.map((columnSet, setIndex) => (
-          <div 
-            key={`set-${setIndex}`} 
-            className="flex gap-4"
-            style={{ 
-              flexShrink: 0,
-              transform: `translateX(${horizontalOffset}px)`,
-              transition: 'transform 0.3s ease-out',
-            }}
-          >
-            {columnSet.map((column, colIndex) => (
-              <motion.div
-                key={`col-${setIndex}-${colIndex}`}
-                className="flex flex-col gap-4"
-                style={{
-                  width: columnWidth,
-                  flexShrink: 0,
-                  pointerEvents: 'none', // Disable mouse interactions on columns
-                }}
-              >
-                {column.map((image, imgIndex) => (
-                  <div key={`${image.id}-${setIndex}-${colIndex}-${imgIndex}`} style={{ pointerEvents: 'none' }}>
-                    <ImageCard
-                      image={image}
-                      cardRadius={cardRadius}
-                    />
-                  </div>
-                ))}
-              </motion.div>
-            ))}
-          </div>
-        ))}
+        {/* First set of columns */}
+        <div 
+          className="column-set-1 flex gap-4"
+          style={{ 
+            flexShrink: 0,
+            transform: `translateX(${horizontalOffset}px)`,
+            transition: 'transform 0.3s ease-out',
+          }}
+        >
+          {columns.map((column, colIndex) => (
+            <motion.div
+              key={`col-${colIndex}`}
+              className="flex flex-col gap-4"
+              style={{
+                width: columnWidth,
+                flexShrink: 0,
+                pointerEvents: 'none',
+              }}
+            >
+              {column.map((image, imgIndex) => (
+                <ImageCard
+                  key={`${image.id}-${colIndex}-${imgIndex}`}
+                  image={image}
+                  cardRadius={cardRadius}
+                />
+              ))}
+            </motion.div>
+          ))}
+        </div>
+        
+        {/* Duplicate set for seamless loop - items that scroll up appear here */}
+        <div 
+          className="column-set-2 flex gap-4"
+          style={{ 
+            flexShrink: 0,
+            transform: `translateX(${horizontalOffset}px)`,
+            transition: 'transform 0.3s ease-out',
+          }}
+        >
+          {columns.map((column, colIndex) => (
+            <motion.div
+              key={`col-dup-${colIndex}`}
+              className="flex flex-col gap-4"
+              style={{
+                width: columnWidth,
+                flexShrink: 0,
+                pointerEvents: 'none',
+              }}
+            >
+              {column.map((image, imgIndex) => (
+                <ImageCard
+                  key={`${image.id}-dup-${colIndex}-${imgIndex}`}
+                  image={image}
+                  cardRadius={cardRadius}
+                />
+              ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       {/* Fade mask at bottom */}
@@ -308,8 +360,8 @@ export default function MasonryParallaxGrid({
   );
 }
 
-// Image Card Component
-function ImageCard({
+// Image Card Component - Memoized for performance
+const ImageCard = memo(function ImageCard({
   image,
   cardRadius,
 }: {
@@ -318,6 +370,15 @@ function ImageCard({
 }) {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
+  
+  const handleLoad = useCallback(() => {
+    setLoaded(true);
+  }, []);
+  
+  const handleError = useCallback(() => {
+    setError(true);
+    setLoaded(true);
+  }, []);
 
   return (
     <motion.div
@@ -339,11 +400,8 @@ function ImageCard({
               loaded ? 'opacity-100' : 'opacity-0'
             }`}
             loading="lazy"
-            onLoad={() => setLoaded(true)}
-            onError={() => {
-              setError(true);
-              setLoaded(true);
-            }}
+            onLoad={handleLoad}
+            onError={handleError}
             style={{ 
               display: 'block',
               width: '100%',
@@ -384,5 +442,5 @@ function ImageCard({
       />
     </motion.div>
   );
-}
+});
 
