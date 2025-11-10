@@ -143,6 +143,13 @@ except ImportError:
     trigger_manual_sync = oauth_not_available
     get_sync_status = oauth_not_available
 
+# Import new feature views
+from .views_new_features import (
+    WebsiteProjectViewSet, WebsitePhaseViewSet, CourseViewSet,
+    CourseLessonViewSet, CourseProgressViewSet, WalletViewSet,
+    TransactionViewSet, GiveawayViewSet, SupportTicketViewSet
+)
+
 # Create router and register viewsets
 router = DefaultRouter()
 router.register(r'clients', ClientViewSet, basename='client')
@@ -154,6 +161,17 @@ router.register(r'invoices', InvoiceViewSet, basename='invoice')
 router.register(r'files', FileViewSet, basename='file')
 router.register(r'notifications', NotificationViewSet, basename='notification')
 router.register(r'social-accounts', SocialMediaAccountViewSet, basename='social-account')
+
+# NEW: Register new feature viewsets
+router.register(r'website-projects', WebsiteProjectViewSet, basename='website-project')
+router.register(r'website-phases', WebsitePhaseViewSet, basename='website-phase')
+router.register(r'courses', CourseViewSet, basename='course')
+router.register(r'lessons', CourseLessonViewSet, basename='lesson')
+router.register(r'course-progress', CourseProgressViewSet, basename='course-progress')
+router.register(r'wallet', WalletViewSet, basename='wallet')
+router.register(r'transactions', TransactionViewSet, basename='transaction')
+router.register(r'giveaways', GiveawayViewSet, basename='giveaway')
+router.register(r'support-tickets', SupportTicketViewSet, basename='support-ticket')
 
 urlpatterns = [
     # Authentication endpoints

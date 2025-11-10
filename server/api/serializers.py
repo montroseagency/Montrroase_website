@@ -7,7 +7,9 @@ from django.contrib.auth import authenticate
 from .models import (
     ContentImage, User, Client, Task, ContentPost, PerformanceData,
     Message, Invoice, TeamMember, Project, File, Notification,
-    SocialMediaAccount, RealTimeMetrics  # Add these imports
+    SocialMediaAccount, RealTimeMetrics, WebsiteProject, WebsitePhase,
+    Course, CourseModule, CourseLesson, CourseProgress, CourseCertificate,
+    Wallet, Transaction, Giveaway, GiveawayWinner, SupportTicket, TicketMessage
 )
 
 class UserSerializer(serializers.ModelSerializer):
@@ -422,3 +424,361 @@ class FileUploadSerializer(serializers.ModelSerializer):
         validated_data['size'] = validated_data['file'].size
         return super().create(validated_data)
 
+# Additional Serializers for New Features
+# Append this to serializers.py
+
+from rest_framework import serializers
+from .models import (
+    WebsiteProject, WebsitePhase, Course, CourseModule, CourseLesson,
+    CourseProgress, CourseCertificate, Wallet, Transaction, Giveaway,
+    GiveawayWinner, SupportTicket, TicketMessage
+)
+
+# ==================== WEBSITE BUILDER SERIALIZERS ====================
+
+class WebsitePhaseSerializer(serializers.ModelSerializer):
+    """Serializer for website project phases"""
+    class Meta:
+        model = WebsitePhase
+        fields = [
+            'id', 'phase_number', 'title', 'description', 'amount',
+            'status', 'deliverables', 'payment_due_date', 'paid_at',
+            'started_at', 'completed_at', 'created_at'
+        ]
+        read_only_fields = ['id', 'created_at']
+
+
+class WebsiteProjectSerializer(serializers.ModelSerializer):
+    """Serializer for website building projects"""
+    phases = WebsitePhaseSerializer(many=True, read_only=True)
+    progress_percentage = serializers.ReadOnlyField()
+    client_name = serializers.SerializerMethodField()
+    developer_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = WebsiteProject
+        fields = [
+            'id', 'client', 'client_name', 'title', 'industry', 'business_goals',
+            'preferred_style', 'desired_features', 'target_audience', 'competitor_sites',
+            'estimated_cost_min', 'estimated_cost_max', 'estimated_hours',
+            'complexity_score', 'ai_recommendations', 'demo_url', 'demo_screenshots',
+            'status', 'total_amount', 'paid_amount', 'current_phase', 'total_phases',
+            'assigned_developer', 'developer_name', 'started_at', 'estimated_completion',
+            'completed_at', 'created_at', 'updated_at', 'phases', 'progress_percentage'
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at', 'progress_percentage']
+
+    def get_client_name(self, obj):
+        return obj.client.name
+
+    def get_developer_name(self, obj):
+        if obj.assigned_developer:
+            return f"{obj.assigned_developer.first_name} {obj.assigned_developer.last_name}"
+        return None
+
+
+class WebsiteProjectCreateSerializer(serializers.ModelSerializer):
+    """Serializer for creating website projects from questionnaire"""
+    class Meta:
+        model = WebsiteProject
+        fields = [
+            'title', 'industry', 'business_goals', 'preferred_style',
+            'desired_features', 'target_audience', 'competitor_sites'
+        ]
+
+    def create(self, validated_data):
+        # Get client from request context
+        request = self.context.get('request')
+        validated_data['client'] = request.user.client_profile
+        validated_data['status'] = 'questionnaire'
+        return super().create(validated_data)
+
+
+# ==================== COURSES SERIALIZERS ====================
+
+class CourseLessonSerializer(serializers.ModelSerializer):
+    """Serializer for course lessons"""
+    class Meta:
+        model = CourseLesson
+        fields = [
+            'id', 'title', 'lesson_type', 'content', 'video_url',
+            'video_duration_minutes', 'attachments', 'order', 'is_preview',
+            'created_at'
+        ]
+        read_only_fields = ['id', 'created_at']
+
+
+class CourseModuleSerializer(serializers.ModelSerializer):
+    """Serializer for course modules"""
+    lessons = CourseLessonSerializer(many=True, read_only=True)
+    lesson_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CourseModule
+        fields = [
+            'id', 'title', 'description', 'order', 'lessons',
+            'lesson_count', 'created_at'
+        ]
+        read_only_fields = ['id', 'created_at']
+
+    def get_lesson_count(self, obj):
+        return obj.lessons.count()
+
+
+class CourseSerializer(serializers.ModelSerializer):
+    """Serializer for courses"""
+    modules = CourseModuleSerializer(many=True, read_only=True)
+    is_accessible = serializers.SerializerMethodField()
+    user_progress = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Course
+        fields = [
+            'id', 'title', 'description', 'thumbnail', 'required_tier',
+            'duration_hours', 'difficulty_level', 'category', 'is_published',
+            'display_order', 'modules', 'is_accessible', 'user_progress',
+            'created_at'
+        ]
+        read_only_fields = ['id', 'created_at']
+
+    def get_is_accessible(self, obj):
+        """Check if user can access this course"""
+        request = self.context.get('request')
+        if not request or not hasattr(request.user, 'client_profile'):
+            return False
+
+        client = request.user.client_profile
+        tier_hierarchy = {'free': 0, 'starter': 1, 'pro': 2, 'premium': 3}
+
+        user_tier = client.current_plan if client.current_plan else 'free'
+        required_tier = obj.required_tier
+
+        return tier_hierarchy.get(user_tier, 0) >= tier_hierarchy.get(required_tier, 0)
+
+    def get_user_progress(self, obj):
+        """Get user's progress in this course"""
+        request = self.context.get('request')
+        if not request or not request.user.is_authenticated:
+            return None
+
+        try:
+            progress = CourseProgress.objects.get(user=request.user, course=obj)
+            return {
+                'completion_percentage': progress.completion_percentage,
+                'completed_lessons': progress.completed_lessons,
+                'current_lesson_id': str(progress.current_lesson.id) if progress.current_lesson else None
+            }
+        except CourseProgress.DoesNotExist:
+            return None
+
+
+class CourseProgressSerializer(serializers.ModelSerializer):
+    """Serializer for course progress"""
+    course_title = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CourseProgress
+        fields = [
+            'id', 'course', 'course_title', 'completed_lessons',
+            'current_lesson', 'completion_percentage', 'started_at',
+            'last_accessed_at', 'completed_at'
+        ]
+        read_only_fields = ['id', 'started_at', 'last_accessed_at']
+
+    def get_course_title(self, obj):
+        return obj.course.title
+
+
+class CourseCertificateSerializer(serializers.ModelSerializer):
+    """Serializer for course certificates"""
+    course_title = serializers.SerializerMethodField()
+    user_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CourseCertificate
+        fields = [
+            'id', 'course', 'course_title', 'user_name',
+            'certificate_number', 'issued_at', 'certificate_url'
+        ]
+        read_only_fields = ['id', 'issued_at']
+
+    def get_course_title(self, obj):
+        return obj.course.title
+
+    def get_user_name(self, obj):
+        return f"{obj.user.first_name} {obj.user.last_name}"
+
+
+# ==================== WALLET & TRANSACTIONS SERIALIZERS ====================
+
+class TransactionSerializer(serializers.ModelSerializer):
+    """Serializer for wallet transactions"""
+    client_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Transaction
+        fields = [
+            'id', 'transaction_type', 'amount', 'status', 'description',
+            'payment_method', 'payment_reference', 'related_invoice',
+            'related_project', 'created_at', 'client_name'
+        ]
+        read_only_fields = ['id', 'created_at']
+
+    def get_client_name(self, obj):
+        return obj.wallet.client.name
+
+
+class WalletSerializer(serializers.ModelSerializer):
+    """Serializer for client wallet"""
+    transactions = TransactionSerializer(many=True, read_only=True)
+    recent_transactions = serializers.SerializerMethodField()
+    client_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Wallet
+        fields = [
+            'id', 'balance', 'total_earned', 'total_spent',
+            'client_name', 'transactions', 'recent_transactions',
+            'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at']
+
+    def get_recent_transactions(self, obj):
+        recent = obj.transactions.all()[:10]
+        return TransactionSerializer(recent, many=True).data
+
+    def get_client_name(self, obj):
+        return obj.client.name
+
+
+class TopUpWalletSerializer(serializers.Serializer):
+    """Serializer for wallet top-up"""
+    amount = serializers.DecimalField(max_digits=10, decimal_places=2, min_value=10)
+    payment_method = serializers.ChoiceField(choices=['paypal', 'stripe', 'bank_transfer'])
+
+
+class GiveawaySerializer(serializers.ModelSerializer):
+    """Serializer for giveaway campaigns"""
+    winners_count = serializers.SerializerMethodField()
+    is_active = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Giveaway
+        fields = [
+            'id', 'title', 'description', 'platform', 'reward_amount',
+            'total_winners', 'status', 'start_date', 'end_date',
+            'winners_count', 'is_active', 'created_at'
+        ]
+        read_only_fields = ['id', 'created_at']
+
+    def get_winners_count(self, obj):
+        return obj.winners.count()
+
+    def get_is_active(self, obj):
+        from django.utils import timezone
+        now = timezone.now()
+        return obj.status == 'active' and obj.start_date <= now <= obj.end_date
+
+
+class GiveawayWinnerSerializer(serializers.ModelSerializer):
+    """Serializer for giveaway winners"""
+    client_name = serializers.SerializerMethodField()
+    giveaway_title = serializers.SerializerMethodField()
+
+    class Meta:
+        model = GiveawayWinner
+        fields = [
+            'id', 'giveaway', 'giveaway_title', 'client_name',
+            'reward_amount', 'is_claimed', 'claimed_at', 'created_at'
+        ]
+        read_only_fields = ['id', 'created_at']
+
+    def get_client_name(self, obj):
+        return obj.client.name
+
+    def get_giveaway_title(self, obj):
+        return obj.giveaway.title
+
+
+# ==================== SUPPORT SYSTEM SERIALIZERS ====================
+
+class TicketMessageSerializer(serializers.ModelSerializer):
+    """Serializer for ticket messages"""
+    sender_name = serializers.SerializerMethodField()
+    sender_role = serializers.SerializerMethodField()
+
+    class Meta:
+        model = TicketMessage
+        fields = [
+            'id', 'sender', 'sender_name', 'sender_role', 'message',
+            'attachments', 'is_system_message', 'created_at'
+        ]
+        read_only_fields = ['id', 'created_at', 'sender']
+
+    def get_sender_name(self, obj):
+        return f"{obj.sender.first_name} {obj.sender.last_name}"
+
+    def get_sender_role(self, obj):
+        return obj.sender.role
+
+
+class SupportTicketSerializer(serializers.ModelSerializer):
+    """Serializer for support tickets"""
+    messages = TicketMessageSerializer(many=True, read_only=True)
+    client_name = serializers.SerializerMethodField()
+    assigned_to_name = serializers.SerializerMethodField()
+    message_count = serializers.SerializerMethodField()
+    last_message_at = serializers.SerializerMethodField()
+
+    class Meta:
+        model = SupportTicket
+        fields = [
+            'id', 'ticket_number', 'client', 'client_name', 'subject',
+            'category', 'priority', 'status', 'assigned_to', 'assigned_to_name',
+            'created_at', 'updated_at', 'resolved_at', 'closed_at',
+            'messages', 'message_count', 'last_message_at'
+        ]
+        read_only_fields = ['id', 'ticket_number', 'created_at', 'updated_at']
+
+    def get_client_name(self, obj):
+        return obj.client.name
+
+    def get_assigned_to_name(self, obj):
+        if obj.assigned_to:
+            return f"{obj.assigned_to.first_name} {obj.assigned_to.last_name}"
+        return None
+
+    def get_message_count(self, obj):
+        return obj.messages.count()
+
+    def get_last_message_at(self, obj):
+        last_message = obj.messages.last()
+        return last_message.created_at if last_message else None
+
+
+class SupportTicketCreateSerializer(serializers.ModelSerializer):
+    """Serializer for creating support tickets"""
+    initial_message = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = SupportTicket
+        fields = ['subject', 'category', 'priority', 'initial_message']
+
+    def create(self, validated_data):
+        initial_message = validated_data.pop('initial_message')
+        request = self.context.get('request')
+
+        # Create ticket
+        ticket = SupportTicket.objects.create(
+            client=request.user.client_profile,
+            **validated_data
+        )
+
+        # Create initial message
+        TicketMessage.objects.create(
+            ticket=ticket,
+            sender=request.user,
+            message=initial_message
+        )
+
+        return ticket

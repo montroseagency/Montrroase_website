@@ -346,7 +346,7 @@ export default function ClientOverviewPage() {
                       <p className="text-xs text-gray-500">Due: {new Date(invoice.due_date).toLocaleDateString()}</p>
                     </div>
                     <div className="text-right">
-                      <p className="font-semibold text-gray-900 text-sm">${invoice.amount.toFixed(2)}</p>
+                      <p className="font-semibold text-gray-900 text-sm">${Number(invoice.amount).toFixed(2)}</p>
                       <span className={`text-xs px-2 py-1 rounded-full inline-block font-medium ${
                         invoice.status === 'paid' ? 'bg-green-100 text-green-800' :
                         invoice.status === 'overdue' ? 'bg-red-100 text-red-800' :

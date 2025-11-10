@@ -580,3 +580,485 @@ class ImageGalleryItem(models.Model):
 
     def __str__(self):
         return f"{self.title} ({self.grid_column}x{self.grid_row})"
+
+
+# ==================== WEBSITE BUILDER MODELS ====================
+
+class WebsiteProject(models.Model):
+    """Website building projects for clients"""
+    STATUS_CHOICES = [
+        ('questionnaire', 'Questionnaire'),
+        ('valuation', 'Valuation Pending'),
+        ('demo', 'Demo Generated'),
+        ('payment_pending', 'Payment Pending'),
+        ('in_development', 'In Development'),
+        ('review', 'Under Review'),
+        ('completed', 'Completed'),
+        ('cancelled', 'Cancelled'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='website_projects')
+    title = models.CharField(max_length=255)
+
+    # Questionnaire responses
+    industry = models.CharField(max_length=100)
+    business_goals = models.TextField()
+    preferred_style = models.CharField(max_length=100)
+    desired_features = models.JSONField(default=list)
+    target_audience = models.TextField(blank=True)
+    competitor_sites = models.TextField(blank=True)
+
+    # AI Valuation
+    estimated_cost_min = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    estimated_cost_max = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    estimated_hours = models.IntegerField(blank=True, null=True)
+    complexity_score = models.IntegerField(default=0)  # 1-10
+    ai_recommendations = models.JSONField(default=dict)
+
+    # Demo
+    demo_url = models.URLField(blank=True, null=True)
+    demo_screenshots = models.JSONField(default=list)
+
+    # Project details
+    status = models.CharField(max_length=30, choices=STATUS_CHOICES, default='questionnaire')
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    paid_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    current_phase = models.IntegerField(default=1)
+    total_phases = models.IntegerField(default=3)
+
+    # Team assignment
+    assigned_developer = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='website_projects'
+    )
+
+    # Dates
+    started_at = models.DateTimeField(blank=True, null=True)
+    estimated_completion = models.DateField(blank=True, null=True)
+    completed_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.title} - {self.client.name} ({self.status})"
+
+    @property
+    def progress_percentage(self):
+        """Calculate project completion percentage"""
+        if self.total_amount > 0:
+            return int((self.paid_amount / self.total_amount) * 100)
+        return 0
+
+    class Meta:
+        ordering = ['-created_at']
+
+
+class WebsitePhase(models.Model):
+    """Payment phases for website projects"""
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('in_progress', 'In Progress'),
+        ('completed', 'Completed'),
+        ('paid', 'Paid'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    project = models.ForeignKey(WebsiteProject, on_delete=models.CASCADE, related_name='phases')
+    phase_number = models.IntegerField()
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    deliverables = models.JSONField(default=list)
+
+    # Payment
+    payment_due_date = models.DateField(blank=True, null=True)
+    paid_at = models.DateTimeField(blank=True, null=True)
+
+    # Progress
+    started_at = models.DateTimeField(blank=True, null=True)
+    completed_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Phase {self.phase_number}: {self.title}"
+
+    class Meta:
+        ordering = ['phase_number']
+        unique_together = ['project', 'phase_number']
+
+
+# ==================== COURSES MODELS ====================
+
+class Course(models.Model):
+    """Educational courses for clients"""
+    TIER_CHOICES = [
+        ('free', 'Free'),
+        ('starter', 'Starter'),
+        ('pro', 'Pro'),
+        ('premium', 'Premium'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    thumbnail = models.ImageField(upload_to='courses/thumbnails/', blank=True, null=True)
+
+    # Access control
+    required_tier = models.CharField(max_length=20, choices=TIER_CHOICES, default='free')
+
+    # Metadata
+    duration_hours = models.DecimalField(max_digits=5, decimal_places=1, default=0)
+    difficulty_level = models.CharField(max_length=20, default='beginner')  # beginner, intermediate, advanced
+    category = models.CharField(max_length=100)  # marketing, web design, branding, etc
+
+    # Display
+    is_published = models.BooleanField(default=False)
+    display_order = models.IntegerField(default=0)
+
+    # Timestamps
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.title} ({self.required_tier})"
+
+    class Meta:
+        ordering = ['display_order', '-created_at']
+
+
+class CourseModule(models.Model):
+    """Modules within a course"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='modules')
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    order = models.IntegerField(default=0)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.course.title} - Module {self.order}: {self.title}"
+
+    class Meta:
+        ordering = ['order']
+        unique_together = ['course', 'order']
+
+
+class CourseLesson(models.Model):
+    """Individual lessons within a module"""
+    LESSON_TYPE_CHOICES = [
+        ('video', 'Video'),
+        ('text', 'Text'),
+        ('quiz', 'Quiz'),
+        ('assignment', 'Assignment'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    module = models.ForeignKey(CourseModule, on_delete=models.CASCADE, related_name='lessons')
+    title = models.CharField(max_length=255)
+    lesson_type = models.CharField(max_length=20, choices=LESSON_TYPE_CHOICES, default='video')
+
+    # Content
+    content = models.TextField(blank=True)  # Text content or description
+    video_url = models.URLField(blank=True, null=True)
+    video_duration_minutes = models.IntegerField(default=0)
+
+    # Files
+    attachments = models.JSONField(default=list)  # List of file URLs
+
+    # Display
+    order = models.IntegerField(default=0)
+    is_preview = models.BooleanField(default=False)  # Can be viewed without subscription
+
+    # Timestamps
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.module.course.title} - {self.title}"
+
+    class Meta:
+        ordering = ['order']
+
+
+class CourseProgress(models.Model):
+    """Track user progress through courses"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='course_progress')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='user_progress')
+    completed_lessons = models.JSONField(default=list)  # List of lesson IDs
+    current_lesson = models.ForeignKey(
+        CourseLesson,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='current_users'
+    )
+
+    # Progress tracking
+    started_at = models.DateTimeField(default=timezone.now)
+    last_accessed_at = models.DateTimeField(auto_now=True)
+    completed_at = models.DateTimeField(blank=True, null=True)
+    completion_percentage = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.course.title} ({self.completion_percentage}%)"
+
+    class Meta:
+        unique_together = ['user', 'course']
+        ordering = ['-last_accessed_at']
+
+
+class CourseCertificate(models.Model):
+    """Certificates awarded for course completion"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='certificates')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='certificates')
+    certificate_number = models.CharField(max_length=100, unique=True)
+    issued_at = models.DateTimeField(default=timezone.now)
+    certificate_url = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return f"Certificate {self.certificate_number} - {self.user.username}"
+
+    class Meta:
+        unique_together = ['user', 'course']
+        ordering = ['-issued_at']
+
+
+# ==================== WALLET & TRANSACTIONS MODELS ====================
+
+class Wallet(models.Model):
+    """Client wallet for credits and transactions"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    client = models.OneToOneField(Client, on_delete=models.CASCADE, related_name='wallet')
+    balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    total_earned = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # From giveaways
+    total_spent = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.client.name} - ${self.balance}"
+
+
+class Transaction(models.Model):
+    """Transaction history for wallet"""
+    TYPE_CHOICES = [
+        ('topup', 'Top Up'),
+        ('payment', 'Payment'),
+        ('refund', 'Refund'),
+        ('giveaway', 'Giveaway Bonus'),
+        ('bonus', 'Bonus'),
+    ]
+
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('completed', 'Completed'),
+        ('failed', 'Failed'),
+        ('cancelled', 'Cancelled'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    wallet = models.ForeignKey(Wallet, on_delete=models.CASCADE, related_name='transactions')
+    transaction_type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='completed')
+    description = models.TextField()
+
+    # Payment gateway info
+    payment_method = models.CharField(max_length=50, blank=True)  # stripe, paypal, bank_transfer
+    payment_reference = models.CharField(max_length=255, blank=True)
+
+    # Related objects
+    related_invoice = models.ForeignKey(
+        Invoice,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='wallet_transactions'
+    )
+    related_project = models.ForeignKey(
+        WebsiteProject,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='wallet_transactions'
+    )
+
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.transaction_type} - ${self.amount} - {self.wallet.client.name}"
+
+    class Meta:
+        ordering = ['-created_at']
+
+
+class Giveaway(models.Model):
+    """Giveaway campaigns for social media"""
+    STATUS_CHOICES = [
+        ('active', 'Active'),
+        ('ended', 'Ended'),
+        ('processing', 'Processing Winners'),
+        ('completed', 'Completed'),
+    ]
+
+    PLATFORM_CHOICES = [
+        ('instagram', 'Instagram'),
+        ('tiktok', 'TikTok'),
+        ('facebook', 'Facebook'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    platform = models.CharField(max_length=20, choices=PLATFORM_CHOICES)
+
+    # Reward
+    reward_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    total_winners = models.IntegerField(default=1)
+
+    # Status
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='active')
+
+    # Dates
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.title} - {self.platform}"
+
+    class Meta:
+        ordering = ['-created_at']
+
+
+class GiveawayWinner(models.Model):
+    """Winners of giveaway campaigns"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    giveaway = models.ForeignKey(Giveaway, on_delete=models.CASCADE, related_name='winners')
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='giveaway_wins')
+    reward_amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+    # Status
+    is_claimed = models.BooleanField(default=False)
+    claimed_at = models.DateTimeField(blank=True, null=True)
+    transaction = models.ForeignKey(
+        Transaction,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='giveaway_win'
+    )
+
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.giveaway.title} - {self.client.name}"
+
+    class Meta:
+        unique_together = ['giveaway', 'client']
+        ordering = ['-created_at']
+
+
+# ==================== SUPPORT SYSTEM MODELS ====================
+
+class SupportTicket(models.Model):
+    """Support tickets for client issues"""
+    STATUS_CHOICES = [
+        ('open', 'Open'),
+        ('in_progress', 'In Progress'),
+        ('waiting_client', 'Waiting for Client'),
+        ('resolved', 'Resolved'),
+        ('closed', 'Closed'),
+    ]
+
+    PRIORITY_CHOICES = [
+        ('low', 'Low'),
+        ('medium', 'Medium'),
+        ('high', 'High'),
+        ('urgent', 'Urgent'),
+    ]
+
+    CATEGORY_CHOICES = [
+        ('technical', 'Technical Issue'),
+        ('billing', 'Billing'),
+        ('feature_request', 'Feature Request'),
+        ('general', 'General Inquiry'),
+        ('project_update', 'Project Update Request'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    ticket_number = models.CharField(max_length=20, unique=True)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='support_tickets')
+
+    # Ticket details
+    subject = models.CharField(max_length=255)
+    category = models.CharField(max_length=30, choices=CATEGORY_CHOICES, default='general')
+    priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default='medium')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='open')
+
+    # Assignment
+    assigned_to = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='assigned_tickets'
+    )
+
+    # Timestamps
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+    resolved_at = models.DateTimeField(blank=True, null=True)
+    closed_at = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return f"#{self.ticket_number} - {self.subject}"
+
+    def generate_ticket_number(self):
+        """Generate unique ticket number"""
+        import random
+        import string
+        while True:
+            number = 'TKT-' + ''.join(random.choices(string.digits, k=6))
+            if not SupportTicket.objects.filter(ticket_number=number).exists():
+                return number
+
+    def save(self, *args, **kwargs):
+        if not self.ticket_number:
+            self.ticket_number = self.generate_ticket_number()
+        super().save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['-created_at']
+
+
+class TicketMessage(models.Model):
+    """Messages within a support ticket"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    ticket = models.ForeignKey(SupportTicket, on_delete=models.CASCADE, related_name='messages')
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ticket_messages')
+    message = models.TextField()
+
+    # Attachments
+    attachments = models.JSONField(default=list)
+
+    # System message flag
+    is_system_message = models.BooleanField(default=False)
+
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"Message in {self.ticket.ticket_number} from {self.sender.username}"
+
+    class Meta:
+        ordering = ['created_at']

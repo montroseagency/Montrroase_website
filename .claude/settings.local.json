@@ -19,7 +19,10 @@
       "Bash(npm run dev:*)",
       "Bash(lsof:*)",
       "Bash(xargs kill -9)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(python3:*)",
+      "Bash(cat:*)",
+      "Bash(api/serializers.py)"
     ],
     "deny": [],
     "ask": []

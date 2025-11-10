@@ -13734,3 +13734,681 @@ WARNING 2025-11-10 07:24:42,997 log 35279 123145626992640 Not Found: /api/admin/
 WARNING 2025-11-10 07:24:42,998 basehttp 35279 123145626992640 "GET /api/admin/stats/ HTTP/1.1" 404 33697
 WARNING 2025-11-10 07:24:43,020 log 35279 123145643782144 Not Found: /api/admin/stats/
 WARNING 2025-11-10 07:24:43,021 basehttp 35279 123145643782144 "GET /api/admin/stats/ HTTP/1.1" 404 33697
+INFO 2025-11-10 12:50:21,027 autoreload 38934 4485903872 Watching for file changes with StatReloader
+INFO 2025-11-10 12:57:00,571 autoreload 39284 4520719872 Watching for file changes with StatReloader
+INFO 2025-11-10 13:05:13,030 basehttp 39284 123145516560384 "OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:05:13,435 basehttp 39284 123145516560384 "POST /api/auth/login/ HTTP/1.1" 200 273
+INFO 2025-11-10 13:05:15,408 basehttp 39284 123145516560384 "OPTIONS /api/dashboard/stats/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:05:15,410 basehttp 39284 123145533349888 "OPTIONS /api/clients/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:05:15,417 basehttp 39284 123145533349888 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:05:15,410 basehttp 39284 123145550139392 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:05:15,427 basehttp 39284 123145550139392 "OPTIONS /api/content/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:05:15,414 basehttp 39284 123145516560384 "OPTIONS /api/clients/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:05:15,441 basehttp 39284 123145516560384 "OPTIONS /api/invoices/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:05:15,453 basehttp 39284 123145583718400 "OPTIONS /api/invoices/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:05:15,476 basehttp 39284 123145566928896 "OPTIONS /api/content/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:05:15,479 basehttp 39284 123145600507904 "OPTIONS /api/dashboard/stats/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:05:15,579 basehttp 39284 123145600507904 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-10 13:05:15,615 basehttp 39284 123145600507904 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-10 13:05:15,676 basehttp 39284 123145533349888 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-10 13:05:15,677 basehttp 39284 123145516560384 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-10 13:05:15,695 basehttp 39284 123145550139392 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-10 13:05:15,715 basehttp 39284 123145566928896 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-10 13:05:15,727 basehttp 39284 123145583718400 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-10 13:05:15,792 basehttp 39284 123145566928896 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-10 13:05:15,799 basehttp 39284 123145533349888 "GET /api/clients/ HTTP/1.1" 200 670
+INFO 2025-11-10 13:05:15,825 basehttp 39284 123145600507904 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-10 13:06:31,710 basehttp 39284 123145600507904 "OPTIONS /api/auth/logout/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:06:31,724 basehttp 39284 123145600507904 "POST /api/auth/logout/ HTTP/1.1" 200 37
+INFO 2025-11-10 13:06:44,096 basehttp 39284 123145600507904 "POST /api/auth/login/ HTTP/1.1" 200 328
+INFO 2025-11-10 13:06:45,480 basehttp 39284 123145600507904 "OPTIONS /api/dashboard/client-stats/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:06:45,491 basehttp 39284 123145583718400 "OPTIONS /api/messages/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:06:45,504 basehttp 39284 123145600507904 "OPTIONS /api/dashboard/client-stats/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:06:45,514 basehttp 39284 123145583718400 "OPTIONS /api/social-accounts/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:06:45,515 basehttp 39284 123145533349888 "OPTIONS /api/social-accounts/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:06:45,632 basehttp 39284 123145566928896 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-10 13:06:45,697 statistic_views 39284 123145600507904 Client dashboard stats for Tech Startup Inc: {'total_followers': 15000, 'engagement_rate': 3.5, 'posts_this_month': 0, 'reach': 45000, 'growth_rate': 0, 'next_payment_amount': 299.99, 'next_payment_date': datetime.date(2025, 12, 6)}
+INFO 2025-11-10 13:06:45,699 basehttp 39284 123145583718400 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-10 13:06:45,709 basehttp 39284 123145550139392 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-10 13:06:45,741 basehttp 39284 123145533349888 "GET /api/messages/ HTTP/1.1" 200 2167
+INFO 2025-11-10 13:06:45,741 basehttp 39284 123145516560384 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-10 13:06:45,763 basehttp 39284 123145600507904 "GET /api/dashboard/client-stats/ HTTP/1.1" 200 170
+INFO 2025-11-10 13:06:45,841 basehttp 39284 123145583718400 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-10 13:06:45,858 basehttp 39284 123145550139392 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-10 13:06:46,049 statistic_views 39284 123145600507904 Client dashboard stats for Tech Startup Inc: {'total_followers': 15000, 'engagement_rate': 3.5, 'posts_this_month': 0, 'reach': 45000, 'growth_rate': 0, 'next_payment_amount': 299.99, 'next_payment_date': datetime.date(2025, 12, 6)}
+INFO 2025-11-10 13:06:46,050 basehttp 39284 123145600507904 "GET /api/dashboard/client-stats/ HTTP/1.1" 200 170
+INFO 2025-11-10 13:06:46,065 basehttp 39284 123145533349888 "GET /api/messages/ HTTP/1.1" 200 2167
+INFO 2025-11-10 13:06:46,080 basehttp 39284 123145516560384 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-10 13:06:46,097 basehttp 39284 123145566928896 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-10 13:07:20,050 basehttp 39284 123145566928896 "OPTIONS /api/auth/me/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:07:20,061 basehttp 39284 123145566928896 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-10 13:07:20,262 basehttp 39284 123145533349888 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-10 13:07:20,330 basehttp 39284 123145533349888 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-10 13:07:20,390 basehttp 39284 123145583718400 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-10 13:07:20,401 basehttp 39284 123145516560384 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-10 13:07:20,402 basehttp 39284 123145550139392 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-10 13:07:20,404 statistic_views 39284 123145566928896 Client dashboard stats for Tech Startup Inc: {'total_followers': 15000, 'engagement_rate': 3.5, 'posts_this_month': 0, 'reach': 45000, 'growth_rate': 0, 'next_payment_amount': 299.99, 'next_payment_date': datetime.date(2025, 12, 6)}
+INFO 2025-11-10 13:07:20,415 basehttp 39284 123145566928896 "GET /api/dashboard/client-stats/ HTTP/1.1" 200 170
+INFO 2025-11-10 13:07:20,479 basehttp 39284 123145600507904 "GET /api/messages/ HTTP/1.1" 200 2167
+INFO 2025-11-10 13:07:20,516 basehttp 39284 123145550139392 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-10 13:07:20,551 statistic_views 39284 123145566928896 Client dashboard stats for Tech Startup Inc: {'total_followers': 15000, 'engagement_rate': 3.5, 'posts_this_month': 0, 'reach': 45000, 'growth_rate': 0, 'next_payment_amount': 299.99, 'next_payment_date': datetime.date(2025, 12, 6)}
+INFO 2025-11-10 13:07:20,555 basehttp 39284 123145516560384 "GET /api/messages/ HTTP/1.1" 200 2167
+INFO 2025-11-10 13:07:20,556 basehttp 39284 123145566928896 "GET /api/dashboard/client-stats/ HTTP/1.1" 200 170
+INFO 2025-11-10 13:07:20,559 basehttp 39284 123145583718400 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-10 13:07:20,578 basehttp 39284 123145533349888 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-10 13:08:22,945 basehttp 39284 123145516560384 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-10 13:08:22,977 basehttp 39284 123145533349888 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-10 13:08:23,016 basehttp 39284 123145550139392 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-10 13:08:23,117 basehttp 39284 123145516560384 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-10 13:08:27,085 basehttp 39284 123145516560384 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-10 13:08:27,131 basehttp 39284 123145550139392 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-10 13:08:30,363 basehttp 39284 123145533349888 "OPTIONS /api/performance/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:08:30,365 basehttp 39284 123145550139392 "OPTIONS /api/performance/ HTTP/1.1" 200 0
+INFO 2025-11-10 13:08:30,401 basehttp 39284 123145516560384 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-10 13:08:30,405 basehttp 39284 123145533349888 "GET /api/performance/ HTTP/1.1" 200 52
+INFO 2025-11-10 13:08:30,441 basehttp 39284 123145516560384 "GET /api/performance/ HTTP/1.1" 200 52
+INFO 2025-11-10 13:08:30,474 basehttp 39284 123145550139392 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-10 13:08:33,272 basehttp 39284 123145550139392 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-10 13:08:33,300 basehttp 39284 123145516560384 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-10 13:10:25,185 basehttp 39284 123145516560384 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-10 13:10:25,305 basehttp 39284 123145516560384 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-10 13:10:25,343 basehttp 39284 123145516560384 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-10 13:10:34,705 basehttp 39284 123145516560384 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-10 13:16:16,376 basehttp 39284 123145516560384 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-10 13:16:18,311 basehttp 39284 123145516560384 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-10 13:16:44,179 basehttp 39284 123145516560384 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-10 13:16:45,860 basehttp 39284 123145516560384 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-10 13:36:44,542 basehttp 39284 123145516560384 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-10 13:36:51,450 basehttp 39284 123145516560384 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-10 13:46:42,447 autoreload 39284 4520719872 /Users/MacOs/Documents/GitHub/Montrroase_website/server/api/models.py changed, reloading.
+INFO 2025-11-10 13:46:44,131 autoreload 40441 4633957888 Watching for file changes with StatReloader
+INFO 2025-11-10 14:06:09,683 autoreload 42298 4790597120 Watching for file changes with StatReloader
+INFO 2025-11-10 14:06:29,471 basehttp 42298 123145555996672 "GET /api/health/ HTTP/1.1" 200 60
+WARNING 2025-11-10 14:07:13,405 log 42298 123145555996672 Bad Request: /api/auth/login/
+WARNING 2025-11-10 14:07:13,410 basehttp 42298 123145555996672 "POST /api/auth/login/ HTTP/1.1" 400 76
+WARNING 2025-11-10 14:07:25,225 log 42298 123145555996672 Bad Request: /api/auth/login/
+WARNING 2025-11-10 14:07:25,230 basehttp 42298 123145555996672 "POST /api/auth/login/ HTTP/1.1" 400 68
+INFO 2025-11-10 14:07:42,480 basehttp 42298 123145555996672 "POST /api/auth/login/ HTTP/1.1" 200 328
+INFO 2025-11-10 14:08:44,275 basehttp 42298 123145555996672 "POST /api/auth/login/ HTTP/1.1" 200 328
+INFO 2025-11-10 14:08:47,644 basehttp 42298 123145572786176 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-10 14:08:47,761 basehttp 42298 123145623154688 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-10 14:08:47,819 statistic_views 42298 123145555996672 Client dashboard stats for Tech Startup Inc: {'total_followers': 15000, 'engagement_rate': 3.5, 'posts_this_month': 0, 'reach': 45000, 'growth_rate': 0, 'next_payment_amount': 299.99, 'next_payment_date': datetime.date(2025, 12, 6)}
+INFO 2025-11-10 14:08:47,823 basehttp 42298 123145555996672 "GET /api/dashboard/client-stats/ HTTP/1.1" 200 170
+INFO 2025-11-10 14:08:47,832 basehttp 42298 123145606365184 "GET /api/messages/ HTTP/1.1" 200 2167
+INFO 2025-11-10 14:08:47,875 basehttp 42298 123145639944192 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-10 14:08:47,889 basehttp 42298 123145572786176 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-10 14:08:47,890 statistic_views 42298 123145555996672 Client dashboard stats for Tech Startup Inc: {'total_followers': 15000, 'engagement_rate': 3.5, 'posts_this_month': 0, 'reach': 45000, 'growth_rate': 0, 'next_payment_amount': 299.99, 'next_payment_date': datetime.date(2025, 12, 6)}
+INFO 2025-11-10 14:08:47,899 basehttp 42298 123145555996672 "GET /api/dashboard/client-stats/ HTTP/1.1" 200 170
+INFO 2025-11-10 14:08:47,923 basehttp 42298 123145589575680 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-10 14:08:47,969 basehttp 42298 123145623154688 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-10 14:08:47,997 basehttp 42298 123145639944192 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-10 14:08:48,017 basehttp 42298 123145606365184 "GET /api/messages/ HTTP/1.1" 200 2167
+INFO 2025-11-10 14:08:48,036 basehttp 42298 123145555996672 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-10 14:09:06,867 basehttp 42298 123145555996672 "OPTIONS /api/website-projects/ HTTP/1.1" 200 0
+ERROR 2025-11-10 14:09:07,131 log 42298 123145555996672 Internal Server Error: /api/website-projects/
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: api_websiteproject
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 40, in list
+    page = self.paginate_queryset(queryset)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/generics.py", line 171, in paginate_queryset
+    return self.paginator.paginate_queryset(queryset, self.request, view=self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/pagination.py", line 204, in paginate_queryset
+    self.page = paginator.page(page_number)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 72, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 53, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/utils/functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 99, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/utils/functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 93, in count
+    return c()
+           ^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/query.py", line 608, in count
+    return self.query.get_count(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 568, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 554, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: api_websiteproject
+ERROR 2025-11-10 14:09:07,144 basehttp 42298 123145555996672 "GET /api/website-projects/ HTTP/1.1" 500 199764
+ERROR 2025-11-10 14:09:07,362 log 42298 123145606365184 Internal Server Error: /api/website-projects/
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: api_websiteproject
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 40, in list
+    page = self.paginate_queryset(queryset)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/generics.py", line 171, in paginate_queryset
+    return self.paginator.paginate_queryset(queryset, self.request, view=self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/pagination.py", line 204, in paginate_queryset
+    self.page = paginator.page(page_number)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 72, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 53, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/utils/functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 99, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/utils/functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 93, in count
+    return c()
+           ^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/query.py", line 608, in count
+    return self.query.get_count(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 568, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 554, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: api_websiteproject
+ERROR 2025-11-10 14:09:07,365 basehttp 42298 123145606365184 "GET /api/website-projects/ HTTP/1.1" 500 199764
+INFO 2025-11-10 14:09:12,514 basehttp 42298 123145606365184 "OPTIONS /api/courses/ HTTP/1.1" 200 0
+INFO 2025-11-10 14:09:12,575 basehttp 42298 123145555996672 "OPTIONS /api/course-progress/ HTTP/1.1" 200 0
+INFO 2025-11-10 14:09:12,580 basehttp 42298 123145639944192 "OPTIONS /api/course-progress/ HTTP/1.1" 200 0
+ERROR 2025-11-10 14:09:12,771 log 42298 123145606365184 Internal Server Error: /api/courses/
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: api_course
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 40, in list
+    page = self.paginate_queryset(queryset)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/generics.py", line 171, in paginate_queryset
+    return self.paginator.paginate_queryset(queryset, self.request, view=self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/pagination.py", line 204, in paginate_queryset
+    self.page = paginator.page(page_number)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 72, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 53, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/utils/functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 99, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/utils/functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 93, in count
+    return c()
+           ^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/query.py", line 608, in count
+    return self.query.get_count(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 568, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 554, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: api_course
+ERROR 2025-11-10 14:09:12,790 basehttp 42298 123145606365184 "GET /api/courses/ HTTP/1.1" 500 198660
+ERROR 2025-11-10 14:09:13,059 log 42298 123145639944192 Internal Server Error: /api/courses/
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: api_course
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 40, in list
+    page = self.paginate_queryset(queryset)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/generics.py", line 171, in paginate_queryset
+    return self.paginator.paginate_queryset(queryset, self.request, view=self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/pagination.py", line 204, in paginate_queryset
+    self.page = paginator.page(page_number)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 72, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 53, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/utils/functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 99, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/utils/functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 93, in count
+    return c()
+           ^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/query.py", line 608, in count
+    return self.query.get_count(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 568, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 554, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: api_course
+ERROR 2025-11-10 14:09:13,061 log 42298 123145555996672 Internal Server Error: /api/course-progress/
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: api_courseprogress
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 40, in list
+    page = self.paginate_queryset(queryset)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/generics.py", line 171, in paginate_queryset
+    return self.paginator.paginate_queryset(queryset, self.request, view=self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/pagination.py", line 204, in paginate_queryset
+    self.page = paginator.page(page_number)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 72, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 53, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/utils/functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 99, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/utils/functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 93, in count
+    return c()
+           ^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/query.py", line 608, in count
+    return self.query.get_count(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 568, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 554, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: api_courseprogress
+ERROR 2025-11-10 14:09:13,069 basehttp 42298 123145639944192 "GET /api/courses/ HTTP/1.1" 500 198660
+ERROR 2025-11-10 14:09:13,076 basehttp 42298 123145555996672 "GET /api/course-progress/ HTTP/1.1" 500 199689
+ERROR 2025-11-10 14:09:13,196 log 42298 123145606365184 Internal Server Error: /api/course-progress/
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: api_courseprogress
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 40, in list
+    page = self.paginate_queryset(queryset)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/generics.py", line 171, in paginate_queryset
+    return self.paginator.paginate_queryset(queryset, self.request, view=self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/pagination.py", line 204, in paginate_queryset
+    self.page = paginator.page(page_number)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 72, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 53, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/utils/functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 99, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/utils/functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/paginator.py", line 93, in count
+    return c()
+           ^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/query.py", line 608, in count
+    return self.query.get_count(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 568, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 554, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: api_courseprogress
+ERROR 2025-11-10 14:09:13,208 basehttp 42298 123145606365184 "GET /api/course-progress/ HTTP/1.1" 500 199689

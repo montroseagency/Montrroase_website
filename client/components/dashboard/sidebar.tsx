@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { Menu, X, BarChart3, Users, FileText, CheckSquare, MessageSquare, Settings, LogOut, Home, TrendingUp, Image } from 'lucide-react';
+import { Menu, X, BarChart3, Users, FileText, CheckSquare, MessageSquare, Settings, LogOut, Home, TrendingUp, Image, Globe, GraduationCap, Wallet as WalletIcon, HelpCircle } from 'lucide-react';
 import { useAuth } from '@/lib/hooks/useAuth';
 
 interface NavLink {
@@ -37,6 +37,10 @@ export function Sidebar() {
     { href: '/dashboard/client/billing', label: 'Billing', icon: <BarChart3 className="w-5 h-5" />, roles: ['client'] },
     { href: '/dashboard/client/messages', label: 'Messages', icon: <MessageSquare className="w-5 h-5" />, roles: ['client'] },
     { href: '/dashboard/client/social-accounts', label: 'Social Accounts', icon: <Users className="w-5 h-5" />, roles: ['client'] },
+    { href: '/dashboard/client/website-builder', label: 'Website Builder', icon: <Globe className="w-5 h-5" />, roles: ['client'] },
+    { href: '/dashboard/client/courses', label: 'Courses', icon: <GraduationCap className="w-5 h-5" />, roles: ['client'] },
+    { href: '/dashboard/client/wallet', label: 'Wallet', icon: <WalletIcon className="w-5 h-5" />, roles: ['client'] },
+    { href: '/dashboard/client/support', label: 'Support', icon: <HelpCircle className="w-5 h-5" />, roles: ['client'] },
     { href: '/dashboard/client/settings', label: 'Settings', icon: <Settings className="w-5 h-5" />, roles: ['client'] },
   ];
 

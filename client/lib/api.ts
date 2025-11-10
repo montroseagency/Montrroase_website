@@ -813,6 +813,32 @@ class ApiService {
   getBaseURL(): string {
     return this.baseURL;
   }
+
+  // ============ GENERIC API METHODS ============
+
+  async get(endpoint: string) {
+    return await this.request(endpoint);
+  }
+
+  async post(endpoint: string, data: any) {
+    return await this.request(endpoint, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async patch(endpoint: string, data: any) {
+    return await this.request(endpoint, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async delete(endpoint: string) {
+    return await this.request(endpoint, {
+      method: 'DELETE',
+    });
+  }
 }
 
 // Export a singleton instance
