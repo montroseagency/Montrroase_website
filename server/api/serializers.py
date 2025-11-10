@@ -9,7 +9,8 @@ from .models import (
     Message, Invoice, TeamMember, Project, File, Notification,
     SocialMediaAccount, RealTimeMetrics, WebsiteProject, WebsitePhase,
     Course, CourseModule, CourseLesson, CourseProgress, CourseCertificate,
-    Wallet, Transaction, Giveaway, GiveawayWinner, SupportTicket, TicketMessage
+    Wallet, Transaction, Giveaway, GiveawayWinner, SupportTicket, TicketMessage,
+    Agent
 )
 
 class UserSerializer(serializers.ModelSerializer):
@@ -101,6 +102,64 @@ class UserLoginSerializer(serializers.Serializer):
 
         return data
 
+# Agent Serializer
+class AgentSerializer(serializers.ModelSerializer):
+    """Agent serializer with user information"""
+    user = UserSerializer(read_only=True)
+    current_client_count = serializers.ReadOnlyField()
+    can_accept_clients = serializers.ReadOnlyField()
+    user_id = serializers.UUIDField(write_only=True, required=False)
+    email = serializers.EmailField(write_only=True, required=False)
+    password = serializers.CharField(write_only=True, required=False, min_length=8)
+    first_name = serializers.CharField(write_only=True, required=False)
+    last_name = serializers.CharField(write_only=True, required=False)
+
+    class Meta:
+        model = Agent
+        fields = [
+            'id', 'user', 'user_id', 'email', 'password', 'first_name', 'last_name',
+            'department', 'specialization', 'is_active', 'max_clients',
+            'current_client_count', 'can_accept_clients', 'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at', 'current_client_count', 'can_accept_clients']
+
+    def validate(self, data):
+        """Validate that required fields are present for creation"""
+        # If this is a create operation (no instance), require user fields
+        if not self.instance:
+            required_fields = ['email', 'password', 'first_name', 'last_name']
+            missing_fields = [field for field in required_fields if not data.get(field)]
+
+            if missing_fields:
+                raise serializers.ValidationError({
+                    field: 'This field is required for creating an agent.'
+                    for field in missing_fields
+                })
+
+        return data
+
+    def create(self, validated_data):
+        """Create agent with user account"""
+        # Extract user fields
+        email = validated_data.pop('email')
+        password = validated_data.pop('password')
+        first_name = validated_data.pop('first_name', '')
+        last_name = validated_data.pop('last_name', '')
+
+        # Create user account
+        user = User.objects.create_user(
+            username=email,
+            email=email,
+            password=password,
+            first_name=first_name,
+            last_name=last_name,
+            role='agent'
+        )
+
+        # Create agent profile
+        agent = Agent.objects.create(user=user, **validated_data)
+        return agent
+
 # ADD MISSING SOCIAL MEDIA SERIALIZERS
 class SocialMediaAccountSerializer(serializers.ModelSerializer):
     """Social Media Account serializer"""
@@ -160,18 +219,31 @@ class ClientSerializer(serializers.ModelSerializer):
     user_last_name = serializers.CharField(source='user.last_name', read_only=True)
     user_email = serializers.CharField(source='user.email', read_only=True)
     user_avatar = serializers.ImageField(source='user.avatar', read_only=True)
-    
+    assigned_agent_name = serializers.SerializerMethodField()
+    assigned_agent_email = serializers.SerializerMethodField()
+
     class Meta:
         model = Client
         fields = [
             'id', 'name', 'email', 'company', 'package', 'monthly_fee',
             'start_date', 'status', 'payment_status', 'platforms',
-            'account_manager', 'next_payment', 'total_spent', 'notes',
+            'assigned_agent', 'assigned_agent_name', 'assigned_agent_email',
+            'next_payment', 'total_spent', 'notes',
             'created_at', 'updated_at',
             # Add user fields
             'user_id', 'user_first_name', 'user_last_name', 'user_email', 'user_avatar'
         ]
         read_only_fields = ['id', 'created_at', 'updated_at', 'user_id', 'user_first_name', 'user_last_name', 'user_email', 'user_avatar']
+
+    def get_assigned_agent_name(self, obj):
+        if obj.assigned_agent:
+            return f"{obj.assigned_agent.user.first_name} {obj.assigned_agent.user.last_name}"
+        return None
+
+    def get_assigned_agent_email(self, obj):
+        if obj.assigned_agent:
+            return obj.assigned_agent.user.email
+        return None
 
 
 class TaskSerializer(serializers.ModelSerializer):

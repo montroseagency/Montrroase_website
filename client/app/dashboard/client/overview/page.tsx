@@ -178,7 +178,7 @@ export default function ClientOverviewPage() {
               </p>
             </div>
             <Link
-              href="/dashboard/client/billing"
+              href="/dashboard/client/settings/billing"
               className="text-blue-600 hover:text-blue-700 font-medium text-sm whitespace-nowrap"
             >
               View Details →
@@ -202,13 +202,13 @@ export default function ClientOverviewPage() {
           icon={<BarChart3 className="w-8 h-8 text-blue-600" />}
         />
         <QuickActionCard
-          href="/dashboard/client/billing"
+          href="/dashboard/client/settings/billing"
           title="Manage Billing"
           description="View invoices and plans"
           icon={<CreditCard className="w-8 h-8 text-green-600" />}
         />
         <QuickActionCard
-          href="/dashboard/client/messages"
+          href="/dashboard/client/support"
           title="Messages"
           description="Chat with your team"
           icon={<MessageCircle className="w-8 h-8 text-blue-600" />}
@@ -299,7 +299,7 @@ export default function ClientOverviewPage() {
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold text-gray-900">Recent Messages</h2>
-            <Link href="/dashboard/client/messages" className="text-purple-600 hover:text-purple-700 text-sm font-medium">
+            <Link href="/dashboard/client/support" className="text-purple-600 hover:text-purple-700 text-sm font-medium">
               View All →
             </Link>
           </div>

@@ -13,6 +13,10 @@ from .views import (
     ClientViewSet, TaskViewSet, ContentPostViewSet,
     PerformanceDataViewSet, MessageViewSet, InvoiceViewSet,
     FileViewSet, NotificationViewSet, SocialMediaAccountViewSet,
+    AgentViewSet,
+
+    # Agent views
+    get_agent_dashboard_stats, get_my_clients,
 
     # Real-time metrics
     get_realtime_metrics,
@@ -161,6 +165,7 @@ router.register(r'invoices', InvoiceViewSet, basename='invoice')
 router.register(r'files', FileViewSet, basename='file')
 router.register(r'notifications', NotificationViewSet, basename='notification')
 router.register(r'social-accounts', SocialMediaAccountViewSet, basename='social-account')
+router.register(r'agents', AgentViewSet, basename='agent')
 
 # NEW: Register new feature viewsets
 router.register(r'website-projects', WebsiteProjectViewSet, basename='website-project')
@@ -200,7 +205,11 @@ urlpatterns = [
     # Dashboard statistics
     path('dashboard/stats/', dashboard_stats_view, name='dashboard_stats'),
     path('dashboard/client-stats/', client_dashboard_stats_view, name='client_dashboard_stats'),
-    
+    path('dashboard/agent-stats/', get_agent_dashboard_stats, name='agent_dashboard_stats'),
+
+    # Agent endpoints
+    path('agents/my-clients/', get_my_clients, name='my_clients'),
+
     # Real-time metrics endpoints
     path('metrics/realtime/', get_realtime_metrics, name='realtime_metrics'),
     

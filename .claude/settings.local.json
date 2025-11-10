@@ -22,7 +22,10 @@
       "Bash(rm:*)",
       "Bash(python3:*)",
       "Bash(cat:*)",
-      "Bash(api/serializers.py)"
+      "Bash(api/serializers.py)",
+      "Bash(pip install:*)",
+      "Bash(venv/bin/python:*)",
+      "Bash(kill:*)"
     ],
     "deny": [],
     "ask": []

@@ -14,6 +14,7 @@ class User(AbstractUser):
     ROLE_CHOICES = [
         ('admin', 'Admin'),
         ('client', 'Client'),
+        ('agent', 'Agent'),
     ]
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -27,6 +28,39 @@ class User(AbstractUser):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.role})"
+
+
+class Agent(models.Model):
+    """Agent profile for managing clients"""
+    DEPARTMENT_CHOICES = [
+        ('marketing', 'Marketing'),
+        ('website', 'Website Development'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='agent_profile')
+    department = models.CharField(max_length=50, choices=DEPARTMENT_CHOICES, default='marketing')
+    specialization = models.CharField(max_length=255, blank=True, help_text='Areas of expertise')
+    is_active = models.BooleanField(default=True)
+    max_clients = models.IntegerField(default=10, help_text='Maximum number of clients this agent can handle')
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.user.get_full_name()} - {self.get_department_display()}"
+
+    @property
+    def current_client_count(self):
+        """Get current number of assigned clients"""
+        return self.assigned_clients.filter(status='active').count()
+
+    @property
+    def can_accept_clients(self):
+        """Check if agent can accept more clients"""
+        return self.is_active and self.current_client_count < self.max_clients
 
 
 class SocialMediaAccount(models.Model):
@@ -149,7 +183,14 @@ class Client(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     payment_status = models.CharField(max_length=20, choices=PAYMENT_STATUS_CHOICES, default='none')
     platforms = models.JSONField(default=list)
-    account_manager = models.CharField(max_length=255, default='Admin')
+    assigned_agent = models.ForeignKey(
+        'Agent',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='assigned_clients',
+        help_text='Agent assigned to manage this client'
+    )
     next_payment = models.DateField(null=True, blank=True)  # Allow null for no active subscription
     total_spent = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     notes = models.TextField(blank=True, null=True)

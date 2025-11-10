@@ -11,6 +11,8 @@ export default function DashboardPage() {
   useEffect(() => {
     if (user?.role === 'admin') {
       router.push('/dashboard/admin/overview');
+    } else if (user?.role === 'agent') {
+      router.push('/dashboard/agent');
     } else {
       router.push('/dashboard/client/overview');
     }

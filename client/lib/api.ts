@@ -40,7 +40,10 @@ class ApiService {
         }
 
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        console.error('Error data from API:', errorData);
+        const error: any = new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        error.response = { data: errorData };
+        throw error;
       }
 
       // Handle empty responses (like DELETE)

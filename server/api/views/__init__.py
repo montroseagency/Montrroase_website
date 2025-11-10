@@ -23,6 +23,9 @@ from .message_views import MessageViewSet
 from .notification_views import NotificationViewSet
 from .file_views import FileViewSet
 
+# ============ AGENT VIEWS ============
+from .agent_views import AgentViewSet, get_agent_dashboard_stats, get_my_clients
+
 # ============ BANK SETTINGS VIEWS ============
 try:
     from .admin.bank_settings_views import (
@@ -153,28 +156,32 @@ __all__ = [
     # Authentication views
     'RegisterView', 'LoginView', 'logout_view', 'current_user_view',
     'update_profile', 'change_password',
-    
+
     # Dashboard stats
     'dashboard_stats_view', 'client_dashboard_stats_view',
-    
+
     # ViewSets
     'ClientViewSet', 'TaskViewSet', 'ContentPostViewSet',
     'PerformanceDataViewSet', 'MessageViewSet', 'InvoiceViewSet',
     'FileViewSet', 'NotificationViewSet', 'SocialMediaAccountViewSet',
-    
-    # Analytics and metrics  
+    'AgentViewSet',
+
+    # Agent functionality
+    'get_agent_dashboard_stats', 'get_my_clients',
+
+    # Analytics and metrics
     'get_realtime_metrics', 'analytics_overview', 'client_performance_report',
-    
+
     # Message functionality
     'send_message_to_admin', 'send_message_to_client',
     'get_admin_conversations', 'get_conversation_messages',
-    
+
     # OAuth functionality
     'initiate_instagram_oauth', 'handle_instagram_callback',
     'initiate_youtube_oauth', 'handle_youtube_callback',
     'get_connected_accounts', 'disconnect_account',
     'trigger_manual_sync', 'get_sync_status',
-    
+
     # PayPal billing
     'get_available_plans', 'create_subscription', 'approve_subscription',
     'create_order', 'capture_payment', 'paypal_webhook',
@@ -182,11 +189,11 @@ __all__ = [
     'pay_invoice_stub', 'get_payment_methods_stub', 'create_setup_intent_stub',
     'set_default_payment_method_stub', 'delete_payment_method_stub',
     'get_admin_billing_settings_stub', 'delete_admin_account_stub',
-    
+
     # Bank settings
     'admin_bank_settings', 'submit_payment_verification',
     'get_pending_verifications', 'approve_payment_verification',
-    
+
     # Health check
     'health_check',
 ]
