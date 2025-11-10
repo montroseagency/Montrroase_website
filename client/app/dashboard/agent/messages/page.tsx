@@ -42,9 +42,13 @@ export default function AgentMessagesPage() {
   const fetchClients = async () => {
     try {
       const response = await ApiService.get('/agents/my-clients/');
-      setClients(response.data);
-      if (response.data.length > 0) {
-        setSelectedClient(response.data[0].id);
+      if (!response || typeof response !== 'object' || !('data' in response) || !Array.isArray((response as any).data)) {
+        throw new Error('Invalid response format from /agents/my-clients/');
+      }
+      const data = (response as { data: Client[] }).data;
+      setClients(data);
+      if (data.length > 0) {
+        setSelectedClient(data[0].id);
       }
     } catch (error) {
       console.error('Error fetching clients:', error);
