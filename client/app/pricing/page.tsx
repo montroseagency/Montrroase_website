@@ -1,5 +1,8 @@
+'use client';
+
 import Navigation from '@/components/marketing/navigation';
 import Footer from '@/components/marketing/footer';
+import InteractiveGlowBackground from '@/components/interactive-glow-background';
 import PricingCard from '@/components/common/pricing-card';
 
 export default function PricingPage() {
@@ -133,225 +136,249 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-black">
-      <Navigation />
+    <div className="relative min-h-screen overflow-hidden">
+      <InteractiveGlowBackground />
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 bg-black">
+      <div className="relative" style={{ zIndex: 1 }}>
+        <Navigation />
 
-        <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
-          <div className="text-center max-w-4xl mx-auto space-y-8">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-3 bg-white px-5 py-3 rounded-full shadow-sm border border-blue-100">
-              <span className="text-sm font-semibold text-gray-700">
-                Simple, Transparent Pricing
-              </span>
+        {/* Hero Section */}
+        <section className="relative pt-32 pb-20">
+          <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
+            <div className="text-center max-w-4xl mx-auto space-y-8">
+              <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm px-5 py-3 rounded-full border border-white/20">
+                <span className="text-sm font-semibold text-white">
+                  Simple, Transparent Pricing
+                </span>
+              </div>
+
+              <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black leading-tight tracking-tighter">
+                <span className="text-white block mb-2">
+                  PLANS THAT SCALE
+                </span>
+                <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent block">
+                  WITH SUCCESS
+                </span>
+              </h1>
+
+              <p className="text-xl sm:text-2xl text-gray-400 leading-relaxed max-w-3xl mx-auto">
+                Start free, upgrade when ready. All plans include access to our powerful dashboard and expert support.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Cards */}
+        <section className="py-24">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {plans.map((plan, index) => (
+                <PricingCard key={index} {...plan} />
+              ))}
             </div>
 
-            {/* Title */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight tracking-tight">
-              <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent block mb-2">
-                Plans That Scale
+            <div className="text-center mt-12">
+              <span className="inline-flex items-center gap-2 px-6 py-3 bg-green-400/10 text-green-400 text-sm font-semibold rounded-full border border-green-400/20">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                14-Day Money-Back Guarantee
               </span>
-              <span className="text-white block">With Your Success</span>
-            </h1>
-
-            {/* Subtitle */}
-            <p className="text-xl sm:text-2xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
-              Start free, upgrade when ready. All plans include access to our powerful dashboard and expert support.
-            </p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Pricing Cards */}
-      <section className="py-24 bg-black">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {plans.map((plan, index) => (
-              <PricingCard key={index} {...plan} />
-            ))}
+        {/* Add-ons Section */}
+        <section className="py-24">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="text-center mb-16 max-w-3xl mx-auto">
+              <h2 className="text-4xl sm:text-5xl font-black text-white mb-6">
+                Add-Ons &{' '}
+                <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+                  Extras
+                </span>
+              </h2>
+              <p className="text-xl text-gray-400">
+                Enhance your plan with additional services tailored to your needs.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {addons.map((addon, index) => (
+                <div key={index} className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300">
+                  <h3 className="text-lg font-bold text-white mb-2">
+                    {addon.name}
+                  </h3>
+                  <p className="text-2xl font-bold text-blue-400 mb-3">
+                    {addon.price}
+                  </p>
+                  <p className="text-sm text-gray-400">
+                    {addon.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
+        </section>
 
-          {/* Guarantee Badge */}
-          <div className="text-center mt-12">
-            <span className="inline-flex items-center gap-2 px-6 py-3 bg-green-50 text-green-700 text-sm font-semibold rounded-full border border-green-200 shadow-sm">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              14-Day Money-Back Guarantee
-            </span>
-          </div>
-        </div>
-      </section>
+        {/* Comparison Table */}
+        <section className="py-24">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="text-center mb-16 max-w-3xl mx-auto">
+              <h2 className="text-4xl sm:text-5xl font-black text-white mb-6">
+                Compare{' '}
+                <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+                  Features
+                </span>
+              </h2>
+              <p className="text-xl text-gray-400">
+                See what's included in each plan
+              </p>
+            </div>
 
-      {/* Add-ons Section */}
-      <section className="py-24 bg-black">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-              Add-Ons & Extras
-            </h2>
-            <p className="text-xl text-gray-300">
-              Enhance your plan with additional services tailored to your needs.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {addons.map((addon, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
-                  {addon.name}
-                </h3>
-                <p className="text-2xl font-bold text-blue-600 mb-3">
-                  {addon.price}
-                </p>
-                <p className="text-sm text-gray-600">
-                  {addon.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Comparison Table */}
-      <section className="py-24 bg-black">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-              Feature Comparison
-            </h2>
-            <p className="text-xl text-gray-300">
-              See exactly what's included in each plan.
-            </p>
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full bg-white rounded-xl shadow-md border border-gray-100">
-              <thead>
-                <tr className="border-b border-gray-200">
-                  <th className="p-4 text-left font-bold text-gray-900">Feature</th>
-                  <th className="p-4 text-center font-bold text-gray-900">Standard</th>
-                  <th className="p-4 text-center font-bold text-gray-900 bg-blue-50">Pro</th>
-                  <th className="p-4 text-center font-bold text-gray-900">Premium</th>
-                  <th className="p-4 text-center font-bold text-gray-900">Enterprise</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  ['Dashboard Access', true, true, true, true],
-                  ['Social Media Accounts', '2', '5', 'Unlimited', 'Unlimited'],
-                  ['Posts per Month', '10', '30', 'Unlimited', 'Unlimited'],
-                  ['Analytics', 'Basic', 'Advanced', 'Real-Time', 'Custom'],
-                  ['Support', 'Email', 'Priority', '24/7', 'Dedicated'],
-                  ['Course Access', 'Fundamentals', 'Strategy', 'Optimization', 'All + Custom'],
-                  ['Website Builder', false, 'Basic', 'Full', 'Full + Custom'],
-                  ['Ad Credits', '$10', '$50', '$100', 'Unlimited'],
-                  ['Strategy Calls', false, 'Monthly', 'Bi-Weekly', 'Weekly'],
-                  ['API Access', false, false, false, true],
-                ].map(([feature, standard, pro, premium, enterprise], index) => (
-                  <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
-                    <td className="p-4 text-gray-700">{feature}</td>
-                    <td className="p-4 text-center">
-                      {typeof standard === 'boolean' ? (
-                        standard ? (
-                          <svg className="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                          </svg>
-                        ) : (
-                          <svg className="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                          </svg>
-                        )
-                      ) : (
-                        <span className="text-gray-700">{standard}</span>
-                      )}
-                    </td>
-                    <td className="p-4 text-center bg-blue-50/50">
-                      {typeof pro === 'boolean' ? (
-                        pro ? (
-                          <svg className="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                          </svg>
-                        ) : (
-                          <svg className="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                          </svg>
-                        )
-                      ) : (
-                        <span className="text-gray-700 font-medium">{pro}</span>
-                      )}
-                    </td>
-                    <td className="p-4 text-center">
-                      {typeof premium === 'boolean' ? (
-                        premium ? (
-                          <svg className="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                          </svg>
-                        ) : (
-                          <svg className="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                          </svg>
-                        )
-                      ) : (
-                        <span className="text-gray-700">{premium}</span>
-                      )}
-                    </td>
-                    <td className="p-4 text-center">
-                      {typeof enterprise === 'boolean' ? (
-                        enterprise ? (
-                          <svg className="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                          </svg>
-                        ) : (
-                          <svg className="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                          </svg>
-                        )
-                      ) : (
-                        <span className="text-gray-700">{enterprise}</span>
-                      )}
-                    </td>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-white/5 backdrop-blur-sm border-b border-white/10">
+                    <th className="text-left p-6 text-white font-bold text-lg">Features</th>
+                    <th className="text-center p-6 text-white font-bold text-lg">Standard</th>
+                    <th className="text-center p-6 text-white font-bold text-lg">Pro</th>
+                    <th className="text-center p-6 text-white font-bold text-lg">Premium</th>
+                    <th className="text-center p-6 text-white font-bold text-lg">Enterprise</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {[
+                    { feature: 'Dashboard Access', standard: true, pro: true, premium: true, enterprise: true },
+                    { feature: 'Social Media Accounts', standard: '2', pro: '5', premium: 'Unlimited', enterprise: 'Unlimited' },
+                    { feature: 'Posts per Month', standard: '10', pro: '30', premium: 'Unlimited', enterprise: 'Unlimited' },
+                    { feature: 'Basic Analytics', standard: true, pro: true, premium: true, enterprise: true },
+                    { feature: 'Advanced Analytics & Insights', standard: false, pro: true, premium: true, enterprise: true },
+                    { feature: 'Real-Time Analytics Dashboard', standard: false, pro: false, premium: true, enterprise: true },
+                    { feature: 'Email Support', standard: true, pro: false, premium: false, enterprise: false },
+                    { feature: 'Priority Support', standard: false, pro: true, premium: false, enterprise: false },
+                    { feature: '24/7 Premium Support', standard: false, pro: false, premium: true, enterprise: true },
+                    { feature: 'Fundamentals Courses', standard: true, pro: false, premium: false, enterprise: false },
+                    { feature: 'Strategy & Content Courses', standard: false, pro: true, premium: false, enterprise: false },
+                    { feature: 'Optimization & Analytics Courses', standard: false, pro: false, premium: true, enterprise: false },
+                    { feature: 'Automation & Scaling Courses', standard: false, pro: false, premium: false, enterprise: true },
+                    { feature: 'Website Builder Access', standard: false, pro: 'Basic', premium: 'Full', enterprise: 'Full' },
+                    { feature: 'Ad Credits', standard: '$10', pro: '$50', premium: '$100', enterprise: 'Unlimited' },
+                    { feature: 'Strategy Calls', standard: false, pro: 'Monthly', premium: 'Bi-Weekly', enterprise: 'Weekly' },
+                    { feature: 'Custom Integrations', standard: false, pro: false, premium: true, enterprise: true },
+                    { feature: 'White-Label Reports', standard: false, pro: false, premium: true, enterprise: true },
+                    { feature: 'Dedicated Account Manager', standard: false, pro: false, premium: false, enterprise: true },
+                    { feature: 'Custom AI Solutions', standard: false, pro: false, premium: false, enterprise: true },
+                    { feature: 'API Access', standard: false, pro: false, premium: false, enterprise: true },
+                    { feature: 'Custom Training Programs', standard: false, pro: false, premium: false, enterprise: true },
+                    { feature: 'Advanced Security Features', standard: false, pro: false, premium: false, enterprise: true },
+                    { feature: 'SLA Guarantee', standard: false, pro: false, premium: false, enterprise: true },
+                  ].map((row, index) => (
+                    <tr key={index} className="border-b border-white/10 hover:bg-white/5 transition-colors duration-200">
+                      <td className="p-6 text-gray-300 font-medium">{row.feature}</td>
+                      <td className="p-6 text-center">
+                        {typeof row.standard === 'boolean' ? (
+                          row.standard ? (
+                            <svg className="w-6 h-6 text-green-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                          ) : (
+                            <svg className="w-6 h-6 text-gray-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                          )
+                        ) : (
+                          <span className="text-white font-semibold">{row.standard}</span>
+                        )}
+                      </td>
+                      <td className="p-6 text-center">
+                        {typeof row.pro === 'boolean' ? (
+                          row.pro ? (
+                            <svg className="w-6 h-6 text-green-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                          ) : (
+                            <svg className="w-6 h-6 text-gray-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                          )
+                        ) : (
+                          <span className="text-white font-semibold">{row.pro}</span>
+                        )}
+                      </td>
+                      <td className="p-6 text-center">
+                        {typeof row.premium === 'boolean' ? (
+                          row.premium ? (
+                            <svg className="w-6 h-6 text-green-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                          ) : (
+                            <svg className="w-6 h-6 text-gray-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                          )
+                        ) : (
+                          <span className="text-white font-semibold">{row.premium}</span>
+                        )}
+                      </td>
+                      <td className="p-6 text-center">
+                        {typeof row.enterprise === 'boolean' ? (
+                          row.enterprise ? (
+                            <svg className="w-6 h-6 text-green-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                          ) : (
+                            <svg className="w-6 h-6 text-gray-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                          )
+                        ) : (
+                          <span className="text-white font-semibold">{row.enterprise}</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* FAQ Section */}
-      <section className="py-24 bg-black">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-xl text-gray-300">
-              Got questions? We've got answers.
-            </p>
+        {/* FAQ Section */}
+        <section className="py-24">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="text-center mb-16 max-w-3xl mx-auto">
+              <h2 className="text-4xl sm:text-5xl font-black text-white mb-6">
+                Frequently Asked{' '}
+                <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+                  Questions
+                </span>
+              </h2>
+              <p className="text-xl text-gray-400">
+                Got questions? We've got answers.
+              </p>
+            </div>
+
+            <div className="max-w-3xl mx-auto space-y-4">
+              {faqs.map((faq, index) => (
+                <details key={index} className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 group hover:border-white/30 transition-all duration-300">
+                  <summary className="font-semibold text-white cursor-pointer list-none flex items-center justify-between">
+                    {faq.question}
+                    <svg className="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <p className="text-gray-400 mt-4 leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </details>
+              ))}
+            </div>
           </div>
+        </section>
 
-          <div className="max-w-3xl mx-auto space-y-4">
-            {faqs.map((faq, index) => (
-              <details key={index} className="bg-white rounded-xl p-6 shadow-md border border-gray-100 group">
-                <summary className="font-semibold text-gray-900 cursor-pointer list-none flex items-center justify-between">
-                  {faq.question}
-                  <svg className="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </summary>
-                <p className="text-gray-600 mt-4 leading-relaxed">
-                  {faq.answer}
-                </p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <Footer />
+        <Footer />
+      </div>
     </div>
   );
 }

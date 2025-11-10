@@ -15,7 +15,11 @@
       "Bash(python manage.py:*)",
       "Bash(python test_gallery_api.py:*)",
       "Bash(source venv/bin/activate)",
-      "Bash(python manage.py runserver:*)"
+      "Bash(python manage.py runserver:*)",
+      "Bash(npm run dev:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill -9)",
+      "Bash(rm:*)"
     ],
     "deny": [],
     "ask": []
