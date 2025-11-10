@@ -36,13 +36,12 @@ export default function Navigation() {
           <div className="px-5 py-3">
             <div className="flex items-center justify-between">
               {/* Logo */}
-              <Link href="/" className="flex items-center space-x-2.5 group">
-                <div className="relative">
-                  <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center transform group-hover:scale-105 transition-all duration-200">
-                    <span className="text-white font-bold text-lg">M</span>
-                  </div>
-                </div>
-                <span className="text-xl font-black text-white tracking-tight">Montrose</span>
+              <Link href="/" className="flex items-center group">
+                <img
+                  src="/logo.png"
+                  alt="Montrose Logo"
+                  className="h-10 w-auto transform group-hover:scale-105 transition-all duration-200"
+                />
               </Link>
 
               {/* Desktop Navigation */}

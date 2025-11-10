@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useCallback, memo } from 'react';
+import { useState, useCallback, memo, useEffect, useRef } from 'react';
 import Navigation from '@/components/marketing/navigation';
 import Footer from '@/components/marketing/footer';
 import MasonryParallaxGrid from '@/components/masonry-parallax-grid';
 import InteractiveGlowBackground from '@/components/interactive-glow-background';
 import Link from 'next/link';
+import { motion, useInView } from 'framer-motion';
 
 // Optimized Courses Section Component
 const CoursesSection = memo(() => {
@@ -16,7 +17,7 @@ const CoursesSection = memo(() => {
       description: 'Master the art of creating stunning, responsive websites that captivate and convert.',
       instructor: 'Sarah Mitchell',
       country: 'United States',
-      image: '/images/hero/dashboard.png',
+      image: '/images/hero/ChatGPT Image Nov 10, 2025, 10_32_20 PM.png',
       glowColor: 'rgba(168, 85, 247, 0.4)',
     },
     {
@@ -25,7 +26,7 @@ const CoursesSection = memo(() => {
       description: 'Build scalable web applications from front-end to back-end with cutting-edge technology.',
       instructor: 'Alex Rivera',
       country: 'Spain',
-      image: '/images/hero/app.png',
+      image: '/images/hero/ChatGPT Image Nov 10, 2025, 10_35_41 PM.png',
       glowColor: 'rgba(59, 130, 246, 0.4)',
     },
     {
@@ -34,7 +35,7 @@ const CoursesSection = memo(() => {
       description: 'Create memorable brand experiences that tell compelling stories and stand out.',
       instructor: 'Emma Chen',
       country: 'Singapore',
-      image: '/images/hero/furniture.png',
+      image: '/images/hero/ChatGPT Image Nov 10, 2025, 10_39_56 PM.png',
       glowColor: 'rgba(249, 115, 22, 0.4)',
     },
     {
@@ -43,7 +44,7 @@ const CoursesSection = memo(() => {
       description: 'Harness the power of AI to streamline workflows and boost productivity exponentially.',
       instructor: 'Marcus Williams',
       country: 'United Kingdom',
-      image: '/images/hero/modernhouse.png',
+      image: '/images/hero/ChatGPT Image Nov 10, 2025, 10_43_41 PM.png',
       glowColor: 'rgba(34, 197, 94, 0.4)',
     },
     {
@@ -52,21 +53,53 @@ const CoursesSection = memo(() => {
       description: 'Bring your designs to life with sophisticated animations and micro-interactions.',
       instructor: 'Lucia Santos',
       country: 'Brazil',
-      image: '/images/hero/travel.png',
+      image: '/images/hero/ChatGPT Image Nov 10, 2025, 10_45_54 PM.png',
       glowColor: 'rgba(236, 72, 153, 0.4)',
+    },
+    {
+      id: 6,
+      title: 'Digital Marketing Excellence',
+      description: 'Master the strategies and tools to grow your brand and reach your audience effectively.',
+      instructor: 'David Park',
+      country: 'South Korea',
+      image: '/images/hero/ChatGPT Image Nov 10, 2025, 10_52_08 PM.png',
+      glowColor: 'rgba(244, 63, 94, 0.4)',
     },
   ];
 
-  const scroll = useCallback((direction: 'left' | 'right') => {
-    const container = document.getElementById('courses-scroll');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scrollToIndex = useCallback((index: number) => {
+    const container = scrollContainerRef.current;
     if (container) {
-      const scrollAmount = 400;
-      container.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
+      const cardWidth = 380 + 24; // card width + gap
+      container.scrollTo({
+        left: cardWidth * index,
         behavior: 'smooth',
       });
+      setCurrentIndex(index);
     }
   }, []);
+
+  const scroll = useCallback((direction: 'left' | 'right') => {
+    let nextIndex = currentIndex;
+    if (direction === 'right') {
+      nextIndex = currentIndex >= courses.length - 1 ? 0 : currentIndex + 1;
+    } else {
+      nextIndex = currentIndex <= 0 ? courses.length - 1 : currentIndex - 1;
+    }
+    scrollToIndex(nextIndex);
+  }, [currentIndex, courses.length, scrollToIndex]);
+
+  // Auto-scroll every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      scroll('right');
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [scroll]);
 
   return (
     <section className="relative py-32 px-6 sm:px-8 lg:px-12 overflow-hidden">
@@ -122,7 +155,7 @@ const CoursesSection = memo(() => {
           </button>
 
           <div
-            id="courses-scroll"
+            ref={scrollContainerRef}
             className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory px-12"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
@@ -265,6 +298,121 @@ const ServiceAccordion = memo(() => {
 
 ServiceAccordion.displayName = 'ServiceAccordion';
 
+// About Section Component with Animated Image
+const AboutSection = memo(() => {
+  const sectionRef = useRef(null);
+  const imageRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: false, amount: 0.3 });
+
+  return (
+    <section ref={sectionRef} className="relative py-40 sm:py-48 lg:py-56 px-6 sm:px-8 lg:px-12 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-red-600/10 rounded-full blur-3xl" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left Side - Text Content */}
+          <div className="space-y-12">
+            <p className="text-lg sm:text-xl text-gray-500 font-medium tracking-wider uppercase">
+              We are
+            </p>
+
+            <h2
+              className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tighter leading-none"
+              style={{
+                background: 'linear-gradient(135deg, #ffffff 0%, #e5e5e5 50%, #ffffff 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              MONTROSE
+            </h2>
+
+            <div className="flex justify-start py-4">
+              <div
+                className="h-[1px] w-32"
+                style={{
+                  background: 'linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.6), rgba(239, 68, 68, 0.6), transparent)',
+                }}
+              />
+            </div>
+
+            <div className="space-y-6">
+              <p className="text-xl sm:text-2xl lg:text-3xl text-white leading-relaxed font-light">
+                A multidisciplinary collective where creativity meets technology. We craft digital experiences that don't just exist—they resonate, inspire, and transform.
+              </p>
+
+              <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 leading-relaxed font-light">
+                From visionary startups to established enterprises, we partner with ambitious brands ready to break boundaries. Our philosophy is simple: exceptional design paired with flawless execution creates unforgettable impact.
+              </p>
+
+              <p className="text-lg sm:text-xl text-gray-400 leading-relaxed font-light">
+                We don't follow trends—we set them. Every project is an opportunity to push creative limits, challenge conventions, and deliver solutions that stand the test of time.
+              </p>
+            </div>
+
+            <div className="pt-8">
+              <Link
+                href="/services"
+                className="group relative inline-flex items-center gap-3 px-10 py-5 overflow-hidden rounded-full transition-all duration-300"
+              >
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600 via-red-600 to-purple-600 opacity-50 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />
+                <div className="absolute inset-[1px] rounded-full bg-black" />
+
+                <span className="relative text-lg font-semibold text-white z-10">
+                  Explore our services
+                </span>
+                <svg className="relative w-5 h-5 text-white z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Side - Animated Image */}
+          <motion.div
+            ref={imageRef}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="relative lg:flex justify-center items-center hidden"
+          >
+            <div className="relative">
+              {/* Glow Effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 via-cyan-400/10 to-transparent rounded-2xl blur-2xl" />
+              <div className="absolute inset-0 bg-gradient-to-tl from-blue-500/15 via-transparent to-transparent rounded-2xl blur-xl" />
+
+              {/* Image Container */}
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                <img
+                  src="/images/hero/okar.png"
+                  alt="Montrose Analytics"
+                  className="w-full h-auto object-cover"
+                  style={{
+                    filter: 'drop-shadow(0 0 40px rgba(59, 130, 246, 0.3))',
+                  }}
+                />
+
+                {/* Reflection Effect */}
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-500/5 via-transparent to-transparent pointer-events-none" />
+              </div>
+
+              {/* Additional Glow Accents */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-400/20 rounded-full blur-3xl" />
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-cyan-400/15 rounded-full blur-3xl" />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+});
+
+AboutSection.displayName = 'AboutSection';
+
 // Main HomePage Component
 export default function HomePage() {
   return (
@@ -337,72 +485,7 @@ export default function HomePage() {
         </section>
 
         {/* About Section */}
-        <section className="relative py-40 sm:py-48 lg:py-56 px-6 sm:px-8 lg:px-12 overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-red-600/10 rounded-full blur-3xl" />
-          </div>
-
-          <div className="relative max-w-5xl mx-auto">
-            <div className="space-y-12">
-              <p className="text-lg sm:text-xl text-gray-500 font-medium tracking-wider uppercase">
-                We are
-              </p>
-
-              <h2
-                className="text-7xl sm:text-8xl lg:text-9xl font-black tracking-tighter leading-none"
-                style={{
-                  background: 'linear-gradient(135deg, #ffffff 0%, #e5e5e5 50%, #ffffff 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                MONTROSE
-              </h2>
-
-              <div className="flex justify-center py-4">
-                <div
-                  className="h-[1px] w-32"
-                  style={{
-                    background: 'linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.6), rgba(239, 68, 68, 0.6), transparent)',
-                  }}
-                />
-              </div>
-
-              <div className="max-w-4xl space-y-6">
-                <p className="text-xl sm:text-2xl lg:text-3xl text-white leading-relaxed font-light">
-                  A multidisciplinary collective where creativity meets technology. We craft digital experiences that don't just exist—they resonate, inspire, and transform.
-                </p>
-
-                <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 leading-relaxed font-light">
-                  From visionary startups to established enterprises, we partner with ambitious brands ready to break boundaries. Our philosophy is simple: exceptional design paired with flawless execution creates unforgettable impact.
-                </p>
-
-                <p className="text-lg sm:text-xl text-gray-400 leading-relaxed font-light">
-                  We don't follow trends—we set them. Every project is an opportunity to push creative limits, challenge conventions, and deliver solutions that stand the test of time.
-                </p>
-              </div>
-
-              <div className="pt-8">
-                <Link
-                  href="/services"
-                  className="group relative inline-flex items-center gap-3 px-10 py-5 overflow-hidden rounded-full transition-all duration-300"
-                >
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600 via-red-600 to-purple-600 opacity-50 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />
-                  <div className="absolute inset-[1px] rounded-full bg-black" />
-
-                  <span className="relative text-lg font-semibold text-white z-10">
-                    Explore our services
-                  </span>
-                  <svg className="relative w-5 h-5 text-white z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
+        <AboutSection />
 
         {/* Services Section */}
         <section className="relative py-32 px-6 sm:px-8 lg:px-12">
