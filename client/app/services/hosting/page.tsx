@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react';
 import Navigation from '@/components/marketing/navigation';
 import Footer from '@/components/marketing/footer';
 import InteractiveGlowBackground from '@/components/interactive-glow-background';
@@ -8,6 +9,552 @@ import SectionHeader from '@/components/services/SectionHeader';
 import FeatureGrid from '@/components/services/FeatureGrid';
 import CallToAction from '@/components/services/CallToAction';
 import AnimatedCounter from '@/components/services/AnimatedCounter';
+
+// 3D AI Security Core Component
+const AISecurityCore = ({ mousePosition }: { mousePosition: { x: number; y: number } }) => {
+  return (
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+      {/* Central glowing sphere */}
+      <motion.div
+        className="relative w-32 h-32"
+        animate={{
+          scale: [1, 1.1, 1],
+          rotate: [0, 360],
+        }}
+        transition={{
+          scale: { duration: 3, repeat: Infinity },
+          rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+        }}
+        style={{
+          transform: `perspective(1000px) rotateY(${mousePosition.x * 20}deg) rotateX(${mousePosition.y * -20}deg)`,
+        }}
+      >
+        {/* Core sphere */}
+        <div
+          className="absolute inset-0 rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.8), rgba(139, 92, 246, 0.6), rgba(16, 185, 129, 0.4))',
+            boxShadow: `
+              0 0 40px rgba(6, 182, 212, 0.8),
+              0 0 80px rgba(139, 92, 246, 0.6),
+              0 0 120px rgba(16, 185, 129, 0.4),
+              inset 0 0 40px rgba(6, 182, 212, 0.4)
+            `,
+            filter: 'blur(2px)',
+          }}
+        />
+
+        {/* Orbiting rings */}
+        {[0, 60, 120].map((rotation, i) => (
+          <motion.div
+            key={i}
+            className="absolute inset-0"
+            style={{
+              transform: `rotateZ(${rotation}deg)`,
+            }}
+            animate={{
+              rotateX: [0, 360],
+            }}
+            transition={{
+              duration: 8 + i * 2,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          >
+            <div
+              className="absolute inset-0 rounded-full border-2"
+              style={{
+                borderColor: i === 0 ? 'rgba(6, 182, 212, 0.6)' : i === 1 ? 'rgba(139, 92, 246, 0.6)' : 'rgba(16, 185, 129, 0.6)',
+                boxShadow: `0 0 20px ${i === 0 ? 'rgba(6, 182, 212, 0.6)' : i === 1 ? 'rgba(139, 92, 246, 0.6)' : 'rgba(16, 185, 129, 0.6)'}`,
+              }}
+            />
+          </motion.div>
+        ))}
+
+        {/* Energy waves */}
+        {[...Array(3)].map((_, i) => (
+          <motion.div
+            key={`wave-${i}`}
+            className="absolute inset-0 rounded-full border-2 border-cyan-400/40"
+            initial={{ scale: 1, opacity: 0.8 }}
+            animate={{
+              scale: [1, 2.5],
+              opacity: [0.8, 0],
+            }}
+            transition={{
+              duration: 3,
+              delay: i,
+              repeat: Infinity,
+              ease: "easeOut",
+            }}
+          />
+        ))}
+      </motion.div>
+    </div>
+  );
+};
+
+// Floating Geometric Shapes
+const FloatingGeometry = () => {
+  const shapes = [
+    { type: 'hexagon', x: 10, y: 20, size: 40, duration: 15 },
+    { type: 'hexagon', x: 80, y: 70, size: 30, duration: 12 },
+    { type: 'hexagon', x: 20, y: 80, size: 35, duration: 18 },
+    { type: 'line', x: 40, y: 30, width: 100, duration: 10 },
+    { type: 'line', x: 60, y: 60, width: 80, duration: 14 },
+  ];
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {shapes.map((shape, i) => {
+        if (shape.type === 'hexagon') {
+          return (
+            <motion.div
+              key={i}
+              className="absolute"
+              style={{
+                left: `${shape.x}%`,
+                top: `${shape.y}%`,
+                width: shape.size,
+                height: shape.size,
+              }}
+              animate={{
+                y: [0, -50, 0],
+                rotate: [0, 360],
+                opacity: [0.2, 0.5, 0.2],
+              }}
+              transition={{
+                duration: shape.duration,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <svg viewBox="0 0 100 100" className="w-full h-full">
+                <polygon
+                  points="50 0, 95 25, 95 75, 50 100, 5 75, 5 25"
+                  fill="none"
+                  stroke="rgba(6, 182, 212, 0.4)"
+                  strokeWidth="2"
+                  style={{
+                    filter: 'drop-shadow(0 0 10px rgba(6, 182, 212, 0.6))',
+                  }}
+                />
+              </svg>
+            </motion.div>
+          );
+        }
+
+        return (
+          <motion.div
+            key={i}
+            className="absolute h-0.5"
+            style={{
+              left: `${shape.x}%`,
+              top: `${shape.y}%`,
+              width: shape.width,
+              background: 'linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.6), transparent)',
+              boxShadow: '0 0 10px rgba(139, 92, 246, 0.6)',
+            }}
+            animate={{
+              scaleX: [1, 1.5, 1],
+              opacity: [0.3, 0.7, 0.3],
+            }}
+            transition={{
+              duration: shape.duration,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+};
+
+// 3D Security Card Component
+const SecurityCard3D = ({
+  feature,
+  index,
+  mousePosition,
+  isInView,
+  orbitalRotation,
+}: {
+  feature: any;
+  index: number;
+  mousePosition: { x: number; y: number };
+  isInView: boolean;
+  orbitalRotation: number;
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Calculate position in circle with orbital rotation
+  const baseAngle = (index / 4) * Math.PI * 2 - Math.PI / 2;
+  const angle = baseAngle + (orbitalRotation * Math.PI / 180);
+  const radius = 280;
+  const x = Math.cos(angle) * radius;
+  const y = Math.sin(angle) * radius;
+
+  // Calculate 3D rotation based on mouse
+  const rotateX = mousePosition.y * -15;
+  const rotateY = mousePosition.x * 15;
+  const translateZ = isHovered ? 50 : 0;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, z: -200 }}
+      animate={isInView ? { opacity: 1, z: 0 } : { opacity: 0, z: -200 }}
+      transition={{
+        duration: 1,
+        delay: 0.3 + index * 0.2,
+        type: "spring",
+      }}
+      className="absolute"
+      style={{
+        left: '50%',
+        top: '50%',
+        transform: `translate(${x}px, ${y}px) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(${translateZ}px)`,
+        transformStyle: 'preserve-3d',
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <motion.div
+        className="relative w-64 p-6 rounded-2xl overflow-hidden"
+        style={{
+          background: 'rgba(6, 18, 36, 0.8)',
+          backdropFilter: 'blur(20px)',
+          border: '1px solid rgba(6, 182, 212, 0.3)',
+          boxShadow: isHovered
+            ? `0 20px 80px rgba(6, 182, 212, 0.4), 0 0 40px rgba(139, 92, 246, 0.3), inset 0 0 30px rgba(6, 182, 212, 0.1)`
+            : `0 10px 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(6, 182, 212, 0.05)`,
+        }}
+        animate={{
+          scale: isHovered ? 1.05 : 1,
+        }}
+        transition={{ duration: 0.3 }}
+      >
+        {/* Holographic scan lines */}
+        {isHovered && (
+          <>
+            <motion.div
+              className="absolute inset-0 pointer-events-none"
+              initial={{ y: '-100%' }}
+              animate={{ y: '200%' }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              style={{
+                background: 'linear-gradient(180deg, transparent, rgba(6, 182, 212, 0.2), transparent)',
+                height: '20%',
+              }}
+            />
+
+            {/* Holographic grid */}
+            <div
+              className="absolute inset-0 pointer-events-none opacity-30"
+              style={{
+                backgroundImage: `
+                  linear-gradient(rgba(6, 182, 212, 0.2) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(6, 182, 212, 0.2) 1px, transparent 1px)
+                `,
+                backgroundSize: '20px 20px',
+              }}
+            />
+
+            {/* Corner indicators */}
+            {[[0, 0], [0, 100], [100, 0], [100, 100]].map(([x, y], i) => (
+              <motion.div
+                key={i}
+                className="absolute w-4 h-4"
+                style={{
+                  left: x === 0 ? '8px' : 'auto',
+                  right: x === 100 ? '8px' : 'auto',
+                  top: y === 0 ? '8px' : 'auto',
+                  bottom: y === 100 ? '8px' : 'auto',
+                  borderLeft: x === 0 ? '2px solid rgba(6, 182, 212, 0.8)' : 'none',
+                  borderRight: x === 100 ? '2px solid rgba(6, 182, 212, 0.8)' : 'none',
+                  borderTop: y === 0 ? '2px solid rgba(6, 182, 212, 0.8)' : 'none',
+                  borderBottom: y === 100 ? '2px solid rgba(6, 182, 212, 0.8)' : 'none',
+                  boxShadow: '0 0 10px rgba(6, 182, 212, 0.6)',
+                }}
+                animate={{
+                  opacity: [0.5, 1, 0.5],
+                }}
+                transition={{
+                  duration: 1.5,
+                  delay: i * 0.2,
+                  repeat: Infinity,
+                }}
+              />
+            ))}
+          </>
+        )}
+
+        {/* Icon with glow */}
+        <motion.div
+          className="relative w-16 h-16 rounded-xl flex items-center justify-center mb-4 mx-auto"
+          style={{
+            background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.3), rgba(16, 185, 129, 0.3))',
+            boxShadow: isHovered
+              ? '0 0 40px rgba(6, 182, 212, 0.8), 0 0 60px rgba(16, 185, 129, 0.6)'
+              : '0 0 20px rgba(6, 182, 212, 0.4)',
+          }}
+          animate={{
+            rotate: isHovered ? [0, 360] : 0,
+          }}
+          transition={{
+            duration: 20,
+            repeat: isHovered ? Infinity : 0,
+            ease: "linear",
+          }}
+        >
+          {feature.icon}
+
+          {/* Orbiting particles */}
+          {isHovered && (
+            <>
+              {[...Array(3)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-2 h-2 rounded-full bg-cyan-400"
+                  animate={{
+                    rotate: [0, 360],
+                  }}
+                  transition={{
+                    duration: 2,
+                    delay: i * 0.66,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  style={{
+                    left: '50%',
+                    top: '-10px',
+                    transformOrigin: '0 42px',
+                    boxShadow: '0 0 10px rgba(6, 182, 212, 0.8)',
+                  }}
+                />
+              ))}
+            </>
+          )}
+        </motion.div>
+
+        {/* Title */}
+        <h3
+          className="text-lg font-bold text-center mb-3 relative z-10"
+          style={{
+            color: '#F0FDFA',
+            textShadow: isHovered ? '0 0 20px rgba(6, 182, 212, 0.6)' : '0 2px 10px rgba(0, 0, 0, 0.5)',
+          }}
+        >
+          {feature.title}
+        </h3>
+
+        {/* Description */}
+        <p
+          className="text-sm text-gray-400 text-center leading-relaxed relative z-10"
+          style={{
+            textShadow: '0 1px 3px rgba(0, 0, 0, 0.5)',
+          }}
+        >
+          {feature.description}
+        </p>
+
+        {/* Animated border glow */}
+        <motion.div
+          className="absolute inset-0 rounded-2xl pointer-events-none"
+          style={{
+            background: `linear-gradient(135deg, rgba(6, 182, 212, ${isHovered ? 0.4 : 0}), rgba(16, 185, 129, ${isHovered ? 0.3 : 0}))`,
+          }}
+          transition={{ duration: 0.3 }}
+        />
+      </motion.div>
+    </motion.div>
+  );
+};
+
+// Main 3D AI Security Section
+const AISecuritySection3D = ({ securityFeatures }: { securityFeatures: any[] }) => {
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [orbitalRotation, setOrbitalRotation] = useState(0);
+
+  // Continuous orbital rotation animation
+  useEffect(() => {
+    if (!isInView) return;
+
+    const interval = setInterval(() => {
+      setOrbitalRotation((prev) => (prev + 0.3) % 360);
+    }, 30); // Smooth 30ms updates
+
+    return () => clearInterval(interval);
+  }, [isInView]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+    const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+    setMousePosition({ x, y });
+  };
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative py-32 px-6 sm:px-8 lg:px-12 overflow-hidden"
+      onMouseMove={handleMouseMove}
+      style={{
+        background: 'linear-gradient(180deg, #0A0E27 0%, #1A1B3D 50%, #000000 100%)',
+        minHeight: '100vh',
+      }}
+    >
+      {/* Animated nebula background */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(50)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: Math.random() * 4 + 1,
+              height: Math.random() * 4 + 1,
+              background: i % 3 === 0 ? '#06B6D4' : i % 3 === 1 ? '#8B5CF6' : '#10B981',
+              boxShadow: `0 0 ${Math.random() * 20 + 10}px currentColor`,
+              filter: 'blur(1px)',
+            }}
+            animate={{
+              y: [0, Math.random() * -100 - 50],
+              opacity: [0, 1, 0],
+              scale: [0, 1.5, 0],
+            }}
+            transition={{
+              duration: Math.random() * 10 + 10,
+              delay: Math.random() * 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Floating geometric shapes */}
+      <FloatingGeometry />
+
+      {/* Section Header */}
+      <motion.div
+        className="relative text-center mb-32 z-20"
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 1 }}
+      >
+        <h2 className="text-5xl sm:text-6xl font-black mb-6">
+          <span className="text-white">Enterprise-Grade </span>
+          <span
+            className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-purple-500 bg-clip-text text-transparent"
+            style={{
+              textShadow: '0 0 40px rgba(6, 182, 212, 0.5)',
+            }}
+          >
+            AI Security
+          </span>
+        </h2>
+        <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          Your data and applications are protected by multiple layers of security, monitoring, and backup systems powered by advanced AI.
+        </p>
+      </motion.div>
+
+      {/* 3D Card Layout with AI Core */}
+      <div className="relative max-w-7xl mx-auto" style={{ height: '800px' }}>
+        {/* AI Core in center */}
+        <AISecurityCore mousePosition={mousePosition} />
+
+        {/* Circuit connections */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none z-5">
+          <defs>
+            <linearGradient id="circuitGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#06B6D4" stopOpacity="0.8" />
+              <stop offset="50%" stopColor="#10B981" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.8" />
+            </linearGradient>
+          </defs>
+
+          {securityFeatures.map((_, index) => {
+            const baseAngle = (index / 4) * Math.PI * 2 - Math.PI / 2;
+            const angle = baseAngle + (orbitalRotation * Math.PI / 180);
+            const x = 50 + Math.cos(angle) * 35;
+            const y = 50 + Math.sin(angle) * 35;
+
+            return (
+              <motion.line
+                key={index}
+                x1="50%"
+                y1="50%"
+                x2={`${x}%`}
+                y2={`${y}%`}
+                stroke="url(#circuitGradient)"
+                strokeWidth="2"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={isInView ? { pathLength: 1, opacity: 0.8 } : { pathLength: 0, opacity: 0 }}
+                transition={{
+                  duration: 1.5,
+                  delay: 0.5 + index * 0.2,
+                  ease: "easeInOut",
+                }}
+                style={{
+                  filter: 'drop-shadow(0 0 8px rgba(6, 182, 212, 0.8))',
+                }}
+              />
+            );
+          })}
+
+          {/* Animated energy pulses along circuits */}
+          {securityFeatures.map((_, index) => {
+            const baseAngle = (index / 4) * Math.PI * 2 - Math.PI / 2;
+            const angle = baseAngle + (orbitalRotation * Math.PI / 180);
+            const x = 50 + Math.cos(angle) * 35;
+            const y = 50 + Math.sin(angle) * 35;
+
+            return (
+              <motion.circle
+                key={`pulse-${index}`}
+                r="4"
+                fill="rgba(6, 182, 212, 0.8)"
+                cx={`${50 + (Math.cos(angle) * 35 * ((index * 0.75 * 1000) % 3000) / 3000)}%`}
+                cy={`${50 + (Math.sin(angle) * 35 * ((index * 0.75 * 1000) % 3000) / 3000)}%`}
+                style={{
+                  filter: 'drop-shadow(0 0 10px rgba(6, 182, 212, 1))',
+                }}
+                animate={{
+                  opacity: [0, 1, 1, 0],
+                }}
+                transition={{
+                  duration: 3,
+                  delay: index * 0.75,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            );
+          })}
+        </svg>
+
+        {/* Floating 3D Cards */}
+        {securityFeatures.map((feature, index) => (
+          <SecurityCard3D
+            key={index}
+            feature={feature}
+            index={index}
+            mousePosition={mousePosition}
+            isInView={isInView}
+            orbitalRotation={orbitalRotation}
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
 
 export default function HostingPage() {
   const performanceMetrics = [
@@ -220,19 +767,8 @@ export default function HostingPage() {
           </div>
         </section>
 
-        {/* Security & Reliability */}
-        <section className="py-24">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-            <SectionHeader
-              title="Enterprise-Grade"
-              highlight="Security"
-              description="Your data and applications are protected by multiple layers of security, monitoring, and backup systems."
-              align="center"
-            />
-
-            <FeatureGrid features={securityFeatures} columns={4} />
-          </div>
-        </section>
+        {/* 3D AI Security & Reliability */}
+        <AISecuritySection3D securityFeatures={securityFeatures} />
 
         {/* Cloud Integration */}
         <section className="py-24">
