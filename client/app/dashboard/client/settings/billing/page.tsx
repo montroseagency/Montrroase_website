@@ -77,7 +77,7 @@ export default function BillingWalletPage() {
         ApiService.get('/giveaways/my_wins/')
       ]);
 
-      setWallet(walletData);
+      setWallet(walletData as WalletData);
       setTransactions(Array.isArray(transactionsData) ? transactionsData : []);
       setInvoices(Array.isArray(invoicesData) ? invoicesData : []);
       setGiveaways(Array.isArray(giveawaysData) ? giveawaysData : []);
@@ -160,9 +160,9 @@ export default function BillingWalletPage() {
 
   const unclaimedWins = wins.filter(w => !w.is_claimed);
   const invoiceStats = {
-    total: invoices.reduce((s, i) => s + i.amount, 0),
-    paid: invoices.filter(i => i.status === 'paid').reduce((s, i) => s + i.amount, 0),
-    pending: invoices.filter(i => i.status === 'pending').reduce((s, i) => s + i.amount, 0),
+    total: invoices.reduce((s, i) => s + (Number(i.amount) || 0), 0),
+    paid: invoices.filter(i => i.status === 'paid').reduce((s, i) => s + (Number(i.amount) || 0), 0),
+    pending: invoices.filter(i => i.status === 'pending').reduce((s, i) => s + (Number(i.amount) || 0), 0),
     overdue: invoices.filter(i => i.status === 'overdue').length,
   };
 
@@ -183,7 +183,7 @@ export default function BillingWalletPage() {
             </div>
             <div>
               <p className="text-purple-100 text-sm">Available Balance</p>
-              <h2 className="text-5xl font-bold">${wallet?.balance.toFixed(2) || '0.00'}</h2>
+              <h2 className="text-5xl font-bold">${wallet?.balance ? Number(wallet.balance).toFixed(2) : '0.00'}</h2>
             </div>
           </div>
           <button
@@ -198,11 +198,11 @@ export default function BillingWalletPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-6 border-t border-purple-400 border-opacity-30">
           <div>
             <p className="text-purple-100 text-sm mb-1">Total Earned</p>
-            <p className="text-2xl font-bold">${wallet?.total_earned.toFixed(2) || '0.00'}</p>
+            <p className="text-2xl font-bold">${wallet?.total_earned ? Number(wallet.total_earned).toFixed(2) : '0.00'}</p>
           </div>
           <div>
             <p className="text-purple-100 text-sm mb-1">Total Spent</p>
-            <p className="text-2xl font-bold">${wallet?.total_spent.toFixed(2) || '0.00'}</p>
+            <p className="text-2xl font-bold">${wallet?.total_spent ? Number(wallet.total_spent).toFixed(2) : '0.00'}</p>
           </div>
           <div>
             <p className="text-purple-100 text-sm mb-1">Unclaimed Rewards</p>
@@ -235,7 +235,7 @@ export default function BillingWalletPage() {
           <div className="flex items-center justify-between">
             <p className="text-gray-700">
               Total rewards: <span className="text-2xl font-bold text-yellow-600">
-                ${unclaimedWins.reduce((sum, w) => sum + w.reward_amount, 0).toFixed(2)}
+                ${unclaimedWins.reduce((sum, w) => sum + (Number(w.reward_amount) || 0), 0).toFixed(2)}
               </span>
             </p>
             <button
@@ -252,15 +252,15 @@ export default function BillingWalletPage() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div className="bg-white rounded-lg shadow p-6">
           <p className="text-sm text-gray-600 mb-1">Total Billed</p>
-          <p className="text-2xl font-bold text-gray-900">${invoiceStats.total.toFixed(2)}</p>
+          <p className="text-2xl font-bold text-gray-900">${(invoiceStats.total || 0).toFixed(2)}</p>
         </div>
         <div className="bg-white rounded-lg shadow p-6">
           <p className="text-sm text-gray-600 mb-1">Paid</p>
-          <p className="text-2xl font-bold text-green-600">${invoiceStats.paid.toFixed(2)}</p>
+          <p className="text-2xl font-bold text-green-600">${(invoiceStats.paid || 0).toFixed(2)}</p>
         </div>
         <div className="bg-white rounded-lg shadow p-6">
           <p className="text-sm text-gray-600 mb-1">Pending</p>
-          <p className="text-2xl font-bold text-yellow-600">${invoiceStats.pending.toFixed(2)}</p>
+          <p className="text-2xl font-bold text-yellow-600">${(invoiceStats.pending || 0).toFixed(2)}</p>
         </div>
         <div className="bg-white rounded-lg shadow p-6">
           <p className="text-sm text-gray-600 mb-1">Transactions</p>
@@ -375,7 +375,7 @@ export default function BillingWalletPage() {
                       </div>
                       <div className={`text-lg font-bold ${getTransactionColor(transaction.transaction_type)}`}>
                         {transaction.transaction_type === 'topup' || transaction.transaction_type === 'giveaway' ? '+' : '-'}
-                        ${transaction.amount.toFixed(2)}
+                        ${(Number(transaction.amount) || 0).toFixed(2)}
                       </div>
                     </div>
                   ))}
@@ -396,7 +396,7 @@ export default function BillingWalletPage() {
                         <p className="text-sm text-gray-600">Due: {new Date(invoice.due_date).toLocaleDateString()}</p>
                       </div>
                       <div className="text-right mr-6">
-                        <p className="font-semibold text-gray-900">${invoice.amount.toFixed(2)}</p>
+                        <p className="font-semibold text-gray-900">${(Number(invoice.amount) || 0).toFixed(2)}</p>
                         <span className={`text-xs px-2 py-1 rounded-full inline-block font-medium ${
                           invoice.status === 'paid' ? 'bg-green-100 text-green-800' :
                           invoice.status === 'overdue' ? 'bg-red-100 text-red-800' :
@@ -461,7 +461,7 @@ export default function BillingWalletPage() {
                       <div className="text-right">
                         <p className={`text-lg font-bold ${getTransactionColor(transaction.transaction_type)}`}>
                           {transaction.transaction_type === 'topup' || transaction.transaction_type === 'giveaway' ? '+' : '-'}
-                          ${transaction.amount.toFixed(2)}
+                          ${(Number(transaction.amount) || 0).toFixed(2)}
                         </p>
                       </div>
                     </div>
@@ -487,7 +487,7 @@ export default function BillingWalletPage() {
                     {unclaimedWins.map((win) => (
                       <div key={win.id} className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-lg p-6 border-2 border-yellow-300">
                         <h4 className="font-semibold text-gray-900 mb-2">{win.giveaway.title}</h4>
-                        <p className="text-3xl font-bold text-yellow-600 mb-3">${win.reward_amount.toFixed(2)}</p>
+                        <p className="text-3xl font-bold text-yellow-600 mb-3">${(Number(win.reward_amount) || 0).toFixed(2)}</p>
                         <p className="text-sm text-gray-600 mb-4">Won on {new Date(win.won_at).toLocaleDateString()}</p>
                         <button
                           onClick={() => handleClaimReward(win.giveaway.id)}

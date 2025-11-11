@@ -63,7 +63,7 @@ export default function ProjectDetailPage() {
         ApiService.get(`/website-projects/${params.id}/`),
         ApiService.get(`/website-phases/?project=${params.id}`)
       ]);
-      setProject(projectData);
+      setProject(projectData as WebsiteProject);
       setPhases(Array.isArray(phasesData) ? phasesData : []);
     } catch (err: any) {
       setError(err.message || 'Failed to load project');
@@ -77,7 +77,7 @@ export default function ProjectDetailPage() {
     try {
       setActionLoading(true);
       const response = await ApiService.post(`/website-projects/${params.id}/generate_valuation/`, {});
-      setProject(response);
+      setProject(response as WebsiteProject);
     } catch (err: any) {
       setError(err.message || 'Failed to generate valuation');
     } finally {
@@ -89,7 +89,7 @@ export default function ProjectDetailPage() {
     try {
       setActionLoading(true);
       const response = await ApiService.post(`/website-projects/${params.id}/generate_demo/`, {});
-      setProject(response);
+      setProject(response as WebsiteProject);
     } catch (err: any) {
       setError(err.message || 'Failed to generate demo');
     } finally {
@@ -105,7 +105,7 @@ export default function ProjectDetailPage() {
       const response = await ApiService.post(`/website-projects/${params.id}/create_phases/`, {
         total_amount: project.estimated_cost_max
       });
-      setProject(response);
+      setProject(response as WebsiteProject);
       await loadProject(); // Reload to get phases
     } catch (err: any) {
       setError(err.message || 'Failed to create payment phases');

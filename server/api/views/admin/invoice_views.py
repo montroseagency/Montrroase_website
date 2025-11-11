@@ -26,8 +26,8 @@ from ...serializers import (
     SocialMediaAccountSerializer, RealTimeMetricsSerializer
 )
 
-# NEW: Import the NotificationService
-from ...services.notification_service import NotificationService
+# NEW: Import the NotificationTriggerService for email + in-app notifications
+from ...services.notification_trigger_service import NotificationTriggerService
 
 logger = logging.getLogger(__name__)
 
@@ -60,9 +60,9 @@ class InvoiceViewSet(ModelViewSet):
         
         invoice = serializer.save()
         
-        # 🔔 NEW: Notify client of new invoice
-        NotificationService.notify_invoice_created(
-            client_user=invoice.client.user,
+        # 🔔 NEW: Notify client of new invoice (in-app + email)
+        NotificationTriggerService.trigger_invoice_created(
+            user=invoice.client.user,
             invoice=invoice
         )
     
@@ -84,10 +84,11 @@ class InvoiceViewSet(ModelViewSet):
         client.next_payment = timezone.now().date() + timedelta(days=30)
         client.save()
         
-        # 🔔 NEW: Notify client that payment was received
-        NotificationService.notify_payment_received(
-            client_user=client.user,
-            invoice=invoice
+        # 🔔 NEW: Notify client that payment was received (in-app + email)
+        NotificationTriggerService.trigger_payment_confirmation(
+            user=client.user,
+            amount=invoice.amount,
+            transaction_id=f"INV-{invoice.id}"
         )
         
         return Response({'message': 'Invoice marked as paid'})

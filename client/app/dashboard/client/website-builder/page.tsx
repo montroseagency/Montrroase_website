@@ -32,9 +32,12 @@ export default function WebsiteBuilderPage() {
   const fetchProjects = async () => {
     try {
       const response = await ApiService.get('/website-projects/');
-      setProjects(response.data);
+      // Handle both array response and object with data property
+      const projectsData = Array.isArray(response) ? response : (response as any)?.data || [];
+      setProjects(projectsData);
     } catch (error) {
       console.error('Error fetching projects:', error);
+      setProjects([]); // Set empty array on error
     } finally {
       setLoading(false);
     }

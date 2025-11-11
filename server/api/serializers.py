@@ -8,9 +8,9 @@ from .models import (
     ContentImage, User, Client, Task, ContentPost, PerformanceData,
     Message, Invoice, TeamMember, Project, File, Notification,
     SocialMediaAccount, RealTimeMetrics, WebsiteProject, WebsitePhase,
-    Course, CourseModule, CourseLesson, CourseProgress, CourseCertificate,
-    Wallet, Transaction, Giveaway, GiveawayWinner, SupportTicket, TicketMessage,
-    Agent
+    Course, CourseModule, CourseLesson, CourseProgress, CourseCertificate, CoursePurchase,
+    Wallet, Transaction, WalletAutoRecharge, Giveaway, GiveawayWinner, SupportTicket, TicketMessage,
+    Agent, ClientServiceSettings, WebsiteVersion, Campaign, ContentSchedule
 )
 
 class UserSerializer(serializers.ModelSerializer):
@@ -212,6 +212,29 @@ class RealTimeMetricsSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ['id', 'created_at']
 
+
+class ClientServiceSettingsSerializer(serializers.ModelSerializer):
+    """Serializer for client service settings"""
+    service_type_display = serializers.CharField(source='get_service_type_display', read_only=True)
+    assigned_agent_name = serializers.SerializerMethodField()
+    assigned_agent_department = serializers.CharField(source='assigned_agent.department', read_only=True)
+
+    class Meta:
+        model = ClientServiceSettings
+        fields = [
+            'id', 'client', 'service_type', 'service_type_display',
+            'is_active', 'settings', 'assigned_agent', 'assigned_agent_name',
+            'assigned_agent_department', 'activation_date', 'deactivation_date',
+            'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at']
+
+    def get_assigned_agent_name(self, obj):
+        if obj.assigned_agent:
+            return f"{obj.assigned_agent.user.first_name} {obj.assigned_agent.user.last_name}"
+        return None
+
+
 class ClientSerializer(serializers.ModelSerializer):
     """Enhanced Client serializer with user info"""
     user_id = serializers.CharField(source='user.id', read_only=True)
@@ -221,6 +244,7 @@ class ClientSerializer(serializers.ModelSerializer):
     user_avatar = serializers.ImageField(source='user.avatar', read_only=True)
     assigned_agent_name = serializers.SerializerMethodField()
     assigned_agent_email = serializers.SerializerMethodField()
+    service_settings = ClientServiceSettingsSerializer(many=True, read_only=True)
 
     class Meta:
         model = Client
@@ -231,7 +255,9 @@ class ClientSerializer(serializers.ModelSerializer):
             'next_payment', 'total_spent', 'notes',
             'created_at', 'updated_at',
             # Add user fields
-            'user_id', 'user_first_name', 'user_last_name', 'user_email', 'user_avatar'
+            'user_id', 'user_first_name', 'user_last_name', 'user_email', 'user_avatar',
+            # Multi-service fields
+            'active_services', 'service_settings'
         ]
         read_only_fields = ['id', 'created_at', 'updated_at', 'user_id', 'user_first_name', 'user_last_name', 'user_email', 'user_avatar']
 
@@ -551,12 +577,34 @@ class WebsiteProjectSerializer(serializers.ModelSerializer):
 
 class WebsiteProjectCreateSerializer(serializers.ModelSerializer):
     """Serializer for creating website projects from questionnaire"""
+    # Accept both frontend field names and model field names
+    project_name = serializers.CharField(write_only=True, required=False)
+    design_preferences = serializers.CharField(write_only=True, required=False)
+
     class Meta:
         model = WebsiteProject
         fields = [
-            'title', 'industry', 'business_goals', 'preferred_style',
-            'desired_features', 'target_audience', 'competitor_sites'
+            'title', 'project_name', 'industry', 'business_goals', 'preferred_style',
+            'design_preferences', 'desired_features', 'target_audience', 'competitor_sites',
+            'content_requirements', 'timeline_expectations', 'budget_range', 'additional_notes'
         ]
+        extra_kwargs = {
+            'title': {'required': False},
+            'preferred_style': {'required': False}
+        }
+
+    def validate(self, data):
+        # Map frontend field names to model field names
+        if 'project_name' in data:
+            data['title'] = data.pop('project_name')
+        if 'design_preferences' in data:
+            data['preferred_style'] = data.pop('design_preferences')
+
+        # Ensure title is set
+        if not data.get('title'):
+            raise serializers.ValidationError({'title': 'Project name is required'})
+
+        return data
 
     def create(self, validated_data):
         # Get client from request context
@@ -597,26 +645,91 @@ class CourseModuleSerializer(serializers.ModelSerializer):
         return obj.lessons.count()
 
 
+class CoursePurchaseSerializer(serializers.ModelSerializer):
+    """Serializer for course purchases"""
+    course_title = serializers.CharField(source='course.title', read_only=True)
+    course_thumbnail = serializers.ImageField(source='course.thumbnail', read_only=True)
+    has_access = serializers.BooleanField(read_only=True)
+
+    class Meta:
+        model = CoursePurchase
+        fields = [
+            'id', 'course', 'course_title', 'course_thumbnail',
+            'amount_paid', 'payment_method', 'access_expires_at',
+            'is_refunded', 'refunded_at', 'paypal_order_id',
+            'purchased_at', 'last_accessed_at', 'has_access'
+        ]
+        read_only_fields = ['id', 'purchased_at', 'has_access']
+
+
 class CourseSerializer(serializers.ModelSerializer):
     """Serializer for courses"""
     modules = CourseModuleSerializer(many=True, read_only=True)
     is_accessible = serializers.SerializerMethodField()
     user_progress = serializers.SerializerMethodField()
+    is_purchased = serializers.SerializerMethodField()
+    purchase_info = serializers.SerializerMethodField()
 
     class Meta:
         model = Course
         fields = [
             'id', 'title', 'description', 'thumbnail', 'required_tier',
+            'price', 'is_free', 'allow_individual_purchase',
             'duration_hours', 'difficulty_level', 'category', 'is_published',
-            'display_order', 'modules', 'is_accessible', 'user_progress',
-            'created_at'
+            'display_order', 'modules', 'is_accessible', 'is_purchased',
+            'purchase_info', 'user_progress', 'created_at'
         ]
         read_only_fields = ['id', 'created_at']
 
-    def get_is_accessible(self, obj):
-        """Check if user can access this course"""
+    def get_is_purchased(self, obj):
+        """Check if user has purchased this course"""
         request = self.context.get('request')
-        if not request or not hasattr(request.user, 'client_profile'):
+        if not request or not request.user.is_authenticated:
+            return False
+
+        try:
+            purchase = CoursePurchase.objects.get(user=request.user, course=obj)
+            return purchase.has_access
+        except CoursePurchase.DoesNotExist:
+            return False
+
+    def get_purchase_info(self, obj):
+        """Get purchase details if user has purchased"""
+        request = self.context.get('request')
+        if not request or not request.user.is_authenticated:
+            return None
+
+        try:
+            purchase = CoursePurchase.objects.get(user=request.user, course=obj)
+            return {
+                'purchased_at': purchase.purchased_at,
+                'amount_paid': str(purchase.amount_paid),
+                'access_expires_at': purchase.access_expires_at,
+                'has_access': purchase.has_access
+            }
+        except CoursePurchase.DoesNotExist:
+            return None
+
+    def get_is_accessible(self, obj):
+        """Check if user can access this course (via subscription OR purchase)"""
+        request = self.context.get('request')
+        if not request or not request.user.is_authenticated:
+            return obj.is_free
+
+        # Check if course is free
+        if obj.is_free:
+            return True
+
+        # Check if user has purchased this course
+        try:
+            purchase = CoursePurchase.objects.get(user=request.user, course=obj)
+            if purchase.has_access:
+                return True
+        except CoursePurchase.DoesNotExist:
+            pass
+
+        # Check subscription tier access
+        if not hasattr(request.user, 'client_profile'):
             return False
 
         client = request.user.client_profile
@@ -692,7 +805,7 @@ class TransactionSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'transaction_type', 'amount', 'status', 'description',
             'payment_method', 'payment_reference', 'related_invoice',
-            'related_project', 'created_at', 'client_name'
+            'related_project', 'paid_for_service', 'created_at', 'client_name'
         ]
         read_only_fields = ['id', 'created_at']
 
@@ -727,6 +840,63 @@ class TopUpWalletSerializer(serializers.Serializer):
     """Serializer for wallet top-up"""
     amount = serializers.DecimalField(max_digits=10, decimal_places=2, min_value=10)
     payment_method = serializers.ChoiceField(choices=['paypal', 'stripe', 'bank_transfer'])
+
+
+class WalletAutoRechargeSerializer(serializers.ModelSerializer):
+    """Serializer for wallet auto-recharge configuration - Phase 7"""
+    wallet_id = serializers.UUIDField(source='wallet.id', read_only=True)
+    client_name = serializers.SerializerMethodField()
+    should_recharge = serializers.ReadOnlyField()
+
+    class Meta:
+        model = WalletAutoRecharge
+        fields = [
+            'id', 'wallet', 'wallet_id', 'client_name', 'is_enabled',
+            'threshold_amount', 'recharge_amount', 'payment_method_id',
+            'payment_method_type', 'last_recharge_date', 'total_recharges',
+            'total_recharged_amount', 'should_recharge', 'created_at', 'updated_at'
+        ]
+        read_only_fields = [
+            'id', 'last_recharge_date', 'total_recharges',
+            'total_recharged_amount', 'created_at', 'updated_at'
+        ]
+
+    def get_client_name(self, obj):
+        return obj.wallet.client.name
+
+
+class WalletAutoRechargeConfigureSerializer(serializers.ModelSerializer):
+    """Serializer for configuring auto-recharge settings"""
+    class Meta:
+        model = WalletAutoRecharge
+        fields = [
+            'is_enabled', 'threshold_amount', 'recharge_amount',
+            'payment_method_id', 'payment_method_type'
+        ]
+
+    def validate_threshold_amount(self, value):
+        """Ensure threshold is at least $5"""
+        if value < 5:
+            raise serializers.ValidationError('Threshold amount must be at least $5.00')
+        return value
+
+    def validate_recharge_amount(self, value):
+        """Ensure recharge amount is at least $10"""
+        if value < 10:
+            raise serializers.ValidationError('Recharge amount must be at least $10.00')
+        return value
+
+    def validate(self, data):
+        """Ensure recharge amount is greater than threshold"""
+        threshold = data.get('threshold_amount')
+        recharge = data.get('recharge_amount')
+
+        if threshold and recharge and recharge <= threshold:
+            raise serializers.ValidationError({
+                'recharge_amount': 'Recharge amount must be greater than threshold amount'
+            })
+
+        return data
 
 
 class GiveawaySerializer(serializers.ModelSerializer):
@@ -967,3 +1137,135 @@ class RedeemCodeRedeemSerializer(serializers.Serializer):
                 raise serializers.ValidationError('This code has expired')
 
         return value
+
+
+# ==================== AGENT FEATURE SERIALIZERS ====================
+
+class WebsiteVersionSerializer(serializers.ModelSerializer):
+    """Serializer for website versions uploaded by agents"""
+    agent_name = serializers.SerializerMethodField()
+    project_title = serializers.SerializerMethodField()
+    file_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = WebsiteVersion
+        fields = [
+            'id', 'project', 'agent', 'agent_name', 'project_title',
+            'version_number', 'status', 'file', 'file_url', 'file_size',
+            'preview_url', 'deployment_url', 'notes', 'client_feedback',
+            'technologies_used', 'changelog', 'uploaded_at', 'approved_at', 'deployed_at'
+        ]
+        read_only_fields = ['id', 'uploaded_at', 'approved_at', 'deployed_at']
+
+    def get_agent_name(self, obj):
+        if obj.agent and obj.agent.user:
+            return f"{obj.agent.user.first_name} {obj.agent.user.last_name}"
+        return None
+
+    def get_project_title(self, obj):
+        return obj.project.title if obj.project else None
+
+    def get_file_url(self, obj):
+        if obj.file:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.file.url)
+            return obj.file.url
+        return None
+
+
+class CampaignSerializer(serializers.ModelSerializer):
+    """Serializer for marketing campaigns"""
+    agent_name = serializers.SerializerMethodField()
+    client_name = serializers.SerializerMethodField()
+    performance_percentage = serializers.ReadOnlyField()
+    is_active = serializers.ReadOnlyField()
+    content_post_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Campaign
+        fields = [
+            'id', 'client', 'agent', 'agent_name', 'client_name',
+            'title', 'description', 'platform', 'status',
+            'start_date', 'end_date', 'goal', 'target_audience',
+            'target_reach', 'target_engagement', 'budget',
+            'actual_reach', 'actual_engagement', 'actual_spend',
+            'content_posts', 'content_post_count',
+            'performance_percentage', 'is_active',
+            'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at', 'performance_percentage', 'is_active']
+
+    def get_agent_name(self, obj):
+        if obj.agent and obj.agent.user:
+            return f"{obj.agent.user.first_name} {obj.agent.user.last_name}"
+        return None
+
+    def get_client_name(self, obj):
+        return obj.client.name if obj.client else None
+
+    def get_content_post_count(self, obj):
+        return obj.content_posts.count()
+
+
+class CampaignCreateSerializer(serializers.ModelSerializer):
+    """Serializer for creating campaigns"""
+    class Meta:
+        model = Campaign
+        fields = [
+            'client', 'title', 'description', 'platform', 'status',
+            'start_date', 'end_date', 'goal', 'target_audience',
+            'target_reach', 'target_engagement', 'budget'
+        ]
+
+
+class ContentScheduleSerializer(serializers.ModelSerializer):
+    """Serializer for scheduled content"""
+    agent_name = serializers.SerializerMethodField()
+    client_name = serializers.SerializerMethodField()
+    campaign_title = serializers.SerializerMethodField()
+    social_account_username = serializers.SerializerMethodField()
+    approved_by_name = serializers.SerializerMethodField()
+    is_overdue = serializers.ReadOnlyField()
+
+    class Meta:
+        model = ContentSchedule
+        fields = [
+            'id', 'client', 'agent', 'campaign', 'agent_name', 'client_name', 'campaign_title',
+            'title', 'caption', 'platform', 'social_account', 'social_account_username',
+            'scheduled_for', 'status', 'published_at', 'post_url', 'platform_post_id',
+            'error_message', 'retry_count', 'media_files', 'hashtags', 'mentions',
+            'requires_approval', 'approved_by', 'approved_by_name', 'approved_at',
+            'is_overdue', 'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at', 'published_at', 'is_overdue']
+
+    def get_agent_name(self, obj):
+        if obj.agent and obj.agent.user:
+            return f"{obj.agent.user.first_name} {obj.agent.user.last_name}"
+        return None
+
+    def get_client_name(self, obj):
+        return obj.client.name if obj.client else None
+
+    def get_campaign_title(self, obj):
+        return obj.campaign.title if obj.campaign else None
+
+    def get_social_account_username(self, obj):
+        return obj.social_account.username if obj.social_account else None
+
+    def get_approved_by_name(self, obj):
+        if obj.approved_by:
+            return f"{obj.approved_by.first_name} {obj.approved_by.last_name}"
+        return None
+
+
+class ContentScheduleCreateSerializer(serializers.ModelSerializer):
+    """Serializer for creating scheduled content"""
+    class Meta:
+        model = ContentSchedule
+        fields = [
+            'client', 'campaign', 'title', 'caption', 'platform',
+            'social_account', 'scheduled_for', 'media_files',
+            'hashtags', 'mentions', 'requires_approval'
+        ]

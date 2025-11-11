@@ -211,6 +211,12 @@ class Client(models.Model):
     subscription_end_date = models.DateTimeField(blank=True, null=True)
     trial_end_date = models.DateTimeField(blank=True, null=True)
 
+    # MULTI-SERVICE ARCHITECTURE FIELDS
+    active_services = models.JSONField(
+        default=list,
+        help_text='List of active services for this client: marketing, website, courses'
+    )
+
     def __str__(self):
         return f"{self.name} - {self.company} ({self.get_current_plan_display()})"
 
@@ -261,6 +267,46 @@ class Client(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+
+class ClientServiceSettings(models.Model):
+    """Service-specific settings and assignments for clients"""
+    SERVICE_TYPE_CHOICES = [
+        ('marketing', 'Marketing'),
+        ('website', 'Website Builder'),
+        ('courses', 'Courses'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='service_settings')
+    service_type = models.CharField(max_length=20, choices=SERVICE_TYPE_CHOICES)
+    is_active = models.BooleanField(default=True)
+    settings = models.JSONField(
+        default=dict,
+        help_text='Service-specific configuration and preferences'
+    )
+    assigned_agent = models.ForeignKey(
+        Agent,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='service_clients',
+        help_text='Agent assigned for this specific service'
+    )
+    activation_date = models.DateTimeField(default=timezone.now)
+    deactivation_date = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ['client', 'service_type']
+        ordering = ['-created_at']
+        verbose_name = 'Client Service Setting'
+        verbose_name_plural = 'Client Service Settings'
+
+    def __str__(self):
+        status = "Active" if self.is_active else "Inactive"
+        return f"{self.client.name} - {self.get_service_type_display()} ({status})"
 
 
 class SyncLog(models.Model):
@@ -573,18 +619,55 @@ class File(models.Model):
 class Notification(models.Model):
     """Notifications for users"""
     NOTIFICATION_TYPES = [
+        # Task notifications
         ('task_assigned', 'Task Assigned'),
+        ('task_completed', 'Task Completed'),
+        ('task_overdue', 'Task Overdue'),
+
+        # Payment & Invoice notifications
         ('payment_due', 'Payment Due'),
+        ('payment_received', 'Payment Received'),
+        ('payment_verification', 'Payment Verification'),
+        ('invoice_created', 'Invoice Created'),
+        ('invoice_overdue', 'Invoice Overdue'),
+        ('invoice_reminder', 'Invoice Reminder'),
+
+        # Content notifications
+        ('content_submitted', 'Content Submitted'),
         ('content_approved', 'Content Approved'),
+        ('content_rejected', 'Content Rejected'),
+        ('content_posted', 'Content Posted'),
+
+        # Message notifications
         ('message_received', 'Message Received'),
+
+        # Website project notifications
+        ('website_phase_completed', 'Website Phase Completed'),
+        ('website_demo_ready', 'Website Demo Ready'),
+
+        # Course notifications
+        ('course_enrollment', 'Course Enrollment'),
+        ('course_completed', 'Course Completed'),
+
+        # Subscription notifications
+        ('subscription_activated', 'Subscription Activated'),
+        ('subscription_created', 'Subscription Created'),
+        ('subscription_cancelled', 'Subscription Cancelled'),
+        ('subscription_renewal', 'Subscription Renewal'),
+
+        # User & Performance
+        ('user_registered', 'User Registered'),
         ('performance_update', 'Performance Update'),
+
+        # General
+        ('general', 'General'),
     ]
-    
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
     title = models.CharField(max_length=255)
     message = models.TextField()
-    notification_type = models.CharField(max_length=20, choices=NOTIFICATION_TYPES)
+    notification_type = models.CharField(max_length=30, choices=NOTIFICATION_TYPES)  # Increased from 20 to 30
     read = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=timezone.now)
 
@@ -645,10 +728,14 @@ class WebsiteProject(models.Model):
     # Questionnaire responses
     industry = models.CharField(max_length=100)
     business_goals = models.TextField()
-    preferred_style = models.CharField(max_length=100)
+    preferred_style = models.CharField(max_length=100, blank=True)
     desired_features = models.JSONField(default=list)
     target_audience = models.TextField(blank=True)
     competitor_sites = models.TextField(blank=True)
+    content_requirements = models.TextField(blank=True)
+    timeline_expectations = models.CharField(max_length=100, blank=True)
+    budget_range = models.CharField(max_length=100, blank=True)
+    additional_notes = models.TextField(blank=True)
 
     # AI Valuation
     estimated_cost_min = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
@@ -656,6 +743,17 @@ class WebsiteProject(models.Model):
     estimated_hours = models.IntegerField(blank=True, null=True)
     complexity_score = models.IntegerField(default=0)  # 1-10
     ai_recommendations = models.JSONField(default=dict)
+
+    # Template Selection
+    selected_template = models.ForeignKey(
+        'WebsiteTemplate',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='projects',
+        help_text='Selected template for this project'
+    )
+    template_customizations = models.JSONField(default=dict, help_text='Template customization settings')
 
     # Demo
     demo_url = models.URLField(blank=True, null=True)
@@ -734,6 +832,154 @@ class WebsitePhase(models.Model):
         unique_together = ['project', 'phase_number']
 
 
+class WebsiteTemplate(models.Model):
+    """Pre-built website templates for clients to choose from"""
+    CATEGORY_CHOICES = [
+        ('business', 'Business'),
+        ('ecommerce', 'E-Commerce'),
+        ('portfolio', 'Portfolio'),
+        ('blog', 'Blog'),
+        ('restaurant', 'Restaurant'),
+        ('healthcare', 'Healthcare'),
+        ('education', 'Education'),
+        ('real_estate', 'Real Estate'),
+        ('agency', 'Agency'),
+        ('other', 'Other'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
+    preview_url = models.URLField(help_text='Live preview URL')
+    thumbnail_url = models.URLField(help_text='Thumbnail image URL')
+    screenshots = models.JSONField(default=list, help_text='List of screenshot URLs')
+    features = models.JSONField(default=list, help_text='List of template features')
+    tech_stack = models.JSONField(default=list, help_text='Technologies used')
+    is_active = models.BooleanField(default=True)
+    complexity_score = models.IntegerField(default=5, help_text='Complexity from 1-10')
+    base_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.name} ({self.get_category_display()})"
+
+    class Meta:
+        ordering = ['category', 'name']
+
+
+class WebsiteHosting(models.Model):
+    """Hosting and domain information for website projects"""
+    HOSTING_PROVIDER_CHOICES = [
+        ('vercel', 'Vercel'),
+        ('netlify', 'Netlify'),
+        ('aws', 'AWS'),
+        ('digitalocean', 'DigitalOcean'),
+        ('cloudflare', 'Cloudflare Pages'),
+        ('other', 'Other'),
+    ]
+
+    DOMAIN_PROVIDER_CHOICES = [
+        ('namecheap', 'Namecheap'),
+        ('godaddy', 'GoDaddy'),
+        ('cloudflare', 'Cloudflare'),
+        ('google', 'Google Domains'),
+        ('other', 'Other'),
+    ]
+
+    SSL_STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('active', 'Active'),
+        ('expired', 'Expired'),
+        ('failed', 'Failed'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    project = models.OneToOneField(WebsiteProject, on_delete=models.CASCADE, related_name='hosting')
+
+    # Domain Information
+    domain_name = models.CharField(max_length=255, blank=True)
+    domain_provider = models.CharField(max_length=100, choices=DOMAIN_PROVIDER_CHOICES, blank=True)
+    domain_purchased_at = models.DateTimeField(blank=True, null=True)
+    domain_expires_at = models.DateTimeField(blank=True, null=True)
+    domain_auto_renew = models.BooleanField(default=True)
+
+    # Hosting Information
+    hosting_provider = models.CharField(max_length=100, choices=HOSTING_PROVIDER_CHOICES, blank=True)
+    hosting_plan = models.CharField(max_length=100, blank=True)
+    hosting_url = models.URLField(blank=True, help_text='Hosting control panel URL')
+
+    # SSL Certificate
+    ssl_status = models.CharField(max_length=20, choices=SSL_STATUS_CHOICES, default='pending')
+    ssl_expires_at = models.DateTimeField(blank=True, null=True)
+
+    # DNS Configuration
+    dns_configured = models.BooleanField(default=False)
+    nameservers = models.JSONField(default=list, help_text='List of nameserver addresses')
+
+    # Deployment
+    deployment_url = models.URLField(blank=True, help_text='Live website URL')
+    last_deployed_at = models.DateTimeField(blank=True, null=True)
+
+    # Credentials (encrypted)
+    hosting_credentials = models.JSONField(default=dict, help_text='Encrypted hosting credentials')
+    domain_credentials = models.JSONField(default=dict, help_text='Encrypted domain credentials')
+
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Hosting for {self.project.title} - {self.domain_name or 'No domain'}"
+
+    class Meta:
+        verbose_name = 'Website Hosting'
+        verbose_name_plural = 'Website Hosting'
+
+
+class WebsiteSEO(models.Model):
+    """SEO tracking and optimization for website projects"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    project = models.OneToOneField(WebsiteProject, on_delete=models.CASCADE, related_name='seo')
+
+    # Google Search Console Integration
+    google_search_console_connected = models.BooleanField(default=False)
+    gsc_property_url = models.URLField(blank=True)
+
+    # Keywords
+    target_keywords = models.JSONField(default=list, help_text='List of target keywords')
+    current_rankings = models.JSONField(default=dict, help_text='Keyword rankings data')
+
+    # Metrics
+    backlinks_count = models.IntegerField(default=0)
+    domain_authority = models.IntegerField(default=0, help_text='0-100 score')
+    page_speed_score = models.IntegerField(default=0, help_text='0-100 score')
+    seo_score = models.IntegerField(default=0, help_text='Overall SEO score 0-100')
+
+    # Audits
+    last_audit_date = models.DateTimeField(blank=True, null=True)
+    audit_results = models.JSONField(default=dict, help_text='Latest SEO audit results')
+
+    # Issues
+    critical_issues = models.IntegerField(default=0)
+    warnings = models.IntegerField(default=0)
+    recommendations = models.JSONField(default=list)
+
+    # Analytics
+    organic_traffic = models.IntegerField(default=0, help_text='Monthly organic visits')
+    indexed_pages = models.IntegerField(default=0)
+
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"SEO for {self.project.title} - Score: {self.seo_score}"
+
+    class Meta:
+        verbose_name = 'Website SEO'
+        verbose_name_plural = 'Website SEO'
+
+
 # ==================== COURSES MODELS ====================
 
 class Course(models.Model):
@@ -752,6 +998,11 @@ class Course(models.Model):
 
     # Access control
     required_tier = models.CharField(max_length=20, choices=TIER_CHOICES, default='free')
+
+    # Pricing for individual purchase
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0, help_text='Price for individual course purchase')
+    is_free = models.BooleanField(default=False, help_text='Course is free for everyone')
+    allow_individual_purchase = models.BooleanField(default=True, help_text='Allow purchase without subscription')
 
     # Metadata
     duration_hours = models.DecimalField(max_digits=5, decimal_places=1, default=0)
@@ -873,6 +1124,47 @@ class CourseCertificate(models.Model):
         ordering = ['-issued_at']
 
 
+class CoursePurchase(models.Model):
+    """Track individual course purchases by users"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='course_purchases')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='purchases')
+    amount_paid = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_method = models.CharField(max_length=50, default='paypal', help_text='paypal, wallet, etc')
+
+    # Access control
+    access_expires_at = models.DateTimeField(null=True, blank=True, help_text='Null = lifetime access')
+    is_refunded = models.BooleanField(default=False)
+    refunded_at = models.DateTimeField(null=True, blank=True)
+    refund_amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+
+    # PayPal integration
+    paypal_order_id = models.CharField(max_length=255, blank=True, help_text='PayPal order ID')
+    paypal_payer_id = models.CharField(max_length=255, blank=True, help_text='PayPal payer ID')
+
+    # Timestamps
+    purchased_at = models.DateTimeField(default=timezone.now)
+    last_accessed_at = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.course.title} (${self.amount_paid})"
+
+    @property
+    def has_access(self):
+        """Check if user still has access to this course"""
+        if self.is_refunded:
+            return False
+        if self.access_expires_at is None:
+            return True  # Lifetime access
+        return timezone.now() < self.access_expires_at
+
+    class Meta:
+        unique_together = ['user', 'course']
+        ordering = ['-purchased_at']
+        verbose_name = 'Course Purchase'
+        verbose_name_plural = 'Course Purchases'
+
+
 # ==================== WALLET & TRANSACTIONS MODELS ====================
 
 class Wallet(models.Model):
@@ -933,6 +1225,13 @@ class Transaction(models.Model):
         related_name='wallet_transactions'
     )
 
+    # Phase 7: Service tracking
+    paid_for_service = models.CharField(
+        max_length=100,
+        blank=True,
+        help_text='What service was paid for: course_id, subscription, invoice_id, etc.'
+    )
+
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
@@ -940,6 +1239,63 @@ class Transaction(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+
+class WalletAutoRecharge(models.Model):
+    """Auto-recharge configuration for client wallets - Phase 7"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    wallet = models.OneToOneField(Wallet, on_delete=models.CASCADE, related_name='auto_recharge')
+
+    # Configuration
+    is_enabled = models.BooleanField(default=False, help_text='Enable/disable auto-recharge')
+    threshold_amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=10.00,
+        help_text='Recharge when balance falls below this amount'
+    )
+    recharge_amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=50.00,
+        help_text='Amount to add when auto-recharging'
+    )
+
+    # Payment method (PayPal subscription or saved card)
+    payment_method_id = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text='PayPal subscription ID or saved payment method ID'
+    )
+    payment_method_type = models.CharField(
+        max_length=50,
+        choices=[('paypal', 'PayPal'), ('card', 'Credit Card')],
+        default='paypal'
+    )
+
+    # Tracking
+    last_recharge_date = models.DateTimeField(null=True, blank=True)
+    total_recharges = models.IntegerField(default=0)
+    total_recharged_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    # Timestamps
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        status = "Enabled" if self.is_enabled else "Disabled"
+        return f"Auto-Recharge ({status}) - {self.wallet.client.name}"
+
+    @property
+    def should_recharge(self):
+        """Check if wallet balance is below threshold"""
+        if not self.is_enabled:
+            return False
+        return self.wallet.balance < self.threshold_amount
+
+    class Meta:
+        verbose_name = 'Wallet Auto-Recharge'
+        verbose_name_plural = 'Wallet Auto-Recharges'
 
 
 class Giveaway(models.Model):
@@ -1163,3 +1519,203 @@ class RedeemCodeUsage(models.Model):
 
     def __str__(self):
         return f"{self.user.email} redeemed {self.redeem_code.code}"
+
+
+# ==================== AGENT FEATURE MODELS ====================
+
+class WebsiteVersion(models.Model):
+    """Track website versions uploaded by website agents"""
+    STATUS_CHOICES = [
+        ('uploaded', 'Uploaded'),
+        ('testing', 'Testing'),
+        ('approved', 'Approved'),
+        ('deployed', 'Deployed'),
+        ('rejected', 'Rejected'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    project = models.ForeignKey(WebsiteProject, on_delete=models.CASCADE, related_name='versions')
+    agent = models.ForeignKey(Agent, on_delete=models.SET_NULL, null=True, related_name='uploaded_versions')
+
+    version_number = models.CharField(max_length=50, help_text='e.g., v1.0, v1.1, v2.0')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='uploaded')
+
+    # File storage
+    file = models.FileField(upload_to='website_versions/%Y/%m/', help_text='Zip file containing website files')
+    file_size = models.BigIntegerField(help_text='File size in bytes')
+
+    # URLs
+    preview_url = models.URLField(blank=True, help_text='URL where this version can be previewed')
+    deployment_url = models.URLField(blank=True, help_text='Live deployment URL')
+
+    # Notes and feedback
+    notes = models.TextField(blank=True, help_text='Agent notes about this version')
+    client_feedback = models.TextField(blank=True, help_text='Client feedback on this version')
+
+    # Technical details
+    technologies_used = models.JSONField(default=list, help_text='List of technologies/frameworks used')
+    changelog = models.TextField(blank=True, help_text='List of changes in this version')
+
+    # Timestamps
+    uploaded_at = models.DateTimeField(default=timezone.now)
+    approved_at = models.DateTimeField(blank=True, null=True)
+    deployed_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        ordering = ['-uploaded_at']
+        unique_together = ['project', 'version_number']
+
+    def __str__(self):
+        return f"{self.project.title} - {self.version_number}"
+
+
+class Campaign(models.Model):
+    """Marketing campaigns managed by marketing agents"""
+    STATUS_CHOICES = [
+        ('draft', 'Draft'),
+        ('scheduled', 'Scheduled'),
+        ('active', 'Active'),
+        ('paused', 'Paused'),
+        ('completed', 'Completed'),
+        ('cancelled', 'Cancelled'),
+    ]
+
+    PLATFORM_CHOICES = [
+        ('instagram', 'Instagram'),
+        ('youtube', 'YouTube'),
+        ('tiktok', 'TikTok'),
+        ('multi', 'Multi-Platform'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='campaigns')
+    agent = models.ForeignKey(Agent, on_delete=models.SET_NULL, null=True, related_name='campaigns')
+
+    # Campaign details
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    platform = models.CharField(max_length=20, choices=PLATFORM_CHOICES)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
+
+    # Dates
+    start_date = models.DateField()
+    end_date = models.DateField()
+
+    # Goals and metrics
+    goal = models.TextField(help_text='Campaign objective/goal')
+    target_audience = models.TextField(blank=True)
+    target_reach = models.IntegerField(default=0, help_text='Target reach/impressions')
+    target_engagement = models.IntegerField(default=0, help_text='Target engagement count')
+    budget = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    # Actual performance (updated as campaign runs)
+    actual_reach = models.IntegerField(default=0)
+    actual_engagement = models.IntegerField(default=0)
+    actual_spend = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    # Content
+    content_posts = models.ManyToManyField(ContentPost, blank=True, related_name='campaigns')
+
+    # Timestamps
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.title} - {self.client.name}"
+
+    @property
+    def is_active(self):
+        """Check if campaign is currently active"""
+        return self.status == 'active' and timezone.now().date() >= self.start_date and timezone.now().date() <= self.end_date
+
+    @property
+    def performance_percentage(self):
+        """Calculate overall performance percentage"""
+        if self.target_reach == 0:
+            return 0
+        reach_pct = (self.actual_reach / self.target_reach) * 100 if self.target_reach > 0 else 0
+        engagement_pct = (self.actual_engagement / self.target_engagement) * 100 if self.target_engagement > 0 else 0
+        return (reach_pct + engagement_pct) / 2
+
+
+class ContentSchedule(models.Model):
+    """Content scheduling system for marketing agents"""
+    STATUS_CHOICES = [
+        ('draft', 'Draft'),
+        ('scheduled', 'Scheduled'),
+        ('published', 'Published'),
+        ('failed', 'Failed'),
+        ('cancelled', 'Cancelled'),
+    ]
+
+    PLATFORM_CHOICES = [
+        ('instagram', 'Instagram'),
+        ('youtube', 'YouTube'),
+        ('tiktok', 'TikTok'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='scheduled_content')
+    agent = models.ForeignKey(Agent, on_delete=models.SET_NULL, null=True, related_name='scheduled_content')
+    campaign = models.ForeignKey(Campaign, on_delete=models.SET_NULL, null=True, blank=True, related_name='scheduled_posts')
+
+    # Content details
+    title = models.CharField(max_length=255)
+    caption = models.TextField()
+    platform = models.CharField(max_length=20, choices=PLATFORM_CHOICES)
+    social_account = models.ForeignKey(
+        SocialMediaAccount,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='scheduled_posts'
+    )
+
+    # Scheduling
+    scheduled_for = models.DateTimeField(help_text='When to publish this content')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
+
+    # Publishing
+    published_at = models.DateTimeField(blank=True, null=True)
+    post_url = models.URLField(blank=True, help_text='URL of published post')
+    platform_post_id = models.CharField(max_length=255, blank=True, help_text='Platform-specific post ID')
+
+    # Error handling
+    error_message = models.TextField(blank=True)
+    retry_count = models.IntegerField(default=0)
+
+    # Media attachments (stored as file paths or URLs)
+    media_files = models.JSONField(default=list, help_text='List of media file paths')
+
+    # Hashtags and mentions
+    hashtags = models.JSONField(default=list, help_text='List of hashtags')
+    mentions = models.JSONField(default=list, help_text='List of @mentions')
+
+    # Approval workflow
+    requires_approval = models.BooleanField(default=True)
+    approved_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='approved_scheduled_content'
+    )
+    approved_at = models.DateTimeField(blank=True, null=True)
+
+    # Timestamps
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['scheduled_for']
+
+    def __str__(self):
+        return f"{self.title} - {self.client.name} - {self.scheduled_for}"
+
+    @property
+    def is_overdue(self):
+        """Check if scheduled post is overdue"""
+        return self.status == 'scheduled' and timezone.now() > self.scheduled_for

@@ -25,6 +25,7 @@ from .file_views import FileViewSet
 
 # ============ AGENT VIEWS ============
 from .agent_views import AgentViewSet, get_agent_dashboard_stats, get_my_clients
+from .agent.agent_features_views import WebsiteVersionViewSet, CampaignViewSet, ContentScheduleViewSet
 
 # ============ BANK SETTINGS VIEWS ============
 try:
@@ -164,7 +165,7 @@ __all__ = [
     'ClientViewSet', 'TaskViewSet', 'ContentPostViewSet',
     'PerformanceDataViewSet', 'MessageViewSet', 'InvoiceViewSet',
     'FileViewSet', 'NotificationViewSet', 'SocialMediaAccountViewSet',
-    'AgentViewSet',
+    'AgentViewSet', 'WebsiteVersionViewSet', 'CampaignViewSet',
 
     # Agent functionality
     'get_agent_dashboard_stats', 'get_my_clients',

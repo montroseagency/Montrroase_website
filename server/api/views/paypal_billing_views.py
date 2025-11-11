@@ -15,7 +15,8 @@ from rest_framework.response import Response
 import requests
 import dateutil.parser
 from ..models import Client, Invoice, User
-from ..services.notification_service import NotificationService
+from ..services.notification_service import NotificationService  # For subscription cancellation
+from ..services.notification_trigger_service import NotificationTriggerService
 
 logger = logging.getLogger(__name__)
 
@@ -299,15 +300,9 @@ def approve_subscription(request):
             
             logger.info(f"Subscription {subscription_id} SUCCESSFULLY ACTIVATED for user {request.user.id} after PayPal confirmation")
             
-            # 🔔 NEW: Notify client of subscription activation
-            NotificationService.notify_subscription_activated(
+            # 🔔 NEW: Notify client of subscription activation (in-app + email)
+            NotificationTriggerService.trigger_subscription_activated(
                 client_user=request.user,
-                plan_name=current_plan
-            )
-            
-            # 🔔 NEW: Notify admins of new subscription
-            NotificationService.notify_subscription_created(
-                client=client,
                 plan_name=current_plan
             )
             

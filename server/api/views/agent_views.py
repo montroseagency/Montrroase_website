@@ -222,6 +222,37 @@ def get_agent_dashboard_stats(request):
             'specialization': agent.specialization,
         }
 
+        # Add service-specific metrics (Phase 6)
+        if agent.department == 'website':
+            from ..models import WebsiteProject, WebsiteVersion
+            # Website agent metrics
+            website_projects = WebsiteProject.objects.filter(client__in=assigned_clients)
+            stats['website_projects'] = {
+                'total': website_projects.count(),
+                'in_development': website_projects.filter(status='in_development').count(),
+                'review': website_projects.filter(status='review').count(),
+                'completed': website_projects.filter(status='completed').count(),
+            }
+            stats['versions_uploaded'] = WebsiteVersion.objects.filter(agent=agent).count()
+
+        elif agent.department == 'marketing':
+            from ..models import ContentPost, Campaign
+            # Marketing agent metrics
+            content_posts = ContentPost.objects.filter(client__in=assigned_clients)
+            campaigns = Campaign.objects.filter(agent=agent)
+            stats['content_posts'] = {
+                'total': content_posts.count(),
+                'draft': content_posts.filter(status='draft').count(),
+                'pending': content_posts.filter(status='pending').count(),
+                'approved': content_posts.filter(status='approved').count(),
+                'posted': content_posts.filter(status='posted').count(),
+            }
+            stats['campaigns'] = {
+                'total': campaigns.count(),
+                'active': campaigns.filter(status='active').count(),
+                'completed': campaigns.filter(status='completed').count(),
+            }
+
         return Response(stats)
 
     except Agent.DoesNotExist:

@@ -76,7 +76,7 @@ export default function NewProjectPage() {
       setLoading(true);
       setError(null);
 
-      const response = await ApiService.post('/website-projects/', formData);
+      const response = await ApiService.post('/website-projects/', formData) as { id: string };
       router.push(`/dashboard/client/website-builder/${response.id}`);
     } catch (err: any) {
       setError(err.message || 'Failed to create project');

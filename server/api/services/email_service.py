@@ -8,8 +8,8 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-# Set your Resend API key
-resend.api_key = "re_PYMEdAkV_NcpDoviLGnE52nsX5y4wb7jj"
+# Set Resend API key from settings
+resend.api_key = settings.RESEND_API_KEY
 
 class EmailService:
     """Service for sending emails via Resend"""

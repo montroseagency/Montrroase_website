@@ -25,6 +25,7 @@ from ...serializers import (
     BulkContentApprovalSerializer, FileUploadSerializer,
     SocialMediaAccountSerializer, RealTimeMetricsSerializer
 )
+from ...services.notification_trigger_service import NotificationTriggerService
 
 logger = logging.getLogger(__name__)
 
@@ -64,8 +65,32 @@ class TaskViewSet(ModelViewSet):
         # Only admins can create tasks
         if self.request.user.role != 'admin':
             raise PermissionError('Admin access required')
-        serializer.save()
-    
+        task = serializer.save()
+
+        # 🔔 NEW: Notify client of new task assignment (in-app + email)
+        NotificationTriggerService.trigger_task_assigned(
+            user=task.client.user,
+            task=task
+        )
+
+    def perform_update(self, serializer):
+        # Check if task is being marked as completed
+        old_status = self.get_object().status
+        task = serializer.save()
+        new_status = task.status
+
+        # 🔔 NEW: Notify client when task is completed (in-app + email)
+        if old_status != 'completed' and new_status == 'completed':
+            # Set completed_at timestamp
+            task.completed_at = timezone.now()
+            task.save()
+
+            # Notify the client (task owner)
+            NotificationTriggerService.trigger_task_completed(
+                user=task.client.user,
+                task=task
+            )
+
     @action(detail=False, methods=['post'])
     def bulk_update(self, request):
         """Bulk update tasks"""

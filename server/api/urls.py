@@ -13,7 +13,7 @@ from .views import (
     ClientViewSet, TaskViewSet, ContentPostViewSet,
     PerformanceDataViewSet, MessageViewSet, InvoiceViewSet,
     FileViewSet, NotificationViewSet, SocialMediaAccountViewSet,
-    AgentViewSet,
+    AgentViewSet, WebsiteVersionViewSet, CampaignViewSet, ContentScheduleViewSet,
 
     # Agent views
     get_agent_dashboard_stats, get_my_clients,
@@ -150,14 +150,20 @@ except ImportError:
 # Import new feature views
 from .views_new_features import (
     WebsiteProjectViewSet, WebsitePhaseViewSet, CourseViewSet,
-    CourseLessonViewSet, CourseProgressViewSet, WalletViewSet,
+    CourseLessonViewSet, CourseProgressViewSet,
     TransactionViewSet, GiveawayViewSet, SupportTicketViewSet
 )
+
+# Import wallet payment views (Phase 7)
+from .views.wallet_payment_views import WalletViewSet, WalletAutoRechargeViewSet
 
 # Import redeem code views
 from .views.redeem_code_views import (
     RedeemCodeViewSet, redeem_code, my_redeemed_codes
 )
+
+# Import service management views
+from .views.client.service_management_views import ClientServiceSettingsViewSet
 
 # Create router and register viewsets
 router = DefaultRouter()
@@ -172,17 +178,24 @@ router.register(r'notifications', NotificationViewSet, basename='notification')
 router.register(r'social-accounts', SocialMediaAccountViewSet, basename='social-account')
 router.register(r'agents', AgentViewSet, basename='agent')
 
+# NEW: Register agent feature viewsets (Phase 6)
+router.register(r'website-versions', WebsiteVersionViewSet, basename='website-version')
+router.register(r'campaigns', CampaignViewSet, basename='campaign')
+router.register(r'content-schedule', ContentScheduleViewSet, basename='content-schedule')
+
 # NEW: Register new feature viewsets
 router.register(r'website-projects', WebsiteProjectViewSet, basename='website-project')
 router.register(r'website-phases', WebsitePhaseViewSet, basename='website-phase')
 router.register(r'courses', CourseViewSet, basename='course')
 router.register(r'lessons', CourseLessonViewSet, basename='lesson')
 router.register(r'course-progress', CourseProgressViewSet, basename='course-progress')
-router.register(r'wallet', WalletViewSet, basename='wallet')
+router.register(r'wallet', WalletViewSet, basename='wallet')  # Phase 7: Updated with payment functionality
+router.register(r'wallet-auto-recharge', WalletAutoRechargeViewSet, basename='wallet-auto-recharge')  # Phase 7
 router.register(r'transactions', TransactionViewSet, basename='transaction')
 router.register(r'giveaways', GiveawayViewSet, basename='giveaway')
 router.register(r'support-tickets', SupportTicketViewSet, basename='support-ticket')
 router.register(r'redeem-codes', RedeemCodeViewSet, basename='redeem-code')
+router.register(r'service-settings', ClientServiceSettingsViewSet, basename='service-settings')
 
 urlpatterns = [
     # Authentication endpoints

@@ -63,7 +63,7 @@ export default function TicketDetailPage() {
     try {
       setLoading(true);
       const response = await ApiService.get(`/support-tickets/${params.id}/`);
-      setTicket(response);
+      setTicket(response as SupportTicket);
     } catch (err: any) {
       console.error('Error loading ticket:', err);
     } finally {

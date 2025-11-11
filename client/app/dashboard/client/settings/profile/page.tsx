@@ -22,7 +22,7 @@ export default function ClientSettingsPage() {
         last_name: profile.last_name,
         company: profile.company,
         bio: profile.bio,
-      });
+      }) as AuthUser;
       setProfile(updated);
       alert('Profile updated successfully!');
     } catch (err) {

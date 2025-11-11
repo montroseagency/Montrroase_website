@@ -16,7 +16,8 @@ import io
 
 from ...models import ContentPost, ContentImage, Client, SocialMediaAccount
 from ...serializers import ContentPostSerializer, ContentImageSerializer
-from ...services.notification_service import NotificationService
+from ...services.notification_service import NotificationService  # For admin-only notifications
+from ...services.notification_trigger_service import NotificationTriggerService  # For client notifications (in-app + email)
 
 logger = logging.getLogger(__name__)
 
@@ -29,10 +30,19 @@ class ContentPostViewSet(ModelViewSet):
     
     def get_queryset(self):
         queryset = ContentPost.objects.all()
-        
+
         if self.request.user.role == 'admin':
             # Admin sees all content
             pass
+        elif self.request.user.role == 'agent':
+            # Agents see content for their assigned clients only (service-based filtering)
+            try:
+                from ...models import Agent
+                agent = Agent.objects.get(user=self.request.user)
+                assigned_clients = Client.objects.filter(assigned_agent=agent)
+                queryset = queryset.filter(client__in=assigned_clients)
+            except Agent.DoesNotExist:
+                return ContentPost.objects.none()
         else:
             # Clients only see their own content
             try:
@@ -274,8 +284,8 @@ class ContentPostViewSet(ModelViewSet):
         content.approved_at = timezone.now()
         content.save()
         
-        # 🔔 NEW: Notify client that their content was approved
-        NotificationService.notify_content_approved(
+        # 🔔 NEW: Notify client that their content was approved (in-app + email)
+        NotificationTriggerService.trigger_content_approved(
             client_user=content.client.user,
             content_post=content
         )
@@ -297,8 +307,8 @@ class ContentPostViewSet(ModelViewSet):
             content.admin_message = feedback
         content.save()
         
-        # 🔔 NEW: Notify client that their content needs revision
-        NotificationService.notify_content_rejected(
+        # 🔔 NEW: Notify client that their content needs revision (in-app + email)
+        NotificationTriggerService.trigger_content_rejected(
             client_user=content.client.user,
             content_post=content,
             feedback=feedback
@@ -334,8 +344,8 @@ class ContentPostViewSet(ModelViewSet):
         
         content.save()
         
-        # 🔔 NEW: Notify client that their content was posted
-        NotificationService.notify_content_posted(
+        # 🔔 NEW: Notify client that their content was posted (in-app + email)
+        NotificationTriggerService.trigger_content_posted(
             client_user=content.client.user,
             content_post=content
         )
@@ -547,9 +557,9 @@ class ContentPostViewSet(ModelViewSet):
                 approved_at=timezone.now()
             )
             
-            # 🔔 NEW: Notify each client their content was approved
+            # 🔔 NEW: Notify each client their content was approved (in-app + email)
             for content in content_posts:
-                NotificationService.notify_content_approved(
+                NotificationTriggerService.trigger_content_approved(
                     client_user=content.client.user,
                     content_post=content
                 )
@@ -561,9 +571,9 @@ class ContentPostViewSet(ModelViewSet):
                 update_data['admin_message'] = feedback
             content_posts.update(**update_data)
             
-            # 🔔 NEW: Notify each client their content needs revision
+            # 🔔 NEW: Notify each client their content needs revision (in-app + email)
             for content in content_posts:
-                NotificationService.notify_content_rejected(
+                NotificationTriggerService.trigger_content_rejected(
                     client_user=content.client.user,
                     content_post=content,
                     feedback=feedback

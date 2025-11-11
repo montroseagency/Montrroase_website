@@ -3,8 +3,9 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { Menu, X, BarChart3, Users, FileText, CheckSquare, MessageSquare, Settings, LogOut, Home, TrendingUp, Image, Globe, GraduationCap, Wallet as WalletIcon, HelpCircle, ChevronDown, ChevronRight, DollarSign } from 'lucide-react';
+import { Menu, X, BarChart3, Users, FileText, CheckSquare, MessageSquare, Settings, LogOut, Home, TrendingUp, Image, Globe, GraduationCap, Wallet as WalletIcon, HelpCircle, ChevronDown, ChevronRight, DollarSign, LayoutGrid, Megaphone, Calendar, Upload, Server } from 'lucide-react';
 import { useAuth } from '@/lib/hooks/useAuth';
+import ServiceSwitcher from '@/components/ServiceSwitcher';
 
 interface SubLink {
   href: string;
@@ -45,6 +46,12 @@ export function Sidebar() {
       roles: ['client']
     },
     {
+      href: '/dashboard/client/services',
+      label: 'All Services',
+      icon: <LayoutGrid className="w-5 h-5" />,
+      roles: ['client']
+    },
+    {
       href: '/dashboard/client/marketing',
       label: 'Marketing',
       icon: <TrendingUp className="w-5 h-5" />,
@@ -57,16 +64,27 @@ export function Sidebar() {
       ]
     },
     {
-      href: '/dashboard/client/website-builder',
-      label: 'Website Builder',
+      href: '/dashboard/client/website',
+      label: 'Website',
       icon: <Globe className="w-5 h-5" />,
-      roles: ['client']
+      roles: ['client'],
+      subLinks: [
+        { href: '/dashboard/client/website-builder', label: 'Projects' },
+        { href: '/dashboard/client/website/domains', label: 'Domains' },
+        { href: '/dashboard/client/website/hosting', label: 'Hosting' },
+        { href: '/dashboard/client/website/seo', label: 'SEO' },
+        { href: '/dashboard/client/website/analytics', label: 'Analytics' },
+      ]
     },
     {
       href: '/dashboard/client/courses',
       label: 'Courses',
       icon: <GraduationCap className="w-5 h-5" />,
-      roles: ['client']
+      roles: ['client'],
+      subLinks: [
+        { href: '/dashboard/client/courses', label: 'All Courses' },
+        { href: '/dashboard/client/courses/purchases', label: 'My Purchases' },
+      ]
     },
     {
       href: '/dashboard/client/support',
@@ -82,6 +100,7 @@ export function Sidebar() {
       subLinks: [
         { href: '/dashboard/client/settings/profile', label: 'Profile' },
         { href: '/dashboard/client/settings/billing', label: 'Billing & Wallet' },
+        { href: '/dashboard/client/settings/wallet', label: 'Auto-Recharge' },
       ]
     },
   ];
@@ -110,6 +129,28 @@ export function Sidebar() {
       label: 'Content',
       icon: <FileText className="w-5 h-5" />,
       roles: ['agent']
+    },
+    {
+      href: '/dashboard/agent/marketing',
+      label: 'Marketing',
+      icon: <Megaphone className="w-5 h-5" />,
+      roles: ['agent'],
+      subLinks: [
+        { href: '/dashboard/agent/marketing/campaigns', label: 'Campaigns' },
+        { href: '/dashboard/agent/marketing/scheduler', label: 'Content Scheduler' },
+        { href: '/dashboard/agent/marketing/analytics', label: 'Analytics' },
+      ]
+    },
+    {
+      href: '/dashboard/agent/website',
+      label: 'Website',
+      icon: <Globe className="w-5 h-5" />,
+      roles: ['agent'],
+      subLinks: [
+        { href: '/dashboard/agent/website/projects', label: 'Projects' },
+        { href: '/dashboard/agent/website/uploads', label: 'Uploads' },
+        { href: '/dashboard/agent/website/hosting', label: 'Hosting' },
+      ]
     },
     {
       href: '/dashboard/agent/messages',
@@ -160,18 +201,27 @@ export function Sidebar() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 h-screen w-64 bg-gray-900 text-white transform transition-transform duration-300 z-40 md:translate-x-0 ${
+        className={`fixed left-0 top-0 h-screen w-64 bg-gray-900 text-white transform transition-transform duration-300 z-40 md:translate-x-0 flex flex-col ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="p-6">
+        {/* Header - Fixed at top */}
+        <div className="p-6 flex-shrink-0">
           <h1 className="text-2xl font-bold">Montrose</h1>
           <p className="text-gray-400 text-sm mt-1">
             {user?.role === 'admin' ? 'Admin Panel' : user?.role === 'agent' ? 'Agent Dashboard' : 'Client Portal'}
           </p>
         </div>
 
-        <nav className="px-4 py-6 space-y-1">
+        {/* Service Switcher for Clients */}
+        {user?.role === 'client' && (
+          <div className="px-4 mb-4 flex-shrink-0">
+            <ServiceSwitcher activeServices={['marketing', 'website', 'courses']} />
+          </div>
+        )}
+
+        {/* Scrollable Navigation */}
+        <nav className="px-4 py-6 space-y-1 flex-1 overflow-y-auto">
           {links.map((link) => (
             <div key={link.href}>
               {link.subLinks ? (
@@ -233,8 +283,9 @@ export function Sidebar() {
             </div>
           ))}
         </nav>
-        {/* Logout Button */}
-        <div className="absolute bottom-6 left-4 right-4">
+
+        {/* Logout Button - Fixed at bottom */}
+        <div className="p-4 flex-shrink-0 border-t border-gray-800">
           <button
             onClick={handleLogout}
             className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-800 transition-colors"

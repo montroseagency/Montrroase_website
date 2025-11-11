@@ -9,7 +9,7 @@ import logging
 
 from ..models import User, Client, Message
 from ..serializers import MessageSerializer
-from ..services.notification_service import NotificationService  # NEW IMPORT
+from ..services.notification_trigger_service import NotificationTriggerService
 
 logger = logging.getLogger(__name__)
 
@@ -62,12 +62,13 @@ class MessageViewSet(ModelViewSet):
     
     def perform_create(self, serializer):
         message = serializer.save(sender=self.request.user)
-        
-        # 🔔 NEW: Notify recipient of new message
+
+        # 🔔 NEW: Notify recipient of new message (in-app + email)
         sender_name = f"{self.request.user.first_name} {self.request.user.last_name}" if self.request.user.first_name else self.request.user.email
-        NotificationService.notify_message_received(
+        NotificationTriggerService.trigger_message_notification(
             recipient_user=message.receiver,
-            sender_name=sender_name
+            sender_name=sender_name,
+            message_preview=message.text[:200] if hasattr(message, 'text') else message.message[:200]
         )
     
     @action(detail=True, methods=['post'])

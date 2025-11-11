@@ -225,6 +225,14 @@ LINKEDIN_CLIENT_SECRET = config('LINKEDIN_CLIENT_SECRET', default='')
 # Encryption key for storing access tokens (32 characters)
 ENCRYPTION_KEY = config('ENCRYPTION_KEY', default='your-32-character-encryption-key-here')
 
+# ============ EMAIL SERVICE CONFIGURATION ============
+
+# Resend API Key for sending emails
+RESEND_API_KEY = config('RESEND_API_KEY', default='re_PYMEdAkV_NcpDoviLGnE52nsX5y4wb7jj')
+# Email sender configuration
+EMAIL_FROM_ADDRESS = config('EMAIL_FROM_ADDRESS', default='VisionBoost <onboarding@visionboost.agency>')
+EMAIL_FROM_NAME = config('EMAIL_FROM_NAME', default='VisionBoost')
+
 # ============ REDIS & CACHE CONFIGURATION ============
 
 # Redis connection URL

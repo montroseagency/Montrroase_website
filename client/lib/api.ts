@@ -852,6 +852,328 @@ class ApiService {
     return await this.request('/redeem-codes/stats/');
   }
 
+  // ============ SERVICE MANAGEMENT API ============
+
+  async getMyServices() {
+    return await this.request('/service-settings/my_services/');
+  }
+
+  async activateService(serviceType: 'marketing' | 'website' | 'courses') {
+    return await this.request('/service-settings/activate_service/', {
+      method: 'POST',
+      body: JSON.stringify({ service_type: serviceType }),
+    });
+  }
+
+  async deactivateService(serviceType: 'marketing' | 'website' | 'courses') {
+    return await this.request('/service-settings/deactivate_service/', {
+      method: 'POST',
+      body: JSON.stringify({ service_type: serviceType }),
+    });
+  }
+
+  async updateServiceSettings(settingsId: string, settings: any) {
+    return await this.request(`/service-settings/${settingsId}/update_settings/`, {
+      method: 'PATCH',
+      body: JSON.stringify({ settings }),
+    });
+  }
+
+  async getAllServiceSettings() {
+    return await this.request('/service-settings/');
+  }
+
+  // ============ COURSE PURCHASE API ============
+
+  async purchaseCourse(courseId: string, paymentMethod: 'wallet' | 'paypal' = 'paypal') {
+    return await this.request(`/courses/${courseId}/purchase/`, {
+      method: 'POST',
+      body: JSON.stringify({ payment_method: paymentMethod }),
+    });
+  }
+
+  async confirmPayPalCoursePurchase(courseId: string, paypalOrderId: string, paypalPayerId?: string) {
+    return await this.request(`/courses/${courseId}/confirm_paypal_purchase/`, {
+      method: 'POST',
+      body: JSON.stringify({
+        paypal_order_id: paypalOrderId,
+        paypal_payer_id: paypalPayerId,
+      }),
+    });
+  }
+
+  async getMyCoursePurchases() {
+    return await this.request('/courses/my_purchases/');
+  }
+
+  // ============ AGENT FEATURE METHODS (PHASE 6) ============
+
+  // Website Agent Methods
+  async getWebsiteVersions() {
+    return await this.request('/website-versions/');
+  }
+
+  async getWebsiteVersion(id: string) {
+    return await this.request(`/website-versions/${id}/`);
+  }
+
+  async uploadWebsiteVersion(formData: FormData) {
+    const url = `${this.baseURL}/website-versions/`;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        ...(this.token && { Authorization: `Token ${this.token}` }),
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || 'Upload failed');
+    }
+
+    return await response.json();
+  }
+
+  async updateWebsiteVersion(id: string, data: any) {
+    return await this.request(`/website-versions/${id}/`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async approveWebsiteVersion(id: string) {
+    return await this.request(`/website-versions/${id}/approve/`, {
+      method: 'POST',
+    });
+  }
+
+  async deployWebsiteVersion(id: string, deploymentUrl: string) {
+    return await this.request(`/website-versions/${id}/deploy/`, {
+      method: 'POST',
+      body: JSON.stringify({ deployment_url: deploymentUrl }),
+    });
+  }
+
+  async addVersionFeedback(id: string, feedback: string) {
+    return await this.request(`/website-versions/${id}/add_feedback/`, {
+      method: 'POST',
+      body: JSON.stringify({ feedback }),
+    });
+  }
+
+  async getMyWebsiteUploads() {
+    return await this.request('/website-versions/my_uploads/');
+  }
+
+  // Marketing Agent Methods - Campaigns
+  async getCampaigns() {
+    return await this.request('/campaigns/');
+  }
+
+  async getCampaign(id: string) {
+    return await this.request(`/campaigns/${id}/`);
+  }
+
+  async createCampaign(data: any) {
+    return await this.request('/campaigns/', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateCampaign(id: string, data: any) {
+    return await this.request(`/campaigns/${id}/`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteCampaign(id: string) {
+    return await this.request(`/campaigns/${id}/`, {
+      method: 'DELETE',
+    });
+  }
+
+  async addContentToCampaign(id: string, contentPostIds: string[]) {
+    return await this.request(`/campaigns/${id}/add_content/`, {
+      method: 'POST',
+      body: JSON.stringify({ content_post_ids: contentPostIds }),
+    });
+  }
+
+  async updateCampaignMetrics(id: string, metrics: {
+    actual_reach?: number;
+    actual_engagement?: number;
+    actual_spend?: number;
+  }) {
+    return await this.request(`/campaigns/${id}/update_metrics/`, {
+      method: 'POST',
+      body: JSON.stringify(metrics),
+    });
+  }
+
+  async changeCampaignStatus(id: string, status: string) {
+    return await this.request(`/campaigns/${id}/change_status/`, {
+      method: 'POST',
+      body: JSON.stringify({ status }),
+    });
+  }
+
+  async getMyCampaigns() {
+    return await this.request('/campaigns/my_campaigns/');
+  }
+
+  async getCampaignAnalytics() {
+    return await this.request('/campaigns/analytics/');
+  }
+
+  // Marketing Agent Methods - Content Scheduling
+  async getScheduledContent(params?: {
+    start_date?: string;
+    end_date?: string;
+    status?: string;
+  }) {
+    const queryParams = new URLSearchParams(params as any).toString();
+    const endpoint = queryParams ? `/content-schedule/?${queryParams}` : '/content-schedule/';
+    return await this.request(endpoint);
+  }
+
+  async getScheduledContentItem(id: string) {
+    return await this.request(`/content-schedule/${id}/`);
+  }
+
+  async scheduleContent(data: any) {
+    return await this.request('/content-schedule/', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateScheduledContent(id: string, data: any) {
+    return await this.request(`/content-schedule/${id}/`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteScheduledContent(id: string) {
+    return await this.request(`/content-schedule/${id}/`, {
+      method: 'DELETE',
+    });
+  }
+
+  async getContentCalendar(params?: {
+    start_date?: string;
+    end_date?: string;
+    status?: string;
+  }) {
+    const queryParams = new URLSearchParams(params as any).toString();
+    const endpoint = queryParams ? `/content-schedule/calendar/?${queryParams}` : '/content-schedule/calendar/';
+    return await this.request(endpoint);
+  }
+
+  async approveScheduledContent(id: string) {
+    return await this.request(`/content-schedule/${id}/approve/`, {
+      method: 'POST',
+    });
+  }
+
+  async publishScheduledContent(id: string, data: {
+    post_url: string;
+    platform_post_id?: string;
+  }) {
+    return await this.request(`/content-schedule/${id}/publish/`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async cancelScheduledContent(id: string) {
+    return await this.request(`/content-schedule/${id}/cancel/`, {
+      method: 'POST',
+    });
+  }
+
+  async getUpcomingScheduledContent() {
+    return await this.request('/content-schedule/upcoming/');
+  }
+
+  async getOverdueScheduledContent() {
+    return await this.request('/content-schedule/overdue/');
+  }
+
+  // ============ WALLET PAYMENT METHODS (PHASE 7) ============
+
+  // Wallet operations
+  async getWallet() {
+    return await this.request('/wallet/');
+  }
+
+  async payFromWallet(data: {
+    amount: number;
+    description: string;
+    paid_for_service?: string;
+  }) {
+    return await this.request('/wallet/pay/', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async topUpWallet(data: {
+    amount: number;
+    payment_method: 'paypal' | 'stripe' | 'bank_transfer';
+    payment_reference?: string;
+  }) {
+    return await this.request('/wallet/topup/', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async checkWalletAffordability(serviceCost: number) {
+    return await this.request('/wallet/check_affordability/', {
+      method: 'POST',
+      body: JSON.stringify({ service_cost: serviceCost }),
+    });
+  }
+
+  async getWalletTransactions(limit?: number) {
+    const params = limit ? `?limit=${limit}` : '';
+    return await this.request(`/wallet/transactions/${params}`);
+  }
+
+  // Auto-recharge operations
+  async getAutoRechargeSettings() {
+    return await this.request('/wallet-auto-recharge/');
+  }
+
+  async configureAutoRecharge(data: {
+    is_enabled: boolean;
+    threshold_amount: number;
+    recharge_amount: number;
+    payment_method_id?: string;
+    payment_method_type?: 'paypal' | 'card';
+  }) {
+    return await this.request('/wallet-auto-recharge/configure/', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async triggerAutoRecharge() {
+    return await this.request('/wallet-auto-recharge/trigger/', {
+      method: 'POST',
+    });
+  }
+
+  async disableAutoRecharge() {
+    return await this.request('/wallet-auto-recharge/disable/', {
+      method: 'POST',
+    });
+  }
+
   // ============ GENERIC API METHODS ============
 
   async get(endpoint: string) {

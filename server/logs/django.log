@@ -19376,3 +19376,1185 @@ INFO 2025-11-11 01:34:10,025 basehttp 58961 123145511043072 "GET /api/wallet/my_
 INFO 2025-11-11 01:41:34,262 autoreload 60253 4572182016 Watching for file changes with StatReloader
 INFO 2025-11-11 01:46:19,759 autoreload 60253 4572182016 /Users/MacOs/Documents/GitHub/Montrroase_website/server/api/views/client/task_views.py changed, reloading.
 INFO 2025-11-11 01:46:21,579 autoreload 60559 4608165376 Watching for file changes with StatReloader
+INFO 2025-11-11 07:07:33,819 autoreload 60559 4608165376 /Users/MacOs/Documents/GitHub/Montrroase_website/server/api/models.py changed, reloading.
+INFO 2025-11-11 07:16:06,889 autoreload 62463 4553438720 Watching for file changes with StatReloader
+INFO 2025-11-11 07:16:22,477 basehttp 62463 123145576964096 "GET /api/health/ HTTP/1.1" 200 60
+INFO 2025-11-11 07:26:43,291 autoreload 62463 4553438720 /Users/MacOs/Documents/GitHub/Montrroase_website/server/api/models.py changed, reloading.
+INFO 2025-11-11 07:26:46,425 autoreload 63171 4464727552 Watching for file changes with StatReloader
+INFO 2025-11-11 07:26:54,450 autoreload 63171 4464727552 /Users/MacOs/Documents/GitHub/Montrroase_website/server/api/models.py changed, reloading.
+INFO 2025-11-11 07:26:57,488 autoreload 63184 4462765568 Watching for file changes with StatReloader
+INFO 2025-11-11 07:33:50,333 autoreload 63184 4462765568 /Users/MacOs/Documents/GitHub/Montrroase_website/server/api/models.py changed, reloading.
+INFO 2025-11-11 07:33:53,467 autoreload 63588 4481771008 Watching for file changes with StatReloader
+INFO 2025-11-11 07:34:13,415 autoreload 63588 4481771008 /Users/MacOs/Documents/GitHub/Montrroase_website/server/api/models.py changed, reloading.
+INFO 2025-11-11 07:34:15,892 autoreload 63606 4534527488 Watching for file changes with StatReloader
+INFO 2025-11-11 07:44:08,800 autoreload 63606 4534527488 /Users/MacOs/Documents/GitHub/Montrroase_website/server/api/serializers.py changed, reloading.
+INFO 2025-11-11 07:44:11,454 autoreload 63939 4761736704 Watching for file changes with StatReloader
+INFO 2025-11-11 07:44:28,579 autoreload 63939 4761736704 /Users/MacOs/Documents/GitHub/Montrroase_website/server/api/serializers.py changed, reloading.
+INFO 2025-11-11 07:44:30,897 autoreload 63954 4665288192 Watching for file changes with StatReloader
+INFO 2025-11-11 07:49:24,425 autoreload 63954 4665288192 /Users/MacOs/Documents/GitHub/Montrroase_website/server/api/views_new_features.py changed, reloading.
+INFO 2025-11-11 07:49:28,630 autoreload 64072 4664071680 Watching for file changes with StatReloader
+INFO 2025-11-11 07:51:49,451 basehttp 64072 123145448079360 "GET /api/health/ HTTP/1.1" 200 60
+INFO 2025-11-11 07:58:55,077 autoreload 64695 4635264512 Watching for file changes with StatReloader
+INFO 2025-11-11 07:59:10,506 basehttp 64695 123145437753344 "GET /api/health/ HTTP/1.1" 200 60
+WARNING 2025-11-11 07:59:52,795 log 64695 123145437753344 Not Found: /
+WARNING 2025-11-11 07:59:52,802 basehttp 64695 123145437753344 "GET / HTTP/1.1" 404 2289
+WARNING 2025-11-11 07:59:53,194 log 64695 123145437753344 Not Found: /favicon.ico
+WARNING 2025-11-11 07:59:53,197 basehttp 64695 123145437753344 "GET /favicon.ico HTTP/1.1" 404 2340
+INFO 2025-11-11 08:03:01,758 basehttp 64695 123145454542848 "OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:03:03,446 basehttp 64695 123145454542848 "POST /api/auth/login/ HTTP/1.1" 200 328
+INFO 2025-11-11 08:03:13,265 basehttp 64695 123145454542848 "OPTIONS /api/dashboard/client-stats/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:03:13,279 basehttp 64695 123145454542848 "OPTIONS /api/social-accounts/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:03:13,283 basehttp 64695 123145471332352 "OPTIONS /api/content/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:03:13,313 basehttp 64695 123145454542848 "OPTIONS /api/invoices/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:03:13,314 basehttp 64695 123145504911360 "OPTIONS /api/messages/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:03:13,329 basehttp 64695 123145454542848 "OPTIONS /api/messages/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:03:13,333 basehttp 64695 123145454542848 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:03:13,333 basehttp 64695 123145538490368 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:03:13,698 basehttp 64695 123145521700864 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 08:03:13,915 statistic_views 64695 123145488121856 Client dashboard stats for Tech Startup Inc: {'total_followers': 15000, 'engagement_rate': 3.5, 'posts_this_month': 0, 'reach': 45000, 'growth_rate': 0, 'next_payment_amount': 299.99, 'next_payment_date': datetime.date(2025, 12, 6)}
+INFO 2025-11-11 08:03:13,983 basehttp 64695 123145488121856 "GET /api/dashboard/client-stats/ HTTP/1.1" 200 170
+INFO 2025-11-11 08:03:14,002 basehttp 64695 123145471332352 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-11 08:03:14,009 basehttp 64695 123145504911360 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 08:03:14,010 basehttp 64695 123145521700864 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 08:03:14,040 basehttp 64695 123145538490368 "GET /api/messages/ HTTP/1.1" 200 2161
+INFO 2025-11-11 08:03:14,093 basehttp 64695 123145454542848 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 08:03:14,094 basehttp 64695 123145521700864 "GET /api/messages/ HTTP/1.1" 200 2161
+INFO 2025-11-11 08:03:14,251 basehttp 64695 123145471332352 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-11 08:03:14,278 statistic_views 64695 123145488121856 Client dashboard stats for Tech Startup Inc: {'total_followers': 15000, 'engagement_rate': 3.5, 'posts_this_month': 0, 'reach': 45000, 'growth_rate': 0, 'next_payment_amount': 299.99, 'next_payment_date': datetime.date(2025, 12, 6)}
+INFO 2025-11-11 08:03:14,297 basehttp 64695 123145488121856 "GET /api/dashboard/client-stats/ HTTP/1.1" 200 170
+INFO 2025-11-11 08:03:14,298 basehttp 64695 123145504911360 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 08:03:14,302 basehttp 64695 123145538490368 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 08:03:17,394 basehttp 64695 123145538490368 "OPTIONS /api/website-projects/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:03:17,395 basehttp 64695 123145504911360 "OPTIONS /api/website-projects/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:03:17,452 basehttp 64695 123145504911360 "GET /api/website-projects/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:03:17,478 basehttp 64695 123145538490368 "GET /api/website-projects/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:10:03,995 basehttp 64695 123145437753344 "GET /api/health/ HTTP/1.1" 200 60
+INFO 2025-11-11 08:10:31,934 basehttp 64695 123145437753344 "OPTIONS /api/auth/me/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:10:32,005 basehttp 64695 123145437753344 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 08:10:32,165 basehttp 64695 123145437753344 "GET /api/website-projects/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:10:32,224 basehttp 64695 123145454542848 "GET /api/website-projects/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:10:53,064 basehttp 64695 123145454542848 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 08:10:53,388 basehttp 64695 123145437753344 "OPTIONS /api/notifications/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:10:53,482 statistic_views 64695 123145454542848 Client dashboard stats for Tech Startup Inc: {'total_followers': 15000, 'engagement_rate': 3.5, 'posts_this_month': 0, 'reach': 45000, 'growth_rate': 0, 'next_payment_amount': 299.99, 'next_payment_date': datetime.date(2025, 12, 6)}
+INFO 2025-11-11 08:10:53,482 basehttp 64695 123145437753344 "GET /api/notifications/ HTTP/1.1" 200 316
+INFO 2025-11-11 08:10:53,486 basehttp 64695 123145454542848 "GET /api/dashboard/client-stats/ HTTP/1.1" 200 170
+INFO 2025-11-11 08:10:53,538 basehttp 64695 123145471332352 "GET /api/notifications/ HTTP/1.1" 200 316
+INFO 2025-11-11 08:10:53,543 statistic_views 64695 123145437753344 Client dashboard stats for Tech Startup Inc: {'total_followers': 15000, 'engagement_rate': 3.5, 'posts_this_month': 0, 'reach': 45000, 'growth_rate': 0, 'next_payment_amount': 299.99, 'next_payment_date': datetime.date(2025, 12, 6)}
+INFO 2025-11-11 08:10:53,544 basehttp 64695 123145437753344 "GET /api/dashboard/client-stats/ HTTP/1.1" 200 170
+INFO 2025-11-11 08:13:55,156 autoreload 66047 4416390656 Watching for file changes with StatReloader
+INFO 2025-11-11 08:14:35,676 autoreload 66324 4716107264 Watching for file changes with StatReloader
+INFO 2025-11-11 08:15:45,448 basehttp 66324 123145505927168 "OPTIONS /api/auth/me/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:15:45,493 basehttp 66324 123145505927168 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 08:16:31,531 basehttp 66324 123145505927168 "OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:16:32,253 basehttp 66324 123145505927168 "POST /api/auth/login/ HTTP/1.1" 200 328
+INFO 2025-11-11 08:16:38,385 basehttp 66324 123145505927168 "OPTIONS /api/dashboard/client-stats/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:16:38,388 basehttp 66324 123145522716672 "OPTIONS /api/social-accounts/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:16:38,454 basehttp 66324 123145539506176 "OPTIONS /api/content/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:16:38,456 basehttp 66324 123145556295680 "OPTIONS /api/messages/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:16:38,457 basehttp 66324 123145573085184 "OPTIONS /api/invoices/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:16:38,460 basehttp 66324 123145589874688 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:16:38,465 basehttp 66324 123145539506176 "OPTIONS /api/content/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:16:38,466 basehttp 66324 123145556295680 "OPTIONS /api/messages/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:16:38,476 basehttp 66324 123145589874688 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:16:38,477 basehttp 66324 123145573085184 "OPTIONS /api/invoices/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:16:38,799 basehttp 66324 123145589874688 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 08:16:38,814 basehttp 66324 123145505927168 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 08:16:38,869 statistic_views 66324 123145522716672 Client dashboard stats for Tech Startup Inc: {'total_followers': 15000, 'engagement_rate': 3.5, 'posts_this_month': 0, 'reach': 45000, 'growth_rate': 0, 'next_payment_amount': 299.99, 'next_payment_date': datetime.date(2025, 12, 6)}
+INFO 2025-11-11 08:16:38,912 basehttp 66324 123145522716672 "GET /api/dashboard/client-stats/ HTTP/1.1" 200 170
+INFO 2025-11-11 08:16:38,914 basehttp 66324 123145573085184 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 08:16:38,922 basehttp 66324 123145539506176 "GET /api/messages/ HTTP/1.1" 200 2161
+INFO 2025-11-11 08:16:39,002 basehttp 66324 123145505927168 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 08:16:39,047 basehttp 66324 123145556295680 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-11 08:16:39,095 statistic_views 66324 123145522716672 Client dashboard stats for Tech Startup Inc: {'total_followers': 15000, 'engagement_rate': 3.5, 'posts_this_month': 0, 'reach': 45000, 'growth_rate': 0, 'next_payment_amount': 299.99, 'next_payment_date': datetime.date(2025, 12, 6)}
+INFO 2025-11-11 08:16:39,110 basehttp 66324 123145522716672 "GET /api/dashboard/client-stats/ HTTP/1.1" 200 170
+INFO 2025-11-11 08:16:39,143 basehttp 66324 123145505927168 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-11 08:16:39,150 basehttp 66324 123145539506176 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 08:16:39,151 basehttp 66324 123145589874688 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 08:16:39,177 basehttp 66324 123145573085184 "GET /api/messages/ HTTP/1.1" 200 2161
+INFO 2025-11-11 08:16:41,914 basehttp 66324 123145573085184 "OPTIONS /api/service-settings/my_services/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:16:41,952 basehttp 66324 123145573085184 "GET /api/service-settings/my_services/ HTTP/1.1" 200 44
+INFO 2025-11-11 08:16:42,060 basehttp 66324 123145573085184 "GET /api/service-settings/my_services/ HTTP/1.1" 200 44
+INFO 2025-11-11 08:16:46,887 basehttp 66324 123145589874688 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 08:16:46,924 basehttp 66324 123145573085184 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-11 08:16:47,006 basehttp 66324 123145539506176 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 08:16:47,172 basehttp 66324 123145589874688 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-11 08:16:49,190 basehttp 66324 123145589874688 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 08:16:49,378 basehttp 66324 123145589874688 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 08:16:51,015 basehttp 66324 123145589874688 "OPTIONS /api/performance/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:16:51,055 basehttp 66324 123145573085184 "OPTIONS /api/performance/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:16:51,069 basehttp 66324 123145539506176 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 08:16:51,146 basehttp 66324 123145589874688 "GET /api/performance/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:16:51,172 basehttp 66324 123145573085184 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 08:16:51,180 basehttp 66324 123145539506176 "GET /api/performance/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:16:53,006 basehttp 66324 123145539506176 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 08:16:53,025 basehttp 66324 123145573085184 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 08:17:17,952 basehttp 66324 123145573085184 "OPTIONS /api/website-projects/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:17:17,956 basehttp 66324 123145539506176 "OPTIONS /api/website-projects/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:17:18,023 basehttp 66324 123145539506176 "GET /api/website-projects/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:17:18,047 basehttp 66324 123145573085184 "GET /api/website-projects/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:17:44,384 basehttp 66324 123145573085184 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 08:17:44,978 basehttp 66324 123145573085184 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 08:17:45,088 basehttp 66324 123145539506176 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 08:18:04,840 statistic_views 66324 123145539506176 Client dashboard stats for Tech Startup Inc: {'total_followers': 15000, 'engagement_rate': 3.5, 'posts_this_month': 0, 'reach': 45000, 'growth_rate': 0, 'next_payment_amount': 299.99, 'next_payment_date': datetime.date(2025, 12, 6)}
+INFO 2025-11-11 08:18:04,854 basehttp 66324 123145539506176 "GET /api/dashboard/client-stats/ HTTP/1.1" 200 170
+INFO 2025-11-11 08:18:04,910 statistic_views 66324 123145573085184 Client dashboard stats for Tech Startup Inc: {'total_followers': 15000, 'engagement_rate': 3.5, 'posts_this_month': 0, 'reach': 45000, 'growth_rate': 0, 'next_payment_amount': 299.99, 'next_payment_date': datetime.date(2025, 12, 6)}
+INFO 2025-11-11 08:18:04,916 basehttp 66324 123145573085184 "GET /api/dashboard/client-stats/ HTTP/1.1" 200 170
+INFO 2025-11-11 08:18:14,153 basehttp 66324 123145573085184 "GET /api/website-projects/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:18:14,195 basehttp 66324 123145539506176 "GET /api/website-projects/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:18:18,135 basehttp 66324 123145539506176 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 08:18:37,742 basehttp 66324 123145539506176 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 08:18:45,549 basehttp 66324 123145539506176 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 08:18:49,664 basehttp 66324 123145539506176 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 08:18:55,915 basehttp 66324 123145539506176 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 08:19:20,159 basehttp 66324 123145505927168 "OPTIONS /api/course-progress/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:19:20,189 basehttp 66324 123145539506176 "OPTIONS /api/courses/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:19:20,193 basehttp 66324 123145573085184 "OPTIONS /api/course-progress/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:19:20,193 basehttp 66324 123145589874688 "OPTIONS /api/courses/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:19:20,210 basehttp 66324 123145505927168 "GET /api/course-progress/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:19:20,226 basehttp 66324 123145573085184 "GET /api/courses/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:19:20,244 basehttp 66324 123145589874688 "GET /api/course-progress/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:19:20,257 basehttp 66324 123145505927168 "GET /api/courses/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:19:22,643 basehttp 66324 123145505927168 "OPTIONS /api/courses/my_purchases/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:19:22,644 basehttp 66324 123145589874688 "OPTIONS /api/courses/my_purchases/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:19:22,668 basehttp 66324 123145589874688 "GET /api/courses/my_purchases/ HTTP/1.1" 200 2
+INFO 2025-11-11 08:19:22,679 basehttp 66324 123145505927168 "GET /api/courses/my_purchases/ HTTP/1.1" 200 2
+INFO 2025-11-11 08:19:26,914 basehttp 66324 123145505927168 "OPTIONS /api/support-tickets/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:19:26,948 basehttp 66324 123145573085184 "OPTIONS /api/support-tickets/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:19:27,011 basehttp 66324 123145505927168 "GET /api/support-tickets/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:19:27,037 basehttp 66324 123145573085184 "GET /api/support-tickets/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:19:27,069 basehttp 66324 123145589874688 "GET /api/messages/ HTTP/1.1" 200 2161
+INFO 2025-11-11 08:19:27,173 basehttp 66324 123145573085184 "GET /api/messages/ HTTP/1.1" 200 2161
+INFO 2025-11-11 08:19:31,978 basehttp 66324 123145573085184 "GET /api/support-tickets/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:19:31,997 basehttp 66324 123145589874688 "GET /api/messages/ HTTP/1.1" 200 2161
+INFO 2025-11-11 08:19:34,633 basehttp 66324 123145589874688 "GET /api/support-tickets/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:19:34,663 basehttp 66324 123145573085184 "GET /api/messages/ HTTP/1.1" 200 2161
+INFO 2025-11-11 08:19:38,603 basehttp 66324 123145573085184 "GET /api/support-tickets/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:19:38,630 basehttp 66324 123145589874688 "GET /api/messages/ HTTP/1.1" 200 2161
+INFO 2025-11-11 08:19:40,965 basehttp 66324 123145589874688 "GET /api/support-tickets/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:19:40,983 basehttp 66324 123145573085184 "GET /api/messages/ HTTP/1.1" 200 2161
+INFO 2025-11-11 08:19:41,821 basehttp 66324 123145573085184 "GET /api/courses/my_purchases/ HTTP/1.1" 200 2
+INFO 2025-11-11 08:19:41,855 basehttp 66324 123145589874688 "GET /api/courses/my_purchases/ HTTP/1.1" 200 2
+INFO 2025-11-11 08:19:45,298 basehttp 66324 123145522716672 "OPTIONS /api/giveaways/my_wins/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:19:45,298 basehttp 66324 123145539506176 "OPTIONS /api/giveaways/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:19:45,305 basehttp 66324 123145573085184 "OPTIONS /api/transactions/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:19:45,306 basehttp 66324 123145589874688 "OPTIONS /api/wallet/my_wallet/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:19:45,408 basehttp 66324 123145573085184 "GET /api/transactions/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:19:45,409 basehttp 66324 123145589874688 "GET /api/giveaways/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:19:45,440 basehttp 66324 123145522716672 "GET /api/giveaways/my_wins/ HTTP/1.1" 200 2
+INFO 2025-11-11 08:19:45,457 basehttp 66324 123145556295680 "GET /api/transactions/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:19:45,465 basehttp 66324 123145573085184 "GET /api/giveaways/my_wins/ HTTP/1.1" 200 2
+INFO 2025-11-11 08:19:45,505 basehttp 66324 123145539506176 "GET /api/wallet/my_wallet/ HTTP/1.1" 200 267
+INFO 2025-11-11 08:19:45,509 basehttp 66324 123145505927168 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 08:19:45,537 basehttp 66324 123145589874688 "GET /api/giveaways/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:19:45,754 basehttp 66324 123145539506176 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 08:19:45,756 basehttp 66324 123145573085184 "GET /api/wallet/my_wallet/ HTTP/1.1" 200 267
+INFO 2025-11-11 08:20:08,629 basehttp 66324 123145573085184 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 08:20:08,844 basehttp 66324 123145573085184 "GET /api/courses/my_purchases/ HTTP/1.1" 200 2
+INFO 2025-11-11 08:20:08,876 basehttp 66324 123145539506176 "GET /api/courses/my_purchases/ HTTP/1.1" 200 2
+INFO 2025-11-11 08:20:23,317 basehttp 66324 123145539506176 "GET /api/website-projects/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:20:23,350 basehttp 66324 123145573085184 "GET /api/website-projects/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:22:25,757 basehttp 66324 123145573085184 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 08:22:25,886 basehttp 66324 123145573085184 "GET /api/website-projects/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:22:25,899 basehttp 66324 123145539506176 "GET /api/website-projects/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:23:05,627 basehttp 66324 123145539506176 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 08:23:07,782 basehttp 66324 123145539506176 "GET /api/website-projects/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:23:07,824 basehttp 66324 123145573085184 "GET /api/website-projects/ HTTP/1.1" 200 52
+WARNING 2025-11-11 08:25:21,865 log 66324 123145573085184 Bad Request: /api/website-projects/
+WARNING 2025-11-11 08:25:21,868 basehttp 66324 123145573085184 "POST /api/website-projects/ HTTP/1.1" 400 83
+WARNING 2025-11-11 08:28:18,082 log 66324 123145573085184 Bad Request: /api/website-projects/
+WARNING 2025-11-11 08:28:18,083 basehttp 66324 123145573085184 "POST /api/website-projects/ HTTP/1.1" 400 83
+INFO 2025-11-11 08:30:18,080 autoreload 66324 4716107264 /Users/MacOs/Documents/GitHub/Montrroase_website/server/api/models.py changed, reloading.
+INFO 2025-11-11 08:30:19,975 autoreload 67278 4629841408 Watching for file changes with StatReloader
+INFO 2025-11-11 08:30:45,598 autoreload 67278 4629841408 /Users/MacOs/Documents/GitHub/Montrroase_website/server/api/serializers.py changed, reloading.
+INFO 2025-11-11 08:30:47,306 autoreload 67324 4572624384 Watching for file changes with StatReloader
+INFO 2025-11-11 08:36:31,980 basehttp 67324 123145517260800 "POST /api/website-projects/ HTTP/1.1" 201 613
+INFO 2025-11-11 08:36:33,879 basehttp 67324 123145517260800 "POST /api/website-projects/ HTTP/1.1" 201 613
+INFO 2025-11-11 08:36:35,771 basehttp 67324 123145517260800 "OPTIONS /api/website-projects/undefined/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:36:35,777 basehttp 67324 123145534050304 "OPTIONS /api/website-phases/?project=undefined HTTP/1.1" 200 0
+WARNING 2025-11-11 08:36:35,794 log 67324 123145517260800 Not Found: /api/website-projects/undefined/
+WARNING 2025-11-11 08:36:35,796 basehttp 67324 123145517260800 "GET /api/website-projects/undefined/ HTTP/1.1" 404 23
+INFO 2025-11-11 08:36:35,815 basehttp 67324 123145534050304 "GET /api/website-phases/?project=undefined HTTP/1.1" 200 52
+WARNING 2025-11-11 08:36:35,817 log 67324 123145550839808 Not Found: /api/website-projects/undefined/
+WARNING 2025-11-11 08:36:35,830 basehttp 67324 123145550839808 "GET /api/website-projects/undefined/ HTTP/1.1" 404 23
+INFO 2025-11-11 08:36:35,847 basehttp 67324 123145517260800 "GET /api/website-phases/?project=undefined HTTP/1.1" 200 52
+INFO 2025-11-11 08:36:37,768 basehttp 67324 123145517260800 "GET /api/website-projects/ HTTP/1.1" 200 2207
+INFO 2025-11-11 08:36:37,809 basehttp 67324 123145550839808 "GET /api/website-projects/ HTTP/1.1" 200 2207
+INFO 2025-11-11 08:37:33,508 basehttp 67324 123145550839808 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 08:37:52,969 basehttp 67324 123145550839808 "POST /api/website-projects/ HTTP/1.1" 201 372
+WARNING 2025-11-11 08:37:53,551 log 67324 123145550839808 Not Found: /api/website-projects/undefined/
+WARNING 2025-11-11 08:37:53,552 basehttp 67324 123145550839808 "GET /api/website-projects/undefined/ HTTP/1.1" 404 23
+INFO 2025-11-11 08:37:53,563 basehttp 67324 123145517260800 "GET /api/website-phases/?project=undefined HTTP/1.1" 200 52
+WARNING 2025-11-11 08:37:53,581 log 67324 123145534050304 Not Found: /api/website-projects/undefined/
+WARNING 2025-11-11 08:37:53,583 basehttp 67324 123145534050304 "GET /api/website-projects/undefined/ HTTP/1.1" 404 23
+INFO 2025-11-11 08:37:53,593 basehttp 67324 123145550839808 "GET /api/website-phases/?project=undefined HTTP/1.1" 200 52
+INFO 2025-11-11 08:40:18,630 autoreload 67930 4519503360 Watching for file changes with StatReloader
+INFO 2025-11-11 08:42:14,227 autoreload 67324 4572624384 /Users/MacOs/Documents/GitHub/Montrroase_website/server/api/views_new_features.py changed, reloading.
+INFO 2025-11-11 08:42:35,621 autoreload 68250 4455872000 Watching for file changes with StatReloader
+INFO 2025-11-11 08:43:06,199 basehttp 68250 123145384448000 "OPTIONS /api/auth/me/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:43:06,234 basehttp 68250 123145384448000 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 08:43:06,493 basehttp 68250 123145384448000 "OPTIONS /api/website-projects/undefined/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:43:06,530 basehttp 68250 123145401237504 "OPTIONS /api/website-phases/?project=undefined HTTP/1.1" 200 0
+INFO 2025-11-11 08:43:06,563 basehttp 68250 123145418027008 "OPTIONS /api/website-projects/undefined/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:43:06,570 basehttp 68250 123145434816512 "OPTIONS /api/website-phases/?project=undefined HTTP/1.1" 200 0
+WARNING 2025-11-11 08:43:06,583 log 68250 123145384448000 Not Found: /api/website-projects/undefined/
+WARNING 2025-11-11 08:43:06,593 basehttp 68250 123145384448000 "GET /api/website-projects/undefined/ HTTP/1.1" 404 23
+INFO 2025-11-11 08:43:06,594 basehttp 68250 123145401237504 "GET /api/website-phases/?project=undefined HTTP/1.1" 200 52
+WARNING 2025-11-11 08:43:06,613 log 68250 123145434816512 Not Found: /api/website-projects/undefined/
+WARNING 2025-11-11 08:43:06,629 basehttp 68250 123145434816512 "GET /api/website-projects/undefined/ HTTP/1.1" 404 23
+INFO 2025-11-11 08:43:06,633 basehttp 68250 123145384448000 "GET /api/website-phases/?project=undefined HTTP/1.1" 200 52
+INFO 2025-11-11 08:46:51,019 basehttp 68250 123145384448000 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 08:47:29,463 basehttp 68250 123145384448000 "OPTIONS /api/website-projects/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:47:29,526 basehttp 68250 123145384448000 "POST /api/website-projects/ HTTP/1.1" 201 834
+INFO 2025-11-11 08:47:30,195 basehttp 68250 123145384448000 "OPTIONS /api/website-projects/c52bb74b-3880-40fb-a430-caab19f59397/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:47:30,211 basehttp 68250 123145434816512 "OPTIONS /api/website-phases/?project=c52bb74b-3880-40fb-a430-caab19f59397 HTTP/1.1" 200 0
+INFO 2025-11-11 08:47:30,232 basehttp 68250 123145384448000 "GET /api/website-projects/c52bb74b-3880-40fb-a430-caab19f59397/ HTTP/1.1" 200 834
+INFO 2025-11-11 08:47:30,284 basehttp 68250 123145434816512 "GET /api/website-phases/?project=c52bb74b-3880-40fb-a430-caab19f59397 HTTP/1.1" 200 52
+INFO 2025-11-11 08:47:30,305 basehttp 68250 123145401237504 "GET /api/website-projects/c52bb74b-3880-40fb-a430-caab19f59397/ HTTP/1.1" 200 834
+INFO 2025-11-11 08:47:30,398 basehttp 68250 123145384448000 "GET /api/website-phases/?project=c52bb74b-3880-40fb-a430-caab19f59397 HTTP/1.1" 200 52
+INFO 2025-11-11 08:47:39,893 basehttp 68250 123145384448000 "OPTIONS /api/website-projects/c52bb74b-3880-40fb-a430-caab19f59397/generate_valuation/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:47:39,935 basehttp 68250 123145384448000 "POST /api/website-projects/c52bb74b-3880-40fb-a430-caab19f59397/generate_valuation/ HTTP/1.1" 200 838
+INFO 2025-11-11 08:47:44,068 basehttp 68250 123145384448000 "OPTIONS /api/website-projects/c52bb74b-3880-40fb-a430-caab19f59397/generate_demo/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:47:44,103 basehttp 68250 123145384448000 "POST /api/website-projects/c52bb74b-3880-40fb-a430-caab19f59397/generate_demo/ HTTP/1.1" 200 893
+INFO 2025-11-11 08:49:05,333 basehttp 68250 123145434816512 "OPTIONS /api/content/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:49:05,334 basehttp 68250 123145384448000 "OPTIONS /api/content/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:49:05,335 basehttp 68250 123145401237504 "OPTIONS /api/social-accounts/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:49:05,344 basehttp 68250 123145418027008 "OPTIONS /api/social-accounts/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:49:05,424 basehttp 68250 123145401237504 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 08:49:05,456 basehttp 68250 123145418027008 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 08:49:05,581 basehttp 68250 123145434816512 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-11 08:49:05,629 basehttp 68250 123145418027008 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-11 08:49:07,677 basehttp 68250 123145434816512 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:49:07,679 basehttp 68250 123145418027008 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:49:07,727 basehttp 68250 123145418027008 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 08:49:07,801 basehttp 68250 123145418027008 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 08:49:09,104 basehttp 68250 123145418027008 "OPTIONS /api/performance/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:49:09,147 basehttp 68250 123145418027008 "GET /api/performance/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:49:09,155 basehttp 68250 123145434816512 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 08:49:09,182 basehttp 68250 123145401237504 "GET /api/performance/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:49:09,216 basehttp 68250 123145418027008 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 08:49:10,579 basehttp 68250 123145418027008 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 08:49:10,608 basehttp 68250 123145401237504 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 08:49:12,872 basehttp 68250 123145401237504 "OPTIONS /api/service-settings/my_services/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:49:12,882 basehttp 68250 123145418027008 "OPTIONS /api/service-settings/my_services/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:49:12,927 basehttp 68250 123145401237504 "GET /api/service-settings/my_services/ HTTP/1.1" 200 44
+INFO 2025-11-11 08:49:12,951 basehttp 68250 123145401237504 "GET /api/service-settings/my_services/ HTTP/1.1" 200 44
+INFO 2025-11-11 08:49:24,257 basehttp 68250 123145401237504 "OPTIONS /api/courses/my_purchases/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:49:24,261 basehttp 68250 123145418027008 "OPTIONS /api/courses/my_purchases/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:49:24,278 basehttp 68250 123145401237504 "GET /api/courses/my_purchases/ HTTP/1.1" 200 2
+INFO 2025-11-11 08:49:24,296 basehttp 68250 123145418027008 "GET /api/courses/my_purchases/ HTTP/1.1" 200 2
+INFO 2025-11-11 08:49:25,711 basehttp 68250 123145418027008 "OPTIONS /api/courses/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:49:25,714 basehttp 68250 123145401237504 "OPTIONS /api/course-progress/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:49:25,751 basehttp 68250 123145418027008 "GET /api/courses/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:49:25,776 basehttp 68250 123145434816512 "GET /api/courses/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:49:25,777 basehttp 68250 123145401237504 "GET /api/course-progress/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:49:25,799 basehttp 68250 123145418027008 "GET /api/course-progress/ HTTP/1.1" 200 52
+INFO 2025-11-11 08:49:28,000 basehttp 68250 123145434816512 "GET /api/courses/my_purchases/ HTTP/1.1" 200 2
+INFO 2025-11-11 08:49:28,009 basehttp 68250 123145418027008 "GET /api/courses/my_purchases/ HTTP/1.1" 200 2
+INFO 2025-11-11 08:53:08,844 basehttp 68250 123145418027008 "OPTIONS /api/notifications/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:53:08,913 basehttp 68250 123145418027008 - Broken pipe from ('127.0.0.1', 62640)
+INFO 2025-11-11 08:53:09,824 basehttp 68250 123145434816512 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 08:53:10,010 basehttp 68250 123145401237504 "GET /api/courses/my_purchases/ HTTP/1.1" 200 2
+INFO 2025-11-11 08:53:10,022 basehttp 68250 123145384448000 "GET /api/courses/my_purchases/ HTTP/1.1" 200 2
+INFO 2025-11-11 08:53:10,023 basehttp 68250 123145434816512 "GET /api/notifications/ HTTP/1.1" 200 316
+INFO 2025-11-11 08:53:10,046 basehttp 68250 123145384448000 "GET /api/notifications/ HTTP/1.1" 200 316
+INFO 2025-11-11 08:53:40,719 basehttp 68250 123145384448000 "GET /api/notifications/ HTTP/1.1" 200 316
+INFO 2025-11-11 08:54:10,715 basehttp 68250 123145384448000 "GET /api/notifications/ HTTP/1.1" 200 1162
+INFO 2025-11-11 08:54:28,613 basehttp 68250 123145384448000 "GET /api/notifications/ HTTP/1.1" 200 1162
+INFO 2025-11-11 08:54:28,631 basehttp 68250 123145434816512 "GET /api/notifications/ HTTP/1.1" 200 1162
+INFO 2025-11-11 08:54:39,688 basehttp 68250 123145434816512 "OPTIONS /api/notifications/2c3c978e-e0cc-4a79-a600-ca8e36747fe5/mark_read/ HTTP/1.1" 200 0
+INFO 2025-11-11 08:54:39,698 basehttp 68250 123145434816512 "POST /api/notifications/2c3c978e-e0cc-4a79-a600-ca8e36747fe5/mark_read/ HTTP/1.1" 200 41
+INFO 2025-11-11 08:54:40,007 basehttp 68250 123145434816512 "GET /api/notifications/ HTTP/1.1" 200 1161
+INFO 2025-11-11 08:54:42,668 basehttp 68250 123145434816512 "POST /api/notifications/2c3c978e-e0cc-4a79-a600-ca8e36747fe5/mark_read/ HTTP/1.1" 200 41
+INFO 2025-11-11 08:55:10,726 basehttp 68250 123145434816512 "GET /api/notifications/ HTTP/1.1" 200 1161
+INFO 2025-11-11 08:55:40,724 basehttp 68250 123145434816512 "GET /api/notifications/ HTTP/1.1" 200 1161
+INFO 2025-11-11 08:56:10,733 basehttp 68250 123145434816512 "GET /api/notifications/ HTTP/1.1" 200 1161
+INFO 2025-11-11 08:57:33,730 basehttp 68250 123145434816512 "GET /api/notifications/ HTTP/1.1" 200 1161
+INFO 2025-11-11 08:58:33,748 basehttp 68250 123145434816512 "GET /api/notifications/ HTTP/1.1" 200 1161
+INFO 2025-11-11 08:59:33,788 basehttp 68250 123145434816512 "GET /api/notifications/ HTTP/1.1" 200 1161
+INFO 2025-11-11 09:00:33,858 basehttp 68250 123145434816512 "GET /api/notifications/ HTTP/1.1" 200 1161
+INFO 2025-11-11 09:01:33,904 basehttp 68250 123145434816512 "GET /api/notifications/ HTTP/1.1" 200 1161
+INFO 2025-11-11 09:02:33,816 basehttp 68250 123145434816512 "GET /api/notifications/ HTTP/1.1" 200 1161
+INFO 2025-11-11 09:03:33,741 basehttp 68250 123145434816512 "GET /api/notifications/ HTTP/1.1" 200 1161
+INFO 2025-11-11 09:03:51,577 basehttp 68250 123145434816512 "GET /api/notifications/ HTTP/1.1" 200 1161
+INFO 2025-11-11 09:03:54,099 basehttp 68250 123145434816512 "OPTIONS /api/notifications/cddd75c2-4c45-4d76-9558-6e93cde23828/mark_read/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:03:54,121 basehttp 68250 123145434816512 "POST /api/notifications/cddd75c2-4c45-4d76-9558-6e93cde23828/mark_read/ HTTP/1.1" 200 41
+INFO 2025-11-11 09:04:09,656 basehttp 68250 123145434816512 "OPTIONS /api/wallet/my_wallet/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:04:09,674 basehttp 68250 123145401237504 "OPTIONS /api/invoices/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:04:09,678 basehttp 68250 123145434816512 "OPTIONS /api/giveaways/my_wins/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:04:09,687 basehttp 68250 123145384448000 "OPTIONS /api/transactions/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:04:09,729 basehttp 68250 123145418027008 "OPTIONS /api/giveaways/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:04:09,736 basehttp 68250 123145468395520 "OPTIONS /api/giveaways/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:04:09,783 basehttp 68250 123145384448000 "GET /api/transactions/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:04:09,814 basehttp 68250 123145401237504 "GET /api/wallet/my_wallet/ HTTP/1.1" 200 267
+INFO 2025-11-11 09:04:09,823 basehttp 68250 123145468395520 "GET /api/giveaways/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:04:09,842 basehttp 68250 123145434816512 "GET /api/giveaways/my_wins/ HTTP/1.1" 200 2
+INFO 2025-11-11 09:04:09,843 basehttp 68250 123145418027008 "GET /api/transactions/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:04:09,876 basehttp 68250 123145384448000 "GET /api/wallet/my_wallet/ HTTP/1.1" 200 267
+INFO 2025-11-11 09:04:09,892 basehttp 68250 123145468395520 "GET /api/giveaways/my_wins/ HTTP/1.1" 200 2
+INFO 2025-11-11 09:04:09,892 basehttp 68250 123145451606016 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 09:04:09,938 basehttp 68250 123145418027008 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 09:04:09,939 basehttp 68250 123145401237504 "GET /api/giveaways/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:04:55,553 basehttp 68250 123145401237504 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 09:04:55,689 basehttp 68250 123145401237504 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:04:55,755 basehttp 68250 123145434816512 "GET /api/giveaways/my_wins/ HTTP/1.1" 200 2
+INFO 2025-11-11 09:04:55,763 basehttp 68250 123145418027008 "GET /api/wallet/my_wallet/ HTTP/1.1" 200 267
+INFO 2025-11-11 09:04:55,811 basehttp 68250 123145384448000 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 09:04:55,818 basehttp 68250 123145451606016 "GET /api/giveaways/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:04:55,831 basehttp 68250 123145434816512 "GET /api/giveaways/my_wins/ HTTP/1.1" 200 2
+INFO 2025-11-11 09:04:55,848 basehttp 68250 123145468395520 "GET /api/transactions/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:04:55,886 basehttp 68250 123145401237504 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:04:55,953 basehttp 68250 123145451606016 "GET /api/giveaways/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:04:55,955 basehttp 68250 123145384448000 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 09:04:55,956 basehttp 68250 123145418027008 "GET /api/wallet/my_wallet/ HTTP/1.1" 200 267
+INFO 2025-11-11 09:04:55,972 basehttp 68250 123145434816512 "GET /api/transactions/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:05:07,076 basehttp 68250 123145434816512 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 09:05:07,423 basehttp 68250 123145434816512 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:05:07,479 basehttp 68250 123145401237504 "GET /api/giveaways/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:05:07,492 basehttp 68250 123145418027008 "GET /api/wallet/my_wallet/ HTTP/1.1" 200 267
+INFO 2025-11-11 09:05:07,496 basehttp 68250 123145468395520 "GET /api/giveaways/my_wins/ HTTP/1.1" 200 2
+INFO 2025-11-11 09:05:07,496 basehttp 68250 123145384448000 "GET /api/transactions/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:05:07,571 basehttp 68250 123145401237504 "GET /api/giveaways/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:05:07,573 basehttp 68250 123145434816512 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:05:07,674 basehttp 68250 123145451606016 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 09:05:07,680 basehttp 68250 123145418027008 "GET /api/giveaways/my_wins/ HTTP/1.1" 200 2
+INFO 2025-11-11 09:05:07,693 basehttp 68250 123145468395520 "GET /api/wallet/my_wallet/ HTTP/1.1" 200 267
+INFO 2025-11-11 09:05:07,696 basehttp 68250 123145384448000 "GET /api/transactions/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:05:07,721 basehttp 68250 123145434816512 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 09:05:13,088 basehttp 68250 123145434816512 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 09:05:13,370 basehttp 68250 123145401237504 "GET /api/giveaways/my_wins/ HTTP/1.1" 200 2
+INFO 2025-11-11 09:05:13,372 basehttp 68250 123145451606016 "GET /api/giveaways/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:05:13,378 basehttp 68250 123145468395520 "GET /api/transactions/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:05:13,429 basehttp 68250 123145384448000 "GET /api/wallet/my_wallet/ HTTP/1.1" 200 267
+INFO 2025-11-11 09:05:13,434 basehttp 68250 123145434816512 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:05:13,462 basehttp 68250 123145451606016 "GET /api/giveaways/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:05:13,484 basehttp 68250 123145418027008 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 09:05:13,491 basehttp 68250 123145468395520 "GET /api/transactions/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:05:13,562 basehttp 68250 123145401237504 "GET /api/giveaways/my_wins/ HTTP/1.1" 200 2
+INFO 2025-11-11 09:05:13,565 basehttp 68250 123145384448000 "GET /api/wallet/my_wallet/ HTTP/1.1" 200 267
+INFO 2025-11-11 09:05:13,579 basehttp 68250 123145451606016 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 09:05:13,607 basehttp 68250 123145434816512 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:05:28,368 basehttp 68250 123145434816512 "OPTIONS /api/wallet/topup/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:05:28,404 basehttp 68250 123145434816512 "POST /api/wallet/topup/ HTTP/1.1" 200 391
+INFO 2025-11-11 09:05:28,471 basehttp 68250 123145451606016 "GET /api/transactions/ HTTP/1.1" 200 376
+INFO 2025-11-11 09:05:28,472 basehttp 68250 123145384448000 "GET /api/giveaways/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:05:28,490 basehttp 68250 123145468395520 "GET /api/giveaways/my_wins/ HTTP/1.1" 200 2
+INFO 2025-11-11 09:05:28,500 basehttp 68250 123145434816512 "GET /api/wallet/my_wallet/ HTTP/1.1" 200 918
+INFO 2025-11-11 09:05:28,505 basehttp 68250 123145401237504 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 09:05:43,290 basehttp 68250 123145401237504 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:06:13,743 basehttp 68250 123145401237504 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:06:43,744 basehttp 68250 123145401237504 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:07:13,865 basehttp 68250 123145401237504 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:07:43,757 basehttp 68250 123145401237504 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:08:13,743 basehttp 68250 123145401237504 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:09:33,769 basehttp 68250 123145401237504 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:10:33,784 basehttp 68250 123145384448000 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:37:13,776 basehttp 68250 123145384448000 "OPTIONS /api/auth/me/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:37:13,866 basehttp 68250 123145384448000 "GET /api/auth/me/ HTTP/1.1" 200 268
+INFO 2025-11-11 09:37:14,076 basehttp 68250 123145401237504 "OPTIONS /api/wallet/my_wallet/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:37:14,082 basehttp 68250 123145434816512 "OPTIONS /api/invoices/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:37:14,083 basehttp 68250 123145401237504 "OPTIONS /api/notifications/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:37:14,084 basehttp 68250 123145418027008 "OPTIONS /api/transactions/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:37:14,092 basehttp 68250 123145434816512 "OPTIONS /api/wallet/my_wallet/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:37:14,094 basehttp 68250 123145451606016 "OPTIONS /api/giveaways/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:37:14,095 basehttp 68250 123145401237504 "OPTIONS /api/transactions/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:37:14,096 basehttp 68250 123145468395520 "OPTIONS /api/giveaways/my_wins/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:37:14,100 basehttp 68250 123145418027008 "OPTIONS /api/invoices/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:37:14,115 basehttp 68250 123145434816512 "OPTIONS /api/giveaways/my_wins/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:37:14,123 basehttp 68250 123145451606016 "OPTIONS /api/giveaways/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:37:14,131 basehttp 68250 123145384448000 "OPTIONS /api/notifications/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:37:14,196 basehttp 68250 123145401237504 "GET /api/wallet/my_wallet/ HTTP/1.1" 200 918
+INFO 2025-11-11 09:37:14,196 basehttp 68250 123145451606016 "GET /api/giveaways/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:37:14,364 basehttp 68250 123145451606016 "GET /api/giveaways/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:37:14,371 basehttp 68250 123145468395520 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:37:14,382 basehttp 68250 123145384448000 "GET /api/giveaways/my_wins/ HTTP/1.1" 200 2
+INFO 2025-11-11 09:37:14,383 basehttp 68250 123145418027008 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 09:37:14,384 basehttp 68250 123145434816512 "GET /api/transactions/ HTTP/1.1" 200 376
+INFO 2025-11-11 09:37:14,516 basehttp 68250 123145468395520 "GET /api/giveaways/my_wins/ HTTP/1.1" 200 2
+INFO 2025-11-11 09:37:14,531 basehttp 68250 123145451606016 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:37:14,558 basehttp 68250 123145384448000 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 09:37:14,636 basehttp 68250 123145418027008 "GET /api/transactions/ HTTP/1.1" 200 376
+INFO 2025-11-11 09:37:14,637 basehttp 68250 123145401237504 "GET /api/wallet/my_wallet/ HTTP/1.1" 200 918
+INFO 2025-11-11 09:37:21,337 basehttp 68250 123145401237504 "OPTIONS /api/content/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:37:21,357 basehttp 68250 123145418027008 "OPTIONS /api/social-accounts/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:37:21,367 basehttp 68250 123145384448000 "OPTIONS /api/social-accounts/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:37:21,374 basehttp 68250 123145451606016 "OPTIONS /api/content/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:37:21,418 basehttp 68250 123145418027008 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 09:37:21,577 basehttp 68250 123145401237504 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-11 09:37:21,686 basehttp 68250 123145451606016 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 09:37:21,705 basehttp 68250 123145418027008 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-11 09:37:44,525 basehttp 68250 123145418027008 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:38:14,527 basehttp 68250 123145418027008 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:38:17,505 basehttp 68250 123145418027008 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:38:17,511 basehttp 68250 123145451606016 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:38:17,567 basehttp 68250 123145418027008 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 09:38:17,622 basehttp 68250 123145451606016 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 09:38:19,461 basehttp 68250 123145451606016 "OPTIONS /api/performance/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:38:19,468 basehttp 68250 123145401237504 "OPTIONS /api/performance/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:38:19,505 basehttp 68250 123145418027008 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 09:38:19,536 basehttp 68250 123145451606016 "GET /api/performance/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:38:19,591 basehttp 68250 123145401237504 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 09:38:19,602 basehttp 68250 123145418027008 "GET /api/performance/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:38:21,048 basehttp 68250 123145418027008 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 09:38:21,088 basehttp 68250 123145401237504 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 09:38:44,529 basehttp 68250 123145384448000 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:39:14,529 basehttp 68250 123145384448000 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:39:44,530 basehttp 68250 123145384448000 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 09:39:58,366 basehttp 68250 123145384448000 "GET /api/performance/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:39:58,395 basehttp 68250 123145401237504 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 09:39:58,400 basehttp 68250 123145418027008 "GET /api/performance/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:39:58,421 basehttp 68250 123145384448000 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 09:39:59,523 basehttp 68250 123145384448000 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 09:39:59,558 basehttp 68250 123145418027008 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 09:40:00,789 basehttp 68250 123145384448000 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 09:40:00,817 basehttp 68250 123145418027008 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-11 09:40:00,872 basehttp 68250 123145401237504 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 09:40:00,897 basehttp 68250 123145384448000 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-11 09:40:02,671 basehttp 68250 123145384448000 "OPTIONS /api/service-settings/my_services/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:40:02,675 basehttp 68250 123145401237504 "OPTIONS /api/service-settings/my_services/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:40:02,693 basehttp 68250 123145384448000 "GET /api/service-settings/my_services/ HTTP/1.1" 200 44
+INFO 2025-11-11 09:40:02,706 basehttp 68250 123145401237504 "GET /api/service-settings/my_services/ HTTP/1.1" 200 44
+INFO 2025-11-11 09:40:13,784 basehttp 68250 123145401237504 "OPTIONS /api/auth/logout/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:40:13,796 basehttp 68250 123145401237504 "POST /api/auth/logout/ HTTP/1.1" 200 37
+INFO 2025-11-11 09:40:53,996 basehttp 68250 123145401237504 "OPTIONS /api/auth/send-verification-code/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:40:54,019 email_service 68250 123145401237504 Stored registration verification code for rexhinodurro27@gmail.com
+INFO 2025-11-11 09:40:55,326 email_service 68250 123145401237504 Verification email sent to rexhinodurro27@gmail.com via Resend
+INFO 2025-11-11 09:40:55,326 auth_views 68250 123145401237504 Verification code sent to rexhinodurro27@gmail.com for registration
+INFO 2025-11-11 09:40:55,340 basehttp 68250 123145401237504 "POST /api/auth/send-verification-code/ HTTP/1.1" 200 82
+INFO 2025-11-11 09:41:05,753 basehttp 68250 123145401237504 "OPTIONS /api/auth/resend-verification-code/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:41:05,768 email_service 68250 123145401237504 Stored registration verification code for rexhinodurro27@gmail.com
+INFO 2025-11-11 09:41:06,573 email_service 68250 123145401237504 Verification email sent to rexhinodurro27@gmail.com via Resend
+INFO 2025-11-11 09:41:06,575 auth_views 68250 123145401237504 Verification code resent to rexhinodurro27@gmail.com
+INFO 2025-11-11 09:41:06,588 basehttp 68250 123145401237504 "POST /api/auth/resend-verification-code/ HTTP/1.1" 200 67
+INFO 2025-11-11 09:41:19,205 email_service 68250 123145401237504 Stored registration verification code for detyrratemia56@gmail.com
+INFO 2025-11-11 09:41:19,695 email_service 68250 123145401237504 Verification email sent to detyrratemia56@gmail.com via Resend
+INFO 2025-11-11 09:41:19,696 auth_views 68250 123145401237504 Verification code sent to detyrratemia56@gmail.com for registration
+INFO 2025-11-11 09:41:19,710 basehttp 68250 123145401237504 "POST /api/auth/send-verification-code/ HTTP/1.1" 200 82
+INFO 2025-11-11 09:41:39,981 basehttp 68250 123145401237504 "OPTIONS /api/auth/verify-and-register/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:41:40,002 email_service 68250 123145401237504 Verification code validated for detyrratemia56@gmail.com
+INFO 2025-11-11 09:41:41,156 notification_service 68250 123145401237504 Notification created for user admin@montrroase.com: New User Registered 👋
+INFO 2025-11-11 09:41:41,635 email_service 68250 123145401237504 Welcome email sent to detyrratemia56@gmail.com
+INFO 2025-11-11 09:41:41,640 auth_views 68250 123145401237504 User detyrratemia56@gmail.com successfully registered and verified
+INFO 2025-11-11 09:41:41,667 basehttp 68250 123145401237504 "POST /api/auth/verify-and-register/ HTTP/1.1" 201 321
+INFO 2025-11-11 09:42:06,185 basehttp 68250 123145401237504 "OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:42:07,168 basehttp 68250 123145401237504 "POST /api/auth/login/ HTTP/1.1" 200 279
+INFO 2025-11-11 09:42:07,819 basehttp 68250 123145401237504 "GET /api/notifications/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:42:07,843 basehttp 68250 123145401237504 "GET /api/notifications/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:42:09,197 basehttp 68250 123145401237504 "OPTIONS /api/dashboard/client-stats/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:42:09,236 basehttp 68250 123145435353088 "OPTIONS /api/messages/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:42:09,245 basehttp 68250 123145435353088 "OPTIONS /api/messages/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:42:09,267 basehttp 68250 123145418027008 "GET /api/content/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:42:09,298 basehttp 68250 123145452142592 "GET /api/invoices/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:42:09,331 basehttp 68250 123145468932096 "GET /api/tasks/ HTTP/1.1" 200 52
+ERROR 2025-11-11 09:42:09,336 oauth_views 68250 123145384448000 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-11 09:42:09,337 log 68250 123145384448000 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-11 09:42:09,338 basehttp 68250 123145384448000 "GET /api/social-accounts/ HTTP/1.1" 500 33
+WARNING 2025-11-11 09:42:09,342 log 68250 123145401237504 Not Found: /api/dashboard/client-stats/
+WARNING 2025-11-11 09:42:09,344 basehttp 68250 123145401237504 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+INFO 2025-11-11 09:42:09,357 basehttp 68250 123145435353088 "GET /api/messages/ HTTP/1.1" 200 52
+ERROR 2025-11-11 09:42:09,358 oauth_views 68250 123145384448000 Failed to get connected accounts: User has no client_profile.
+WARNING 2025-11-11 09:42:09,365 log 68250 123145401237504 Not Found: /api/dashboard/client-stats/
+ERROR 2025-11-11 09:42:09,367 log 68250 123145384448000 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-11 09:42:09,369 basehttp 68250 123145384448000 "GET /api/social-accounts/ HTTP/1.1" 500 33
+WARNING 2025-11-11 09:42:09,372 basehttp 68250 123145401237504 "GET /api/dashboard/client-stats/ HTTP/1.1" 404 36
+INFO 2025-11-11 09:42:09,376 basehttp 68250 123145468932096 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:42:09,389 basehttp 68250 123145452142592 "GET /api/invoices/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:42:09,390 basehttp 68250 123145418027008 "GET /api/content/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:42:09,397 basehttp 68250 123145435353088 "GET /api/messages/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:42:27,813 basehttp 68250 123145435353088 "GET /api/content/ HTTP/1.1" 200 52
+ERROR 2025-11-11 09:42:27,824 oauth_views 68250 123145418027008 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-11 09:42:27,825 log 68250 123145418027008 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-11 09:42:27,825 basehttp 68250 123145418027008 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-11 09:42:27,852 basehttp 68250 123145452142592 "GET /api/content/ HTTP/1.1" 200 52
+ERROR 2025-11-11 09:42:27,909 oauth_views 68250 123145435353088 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-11 09:42:27,959 log 68250 123145435353088 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-11 09:42:27,972 basehttp 68250 123145435353088 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-11 09:42:28,738 basehttp 68250 123145435353088 "GET /api/performance/ HTTP/1.1" 200 52
+ERROR 2025-11-11 09:42:28,740 oauth_views 68250 123145452142592 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-11 09:42:28,749 log 68250 123145452142592 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-11 09:42:28,749 basehttp 68250 123145452142592 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-11 09:42:28,766 basehttp 68250 123145418027008 "GET /api/performance/ HTTP/1.1" 200 52
+ERROR 2025-11-11 09:42:28,776 oauth_views 68250 123145452142592 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-11 09:42:28,778 log 68250 123145452142592 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-11 09:42:28,778 basehttp 68250 123145452142592 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-11 09:42:29,359 basehttp 68250 123145452142592 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:42:29,391 basehttp 68250 123145418027008 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:42:30,369 basehttp 68250 123145418027008 "GET /api/content/ HTTP/1.1" 200 52
+ERROR 2025-11-11 09:42:30,375 oauth_views 68250 123145452142592 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-11 09:42:30,375 log 68250 123145452142592 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-11 09:42:30,376 basehttp 68250 123145452142592 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-11 09:42:30,394 basehttp 68250 123145435353088 "GET /api/content/ HTTP/1.1" 200 52
+ERROR 2025-11-11 09:42:30,405 oauth_views 68250 123145418027008 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-11 09:42:30,406 log 68250 123145418027008 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-11 09:42:30,406 basehttp 68250 123145418027008 "GET /api/social-accounts/ HTTP/1.1" 500 33
+ERROR 2025-11-11 09:42:31,063 oauth_views 68250 123145435353088 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-11 09:42:31,064 log 68250 123145435353088 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-11 09:42:31,070 basehttp 68250 123145435353088 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-11 09:42:31,087 basehttp 68250 123145418027008 "GET /api/performance/ HTTP/1.1" 200 52
+ERROR 2025-11-11 09:42:31,110 oauth_views 68250 123145452142592 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-11 09:42:31,111 log 68250 123145452142592 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-11 09:42:31,114 basehttp 68250 123145452142592 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-11 09:42:31,141 basehttp 68250 123145418027008 "GET /api/performance/ HTTP/1.1" 200 52
+ERROR 2025-11-11 09:42:32,759 oauth_views 68250 123145418027008 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-11 09:42:32,760 log 68250 123145418027008 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-11 09:42:32,761 basehttp 68250 123145418027008 "GET /api/social-accounts/ HTTP/1.1" 500 33
+ERROR 2025-11-11 09:42:32,844 oauth_views 68250 123145452142592 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-11 09:42:32,847 log 68250 123145452142592 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-11 09:42:32,847 basehttp 68250 123145452142592 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-11 09:42:35,312 basehttp 68250 123145452142592 "OPTIONS /api/oauth/instagram/initiate/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:42:35,321 basehttp 68250 123145452142592 "GET /api/oauth/instagram/initiate/ HTTP/1.1" 200 358
+ERROR 2025-11-11 09:42:37,389 oauth_views 68250 123145452142592 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-11 09:42:37,392 log 68250 123145452142592 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-11 09:42:37,394 basehttp 68250 123145452142592 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-11 09:42:37,868 basehttp 68250 123145452142592 "GET /api/notifications/ HTTP/1.1" 200 52
+INFO 2025-11-11 09:42:39,199 basehttp 68250 123145452142592 "OPTIONS /api/oauth/youtube/initiate/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:42:39,212 oauth_views 68250 123145452142592 YouTube OAuth URL generated for user detyrratemia56@gmail.com
+INFO 2025-11-11 09:42:39,213 basehttp 68250 123145452142592 "GET /api/oauth/youtube/initiate/ HTTP/1.1" 200 449
+ERROR 2025-11-11 09:42:41,273 oauth_views 68250 123145452142592 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-11 09:42:41,274 log 68250 123145452142592 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-11 09:42:41,274 basehttp 68250 123145452142592 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-11 09:42:42,129 basehttp 68250 123145452142592 "OPTIONS /api/oauth/tiktok/initiate/ HTTP/1.1" 200 0
+WARNING 2025-11-11 09:42:42,179 log 68250 123145452142592 Not Found: /api/oauth/tiktok/initiate/
+WARNING 2025-11-11 09:42:42,179 basehttp 68250 123145452142592 "GET /api/oauth/tiktok/initiate/ HTTP/1.1" 404 61911
+WARNING 2025-11-11 09:42:43,016 log 68250 123145452142592 Not Found: /api/oauth/tiktok/initiate/
+WARNING 2025-11-11 09:42:43,017 basehttp 68250 123145452142592 "GET /api/oauth/tiktok/initiate/ HTTP/1.1" 404 61911
+WARNING 2025-11-11 09:42:43,095 log 68250 123145452142592 Not Found: /api/oauth/tiktok/initiate/
+WARNING 2025-11-11 09:42:43,096 basehttp 68250 123145452142592 "GET /api/oauth/tiktok/initiate/ HTTP/1.1" 404 61911
+INFO 2025-11-11 09:42:43,546 basehttp 68250 123145452142592 "OPTIONS /api/oauth/twitter/initiate/ HTTP/1.1" 200 0
+WARNING 2025-11-11 09:42:43,571 log 68250 123145452142592 Not Found: /api/oauth/twitter/initiate/
+WARNING 2025-11-11 09:42:43,572 basehttp 68250 123145452142592 "GET /api/oauth/twitter/initiate/ HTTP/1.1" 404 61914
+WARNING 2025-11-11 09:42:43,896 log 68250 123145452142592 Not Found: /api/oauth/twitter/initiate/
+WARNING 2025-11-11 09:42:43,897 basehttp 68250 123145452142592 "GET /api/oauth/twitter/initiate/ HTTP/1.1" 404 61914
+INFO 2025-11-11 09:42:44,988 basehttp 68250 123145452142592 "OPTIONS /api/oauth/linkedin/initiate/ HTTP/1.1" 200 0
+WARNING 2025-11-11 09:42:45,144 log 68250 123145452142592 Not Found: /api/oauth/linkedin/initiate/
+WARNING 2025-11-11 09:42:45,144 basehttp 68250 123145452142592 "GET /api/oauth/linkedin/initiate/ HTTP/1.1" 404 61917
+WARNING 2025-11-11 09:42:45,344 log 68250 123145452142592 Not Found: /api/oauth/linkedin/initiate/
+WARNING 2025-11-11 09:42:45,354 basehttp 68250 123145452142592 "GET /api/oauth/linkedin/initiate/ HTTP/1.1" 404 61917
+INFO 2025-11-11 09:42:46,181 oauth_views 68250 123145452142592 YouTube OAuth URL generated for user detyrratemia56@gmail.com
+INFO 2025-11-11 09:42:46,182 basehttp 68250 123145452142592 "GET /api/oauth/youtube/initiate/ HTTP/1.1" 200 449
+ERROR 2025-11-11 09:42:48,256 oauth_views 68250 123145452142592 Failed to get connected accounts: User has no client_profile.
+ERROR 2025-11-11 09:42:48,257 log 68250 123145452142592 Internal Server Error: /api/social-accounts/
+ERROR 2025-11-11 09:42:48,258 basehttp 68250 123145452142592 "GET /api/social-accounts/ HTTP/1.1" 500 33
+INFO 2025-11-11 09:42:49,748 basehttp 68250 123145418027008 "OPTIONS /api/website-projects/ HTTP/1.1" 200 0
+INFO 2025-11-11 09:42:49,757 basehttp 68250 123145452142592 "OPTIONS /api/website-projects/ HTTP/1.1" 200 0
+ERROR 2025-11-11 09:42:49,857 log 68250 123145418027008 Internal Server Error: /api/website-projects/
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/api/views_new_features.py", line 31, in get_queryset
+    return WebsiteProject.objects.filter(client=self.request.user.client_profile)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 492, in __get__
+    raise self.RelatedObjectDoesNotExist(
+api.models.User.client_profile.RelatedObjectDoesNotExist: User has no client_profile.
+ERROR 2025-11-11 09:42:49,865 basehttp 68250 123145418027008 "GET /api/website-projects/ HTTP/1.1" 500 113472
+ERROR 2025-11-11 09:42:50,133 log 68250 123145452142592 Internal Server Error: /api/website-projects/
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/api/views_new_features.py", line 31, in get_queryset
+    return WebsiteProject.objects.filter(client=self.request.user.client_profile)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 492, in __get__
+    raise self.RelatedObjectDoesNotExist(
+api.models.User.client_profile.RelatedObjectDoesNotExist: User has no client_profile.
+ERROR 2025-11-11 09:42:50,177 basehttp 68250 123145452142592 "GET /api/website-projects/ HTTP/1.1" 500 113472
+INFO 2025-11-11 09:43:07,840 basehttp 68250 123145452142592 "GET /api/notifications/ HTTP/1.1" 200 52
+INFO 2025-11-11 10:03:09,241 autoreload 68250 4455872000 /Users/MacOs/Documents/GitHub/Montrroase_website/server/server/settings.py changed, reloading.
+INFO 2025-11-11 10:03:11,762 autoreload 69830 4459767296 Watching for file changes with StatReloader
+INFO 2025-11-11 10:12:15,788 autoreload 69830 4459767296 /Users/MacOs/Documents/GitHub/Montrroase_website/server/api/models.py changed, reloading.
+INFO 2025-11-11 10:19:10,613 notification_service 71343 4778579456 Notification created for user detyrratemia56@gmail.com: Payment Received ✅
+INFO 2025-11-11 10:19:11,580 email_templates 71343 4778579456 Email sent to detyrratemia56@gmail.com: Payment Confirmation
+INFO 2025-11-11 10:19:11,580 notification_trigger_service 71343 4778579456 Payment confirmation triggered for detyrratemia56@gmail.com
+INFO 2025-11-11 13:29:31,983 autoreload 77250 4338857472 Watching for file changes with StatReloader
+INFO 2025-11-11 13:31:03,597 basehttp 77250 123145357697024 "OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:31:04,739 basehttp 77250 123145357697024 "POST /api/auth/login/ HTTP/1.1" 200 276
+INFO 2025-11-11 13:31:09,655 basehttp 77250 123145357697024 "OPTIONS /api/notifications/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:31:09,702 basehttp 77250 123145357697024 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:31:09,725 basehttp 77250 123145374486528 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:31:10,971 basehttp 77250 123145357697024 "OPTIONS /api/agents/my-clients/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:31:10,973 basehttp 77250 123145374486528 "OPTIONS /api/dashboard/agent-stats/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:31:11,012 basehttp 77250 123145391276032 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:31:11,029 basehttp 77250 123145408065536 "OPTIONS /api/dashboard/agent-stats/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:31:11,033 basehttp 77250 123145424855040 "OPTIONS /api/agents/my-clients/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:31:11,036 basehttp 77250 123145441644544 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:31:11,058 basehttp 77250 123145357697024 "GET /api/agents/my-clients/ HTTP/1.1" 200 2
+INFO 2025-11-11 13:31:11,093 basehttp 77250 123145391276032 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-11 13:31:11,125 basehttp 77250 123145441644544 "GET /api/agents/my-clients/ HTTP/1.1" 200 2
+INFO 2025-11-11 13:31:11,152 basehttp 77250 123145374486528 "GET /api/dashboard/agent-stats/ HTTP/1.1" 200 272
+INFO 2025-11-11 13:31:11,171 basehttp 77250 123145357697024 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-11 13:31:11,206 basehttp 77250 123145441644544 "GET /api/dashboard/agent-stats/ HTTP/1.1" 200 272
+INFO 2025-11-11 13:31:21,923 basehttp 77250 123145441644544 "OPTIONS /api/campaigns/my_campaigns/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:31:21,932 basehttp 77250 123145357697024 "OPTIONS /api/campaigns/my_campaigns/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:31:21,975 basehttp 77250 123145441644544 "GET /api/campaigns/my_campaigns/ HTTP/1.1" 200 2
+INFO 2025-11-11 13:31:21,995 basehttp 77250 123145357697024 "GET /api/campaigns/my_campaigns/ HTTP/1.1" 200 2
+INFO 2025-11-11 13:31:26,527 basehttp 77250 123145357697024 "OPTIONS /api/content-schedule/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:31:26,558 basehttp 77250 123145441644544 "OPTIONS /api/content-schedule/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:31:26,579 basehttp 77250 123145357697024 "GET /api/content-schedule/ HTTP/1.1" 200 52
+INFO 2025-11-11 13:31:26,613 basehttp 77250 123145441644544 "GET /api/content-schedule/ HTTP/1.1" 200 52
+INFO 2025-11-11 13:31:35,227 basehttp 77250 123145441644544 "OPTIONS /api/campaigns/analytics/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:31:35,228 basehttp 77250 123145374486528 "OPTIONS /api/campaigns/analytics/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:31:35,256 basehttp 77250 123145357697024 "GET /api/campaigns/my_campaigns/ HTTP/1.1" 200 2
+INFO 2025-11-11 13:31:35,276 basehttp 77250 123145441644544 "GET /api/campaigns/analytics/ HTTP/1.1" 200 182
+INFO 2025-11-11 13:31:35,289 basehttp 77250 123145374486528 "GET /api/campaigns/my_campaigns/ HTTP/1.1" 200 2
+INFO 2025-11-11 13:31:35,311 basehttp 77250 123145441644544 "GET /api/campaigns/analytics/ HTTP/1.1" 200 182
+INFO 2025-11-11 13:31:39,675 basehttp 77250 123145441644544 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:31:42,445 basehttp 77250 123145441644544 "OPTIONS /api/website-projects/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:31:42,454 basehttp 77250 123145374486528 "OPTIONS /api/website-projects/ HTTP/1.1" 200 0
+ERROR 2025-11-11 13:31:42,599 log 77250 123145441644544 Internal Server Error: /api/website-projects/
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/api/views_new_features.py", line 32, in get_queryset
+    return WebsiteProject.objects.filter(client=self.request.user.client_profile)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 492, in __get__
+    raise self.RelatedObjectDoesNotExist(
+api.models.User.client_profile.RelatedObjectDoesNotExist: User has no client_profile.
+ERROR 2025-11-11 13:31:42,605 basehttp 77250 123145441644544 "GET /api/website-projects/ HTTP/1.1" 500 113763
+ERROR 2025-11-11 13:31:42,785 log 77250 123145374486528 Internal Server Error: /api/website-projects/
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/api/views_new_features.py", line 32, in get_queryset
+    return WebsiteProject.objects.filter(client=self.request.user.client_profile)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 492, in __get__
+    raise self.RelatedObjectDoesNotExist(
+api.models.User.client_profile.RelatedObjectDoesNotExist: User has no client_profile.
+ERROR 2025-11-11 13:31:42,807 basehttp 77250 123145374486528 "GET /api/website-projects/ HTTP/1.1" 500 113763
+INFO 2025-11-11 13:31:44,224 basehttp 77250 123145374486528 "OPTIONS /api/website-versions/my_uploads/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:31:44,239 basehttp 77250 123145357697024 "OPTIONS /api/website-versions/my_uploads/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:31:44,283 basehttp 77250 123145374486528 "GET /api/website-versions/my_uploads/ HTTP/1.1" 200 2
+INFO 2025-11-11 13:31:44,306 basehttp 77250 123145357697024 "GET /api/website-versions/my_uploads/ HTTP/1.1" 200 2
+ERROR 2025-11-11 13:31:44,337 log 77250 123145441644544 Internal Server Error: /api/website-projects/
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/api/views_new_features.py", line 32, in get_queryset
+    return WebsiteProject.objects.filter(client=self.request.user.client_profile)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 492, in __get__
+    raise self.RelatedObjectDoesNotExist(
+api.models.User.client_profile.RelatedObjectDoesNotExist: User has no client_profile.
+ERROR 2025-11-11 13:31:44,339 basehttp 77250 123145441644544 "GET /api/website-projects/ HTTP/1.1" 500 113763
+ERROR 2025-11-11 13:31:44,518 log 77250 123145357697024 Internal Server Error: /api/website-projects/
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/api/views_new_features.py", line 32, in get_queryset
+    return WebsiteProject.objects.filter(client=self.request.user.client_profile)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 492, in __get__
+    raise self.RelatedObjectDoesNotExist(
+api.models.User.client_profile.RelatedObjectDoesNotExist: User has no client_profile.
+ERROR 2025-11-11 13:31:44,520 basehttp 77250 123145357697024 "GET /api/website-projects/ HTTP/1.1" 500 113763
+ERROR 2025-11-11 13:31:45,986 log 77250 123145357697024 Internal Server Error: /api/website-projects/
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/api/views_new_features.py", line 32, in get_queryset
+    return WebsiteProject.objects.filter(client=self.request.user.client_profile)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 492, in __get__
+    raise self.RelatedObjectDoesNotExist(
+api.models.User.client_profile.RelatedObjectDoesNotExist: User has no client_profile.
+ERROR 2025-11-11 13:31:46,033 basehttp 77250 123145357697024 "GET /api/website-projects/ HTTP/1.1" 500 113763
+ERROR 2025-11-11 13:31:46,158 log 77250 123145441644544 Internal Server Error: /api/website-projects/
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/api/views_new_features.py", line 32, in get_queryset
+    return WebsiteProject.objects.filter(client=self.request.user.client_profile)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 492, in __get__
+    raise self.RelatedObjectDoesNotExist(
+api.models.User.client_profile.RelatedObjectDoesNotExist: User has no client_profile.
+ERROR 2025-11-11 13:31:46,169 basehttp 77250 123145441644544 "GET /api/website-projects/ HTTP/1.1" 500 113763
+INFO 2025-11-11 13:31:51,943 basehttp 77250 123145441644544 "GET /api/agents/my-clients/ HTTP/1.1" 200 2
+INFO 2025-11-11 13:31:51,955 basehttp 77250 123145357697024 "GET /api/agents/my-clients/ HTTP/1.1" 200 2
+INFO 2025-11-11 13:32:01,975 basehttp 77250 123145357697024 "OPTIONS /api/auth/logout/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:32:01,991 basehttp 77250 123145357697024 "POST /api/auth/logout/ HTTP/1.1" 200 37
+INFO 2025-11-11 13:32:38,113 basehttp 77250 123145357697024 "POST /api/auth/login/ HTTP/1.1" 200 328
+INFO 2025-11-11 13:32:38,814 basehttp 77250 123145357697024 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:32:38,824 basehttp 77250 123145441644544 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:32:41,139 basehttp 77250 123145441644544 "OPTIONS /api/dashboard/client-stats/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:32:41,141 basehttp 77250 123145357697024 "OPTIONS /api/social-accounts/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:32:41,162 basehttp 77250 123145374486528 "OPTIONS /api/content/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:32:41,171 basehttp 77250 123145391276032 "OPTIONS /api/messages/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:32:41,195 basehttp 77250 123145424855040 "OPTIONS /api/invoices/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:32:41,209 basehttp 77250 123145424855040 "OPTIONS /api/invoices/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:32:41,352 basehttp 77250 123145357697024 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 13:32:41,391 basehttp 77250 123145424855040 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 13:32:41,403 statistic_views 77250 123145441644544 Client dashboard stats for Tech Startup Inc: {'total_followers': 15000, 'engagement_rate': 3.5, 'posts_this_month': 0, 'reach': 45000, 'growth_rate': 0, 'next_payment_amount': 299.99, 'next_payment_date': datetime.date(2025, 12, 6)}
+INFO 2025-11-11 13:32:41,407 basehttp 77250 123145441644544 "GET /api/dashboard/client-stats/ HTTP/1.1" 200 170
+INFO 2025-11-11 13:32:41,530 basehttp 77250 123145374486528 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-11 13:32:41,553 basehttp 77250 123145408065536 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 13:32:41,588 basehttp 77250 123145391276032 "GET /api/messages/ HTTP/1.1" 200 2161
+INFO 2025-11-11 13:32:41,694 basehttp 77250 123145357697024 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 13:32:41,770 basehttp 77250 123145424855040 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 13:32:41,778 statistic_views 77250 123145441644544 Client dashboard stats for Tech Startup Inc: {'total_followers': 15000, 'engagement_rate': 3.5, 'posts_this_month': 0, 'reach': 45000, 'growth_rate': 0, 'next_payment_amount': 299.99, 'next_payment_date': datetime.date(2025, 12, 6)}
+INFO 2025-11-11 13:32:41,807 basehttp 77250 123145441644544 "GET /api/dashboard/client-stats/ HTTP/1.1" 200 170
+INFO 2025-11-11 13:32:41,819 basehttp 77250 123145408065536 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 13:32:41,867 basehttp 77250 123145374486528 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-11 13:32:41,895 basehttp 77250 123145391276032 "GET /api/messages/ HTTP/1.1" 200 2161
+INFO 2025-11-11 13:32:49,254 basehttp 77250 123145391276032 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-11 13:32:49,273 basehttp 77250 123145374486528 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 13:32:49,312 basehttp 77250 123145408065536 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-11 13:32:49,362 basehttp 77250 123145391276032 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 13:32:51,640 basehttp 77250 123145391276032 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 13:32:51,685 basehttp 77250 123145408065536 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 13:32:55,340 basehttp 77250 123145408065536 "OPTIONS /api/performance/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:32:55,361 basehttp 77250 123145374486528 "OPTIONS /api/performance/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:32:55,408 basehttp 77250 123145408065536 "GET /api/performance/ HTTP/1.1" 200 52
+INFO 2025-11-11 13:32:55,409 basehttp 77250 123145391276032 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 13:32:55,423 basehttp 77250 123145374486528 "GET /api/performance/ HTTP/1.1" 200 52
+INFO 2025-11-11 13:32:55,459 basehttp 77250 123145408065536 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 13:32:58,281 basehttp 77250 123145408065536 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 13:32:58,300 basehttp 77250 123145374486528 "GET /api/social-accounts/ HTTP/1.1" 200 819
+INFO 2025-11-11 13:33:08,769 basehttp 77250 123145374486528 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:33:38,763 basehttp 77250 123145374486528 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:34:08,781 basehttp 77250 123145374486528 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:34:26,338 basehttp 77250 123145458434048 "OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:34:27,340 basehttp 77250 123145458434048 "POST /api/auth/login/ HTTP/1.1" 200 273
+INFO 2025-11-11 13:34:28,161 basehttp 77250 123145458434048 "OPTIONS /api/notifications/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:34:28,172 basehttp 77250 123145475223552 "OPTIONS /api/notifications/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:34:28,232 basehttp 77250 123145458434048 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:34:28,259 basehttp 77250 123145475223552 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:34:29,600 basehttp 77250 123145475223552 "OPTIONS /api/dashboard/stats/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:34:29,607 basehttp 77250 123145475223552 "OPTIONS /api/clients/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:34:29,615 basehttp 77250 123145458434048 "OPTIONS /api/clients/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:34:29,617 basehttp 77250 123145475223552 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:34:29,626 basehttp 77250 123145475223552 "OPTIONS /api/invoices/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:34:29,634 basehttp 77250 123145458434048 "OPTIONS /api/content/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:34:29,636 basehttp 77250 123145492013056 "OPTIONS /api/tasks/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:34:29,641 basehttp 77250 123145508802560 "OPTIONS /api/content/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:34:29,656 basehttp 77250 123145525592064 "OPTIONS /api/invoices/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:34:29,676 basehttp 77250 123145542381568 "OPTIONS /api/dashboard/stats/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:34:29,766 basehttp 77250 123145458434048 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 13:34:29,864 basehttp 77250 123145475223552 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-11 13:34:29,890 basehttp 77250 123145492013056 "GET /api/clients/ HTTP/1.1" 200 759
+INFO 2025-11-11 13:34:29,891 basehttp 77250 123145508802560 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 13:34:29,897 basehttp 77250 123145525592064 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-11 13:34:29,900 basehttp 77250 123145542381568 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 13:34:29,927 basehttp 77250 123145475223552 "GET /api/clients/ HTTP/1.1" 200 759
+INFO 2025-11-11 13:34:29,978 basehttp 77250 123145492013056 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 13:34:30,115 basehttp 77250 123145458434048 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-11 13:34:30,200 basehttp 77250 123145508802560 "GET /api/content/ HTTP/1.1" 200 8596
+INFO 2025-11-11 13:34:38,566 basehttp 77250 123145458434048 "OPTIONS /api/agents/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:34:38,570 basehttp 77250 123145508802560 "OPTIONS /api/agents/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:34:38,616 basehttp 77250 123145458434048 "GET /api/agents/ HTTP/1.1" 200 1041
+INFO 2025-11-11 13:34:38,723 basehttp 77250 123145508802560 "GET /api/agents/ HTTP/1.1" 200 1041
+INFO 2025-11-11 13:34:38,784 basehttp 77250 123145374486528 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:34:58,146 basehttp 77250 123145508802560 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:35:00,715 basehttp 77250 123145458434048 "GET /api/clients/ HTTP/1.1" 200 759
+INFO 2025-11-11 13:35:00,738 basehttp 77250 123145508802560 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 13:35:00,762 basehttp 77250 123145492013056 "GET /api/clients/ HTTP/1.1" 200 759
+INFO 2025-11-11 13:35:00,804 basehttp 77250 123145458434048 "GET /api/tasks/ HTTP/1.1" 200 3284
+INFO 2025-11-11 13:35:03,394 basehttp 77250 123145458434048 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 13:35:03,429 basehttp 77250 123145492013056 "GET /api/invoices/ HTTP/1.1" 200 1558
+INFO 2025-11-11 13:35:08,771 basehttp 77250 123145374486528 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:35:13,167 basehttp 77250 123145492013056 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-11 13:35:13,202 basehttp 77250 123145458434048 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-11 13:35:15,134 basehttp 77250 123145492013056 "OPTIONS /api/messages/admin-conversations/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:35:15,145 basehttp 77250 123145458434048 "OPTIONS /api/messages/admin-conversations/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:35:15,150 message_views 77250 123145492013056 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-11 13:35:15,170 message_views 77250 123145492013056 Found 1 conversations
+INFO 2025-11-11 13:35:15,171 basehttp 77250 123145492013056 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 606
+INFO 2025-11-11 13:35:15,180 message_views 77250 123145458434048 Admin admin@montrroase.com fetching conversations
+INFO 2025-11-11 13:35:15,194 message_views 77250 123145458434048 Found 1 conversations
+INFO 2025-11-11 13:35:15,195 basehttp 77250 123145458434048 "GET /api/messages/admin-conversations/ HTTP/1.1" 200 606
+INFO 2025-11-11 13:35:15,248 basehttp 77250 123145458434048 "OPTIONS /api/messages/conversation/9ed6db5f-44f6-4cfd-928f-95433af65a33/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:35:15,261 message_views 77250 123145458434048 User admin@montrroase.com fetching messages with user 9ed6db5f-44f6-4cfd-928f-95433af65a33
+INFO 2025-11-11 13:35:15,262 message_views 77250 123145458434048 Found other user: client@example.com
+INFO 2025-11-11 13:35:15,265 message_views 77250 123145458434048 Found 6 messages
+INFO 2025-11-11 13:35:15,322 basehttp 77250 123145458434048 "GET /api/messages/conversation/9ed6db5f-44f6-4cfd-928f-95433af65a33/ HTTP/1.1" 200 2111
+INFO 2025-11-11 13:35:15,361 message_views 77250 123145458434048 User admin@montrroase.com fetching messages with user 9ed6db5f-44f6-4cfd-928f-95433af65a33
+INFO 2025-11-11 13:35:15,364 message_views 77250 123145458434048 Found other user: client@example.com
+INFO 2025-11-11 13:35:15,369 message_views 77250 123145458434048 Found 6 messages
+INFO 2025-11-11 13:35:15,421 basehttp 77250 123145458434048 "GET /api/messages/conversation/9ed6db5f-44f6-4cfd-928f-95433af65a33/ HTTP/1.1" 200 2111
+INFO 2025-11-11 13:35:19,399 basehttp 77250 123145458434048 "OPTIONS /api/messages/send-to-client/ HTTP/1.1" 200 0
+ERROR 2025-11-11 13:35:19,421 message_views 77250 123145458434048 Error sending message to client: name 'NotificationService' is not defined
+ERROR 2025-11-11 13:35:19,422 log 77250 123145458434048 Internal Server Error: /api/messages/send-to-client/
+ERROR 2025-11-11 13:35:19,422 basehttp 77250 123145458434048 "POST /api/messages/send-to-client/ HTTP/1.1" 500 53
+INFO 2025-11-11 13:35:26,452 basehttp 77250 123145458434048 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-11 13:35:26,529 basehttp 77250 123145492013056 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-11 13:35:28,153 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:35:29,262 basehttp 77250 123145492013056 "OPTIONS /api/auth/me/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:35:29,295 basehttp 77250 123145492013056 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-11 13:35:29,465 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:35:29,478 basehttp 77250 123145458434048 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-11 13:35:29,497 basehttp 77250 123145508802560 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:35:29,513 basehttp 77250 123145492013056 "GET /api/dashboard/stats/ HTTP/1.1" 200 141
+INFO 2025-11-11 13:35:38,783 basehttp 77250 123145374486528 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:35:39,399 basehttp 77250 123145492013056 "GET /api/clients/ HTTP/1.1" 200 759
+INFO 2025-11-11 13:35:39,430 basehttp 77250 123145508802560 "GET /api/clients/ HTTP/1.1" 200 759
+INFO 2025-11-11 13:35:50,853 basehttp 77250 123145408065536 "OPTIONS /api/service-settings/my_services/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:35:50,853 basehttp 77250 123145374486528 "OPTIONS /api/service-settings/my_services/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:35:50,894 basehttp 77250 123145374486528 "GET /api/service-settings/my_services/ HTTP/1.1" 200 44
+INFO 2025-11-11 13:35:50,913 basehttp 77250 123145408065536 "GET /api/service-settings/my_services/ HTTP/1.1" 200 44
+INFO 2025-11-11 13:35:59,439 basehttp 77250 123145508802560 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:36:05,469 basehttp 77250 123145508802560 "GET /api/auth/me/ HTTP/1.1" 200 213
+INFO 2025-11-11 13:36:08,839 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:36:29,454 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:36:29,801 basehttp 77250 123145508802560 "POST /api/auth/login/ HTTP/1.1" 200 276
+INFO 2025-11-11 13:36:30,717 basehttp 77250 123145508802560 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:36:30,742 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:36:31,058 basehttp 77250 123145492013056 "OPTIONS /api/dashboard/agent-stats/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:36:31,067 basehttp 77250 123145508802560 "OPTIONS /api/agents/my-clients/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:36:31,087 basehttp 77250 123145475223552 "OPTIONS /api/dashboard/agent-stats/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:36:31,093 basehttp 77250 123145542381568 "OPTIONS /api/agents/my-clients/ HTTP/1.1" 200 0
+INFO 2025-11-11 13:36:31,107 basehttp 77250 123145458434048 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-11 13:36:31,153 basehttp 77250 123145542381568 "GET /api/tasks/ HTTP/1.1" 200 52
+INFO 2025-11-11 13:36:31,158 basehttp 77250 123145508802560 "GET /api/agents/my-clients/ HTTP/1.1" 200 2
+INFO 2025-11-11 13:36:31,178 basehttp 77250 123145542381568 "GET /api/agents/my-clients/ HTTP/1.1" 200 2
+INFO 2025-11-11 13:36:31,183 basehttp 77250 123145492013056 "GET /api/dashboard/agent-stats/ HTTP/1.1" 200 246
+INFO 2025-11-11 13:36:31,219 basehttp 77250 123145542381568 "GET /api/dashboard/agent-stats/ HTTP/1.1" 200 246
+INFO 2025-11-11 13:36:38,054 basehttp 77250 123145542381568 "OPTIONS /api/website-projects/ HTTP/1.1" 200 0
+ERROR 2025-11-11 13:36:38,136 log 77250 123145542381568 Internal Server Error: /api/website-projects/
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/api/views_new_features.py", line 32, in get_queryset
+    return WebsiteProject.objects.filter(client=self.request.user.client_profile)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 492, in __get__
+    raise self.RelatedObjectDoesNotExist(
+api.models.User.client_profile.RelatedObjectDoesNotExist: User has no client_profile.
+ERROR 2025-11-11 13:36:38,144 basehttp 77250 123145542381568 "GET /api/website-projects/ HTTP/1.1" 500 113754
+ERROR 2025-11-11 13:36:38,320 log 77250 123145492013056 Internal Server Error: /api/website-projects/
+Traceback (most recent call last):
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/api/views_new_features.py", line 32, in get_queryset
+    return WebsiteProject.objects.filter(client=self.request.user.client_profile)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 492, in __get__
+    raise self.RelatedObjectDoesNotExist(
+api.models.User.client_profile.RelatedObjectDoesNotExist: User has no client_profile.
+ERROR 2025-11-11 13:36:38,322 basehttp 77250 123145492013056 "GET /api/website-projects/ HTTP/1.1" 500 113754
+INFO 2025-11-11 13:36:38,771 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:36:59,438 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:37:00,701 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:37:08,768 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:37:29,441 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:37:30,702 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:37:38,769 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:37:59,441 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:38:00,700 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:38:08,771 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:38:29,441 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:38:30,702 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:38:38,770 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:38:59,442 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:39:00,703 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:39:08,772 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:39:30,048 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:39:30,704 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:39:38,771 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:40:00,055 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:40:00,707 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:40:08,832 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:40:29,449 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:40:30,707 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:40:38,772 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:41:00,049 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:41:00,706 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:41:08,776 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:41:30,054 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:41:30,709 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:41:39,051 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:42:00,710 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:42:09,052 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:42:30,710 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:42:35,057 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:43:00,709 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:43:30,712 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:43:35,071 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:43:35,078 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:44:00,712 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:44:30,712 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:44:35,076 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:44:35,084 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:45:00,716 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:45:30,718 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:45:35,073 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:45:35,076 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:46:00,719 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:46:30,718 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:46:35,072 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:46:35,072 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:47:00,718 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:47:30,718 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:47:35,081 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:47:35,090 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:48:00,720 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:48:30,721 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:48:35,077 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:48:35,080 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:49:00,721 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:49:30,729 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:49:35,086 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:49:35,088 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:50:00,722 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:50:30,724 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:50:35,085 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:50:35,088 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:51:00,726 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:51:30,727 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:51:35,201 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:51:35,207 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:52:00,731 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:52:30,728 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:52:35,083 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:52:35,083 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:53:00,733 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:53:30,730 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:53:35,096 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:53:35,106 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:54:00,729 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:54:30,734 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:54:35,091 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:54:35,103 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:55:00,732 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:55:30,734 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:55:35,087 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:55:35,093 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:56:00,736 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:56:30,734 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:56:35,099 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:56:35,099 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:57:00,732 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:57:30,739 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 897
+INFO 2025-11-11 13:57:35,094 basehttp 77250 123145492013056 "GET /api/notifications/ HTTP/1.1" 200 1180
+INFO 2025-11-11 13:57:35,095 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
+INFO 2025-11-11 13:57:48,363 basehttp 77250 123145408065536 "GET /api/notifications/ HTTP/1.1" 200 1160
