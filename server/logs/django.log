@@ -19373,3 +19373,6 @@ INFO 2025-11-11 01:34:09,887 basehttp 58961 123145511043072 "GET /api/invoices/ 
 INFO 2025-11-11 01:34:09,891 basehttp 58961 123145477464064 "GET /api/wallet/my_wallet/ HTTP/1.1" 200 267
 INFO 2025-11-11 01:34:10,021 basehttp 58961 123145494253568 "GET /api/invoices/ HTTP/1.1" 200 1558
 INFO 2025-11-11 01:34:10,025 basehttp 58961 123145511043072 "GET /api/wallet/my_wallet/ HTTP/1.1" 200 267
+INFO 2025-11-11 01:41:34,262 autoreload 60253 4572182016 Watching for file changes with StatReloader
+INFO 2025-11-11 01:46:19,759 autoreload 60253 4572182016 /Users/MacOs/Documents/GitHub/Montrroase_website/server/api/views/client/task_views.py changed, reloading.
+INFO 2025-11-11 01:46:21,579 autoreload 60559 4608165376 Watching for file changes with StatReloader

@@ -43,6 +43,15 @@ class TaskViewSet(ModelViewSet):
     def get_queryset(self):
         if self.request.user.role == 'admin':
             return Task.objects.all()
+        elif self.request.user.role == 'agent':
+            # Agents can only see tasks for their assigned clients
+            try:
+                agent = self.request.user.agent_profile
+                # Get all clients assigned to this agent
+                assigned_clients = Client.objects.filter(assigned_agent=agent)
+                return Task.objects.filter(client__in=assigned_clients)
+            except:
+                return Task.objects.none()
         else:
             # Clients can only see tasks for their account
             try:

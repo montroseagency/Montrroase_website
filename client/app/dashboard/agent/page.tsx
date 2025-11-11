@@ -8,12 +8,17 @@ import { Users, CheckSquare, FileText, MessageCircle, AlertCircle, RefreshCw, Tr
 
 interface AgentStats {
   total_clients: number;
+  active_clients?: number;
   active_tasks: number;
   completed_tasks: number;
   pending_content: number;
   unread_messages: number;
-  client_capacity: number;
-  current_load_percentage: number;
+  client_capacity?: number;
+  max_clients?: number;
+  current_load_percentage?: number;
+  capacity_used?: number;
+  department?: string;
+  specialization?: string;
 }
 
 interface Client {
@@ -107,8 +112,22 @@ export default function AgentDashboardPage() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Welcome back, {user?.first_name}!</h1>
-          <p className="text-gray-600 mt-2">Here's an overview of your assigned clients and tasks.</p>
+          <div className="flex items-center gap-3 mb-2">
+            <h1 className="text-3xl font-bold text-gray-900">Welcome back, {user?.first_name}!</h1>
+            {stats?.department && (
+              <span className={`px-4 py-1.5 rounded-full text-sm font-semibold capitalize ${
+                stats.department === 'marketing'
+                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white'
+                  : 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
+              }`}>
+                {stats.department === 'marketing' ? '📱 Marketing Agent' : '🌐 Website Developer'}
+              </span>
+            )}
+          </div>
+          <p className="text-gray-600">Here's an overview of your assigned clients and tasks.</p>
+          {stats?.specialization && (
+            <p className="text-sm text-purple-600 mt-1 font-medium">🎯 {stats.specialization}</p>
+          )}
         </div>
         <button
           onClick={handleRefresh}
@@ -127,7 +146,7 @@ export default function AgentDashboardPage() {
             icon={<Users className="w-6 h-6 text-blue-600" />}
             title="My Clients"
             value={stats.total_clients.toString()}
-            subtitle={`${stats.client_capacity} max capacity`}
+            subtitle={`${stats.max_clients || stats.client_capacity || 10} max capacity`}
             bgColor="bg-blue-50"
           />
           <StatCard
@@ -165,12 +184,13 @@ export default function AgentDashboardPage() {
               </div>
               <p className="text-purple-700 mb-3">
                 You're managing <span className="font-bold">{stats.total_clients}</span> out of{' '}
-                <span className="font-bold">{stats.client_capacity}</span> clients ({stats.current_load_percentage}% capacity)
+                <span className="font-bold">{stats.max_clients || stats.client_capacity || 10}</span> clients{' '}
+                ({Math.round(stats.capacity_used || stats.current_load_percentage || 0)}% capacity)
               </p>
               <div className="w-full bg-purple-200 rounded-full h-2.5">
                 <div
                   className="bg-purple-600 h-2.5 rounded-full transition-all"
-                  style={{ width: `${stats.current_load_percentage}%` }}
+                  style={{ width: `${Math.round(stats.capacity_used || stats.current_load_percentage || 0)}%` }}
                 ></div>
               </div>
             </div>
