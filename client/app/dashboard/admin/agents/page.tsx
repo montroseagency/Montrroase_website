@@ -45,8 +45,10 @@ export default function AgentsPage() {
 
   const fetchAgents = async () => {
     try {
-      const response = await ApiService.get('/agents/');
-      setAgents(Array.isArray(response.data) ? response.data : []);
+      const response: any = await ApiService.get('/agents/');
+      // Handle paginated response from Django REST Framework
+      const agents = response.results || response;
+      setAgents(Array.isArray(agents) ? agents : []);
     } catch (error) {
       console.error('Error fetching agents:', error);
       setAgents([]);

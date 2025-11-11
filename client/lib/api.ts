@@ -817,6 +817,41 @@ class ApiService {
     return this.baseURL;
   }
 
+  // ============ REDEEM CODE METHODS ============
+
+  async redeemCode(code: string) {
+    return await this.request('/wallet/redeem/', {
+      method: 'POST',
+      body: JSON.stringify({ code }),
+    });
+  }
+
+  async getMyRedeemedCodes() {
+    return await this.request('/wallet/my-redeemed-codes/');
+  }
+
+  async getRedeemCodes() {
+    return await this.request('/redeem-codes/');
+  }
+
+  async createRedeemCode(data: any) {
+    return await this.request('/redeem-codes/', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateRedeemCode(id: string, data: any) {
+    return await this.request(`/redeem-codes/${id}/`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async getRedeemCodeStats() {
+    return await this.request('/redeem-codes/stats/');
+  }
+
   // ============ GENERIC API METHODS ============
 
   async get(endpoint: string) {

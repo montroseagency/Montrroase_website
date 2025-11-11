@@ -32,19 +32,12 @@ export default function AgentClientsPage() {
   const fetchClients = async () => {
     try {
       const response = await ApiService.get('/agents/my-clients/');
-      if (
-        response &&
-        typeof response === 'object' &&
-        'data' in response &&
-        Array.isArray((response as any).data)
-      ) {
-        setClients((response.data as Client[]));
-      } else {
-        setClients([]);
-        console.error('Unexpected response structure when fetching clients:', response);
-      }
+      // ApiService.get returns data directly (after handling pagination)
+      const clientsData = Array.isArray(response) ? response : [];
+      setClients(clientsData);
     } catch (error) {
       console.error('Error fetching clients:', error);
+      setClients([]);
     } finally {
       setLoading(false);
     }

@@ -854,3 +854,116 @@ class SupportTicketCreateSerializer(serializers.ModelSerializer):
         )
 
         return ticket
+
+
+# ==================== REDEEM CODE SERIALIZERS ====================
+
+from .models import RedeemCode, RedeemCodeUsage
+
+class RedeemCodeSerializer(serializers.ModelSerializer):
+    """Serializer for redeem codes (admin view)"""
+    created_by_name = serializers.SerializerMethodField()
+    is_valid = serializers.ReadOnlyField()
+
+    class Meta:
+        model = RedeemCode
+        fields = [
+            'id', 'code', 'value', 'description', 'is_active',
+            'usage_limit', 'times_used', 'expires_at', 'created_by',
+            'created_by_name', 'created_at', 'is_valid'
+        ]
+        read_only_fields = ['id', 'times_used', 'created_at', 'created_by']
+
+    def get_created_by_name(self, obj):
+        if obj.created_by:
+            return f"{obj.created_by.first_name} {obj.created_by.last_name}"
+        return "System"
+
+
+class RedeemCodeCreateSerializer(serializers.ModelSerializer):
+    """Serializer for creating redeem codes"""
+    auto_generate = serializers.BooleanField(default=False, write_only=True, required=False)
+    quantity = serializers.IntegerField(default=1, write_only=True, required=False, min_value=1, max_value=100)
+
+    class Meta:
+        model = RedeemCode
+        fields = [
+            'code', 'value', 'description', 'is_active',
+            'usage_limit', 'expires_at', 'auto_generate', 'quantity'
+        ]
+
+    def validate(self, data):
+        """Validate code creation"""
+        if not data.get('auto_generate') and not data.get('code'):
+            raise serializers.ValidationError({'code': 'Code is required if not auto-generating'})
+        return data
+
+    def create(self, validated_data):
+        """Create redeem code(s)"""
+        import random
+        import string
+
+        auto_generate = validated_data.pop('auto_generate', False)
+        quantity = validated_data.pop('quantity', 1)
+        request = self.context.get('request')
+
+        if request:
+            validated_data['created_by'] = request.user
+
+        if auto_generate:
+            # Generate multiple codes
+            codes = []
+            for _ in range(quantity):
+                # Generate unique code
+                while True:
+                    code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=12))
+                    if not RedeemCode.objects.filter(code=code).exists():
+                        break
+
+                code_obj = RedeemCode.objects.create(code=code, **validated_data)
+                codes.append(code_obj)
+
+            # Return first one (for serializer response)
+            return codes[0] if codes else None
+        else:
+            # Create single code with provided code
+            return RedeemCode.objects.create(**validated_data)
+
+
+class RedeemCodeUsageSerializer(serializers.ModelSerializer):
+    """Serializer for redeem code usage history"""
+    code = serializers.CharField(source='redeem_code.code', read_only=True)
+    value = serializers.DecimalField(source='redeem_code.value', max_digits=10, decimal_places=2, read_only=True)
+    user_email = serializers.CharField(source='user.email', read_only=True)
+
+    class Meta:
+        model = RedeemCodeUsage
+        fields = [
+            'id', 'redeem_code', 'code', 'value', 'user',
+            'user_email', 'redeemed_at'
+        ]
+        read_only_fields = ['id', 'redeemed_at']
+
+
+class RedeemCodeRedeemSerializer(serializers.Serializer):
+    """Serializer for redeeming a code"""
+    code = serializers.CharField(max_length=50, required=True)
+
+    def validate_code(self, value):
+        """Validate the redeem code"""
+        value = value.strip().upper()
+
+        try:
+            redeem_code = RedeemCode.objects.get(code=value)
+        except RedeemCode.DoesNotExist:
+            raise serializers.ValidationError('Invalid redeem code')
+
+        if not redeem_code.is_valid:
+            if not redeem_code.is_active:
+                raise serializers.ValidationError('This code is no longer active')
+            elif redeem_code.times_used >= redeem_code.usage_limit:
+                raise serializers.ValidationError('This code has reached its usage limit')
+            elif redeem_code.expires_at and timezone.now() > redeem_code.expires_at:
+                raise serializers.ValidationError('This code has expired')
+
+        return value

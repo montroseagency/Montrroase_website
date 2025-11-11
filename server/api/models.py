@@ -1103,3 +1103,63 @@ class TicketMessage(models.Model):
 
     class Meta:
         ordering = ['created_at']
+
+
+# ==================== REDEEM CODE SYSTEM ====================
+
+class RedeemCode(models.Model):
+    """Redeem codes for wallet credits"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    code = models.CharField(max_length=50, unique=True, help_text='Unique redemption code')
+    value = models.DecimalField(max_digits=10, decimal_places=2, help_text='Credit amount')
+    description = models.TextField(blank=True, help_text='Internal description of the code purpose')
+
+    # Usage tracking
+    is_active = models.BooleanField(default=True)
+    usage_limit = models.IntegerField(default=1, help_text='How many times this code can be used')
+    times_used = models.IntegerField(default=0)
+
+    # Expiration
+    expires_at = models.DateTimeField(null=True, blank=True)
+
+    # Audit
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='created_redeem_codes')
+    created_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.code} - ${self.value}"
+
+    @property
+    def is_valid(self):
+        """Check if code is still valid"""
+        if not self.is_active:
+            return False
+        if self.times_used >= self.usage_limit:
+            return False
+        if self.expires_at and timezone.now() > self.expires_at:
+            return False
+        return True
+
+    def can_be_redeemed(self):
+        """Check if code can be redeemed"""
+        return self.is_valid
+
+
+class RedeemCodeUsage(models.Model):
+    """Track redeem code usage"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    redeem_code = models.ForeignKey(RedeemCode, on_delete=models.CASCADE, related_name='usages')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='redeemed_codes')
+    wallet = models.ForeignKey(Wallet, on_delete=models.CASCADE, related_name='redeem_usages')
+    transaction = models.ForeignKey(Transaction, on_delete=models.SET_NULL, null=True)
+    redeemed_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['-redeemed_at']
+        unique_together = ['redeem_code', 'user']
+
+    def __str__(self):
+        return f"{self.user.email} redeemed {self.redeem_code.code}"

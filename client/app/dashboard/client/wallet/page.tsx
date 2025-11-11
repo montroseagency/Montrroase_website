@@ -5,7 +5,7 @@ import { useAuth } from '@/lib/hooks/useAuth';
 import ApiService from '@/lib/api';
 import {
   Wallet, ArrowUpCircle, ArrowDownCircle, Gift, TrendingUp,
-  CreditCard, DollarSign, Calendar, Award, Plus, Download
+  CreditCard, DollarSign, Calendar, Award, Plus, Download, Tag, CheckCircle, XCircle
 } from 'lucide-react';
 
 interface WalletData {
@@ -46,17 +46,28 @@ interface GiveawayWin {
   claimed_at?: string;
 }
 
+interface RedeemedCode {
+  id: string;
+  code: string;
+  value: number;
+  redeemed_at: string;
+}
+
 export default function WalletPage() {
   const { user } = useAuth();
   const [wallet, setWallet] = useState<WalletData | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [giveaways, setGiveaways] = useState<Giveaway[]>([]);
   const [wins, setWins] = useState<GiveawayWin[]>([]);
+  const [redeemedCodes, setRedeemedCodes] = useState<RedeemedCode[]>([]);
   const [loading, setLoading] = useState(true);
   const [showTopUpModal, setShowTopUpModal] = useState(false);
   const [topUpAmount, setTopUpAmount] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('paypal');
   const [processingTopUp, setProcessingTopUp] = useState(false);
+  const [redeemCode, setRedeemCode] = useState('');
+  const [redeeming, setRedeeming] = useState(false);
+  const [redeemMessage, setRedeemMessage] = useState<{type: 'success' | 'error', text: string} | null>(null);
 
   useEffect(() => {
     loadWalletData();
@@ -65,17 +76,19 @@ export default function WalletPage() {
   const loadWalletData = async () => {
     try {
       setLoading(true);
-      const [walletData, transactionsData, giveawaysData, winsData] = await Promise.all([
+      const [walletData, transactionsData, giveawaysData, winsData, redeemedData] = await Promise.all([
         ApiService.get('/wallet/my_wallet/'),
         ApiService.get('/transactions/'),
         ApiService.get('/giveaways/'),
-        ApiService.get('/giveaways/my_wins/')
+        ApiService.get('/giveaways/my_wins/'),
+        ApiService.getMyRedeemedCodes()
       ]);
 
       setWallet(walletData);
       setTransactions(Array.isArray(transactionsData) ? transactionsData : []);
       setGiveaways(Array.isArray(giveawaysData) ? giveawaysData : []);
       setWins(Array.isArray(winsData) ? winsData : []);
+      setRedeemedCodes(Array.isArray(redeemedData) ? redeemedData : []);
     } catch (err: any) {
       console.error('Error loading wallet:', err);
     } finally {
@@ -115,6 +128,32 @@ export default function WalletPage() {
     }
   };
 
+  const handleRedeemCode = async () => {
+    const code = redeemCode.trim().toUpperCase();
+    if (!code) {
+      setRedeemMessage({ type: 'error', text: 'Please enter a code' });
+      return;
+    }
+
+    try {
+      setRedeeming(true);
+      setRedeemMessage(null);
+      const response: any = await ApiService.redeemCode(code);
+      setRedeemMessage({
+        type: 'success',
+        text: `Success! $${response.amount} has been added to your wallet.`
+      });
+      setRedeemCode('');
+      await loadWalletData();
+    } catch (err: any) {
+      const errorMsg = err.response?.data?.error || err.response?.data?.code?.[0] || 'Invalid or expired code';
+      setRedeemMessage({ type: 'error', text: errorMsg });
+    } finally {
+      setRedeeming(false);
+      setTimeout(() => setRedeemMessage(null), 5000);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -133,6 +172,8 @@ export default function WalletPage() {
       case 'giveaway':
       case 'referral_bonus':
         return <Gift className="w-5 h-5 text-purple-600" />;
+      case 'bonus':
+        return <Tag className="w-5 h-5 text-green-600" />;
       default:
         return <DollarSign className="w-5 h-5 text-gray-600" />;
     }
@@ -143,6 +184,7 @@ export default function WalletPage() {
       case 'topup':
       case 'giveaway':
       case 'referral_bonus':
+      case 'bonus':
         return 'text-green-600';
       case 'payment':
       case 'website_payment':
@@ -220,6 +262,75 @@ export default function WalletPage() {
         </div>
       </div>
 
+      {/* Redeem Code Section */}
+      <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg shadow-lg p-6 border-2 border-green-200">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-3 bg-green-100 rounded-lg">
+            <Tag className="w-6 h-6 text-green-600" />
+          </div>
+          <div>
+            <h2 className="text-xl font-bold text-gray-900">Redeem Code</h2>
+            <p className="text-sm text-gray-600">Enter a code to add credits to your wallet</p>
+          </div>
+        </div>
+
+        <div className="flex gap-3">
+          <div className="flex-1">
+            <input
+              type="text"
+              value={redeemCode}
+              onChange={(e) => setRedeemCode(e.target.value.toUpperCase())}
+              onKeyPress={(e) => e.key === 'Enter' && handleRedeemCode()}
+              placeholder="Enter code (e.g., SUMMER2024)"
+              className="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent font-mono text-lg uppercase"
+              disabled={redeeming}
+            />
+          </div>
+          <button
+            onClick={handleRedeemCode}
+            disabled={!redeemCode.trim() || redeeming}
+            className="px-8 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg hover:from-green-700 hover:to-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-semibold shadow-lg"
+          >
+            {redeeming ? 'Redeeming...' : 'Redeem'}
+          </button>
+        </div>
+
+        {redeemMessage && (
+          <div className={`mt-4 p-4 rounded-lg flex items-center gap-2 ${
+            redeemMessage.type === 'success'
+              ? 'bg-green-100 text-green-800 border-2 border-green-300'
+              : 'bg-red-100 text-red-800 border-2 border-red-300'
+          }`}>
+            {redeemMessage.type === 'success' ? (
+              <CheckCircle className="w-5 h-5" />
+            ) : (
+              <XCircle className="w-5 h-5" />
+            )}
+            <p className="font-medium">{redeemMessage.text}</p>
+          </div>
+        )}
+
+        {redeemedCodes.length > 0 && (
+          <div className="mt-6 pt-6 border-t border-green-200">
+            <h3 className="text-sm font-semibold text-gray-700 mb-3">Recently Redeemed Codes</h3>
+            <div className="space-y-2">
+              {redeemedCodes.slice(0, 3).map((item) => (
+                <div key={item.id} className="bg-white rounded-lg p-3 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <Tag className="w-4 h-4 text-green-600" />
+                    <div>
+                      <code className="text-sm font-mono font-bold text-gray-900">{item.code}</code>
+                      <p className="text-xs text-gray-500">{new Date(item.redeemed_at).toLocaleDateString()}</p>
+                    </div>
+                  </div>
+                  <span className="text-sm font-bold text-green-600">+${item.value.toFixed(2)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
       {/* Recent Transactions */}
       <div className="bg-white rounded-lg shadow">
         <div className="p-6 border-b border-gray-200">
@@ -264,7 +375,7 @@ export default function WalletPage() {
                 </div>
                 <div className="text-right">
                   <p className={`text-lg font-bold ${getTransactionColor(transaction.transaction_type)}`}>
-                    {transaction.transaction_type === 'topup' || transaction.transaction_type === 'giveaway' ? '+' : '-'}
+                    {['topup', 'giveaway', 'bonus', 'referral_bonus'].includes(transaction.transaction_type) ? '+' : '-'}
                     ${transaction.amount.toFixed(2)}
                   </p>
                 </div>

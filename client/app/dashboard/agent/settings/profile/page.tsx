@@ -39,7 +39,9 @@ export default function AgentProfileSettingsPage() {
     try {
       // Get the current agent's profile
       const response = await ApiService.get('/agents/');
-      const agentData = response.data.find((agent: AgentProfile) => agent.user.email === user?.email);
+      // ApiService.get returns data directly (after handling pagination)
+      const agents = Array.isArray(response) ? response : [];
+      const agentData = agents.find((agent: AgentProfile) => agent.user.email === user?.email);
 
       if (agentData) {
         setProfile(agentData);

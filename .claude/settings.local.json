@@ -25,7 +25,9 @@
       "Bash(api/serializers.py)",
       "Bash(pip install:*)",
       "Bash(venv/bin/python:*)",
-      "Bash(kill:*)"
+      "Bash(kill:*)",
+      "Bash(/Users/MacOs/Documents/GitHub/Montrroase_website/server/venv/bin/python:*)",
+      "Bash(xargs -I {} sh -c 'echo \"\"\"\"=== {} ===\"\"\"\" && head -30 {}')"
     ],
     "deny": [],
     "ask": []

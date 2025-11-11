@@ -154,6 +154,11 @@ from .views_new_features import (
     TransactionViewSet, GiveawayViewSet, SupportTicketViewSet
 )
 
+# Import redeem code views
+from .views.redeem_code_views import (
+    RedeemCodeViewSet, redeem_code, my_redeemed_codes
+)
+
 # Create router and register viewsets
 router = DefaultRouter()
 router.register(r'clients', ClientViewSet, basename='client')
@@ -177,6 +182,7 @@ router.register(r'wallet', WalletViewSet, basename='wallet')
 router.register(r'transactions', TransactionViewSet, basename='transaction')
 router.register(r'giveaways', GiveawayViewSet, basename='giveaway')
 router.register(r'support-tickets', SupportTicketViewSet, basename='support-ticket')
+router.register(r'redeem-codes', RedeemCodeViewSet, basename='redeem-code')
 
 urlpatterns = [
     # Authentication endpoints
@@ -255,7 +261,11 @@ urlpatterns = [
     path('billing/submit-verification/', submit_payment_verification, name='submit_verification'),
     path('admin/pending-verifications/', get_pending_verifications, name='pending_verifications'),
     path('admin/approve-verification/<uuid:verification_id>/', approve_payment_verification, name='approve_verification'),
-    
+
+    # Redeem Code endpoints
+    path('wallet/redeem/', redeem_code, name='redeem_code'),
+    path('wallet/my-redeemed-codes/', my_redeemed_codes, name='my_redeemed_codes'),
+
     # Message endpoints
     path('messages/send-to-admin/', send_message_to_admin, name='send_message_to_admin'),
     path('messages/send-to-client/', send_message_to_client, name='send_message_to_client'),
