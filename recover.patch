@@ -1,0 +1,14 @@
+diff --git a/server/logs/django.log b/server/logs/django.log
+index 84c25a6..be4a13e 100644
+--- a/server/logs/django.log
++++ b/server/logs/django.log
+@@ -23406,3 +23406,9 @@ INFO 2025-11-12 21:52:21,649 basehttp 14945 123145534070784 "GET /api/notificati
+ INFO 2025-11-12 21:53:21,267 basehttp 14945 123145534070784 "GET /api/notifications/ HTTP/1.1" 200 52
+ INFO 2025-11-12 21:53:21,283 basehttp 14945 123145550860288 "GET /api/notifications/ HTTP/1.1" 200 364
+ INFO 2025-11-12 21:53:21,304 basehttp 14945 123145567649792 "GET /api/notifications/ HTTP/1.1" 200 367
++INFO 2025-11-12 21:54:21,193 basehttp 14945 123145567649792 "GET /api/notifications/ HTTP/1.1" 200 52
++INFO 2025-11-12 21:54:21,236 basehttp 14945 123145534070784 "GET /api/notifications/ HTTP/1.1" 200 367
++INFO 2025-11-12 21:54:21,245 basehttp 14945 123145550860288 "GET /api/notifications/ HTTP/1.1" 200 364
++INFO 2025-11-12 21:55:21,288 basehttp 14945 123145550860288 "GET /api/notifications/ HTTP/1.1" 200 364
++INFO 2025-11-12 21:55:21,326 basehttp 14945 123145534070784 "GET /api/notifications/ HTTP/1.1" 200 52
++INFO 2025-11-12 21:55:21,359 basehttp 14945 123145567649792 "GET /api/notifications/ HTTP/1.1" 200 367
