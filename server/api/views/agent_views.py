@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 
-from ..models import Agent, Client, User
+from ..models import Agent, Client, User, ClientServiceSettings
 from ..serializers import AgentSerializer, ClientSerializer
 
 
@@ -265,7 +265,7 @@ def get_agent_dashboard_stats(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_my_clients(request):
-    """Get clients assigned to the logged-in agent"""
+    """Get clients visible to the logged-in agent based on their department"""
     user = request.user
 
     if user.role != 'agent':
@@ -276,9 +276,85 @@ def get_my_clients(request):
 
     try:
         agent = Agent.objects.get(user=user)
-        clients = Client.objects.filter(assigned_agent=agent).select_related('user')
-        serializer = ClientSerializer(clients, many=True, context={'request': request})
-        return Response(serializer.data)
+
+        # Get ALL clients, then filter based on agent's department and client classification
+        all_clients = Client.objects.all().select_related('user', 'assigned_agent__user').prefetch_related(
+            'social_accounts', 'website_projects', 'service_settings__assigned_agent__user'
+        )
+
+        # Filter clients based on agent department and client type
+        eligible_clients = []
+        for client in all_clients:
+            client_type = client.client_type
+
+            # Marketing agents should only see clients who need marketing services
+            if agent.department == 'marketing':
+                if client_type in ['marketing', 'full']:
+                    eligible_clients.append(client)
+
+            # Website agents should only see clients who need website services
+            elif agent.department == 'website':
+                if client_type in ['website', 'full']:
+                    eligible_clients.append(client)
+
+            # For other departments or 'none' type clients, include them (fallback)
+            else:
+                eligible_clients.append(client)
+
+        serializer = ClientSerializer(eligible_clients, many=True, context={'request': request})
+        clients_data = serializer.data
+
+        # Add flags to indicate service-specific assignment status
+        for client_data in clients_data:
+            client = Client.objects.get(id=client_data['id'])
+
+            # Check service-specific assignment for agent's department
+            my_service_setting = ClientServiceSettings.objects.filter(
+                client=client,
+                service_type=agent.department,
+                assigned_agent=agent
+            ).first()
+
+            # Check if client has any agent for this service type
+            service_setting = ClientServiceSettings.objects.filter(
+                client=client,
+                service_type=agent.department,
+                assigned_agent__isnull=False
+            ).first()
+
+            # Get service settings for both marketing and website
+            marketing_setting = ClientServiceSettings.objects.filter(
+                client=client,
+                service_type='marketing',
+                assigned_agent__isnull=False
+            ).select_related('assigned_agent__user').first()
+
+            website_setting = ClientServiceSettings.objects.filter(
+                client=client,
+                service_type='website',
+                assigned_agent__isnull=False
+            ).select_related('assigned_agent__user').first()
+
+            # Set flags
+            client_data['is_assigned_to_me'] = my_service_setting is not None
+            client_data['is_available'] = service_setting is None  # Available for my service type
+
+            # Service-specific agent info
+            client_data['has_marketing_agent'] = marketing_setting is not None
+            client_data['has_website_agent'] = website_setting is not None
+            client_data['marketing_agent_name'] = marketing_setting.assigned_agent.user.get_full_name() if marketing_setting else None
+            client_data['website_agent_name'] = website_setting.assigned_agent.user.get_full_name() if website_setting else None
+
+            # Backwards compatibility
+            if client.assigned_agent:
+                client_data['assigned_agent_name'] = client.assigned_agent.user.get_full_name()
+            else:
+                client_data['assigned_agent_name'] = None
+
+            # Add active services
+            client_data['active_services'] = client.active_services if hasattr(client, 'active_services') else []
+
+        return Response(clients_data)
 
     except Agent.DoesNotExist:
         return Response(

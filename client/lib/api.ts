@@ -136,6 +136,11 @@ class ApiService {
     return await this.request('/auth/me/');
   }
 
+  async getMe() {
+    // Alias for getCurrentUser for backward compatibility
+    return await this.getCurrentUser();
+  }
+
   // ============ EMAIL VERIFICATION METHODS ============
 
   async sendVerificationCode(data: {
@@ -883,6 +888,36 @@ class ApiService {
     return await this.request('/service-settings/');
   }
 
+  // ============ COURSE API ============
+
+  async getCourses() {
+    return await this.request('/courses/');
+  }
+
+  async getCourse(id: string) {
+    return await this.request(`/courses/${id}/`);
+  }
+
+  async createCourse(data: any) {
+    return await this.request('/courses/', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateCourse(id: string, data: any) {
+    return await this.request(`/courses/${id}/`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteCourse(id: string) {
+    return await this.request(`/courses/${id}/`, {
+      method: 'DELETE',
+    });
+  }
+
   // ============ COURSE PURCHASE API ============
 
   async purchaseCourse(courseId: string, paymentMethod: 'wallet' | 'paypal' = 'paypal') {
@@ -1171,6 +1206,47 @@ class ApiService {
   async disableAutoRecharge() {
     return await this.request('/wallet-auto-recharge/disable/', {
       method: 'POST',
+    });
+  }
+
+  // ============ AGENT MANAGEMENT METHODS ============
+
+  async getAgentsWithRequests() {
+    return await this.request('/client-access-requests/agents_with_requests/');
+  }
+
+  async assignClientToAgent(agentId: string, clientId: string) {
+    return await this.request('/client-access-requests/assign_client/', {
+      method: 'POST',
+      body: JSON.stringify({ agent_id: agentId, client_id: clientId }),
+    });
+  }
+
+  async transferClient(clientId: string, newAgentId: string) {
+    return await this.request('/client-access-requests/transfer_client/', {
+      method: 'POST',
+      body: JSON.stringify({ client_id: clientId, new_agent_id: newAgentId }),
+    });
+  }
+
+  async unassignClient(clientId: string) {
+    return await this.request('/client-access-requests/unassign_client/', {
+      method: 'POST',
+      body: JSON.stringify({ client_id: clientId }),
+    });
+  }
+
+  async approveClientRequest(requestId: string, reviewNote?: string) {
+    return await this.request(`/client-access-requests/${requestId}/approve/`, {
+      method: 'POST',
+      body: JSON.stringify({ review_note: reviewNote }),
+    });
+  }
+
+  async denyClientRequest(requestId: string, reviewNote: string) {
+    return await this.request(`/client-access-requests/${requestId}/deny/`, {
+      method: 'POST',
+      body: JSON.stringify({ review_note: reviewNote }),
     });
   }
 

@@ -265,6 +265,65 @@ class Client(models.Model):
         else:
             return f'{self.get_status_display()} - {self.get_current_plan_display()}'
 
+    @property
+    def has_social_accounts(self):
+        """Check if client has connected any social media accounts"""
+        return self.social_accounts.filter(is_active=True).exists()
+
+    @property
+    def has_website_projects(self):
+        """Check if client has any website projects"""
+        return self.website_projects.exists()
+
+    @property
+    def client_type(self):
+        """
+        Determine client type based on their activities:
+        - 'marketing': Has social accounts but no website projects
+        - 'website': Has website projects but no social accounts
+        - 'full': Has both social accounts and website projects
+        - 'none': Has neither (new client)
+        """
+        has_social = self.has_social_accounts
+        has_website = self.has_website_projects
+
+        if has_social and has_website:
+            return 'full'
+        elif has_social:
+            return 'marketing'
+        elif has_website:
+            return 'website'
+        else:
+            return 'none'
+
+    @property
+    def needs_marketing_agent(self):
+        """Check if client needs a marketing agent"""
+        return self.client_type in ['marketing', 'full']
+
+    @property
+    def needs_website_agent(self):
+        """Check if client needs a website agent"""
+        return self.client_type in ['website', 'full']
+
+    @property
+    def marketing_agent(self):
+        """Get the marketing agent assigned to this client"""
+        service_setting = self.service_settings.filter(
+            service_type='marketing',
+            assigned_agent__isnull=False
+        ).select_related('assigned_agent__user').first()
+        return service_setting.assigned_agent if service_setting else None
+
+    @property
+    def website_agent(self):
+        """Get the website agent assigned to this client"""
+        service_setting = self.service_settings.filter(
+            service_type='website',
+            assigned_agent__isnull=False
+        ).select_related('assigned_agent__user').first()
+        return service_setting.assigned_agent if service_setting else None
+
     class Meta:
         ordering = ['-created_at']
 
@@ -676,6 +735,38 @@ class Notification(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+
+class ClientAccessRequest(models.Model):
+    """Model for agents to request access to clients"""
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('denied', 'Denied'),
+    ]
+
+    SERVICE_TYPE_CHOICES = [
+        ('marketing', 'Marketing'),
+        ('website', 'Website Development'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    agent = models.ForeignKey(Agent, on_delete=models.CASCADE, related_name='client_requests')
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='access_requests')
+    service_type = models.CharField(max_length=20, choices=SERVICE_TYPE_CHOICES, default='marketing', help_text='Service type for this request')
+    reason = models.TextField(help_text='Reason for requesting this client', blank=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    reviewed_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='reviewed_requests')
+    review_note = models.TextField(blank=True, help_text='Admin note for approval/denial')
+    created_at = models.DateTimeField(default=timezone.now)
+    reviewed_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        unique_together = ['agent', 'client', 'service_type', 'status']  # Prevent duplicate pending requests per service
+
+    def __str__(self):
+        return f"{self.agent.user.get_full_name()} → {self.client.name} ({self.service_type}) [{self.status}]"
 
 
 class ImageGalleryItem(models.Model):

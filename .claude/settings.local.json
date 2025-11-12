@@ -30,7 +30,10 @@
       "Bash(xargs -I {} sh -c 'echo \"\"\"\"=== {} ===\"\"\"\" && head -30 {}')",
       "Bash(python test_notification_system.py:*)",
       "Bash(sqlite3:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(xargs -I {} sh -c 'echo \"\"\"\"Next.js running on PID: {}\"\"\"\"')",
+      "Bash(xargs -I {} sh -c 'echo \"\"\"\"Django running on PID: {}\"\"\"\"')",
+      "Bash(python create_test_users.py:*)"
     ],
     "deny": [],
     "ask": []

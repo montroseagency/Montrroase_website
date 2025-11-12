@@ -2,10 +2,11 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X, BarChart3, Users, FileText, CheckSquare, MessageSquare, Settings, LogOut, Home, TrendingUp, Image, Globe, GraduationCap, Wallet as WalletIcon, HelpCircle, ChevronDown, ChevronRight, DollarSign, LayoutGrid, Megaphone, Calendar, Upload, Server } from 'lucide-react';
 import { useAuth } from '@/lib/hooks/useAuth';
 import ServiceSwitcher from '@/components/ServiceSwitcher';
+import ApiService from '@/lib/api';
 
 interface SubLink {
   href: string;
@@ -25,15 +26,52 @@ export function Sidebar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
+  const [agentDepartment, setAgentDepartment] = useState<string | null>(null);
+
+  // Fetch agent department if user is an agent
+  useEffect(() => {
+    if (user?.role === 'agent') {
+      const fetchAgentInfo = async () => {
+        try {
+          const userData = await ApiService.getMe();
+          if (userData.agent_profile?.department) {
+            setAgentDepartment(userData.agent_profile.department);
+          }
+        } catch (error) {
+          console.error('Error fetching agent info:', error);
+        }
+      };
+      fetchAgentInfo();
+    }
+  }, [user]);
 
   const adminLinks: NavLink[] = [
     { href: '/dashboard/admin/overview', label: 'Overview', icon: <Home className="w-5 h-5" />, roles: ['admin'] },
     { href: '/dashboard/admin/clients', label: 'Clients', icon: <Users className="w-5 h-5" />, roles: ['admin'] },
-    { href: '/dashboard/admin/agents', label: 'Agents', icon: <Users className="w-5 h-5" />, roles: ['admin'] },
-    { href: '/dashboard/admin/content', label: 'Content', icon: <FileText className="w-5 h-5" />, roles: ['admin'] },
-    { href: '/dashboard/admin/tasks', label: 'Tasks', icon: <CheckSquare className="w-5 h-5" />, roles: ['admin'] },
+    {
+      href: '/dashboard/admin/agents',
+      label: 'Team',
+      icon: <Users className="w-5 h-5" />,
+      roles: ['admin'],
+      subLinks: [
+        { href: '/dashboard/admin/agents', label: 'Agents' },
+        { href: '/dashboard/admin/team/performance', label: 'Performance' },
+        { href: '/dashboard/admin/client-requests', label: 'Client Requests' },
+      ]
+    },
+    { href: '/dashboard/admin/courses', label: 'Courses', icon: <GraduationCap className="w-5 h-5" />, roles: ['admin'] },
     { href: '/dashboard/admin/invoices', label: 'Invoices', icon: <BarChart3 className="w-5 h-5" />, roles: ['admin'] },
-    { href: '/dashboard/admin/analytics', label: 'Analytics', icon: <TrendingUp className="w-5 h-5" />, roles: ['admin'] },
+    {
+      href: '/dashboard/admin/analytics',
+      label: 'Analytics',
+      icon: <TrendingUp className="w-5 h-5" />,
+      roles: ['admin'],
+      subLinks: [
+        { href: '/dashboard/admin/analytics', label: 'Overview' },
+        { href: '/dashboard/admin/analytics/services', label: 'Services' },
+        { href: '/dashboard/admin/analytics/revenue', label: 'Revenue' },
+      ]
+    },
     { href: '/dashboard/admin/messages', label: 'Messages', icon: <MessageSquare className="w-5 h-5" />, roles: ['admin'] },
     { href: '/dashboard/admin/settings', label: 'Settings', icon: <Settings className="w-5 h-5" />, roles: ['admin'] },
   ];
@@ -105,70 +143,116 @@ export function Sidebar() {
     },
   ];
 
-  const agentLinks: NavLink[] = [
+  // Build Marketing Agent Links
+  const marketingAgentLinks: NavLink[] = [
     {
-      href: '/dashboard/agent',
+      href: '/dashboard/agent/marketing',
       label: 'Dashboard',
       icon: <Home className="w-5 h-5" />,
       roles: ['agent']
     },
     {
-      href: '/dashboard/agent/clients',
+      href: '/dashboard/agent/marketing/clients',
       label: 'My Clients',
       icon: <Users className="w-5 h-5" />,
       roles: ['agent']
     },
     {
-      href: '/dashboard/agent/tasks',
-      label: 'Tasks',
-      icon: <CheckSquare className="w-5 h-5" />,
-      roles: ['agent']
-    },
-    {
-      href: '/dashboard/agent/content',
+      href: '/dashboard/agent/marketing/content',
       label: 'Content',
       icon: <FileText className="w-5 h-5" />,
       roles: ['agent']
     },
     {
-      href: '/dashboard/agent/marketing',
-      label: 'Marketing',
+      href: '/dashboard/agent/marketing/campaigns',
+      label: 'Campaigns',
       icon: <Megaphone className="w-5 h-5" />,
-      roles: ['agent'],
-      subLinks: [
-        { href: '/dashboard/agent/marketing/campaigns', label: 'Campaigns' },
-        { href: '/dashboard/agent/marketing/scheduler', label: 'Content Scheduler' },
-        { href: '/dashboard/agent/marketing/analytics', label: 'Analytics' },
-      ]
+      roles: ['agent']
     },
     {
-      href: '/dashboard/agent/website',
-      label: 'Website',
-      icon: <Globe className="w-5 h-5" />,
-      roles: ['agent'],
-      subLinks: [
-        { href: '/dashboard/agent/website/projects', label: 'Projects' },
-        { href: '/dashboard/agent/website/uploads', label: 'Uploads' },
-        { href: '/dashboard/agent/website/hosting', label: 'Hosting' },
-      ]
+      href: '/dashboard/agent/marketing/scheduler',
+      label: 'Content Scheduler',
+      icon: <Calendar className="w-5 h-5" />,
+      roles: ['agent']
     },
     {
-      href: '/dashboard/agent/messages',
+      href: '/dashboard/agent/marketing/analytics',
+      label: 'Analytics',
+      icon: <BarChart3 className="w-5 h-5" />,
+      roles: ['agent']
+    },
+    {
+      href: '/dashboard/agent/marketing/messages',
       label: 'Messages',
       icon: <MessageSquare className="w-5 h-5" />,
       roles: ['agent']
     },
     {
-      href: '/dashboard/agent/settings',
+      href: '/dashboard/agent/marketing/settings',
       label: 'Settings',
       icon: <Settings className="w-5 h-5" />,
       roles: ['agent'],
       subLinks: [
-        { href: '/dashboard/agent/settings/profile', label: 'Profile' },
+        { href: '/dashboard/agent/marketing/settings/profile', label: 'Profile' },
       ]
-    },
+    }
   ];
 
+  // Build Developer Agent Links
+  const developerAgentLinks: NavLink[] = [
+    {
+      href: '/dashboard/agent/developer',
+      label: 'Dashboard',
+      icon: <Home className="w-5 h-5" />,
+      roles: ['agent']
+    },
+    {
+      href: '/dashboard/agent/developer/clients',
+      label: 'My Clients',
+      icon: <Users className="w-5 h-5" />,
+      roles: ['agent']
+    },
+    {
+      href: '/dashboard/agent/website/projects',
+      label: 'Projects',
+      icon: <Globe className="w-5 h-5" />,
+      roles: ['agent']
+    },
+    {
+      href: '/dashboard/agent/website/uploads',
+      label: 'Upload Versions',
+      icon: <Upload className="w-5 h-5" />,
+      roles: ['agent']
+    },
+    {
+      href: '/dashboard/agent/website/hosting',
+      label: 'Hosting',
+      icon: <Server className="w-5 h-5" />,
+      roles: ['agent']
+    },
+    {
+      href: '/dashboard/agent/developer/messages',
+      label: 'Messages',
+      icon: <MessageSquare className="w-5 h-5" />,
+      roles: ['agent']
+    },
+    {
+      href: '/dashboard/agent/developer/settings',
+      label: 'Settings',
+      icon: <Settings className="w-5 h-5" />,
+      roles: ['agent'],
+      subLinks: [
+        { href: '/dashboard/agent/developer/settings/profile', label: 'Profile' },
+      ]
+    }
+  ];
+
+  // Select agent links based on department
+  const agentLinks = agentDepartment === 'marketing'
+    ? marketingAgentLinks
+    : agentDepartment === 'website'
+    ? developerAgentLinks
+    : [];
   const links = user?.role === 'admin' ? adminLinks : user?.role === 'agent' ? agentLinks : clientLinks;
 
   const isActive = (href: string) => {

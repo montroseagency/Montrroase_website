@@ -29,7 +29,20 @@ class WebsiteProjectViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         if self.request.user.role == 'admin':
             return WebsiteProject.objects.all()
-        return WebsiteProject.objects.filter(client=self.request.user.client_profile)
+        elif self.request.user.role == 'agent':
+            # Agents see projects for their assigned clients
+            try:
+                from .models import Client
+                agent_clients = Client.objects.filter(assigned_agent=self.request.user.agent_profile)
+                return WebsiteProject.objects.filter(client__in=agent_clients)
+            except:
+                return WebsiteProject.objects.none()
+        else:
+            # Clients see only their own projects
+            try:
+                return WebsiteProject.objects.filter(client=self.request.user.client_profile)
+            except:
+                return WebsiteProject.objects.none()
 
     def get_serializer_class(self):
         if self.action == 'create':
@@ -114,7 +127,10 @@ class WebsitePhaseViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         if self.request.user.role == 'admin':
             return WebsitePhase.objects.all()
-        return WebsitePhase.objects.filter(project__client=self.request.user.client_profile)
+        try:
+            return WebsitePhase.objects.filter(project__client=self.request.user.client_profile)
+        except:
+            return WebsitePhase.objects.none()
 
 
 # ==================== COURSES VIEWS ====================
@@ -358,13 +374,19 @@ class WalletViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         if self.request.user.role == 'admin':
             return Wallet.objects.all()
-        return Wallet.objects.filter(client=self.request.user.client_profile)
+        try:
+            return Wallet.objects.filter(client=self.request.user.client_profile)
+        except:
+            return Wallet.objects.none()
 
     @action(detail=False, methods=['get'])
     def my_wallet(self, request):
         """Get current user's wallet"""
-        wallet, _ = Wallet.objects.get_or_create(client=request.user.client_profile)
-        return Response(WalletSerializer(wallet).data)
+        try:
+            wallet, _ = Wallet.objects.get_or_create(client=request.user.client_profile)
+            return Response(WalletSerializer(wallet).data)
+        except:
+            return Response({'error': 'No client profile found'}, status=404)
 
     @action(detail=False, methods=['post'])
     def topup(self, request):
@@ -372,7 +394,10 @@ class WalletViewSet(viewsets.ReadOnlyModelViewSet):
         serializer = TopUpWalletSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        wallet, _ = Wallet.objects.get_or_create(client=request.user.client_profile)
+        try:
+            wallet, _ = Wallet.objects.get_or_create(client=request.user.client_profile)
+        except:
+            return Response({'error': 'No client profile found'}, status=400)
         amount = serializer.validated_data['amount']
         payment_method = serializer.validated_data['payment_method']
 
@@ -405,7 +430,10 @@ class TransactionViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         if self.request.user.role == 'admin':
             return Transaction.objects.all()
-        return Transaction.objects.filter(wallet__client=self.request.user.client_profile)
+        try:
+            return Transaction.objects.filter(wallet__client=self.request.user.client_profile)
+        except:
+            return Transaction.objects.none()
 
 
 class GiveawayViewSet(viewsets.ReadOnlyModelViewSet):
@@ -417,19 +445,28 @@ class GiveawayViewSet(viewsets.ReadOnlyModelViewSet):
     @action(detail=False, methods=['get'])
     def my_wins(self, request):
         """Get user's giveaway wins"""
-        wins = GiveawayWinner.objects.filter(client=request.user.client_profile)
-        from .serializers import GiveawayWinnerSerializer
-        return Response(GiveawayWinnerSerializer(wins, many=True).data)
+        try:
+            wins = GiveawayWinner.objects.filter(client=request.user.client_profile)
+            from .serializers import GiveawayWinnerSerializer
+            return Response(GiveawayWinnerSerializer(wins, many=True).data)
+        except:
+            return Response([])
 
     @action(detail=True, methods=['post'])
     def claim_reward(self, request, pk=None):
         """Claim giveaway reward"""
-        win = get_object_or_404(GiveawayWinner, giveaway_id=pk, client=request.user.client_profile)
+        try:
+            win = get_object_or_404(GiveawayWinner, giveaway_id=pk, client=request.user.client_profile)
+        except:
+            return Response({'error': 'No client profile found'}, status=400)
 
         if win.is_claimed:
             return Response({'error': 'Reward already claimed'}, status=400)
 
-        wallet, _ = Wallet.objects.get_or_create(client=request.user.client_profile)
+        try:
+            wallet, _ = Wallet.objects.get_or_create(client=request.user.client_profile)
+        except:
+            return Response({'error': 'No client profile found'}, status=400)
 
         # Create transaction
         transaction = Transaction.objects.create(
@@ -463,7 +500,10 @@ class SupportTicketViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         if self.request.user.role == 'admin':
             return SupportTicket.objects.all()
-        return SupportTicket.objects.filter(client=self.request.user.client_profile)
+        try:
+            return SupportTicket.objects.filter(client=self.request.user.client_profile)
+        except:
+            return SupportTicket.objects.none()
 
     def get_serializer_class(self):
         if self.action == 'create':

@@ -165,6 +165,9 @@ from .views.redeem_code_views import (
 # Import service management views
 from .views.client.service_management_views import ClientServiceSettingsViewSet
 
+# Import agent views
+from .views.agent import ClientAccessRequestViewSet
+
 # Create router and register viewsets
 router = DefaultRouter()
 router.register(r'clients', ClientViewSet, basename='client')
@@ -196,6 +199,7 @@ router.register(r'giveaways', GiveawayViewSet, basename='giveaway')
 router.register(r'support-tickets', SupportTicketViewSet, basename='support-ticket')
 router.register(r'redeem-codes', RedeemCodeViewSet, basename='redeem-code')
 router.register(r'service-settings', ClientServiceSettingsViewSet, basename='service-settings')
+router.register(r'client-access-requests', ClientAccessRequestViewSet, basename='client-access-request')
 
 urlpatterns = [
     # Authentication endpoints

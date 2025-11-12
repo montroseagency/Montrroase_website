@@ -1,4 +1,4 @@
-# Agent-specific views
-from .agent_features_views import WebsiteVersionViewSet, CampaignViewSet
+# Agent views module
+from .client_request_views import ClientAccessRequestViewSet
 
-__all__ = ['WebsiteVersionViewSet', 'CampaignViewSet']
+__all__ = ['ClientAccessRequestViewSet']

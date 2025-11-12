@@ -8,7 +8,7 @@ export interface AuthUser {
   email: string;
   first_name: string;
   last_name: string;
-  role: 'admin' | 'client';
+  role: 'admin' | 'client' | 'agent';
   company?: string;
   avatar?: string;
   bio?: string;
@@ -63,6 +63,35 @@ export interface PostMetrics {
 }
 
 // Business Logic Types
+export interface Agent {
+  id: string;
+  user: AuthUser;
+  department: 'marketing' | 'website';
+  specialization: string;
+  is_active: boolean;
+  max_clients: number;
+  current_client_count?: number;
+  can_accept_clients?: boolean;
+  created_at: string;
+  updated_at: string;
+  pending_requests?: ClientAccessRequest[];
+  pending_requests_count?: number;
+  assigned_clients_count?: number;
+}
+
+export interface ClientAccessRequest {
+  id: string;
+  agent: Agent;
+  client: Client;
+  service_type: 'marketing' | 'website';
+  reason: string;
+  status: 'pending' | 'approved' | 'denied';
+  reviewed_by?: AuthUser;
+  review_note?: string;
+  created_at: string;
+  reviewed_at?: string;
+}
+
 export interface Client {
   id: string;
   name: string;
@@ -75,11 +104,21 @@ export interface Client {
   payment_status: 'paid' | 'overdue' | 'pending';
   platforms: string[];
   account_manager: string;
+  assigned_agent?: Agent;
   next_payment: string;
   total_spent: number;
   notes?: string;
   created_at: string;
   updated_at: string;
+  // Service-specific assignment info
+  is_assigned_to_me?: boolean;
+  is_available?: boolean;
+  has_marketing_agent?: boolean;
+  has_website_agent?: boolean;
+  marketing_agent_name?: string | null;
+  website_agent_name?: string | null;
+  assigned_agent_name?: string | null;
+  active_services?: string[];
 }
 
 export interface Task {

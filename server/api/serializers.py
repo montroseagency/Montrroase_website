@@ -10,18 +10,19 @@ from .models import (
     SocialMediaAccount, RealTimeMetrics, WebsiteProject, WebsitePhase,
     Course, CourseModule, CourseLesson, CourseProgress, CourseCertificate, CoursePurchase,
     Wallet, Transaction, WalletAutoRecharge, Giveaway, GiveawayWinner, SupportTicket, TicketMessage,
-    Agent, ClientServiceSettings, WebsiteVersion, Campaign, ContentSchedule
+    Agent, ClientServiceSettings, WebsiteVersion, Campaign, ContentSchedule, ClientAccessRequest
 )
 
 class UserSerializer(serializers.ModelSerializer):
     """User serializer for authentication and profile"""
     avatar = serializers.SerializerMethodField()
-    
+    agent_profile = serializers.SerializerMethodField()
+
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'role', 'company', 'avatar', 'bio']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'role', 'company', 'avatar', 'bio', 'agent_profile']
         read_only_fields = ['id']
-    
+
     def get_avatar(self, obj):
         """Return full URL for avatar"""
         if obj.avatar:
@@ -29,6 +30,24 @@ class UserSerializer(serializers.ModelSerializer):
             if request:
                 return request.build_absolute_uri(obj.avatar.url)
             return obj.avatar.url
+        return None
+
+    def get_agent_profile(self, obj):
+        """Return agent profile data if user is an agent"""
+        if obj.role == 'agent':
+            try:
+                agent = obj.agent_profile
+                return {
+                    'id': str(agent.id),
+                    'department': agent.department,
+                    'specialization': agent.specialization,
+                    'is_active': agent.is_active,
+                    'max_clients': agent.max_clients,
+                    'current_client_count': agent.current_client_count,
+                    'can_accept_clients': agent.can_accept_clients,
+                }
+            except:
+                return None
         return None
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
@@ -49,32 +68,45 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         
         user = User.objects.create_user(**validated_data)
         
-        # ALWAYS create client profile for any user (even if role is admin, they might need billing)
+        # ALWAYS create client profile for any user with FREE plan by default
         # This ensures every user has a client profile for billing purposes
         try:
             from django.utils import timezone
             from datetime import timedelta
+            from .models import Wallet
             future_date = timezone.now().date() + timedelta(days=30)
-            
-            Client.objects.create(
+
+            client = Client.objects.create(
                 user=user,
                 name=name,
                 email=validated_data['email'],
                 company=validated_data.get('company', '') or 'Unknown Company',
-                package='No Plan Selected',
+                package='free',  # Default FREE plan for all new users
                 monthly_fee=0,
                 start_date=timezone.now().date(),
-                status='pending',
-                payment_status='none',
-                account_manager='Admin',
-                next_payment=future_date,  # Use future date instead of None
-                current_plan='none',
+                status='active',  # Set to active immediately for free plan
+                payment_status='none',  # No payment required for free plan
+                next_payment=None,  # No payment required for free plan
+                current_plan='none',  # No plan selected initially
                 paypal_subscription_id=None,
                 paypal_customer_id=None,
             )
-            print(f"Created client profile for new user: {user.email}")
+
+            # Create wallet for the client
+            try:
+                Wallet.objects.create(
+                    client=client,
+                    balance=0.00  # Start with zero balance
+                )
+                print(f"Created wallet for new user: {user.email}")
+            except Exception as wallet_error:
+                print(f"WARNING: Failed to create wallet for {user.email}: {wallet_error}")
+
+            print(f"Created client profile with FREE plan for new user: {user.email}")
         except Exception as e:
             print(f"ERROR: Failed to create client profile for {user.email}: {e}")
+            import traceback
+            traceback.print_exc()
             # Don't fail registration if client profile creation fails
             pass
         
@@ -160,6 +192,39 @@ class AgentSerializer(serializers.ModelSerializer):
         agent = Agent.objects.create(user=user, **validated_data)
         return agent
 
+
+class ClientAccessRequestSerializer(serializers.ModelSerializer):
+    """Serializer for client access requests"""
+    agent_name = serializers.CharField(source='agent.user.get_full_name', read_only=True)
+    agent_department = serializers.CharField(source='agent.department', read_only=True)
+    client_name = serializers.CharField(source='client.name', read_only=True)
+    client_company = serializers.CharField(source='client.company', read_only=True)
+    reviewed_by_name = serializers.CharField(source='reviewed_by.get_full_name', read_only=True)
+
+    class Meta:
+        model = ClientAccessRequest
+        fields = [
+            'id', 'agent', 'agent_name', 'agent_department', 'client', 'client_name',
+            'client_company', 'service_type', 'reason', 'status', 'reviewed_by', 'reviewed_by_name',
+            'review_note', 'created_at', 'reviewed_at'
+        ]
+        read_only_fields = ['id', 'agent', 'status', 'reviewed_by', 'reviewed_at', 'created_at']
+
+
+class ClientAccessRequestCreateSerializer(serializers.ModelSerializer):
+    """Serializer for creating client access requests"""
+
+    class Meta:
+        model = ClientAccessRequest
+        fields = ['client', 'service_type', 'reason']
+
+    def create(self, validated_data):
+        # Get agent from request context
+        request = self.context.get('request')
+        validated_data['agent'] = request.user.agent_profile
+        return super().create(validated_data)
+
+
 # ADD MISSING SOCIAL MEDIA SERIALIZERS
 class SocialMediaAccountSerializer(serializers.ModelSerializer):
     """Social Media Account serializer"""
@@ -236,7 +301,7 @@ class ClientServiceSettingsSerializer(serializers.ModelSerializer):
 
 
 class ClientSerializer(serializers.ModelSerializer):
-    """Enhanced Client serializer with user info"""
+    """Enhanced Client serializer with user info and classification"""
     user_id = serializers.CharField(source='user.id', read_only=True)
     user_first_name = serializers.CharField(source='user.first_name', read_only=True)
     user_last_name = serializers.CharField(source='user.last_name', read_only=True)
@@ -245,6 +310,19 @@ class ClientSerializer(serializers.ModelSerializer):
     assigned_agent_name = serializers.SerializerMethodField()
     assigned_agent_email = serializers.SerializerMethodField()
     service_settings = ClientServiceSettingsSerializer(many=True, read_only=True)
+
+    # Client classification fields
+    client_type = serializers.ReadOnlyField()
+    has_social_accounts = serializers.ReadOnlyField()
+    has_website_projects = serializers.ReadOnlyField()
+    needs_marketing_agent = serializers.ReadOnlyField()
+    needs_website_agent = serializers.ReadOnlyField()
+
+    # Service-specific agent assignments
+    marketing_agent_id = serializers.SerializerMethodField()
+    marketing_agent_name = serializers.SerializerMethodField()
+    website_agent_id = serializers.SerializerMethodField()
+    website_agent_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Client
@@ -257,7 +335,13 @@ class ClientSerializer(serializers.ModelSerializer):
             # Add user fields
             'user_id', 'user_first_name', 'user_last_name', 'user_email', 'user_avatar',
             # Multi-service fields
-            'active_services', 'service_settings'
+            'active_services', 'service_settings',
+            # Client classification
+            'client_type', 'has_social_accounts', 'has_website_projects',
+            'needs_marketing_agent', 'needs_website_agent',
+            # Service-specific agents
+            'marketing_agent_id', 'marketing_agent_name',
+            'website_agent_id', 'website_agent_name'
         ]
         read_only_fields = ['id', 'created_at', 'updated_at', 'user_id', 'user_first_name', 'user_last_name', 'user_email', 'user_avatar']
 
@@ -270,6 +354,26 @@ class ClientSerializer(serializers.ModelSerializer):
         if obj.assigned_agent:
             return obj.assigned_agent.user.email
         return None
+
+    def get_marketing_agent_id(self, obj):
+        """Get marketing agent ID"""
+        agent = obj.marketing_agent
+        return str(agent.id) if agent else None
+
+    def get_marketing_agent_name(self, obj):
+        """Get marketing agent name"""
+        agent = obj.marketing_agent
+        return f"{agent.user.first_name} {agent.user.last_name}" if agent else None
+
+    def get_website_agent_id(self, obj):
+        """Get website agent ID"""
+        agent = obj.website_agent
+        return str(agent.id) if agent else None
+
+    def get_website_agent_name(self, obj):
+        """Get website agent name"""
+        agent = obj.website_agent
+        return f"{agent.user.first_name} {agent.user.last_name}" if agent else None
 
 
 class TaskSerializer(serializers.ModelSerializer):
