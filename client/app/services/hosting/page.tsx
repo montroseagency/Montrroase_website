@@ -2,6 +2,7 @@
 
 import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 import Navigation from '@/components/marketing/navigation';
 import Footer from '@/components/marketing/footer';
 import InteractiveGlowBackground from '@/components/interactive-glow-background';
@@ -10,87 +11,279 @@ import FeatureGrid from '@/components/services/FeatureGrid';
 import CallToAction from '@/components/services/CallToAction';
 import AnimatedCounter from '@/components/services/AnimatedCounter';
 
-// 3D AI Security Core Component
-const AISecurityCore = ({ mousePosition }: { mousePosition: { x: number; y: number } }) => {
+// Ultra-Modern Floating 3D Card Component
+const FloatingSecurityCard = ({
+  feature,
+  index,
+  mousePosition,
+  isInView,
+}: {
+  feature: any;
+  index: number;
+  mousePosition: { x: number; y: number };
+  isInView: boolean;
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Evenly spaced positions in a 2x2 grid with depth layers
+  const positions = [
+    { x: -400, y: -200, z: 30, delay: 0, floatOffset: 0, zIndex: 4, rotateZ: -2 },
+    { x: 400, y: -200, z: -20, delay: 0.2, floatOffset: 0.7, zIndex: 2, rotateZ: 2 },
+    { x: -400, y: 220, z: -30, delay: 0.4, floatOffset: 1.2, zIndex: 2, rotateZ: 1 },
+    { x: 400, y: 220, z: 40, delay: 0.6, floatOffset: 1.8, zIndex: 4, rotateZ: -1 },
+  ];
+
+  const pos = positions[index];
+
+  // Independent mouse parallax effect - each card responds differently
+  const parallaxX = mousePosition.x * (25 + index * 8);
+  const parallaxY = mousePosition.y * (25 + index * 8);
+
+  // 3D tilt based on mouse position - enhanced on hover
+  const tiltX = isHovered ? mousePosition.y * -20 : mousePosition.y * -8;
+  const tiltY = isHovered ? mousePosition.x * 20 : mousePosition.x * 8;
+
   return (
-    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-      {/* Central glowing sphere */}
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8, filter: 'blur(10px)', y: 50 }}
+      animate={
+        isInView
+          ? { opacity: 1, scale: 1, filter: 'blur(0px)', y: 0 }
+          : { opacity: 0, scale: 0.8, filter: 'blur(10px)', y: 50 }
+      }
+      transition={{
+        duration: 0.8,
+        delay: pos.delay,
+        type: 'spring',
+        stiffness: 80,
+        damping: 15,
+      }}
+      className="absolute"
+      style={{
+        left: '50%',
+        top: '50%',
+        zIndex: pos.zIndex,
+        transform: `
+          translate(-50%, -50%)
+          translate3d(${pos.x + parallaxX}px, ${pos.y + parallaxY}px, ${pos.z}px)
+          perspective(1500px)
+          rotateX(${tiltX}deg)
+          rotateY(${tiltY}deg)
+          rotateZ(${pos.rotateZ + (isHovered ? 0 : pos.rotateZ * 0.5)}deg)
+        `,
+        transformStyle: 'preserve-3d',
+        willChange: 'transform',
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <motion.div
-        className="relative w-32 h-32"
+        className="relative w-72 p-8 rounded-3xl overflow-hidden"
+        style={{
+          background: isHovered
+            ? 'rgba(10, 25, 47, 0.9)'
+            : 'rgba(10, 25, 47, 0.75)',
+          backdropFilter: 'blur(30px) saturate(180%)',
+          border: `2px solid ${
+            isHovered ? 'rgba(6, 182, 212, 0.8)' : 'rgba(6, 182, 212, 0.4)'
+          }`,
+          boxShadow: isHovered
+            ? `
+                0 30px 90px rgba(6, 182, 212, 0.5),
+                0 0 80px rgba(139, 92, 246, 0.4),
+                inset 0 0 60px rgba(6, 182, 212, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.1)
+              `
+            : `
+                0 ${15 + pos.z}px ${50 + Math.abs(pos.z)}px rgba(0, 0, 0, ${0.6 + Math.abs(pos.z) / 100}),
+                0 0 30px rgba(6, 182, 212, 0.2),
+                inset 0 0 30px rgba(6, 182, 212, 0.05)
+              `,
+        }}
         animate={{
-          scale: [1, 1.1, 1],
-          rotate: [0, 360],
+          y: isHovered ? 0 : [0, -18, 0],
+          scale: isHovered ? 1.08 : 1 + (pos.z / 800), // Closer cards appear slightly larger
+          rotate: isHovered ? 0 : [0, pos.rotateZ / 2, 0],
         }}
         transition={{
-          scale: { duration: 3, repeat: Infinity },
-          rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-        }}
-        style={{
-          transform: `perspective(1000px) rotateY(${mousePosition.x * 20}deg) rotateX(${mousePosition.y * -20}deg)`,
+          y: {
+            duration: 3.5 + pos.floatOffset,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: pos.floatOffset * 0.5,
+          },
+          scale: { duration: 0.3 },
+          rotate: {
+            duration: 4 + pos.floatOffset,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: pos.floatOffset * 0.3,
+          },
         }}
       >
-        {/* Core sphere */}
-        <div
-          className="absolute inset-0 rounded-full"
+        {/* Animated gradient overlay */}
+        <motion.div
+          className="absolute inset-0 rounded-3xl pointer-events-none"
           style={{
-            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.8), rgba(139, 92, 246, 0.6), rgba(16, 185, 129, 0.4))',
-            boxShadow: `
-              0 0 40px rgba(6, 182, 212, 0.8),
-              0 0 80px rgba(139, 92, 246, 0.6),
-              0 0 120px rgba(16, 185, 129, 0.4),
-              inset 0 0 40px rgba(6, 182, 212, 0.4)
-            `,
-            filter: 'blur(2px)',
+            background: `linear-gradient(135deg,
+              rgba(6, 182, 212, ${isHovered ? 0.2 : 0}) 0%,
+              rgba(139, 92, 246, ${isHovered ? 0.15 : 0}) 100%)`,
+          }}
+          animate={{
+            backgroundPosition: ['0% 0%', '100% 100%'],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: 'linear',
           }}
         />
 
-        {/* Orbiting rings */}
-        {[0, 60, 120].map((rotation, i) => (
+        {/* Holographic scan effect */}
+        {isHovered && (
           <motion.div
-            key={i}
-            className="absolute inset-0"
+            className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl"
+            initial={{ y: '-100%' }}
+            animate={{ y: '200%' }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: 'linear',
+            }}
             style={{
-              transform: `rotateZ(${rotation}deg)`,
-            }}
-            animate={{
-              rotateX: [0, 360],
-            }}
-            transition={{
-              duration: 8 + i * 2,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          >
-            <div
-              className="absolute inset-0 rounded-full border-2"
-              style={{
-                borderColor: i === 0 ? 'rgba(6, 182, 212, 0.6)' : i === 1 ? 'rgba(139, 92, 246, 0.6)' : 'rgba(16, 185, 129, 0.6)',
-                boxShadow: `0 0 20px ${i === 0 ? 'rgba(6, 182, 212, 0.6)' : i === 1 ? 'rgba(139, 92, 246, 0.6)' : 'rgba(16, 185, 129, 0.6)'}`,
-              }}
-            />
-          </motion.div>
-        ))}
-
-        {/* Energy waves */}
-        {[...Array(3)].map((_, i) => (
-          <motion.div
-            key={`wave-${i}`}
-            className="absolute inset-0 rounded-full border-2 border-cyan-400/40"
-            initial={{ scale: 1, opacity: 0.8 }}
-            animate={{
-              scale: [1, 2.5],
-              opacity: [0.8, 0],
-            }}
-            transition={{
-              duration: 3,
-              delay: i,
-              repeat: Infinity,
-              ease: "easeOut",
+              background:
+                'linear-gradient(180deg, transparent, rgba(6, 182, 212, 0.3), transparent)',
+              height: '30%',
             }}
           />
-        ))}
+        )}
+
+        {/* Neon glow corners */}
+        {isHovered && (
+          <>
+            {[
+              'top-2 left-2',
+              'top-2 right-2',
+              'bottom-2 left-2',
+              'bottom-2 right-2',
+            ].map((position, i) => (
+              <motion.div
+                key={i}
+                className={`absolute ${position} w-6 h-6`}
+                style={{
+                  borderTop:
+                    i < 2 ? '2px solid rgba(6, 182, 212, 1)' : 'none',
+                  borderBottom:
+                    i >= 2 ? '2px solid rgba(6, 182, 212, 1)' : 'none',
+                  borderLeft:
+                    i % 2 === 0 ? '2px solid rgba(6, 182, 212, 1)' : 'none',
+                  borderRight:
+                    i % 2 === 1 ? '2px solid rgba(6, 182, 212, 1)' : 'none',
+                  boxShadow: '0 0 20px rgba(6, 182, 212, 0.8)',
+                }}
+                animate={{
+                  opacity: [0.5, 1, 0.5],
+                }}
+                transition={{
+                  duration: 1.5,
+                  delay: i * 0.2,
+                  repeat: Infinity,
+                }}
+              />
+            ))}
+          </>
+        )}
+
+        {/* Icon with AI energy glow */}
+        <motion.div
+          className="relative w-20 h-20 rounded-2xl flex items-center justify-center mb-6 mx-auto"
+          style={{
+            background:
+              'linear-gradient(135deg, rgba(6, 182, 212, 0.3), rgba(139, 92, 246, 0.3))',
+            boxShadow: isHovered
+              ? '0 0 50px rgba(6, 182, 212, 1), 0 0 80px rgba(139, 92, 246, 0.8)'
+              : '0 0 30px rgba(6, 182, 212, 0.5)',
+          }}
+          animate={{
+            boxShadow: isHovered
+              ? [
+                  '0 0 50px rgba(6, 182, 212, 1)',
+                  '0 0 70px rgba(139, 92, 246, 1)',
+                  '0 0 50px rgba(6, 182, 212, 1)',
+                ]
+              : '0 0 30px rgba(6, 182, 212, 0.5)',
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+          }}
+        >
+          <div className="text-3xl">{feature.icon}</div>
+
+          {/* Orbiting particles */}
+          {isHovered &&
+            [...Array(4)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-2 h-2 rounded-full bg-cyan-400"
+                animate={{
+                  rotate: [0, 360],
+                }}
+                transition={{
+                  duration: 2,
+                  delay: i * 0.5,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }}
+                style={{
+                  left: '50%',
+                  top: '-8px',
+                  transformOrigin: '0 48px',
+                  boxShadow: '0 0 15px rgba(6, 182, 212, 1)',
+                }}
+              />
+            ))}
+        </motion.div>
+
+        {/* Title with futuristic font */}
+        <h3
+          className="text-xl font-black text-center mb-4 tracking-wide"
+          style={{
+            color: '#F0FDFA',
+            textShadow: isHovered
+              ? '0 0 30px rgba(6, 182, 212, 1), 0 2px 10px rgba(0, 0, 0, 0.8)'
+              : '0 2px 10px rgba(0, 0, 0, 0.8)',
+            fontFamily: 'Inter, system-ui, sans-serif',
+            letterSpacing: '0.05em',
+          }}
+        >
+          {feature.title}
+        </h3>
+
+        {/* Description */}
+        <p
+          className="text-sm text-gray-300 text-center leading-relaxed"
+          style={{
+            textShadow: '0 1px 3px rgba(0, 0, 0, 0.8)',
+          }}
+        >
+          {feature.description}
+        </p>
+
+        {/* Bottom glow bar */}
+        <motion.div
+          className="absolute bottom-0 left-0 right-0 h-1 rounded-b-3xl"
+          style={{
+            background:
+              'linear-gradient(90deg, rgba(6, 182, 212, 0.8), rgba(139, 92, 246, 0.8))',
+            boxShadow: '0 -5px 30px rgba(6, 182, 212, 0.6)',
+          }}
+          animate={{
+            opacity: isHovered ? 1 : 0.5,
+          }}
+        />
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -171,226 +364,12 @@ const FloatingGeometry = () => {
   );
 };
 
-// 3D Security Card Component
-const SecurityCard3D = ({
-  feature,
-  index,
-  mousePosition,
-  isInView,
-  orbitalRotation,
-}: {
-  feature: any;
-  index: number;
-  mousePosition: { x: number; y: number };
-  isInView: boolean;
-  orbitalRotation: number;
-}) => {
-  const [isHovered, setIsHovered] = useState(false);
 
-  // Calculate position in circle with orbital rotation
-  const baseAngle = (index / 4) * Math.PI * 2 - Math.PI / 2;
-  const angle = baseAngle + (orbitalRotation * Math.PI / 180);
-  const radius = 280;
-  const x = Math.cos(angle) * radius;
-  const y = Math.sin(angle) * radius;
-
-  // Calculate 3D rotation based on mouse
-  const rotateX = mousePosition.y * -15;
-  const rotateY = mousePosition.x * 15;
-  const translateZ = isHovered ? 50 : 0;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, z: -200 }}
-      animate={isInView ? { opacity: 1, z: 0 } : { opacity: 0, z: -200 }}
-      transition={{
-        duration: 1,
-        delay: 0.3 + index * 0.2,
-        type: "spring",
-      }}
-      className="absolute"
-      style={{
-        left: '50%',
-        top: '50%',
-        transform: `translate(${x}px, ${y}px) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(${translateZ}px)`,
-        transformStyle: 'preserve-3d',
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <motion.div
-        className="relative w-64 p-6 rounded-2xl overflow-hidden"
-        style={{
-          background: 'rgba(6, 18, 36, 0.8)',
-          backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(6, 182, 212, 0.3)',
-          boxShadow: isHovered
-            ? `0 20px 80px rgba(6, 182, 212, 0.4), 0 0 40px rgba(139, 92, 246, 0.3), inset 0 0 30px rgba(6, 182, 212, 0.1)`
-            : `0 10px 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(6, 182, 212, 0.05)`,
-        }}
-        animate={{
-          scale: isHovered ? 1.05 : 1,
-        }}
-        transition={{ duration: 0.3 }}
-      >
-        {/* Holographic scan lines */}
-        {isHovered && (
-          <>
-            <motion.div
-              className="absolute inset-0 pointer-events-none"
-              initial={{ y: '-100%' }}
-              animate={{ y: '200%' }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              style={{
-                background: 'linear-gradient(180deg, transparent, rgba(6, 182, 212, 0.2), transparent)',
-                height: '20%',
-              }}
-            />
-
-            {/* Holographic grid */}
-            <div
-              className="absolute inset-0 pointer-events-none opacity-30"
-              style={{
-                backgroundImage: `
-                  linear-gradient(rgba(6, 182, 212, 0.2) 1px, transparent 1px),
-                  linear-gradient(90deg, rgba(6, 182, 212, 0.2) 1px, transparent 1px)
-                `,
-                backgroundSize: '20px 20px',
-              }}
-            />
-
-            {/* Corner indicators */}
-            {[[0, 0], [0, 100], [100, 0], [100, 100]].map(([x, y], i) => (
-              <motion.div
-                key={i}
-                className="absolute w-4 h-4"
-                style={{
-                  left: x === 0 ? '8px' : 'auto',
-                  right: x === 100 ? '8px' : 'auto',
-                  top: y === 0 ? '8px' : 'auto',
-                  bottom: y === 100 ? '8px' : 'auto',
-                  borderLeft: x === 0 ? '2px solid rgba(6, 182, 212, 0.8)' : 'none',
-                  borderRight: x === 100 ? '2px solid rgba(6, 182, 212, 0.8)' : 'none',
-                  borderTop: y === 0 ? '2px solid rgba(6, 182, 212, 0.8)' : 'none',
-                  borderBottom: y === 100 ? '2px solid rgba(6, 182, 212, 0.8)' : 'none',
-                  boxShadow: '0 0 10px rgba(6, 182, 212, 0.6)',
-                }}
-                animate={{
-                  opacity: [0.5, 1, 0.5],
-                }}
-                transition={{
-                  duration: 1.5,
-                  delay: i * 0.2,
-                  repeat: Infinity,
-                }}
-              />
-            ))}
-          </>
-        )}
-
-        {/* Icon with glow */}
-        <motion.div
-          className="relative w-16 h-16 rounded-xl flex items-center justify-center mb-4 mx-auto"
-          style={{
-            background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.3), rgba(16, 185, 129, 0.3))',
-            boxShadow: isHovered
-              ? '0 0 40px rgba(6, 182, 212, 0.8), 0 0 60px rgba(16, 185, 129, 0.6)'
-              : '0 0 20px rgba(6, 182, 212, 0.4)',
-          }}
-          animate={{
-            rotate: isHovered ? [0, 360] : 0,
-          }}
-          transition={{
-            duration: 20,
-            repeat: isHovered ? Infinity : 0,
-            ease: "linear",
-          }}
-        >
-          {feature.icon}
-
-          {/* Orbiting particles */}
-          {isHovered && (
-            <>
-              {[...Array(3)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-2 h-2 rounded-full bg-cyan-400"
-                  animate={{
-                    rotate: [0, 360],
-                  }}
-                  transition={{
-                    duration: 2,
-                    delay: i * 0.66,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  style={{
-                    left: '50%',
-                    top: '-10px',
-                    transformOrigin: '0 42px',
-                    boxShadow: '0 0 10px rgba(6, 182, 212, 0.8)',
-                  }}
-                />
-              ))}
-            </>
-          )}
-        </motion.div>
-
-        {/* Title */}
-        <h3
-          className="text-lg font-bold text-center mb-3 relative z-10"
-          style={{
-            color: '#F0FDFA',
-            textShadow: isHovered ? '0 0 20px rgba(6, 182, 212, 0.6)' : '0 2px 10px rgba(0, 0, 0, 0.5)',
-          }}
-        >
-          {feature.title}
-        </h3>
-
-        {/* Description */}
-        <p
-          className="text-sm text-gray-400 text-center leading-relaxed relative z-10"
-          style={{
-            textShadow: '0 1px 3px rgba(0, 0, 0, 0.5)',
-          }}
-        >
-          {feature.description}
-        </p>
-
-        {/* Animated border glow */}
-        <motion.div
-          className="absolute inset-0 rounded-2xl pointer-events-none"
-          style={{
-            background: `linear-gradient(135deg, rgba(6, 182, 212, ${isHovered ? 0.4 : 0}), rgba(16, 185, 129, ${isHovered ? 0.3 : 0}))`,
-          }}
-          transition={{ duration: 0.3 }}
-        />
-      </motion.div>
-    </motion.div>
-  );
-};
-
-// Main 3D AI Security Section
+// Main Ultra-Modern 3D Security Section
 const AISecuritySection3D = ({ securityFeatures }: { securityFeatures: any[] }) => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [orbitalRotation, setOrbitalRotation] = useState(0);
-
-  // Continuous orbital rotation animation
-  useEffect(() => {
-    if (!isInView) return;
-
-    const interval = setInterval(() => {
-      setOrbitalRotation((prev) => (prev + 0.3) % 360);
-    }, 30); // Smooth 30ms updates
-
-    return () => clearInterval(interval);
-  }, [isInView]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -405,33 +384,69 @@ const AISecuritySection3D = ({ securityFeatures }: { securityFeatures: any[] }) 
       className="relative py-32 px-6 sm:px-8 lg:px-12 overflow-hidden"
       onMouseMove={handleMouseMove}
       style={{
-        background: 'linear-gradient(180deg, #0A0E27 0%, #1A1B3D 50%, #000000 100%)',
+        background: 'linear-gradient(180deg, #050A1E 0%, #0A1628 25%, #0D1B3A 50%, #0A152E 75%, #000000 100%)',
         minHeight: '100vh',
       }}
     >
-      {/* Animated nebula background */}
+      {/* Enhanced animated nebula background with particles */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(50)].map((_, i) => (
+        {/* Floating particles */}
+        {[...Array(80)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              width: Math.random() * 4 + 1,
-              height: Math.random() * 4 + 1,
+              width: Math.random() * 3 + 1.5,
+              height: Math.random() * 3 + 1.5,
               background: i % 3 === 0 ? '#06B6D4' : i % 3 === 1 ? '#8B5CF6' : '#10B981',
-              boxShadow: `0 0 ${Math.random() * 20 + 10}px currentColor`,
-              filter: 'blur(1px)',
+              boxShadow: `0 0 ${Math.random() * 25 + 15}px currentColor`,
+              filter: 'blur(0.5px)',
             }}
             animate={{
-              y: [0, Math.random() * -100 - 50],
-              opacity: [0, 1, 0],
-              scale: [0, 1.5, 0],
+              y: [0, Math.random() * -120 - 80],
+              x: [0, Math.random() * 40 - 20],
+              opacity: [0, 0.9, 0.9, 0],
+              scale: [0, 1.8, 1.8, 0],
             }}
             transition={{
-              duration: Math.random() * 10 + 10,
+              duration: Math.random() * 12 + 8,
               delay: Math.random() * 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+
+        {/* Larger glowing orbs */}
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={`orb-${i}`}
+            className="absolute rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: Math.random() * 60 + 40,
+              height: Math.random() * 60 + 40,
+              background: `radial-gradient(circle, ${
+                i % 3 === 0
+                  ? 'rgba(6, 182, 212, 0.15)'
+                  : i % 3 === 1
+                  ? 'rgba(139, 92, 246, 0.15)'
+                  : 'rgba(16, 185, 129, 0.15)'
+              }, transparent 70%)`,
+              filter: 'blur(25px)',
+            }}
+            animate={{
+              scale: [1, 1.5, 1],
+              opacity: [0.3, 0.6, 0.3],
+              x: [0, Math.random() * 50 - 25],
+              y: [0, Math.random() * 50 - 25],
+            }}
+            transition={{
+              duration: Math.random() * 15 + 10,
+              delay: Math.random() * 3,
               repeat: Infinity,
               ease: "easeInOut",
             }}
@@ -465,90 +480,23 @@ const AISecuritySection3D = ({ securityFeatures }: { securityFeatures: any[] }) 
         </p>
       </motion.div>
 
-      {/* 3D Card Layout with AI Core */}
-      <div className="relative max-w-7xl mx-auto" style={{ height: '800px' }}>
-        {/* AI Core in center */}
-        <AISecurityCore mousePosition={mousePosition} />
-
-        {/* Circuit connections */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none z-5">
-          <defs>
-            <linearGradient id="circuitGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#06B6D4" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="#10B981" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.8" />
-            </linearGradient>
-          </defs>
-
-          {securityFeatures.map((_, index) => {
-            const baseAngle = (index / 4) * Math.PI * 2 - Math.PI / 2;
-            const angle = baseAngle + (orbitalRotation * Math.PI / 180);
-            const x = 50 + Math.cos(angle) * 35;
-            const y = 50 + Math.sin(angle) * 35;
-
-            return (
-              <motion.line
-                key={index}
-                x1="50%"
-                y1="50%"
-                x2={`${x}%`}
-                y2={`${y}%`}
-                stroke="url(#circuitGradient)"
-                strokeWidth="2"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={isInView ? { pathLength: 1, opacity: 0.8 } : { pathLength: 0, opacity: 0 }}
-                transition={{
-                  duration: 1.5,
-                  delay: 0.5 + index * 0.2,
-                  ease: "easeInOut",
-                }}
-                style={{
-                  filter: 'drop-shadow(0 0 8px rgba(6, 182, 212, 0.8))',
-                }}
-              />
-            );
-          })}
-
-          {/* Animated energy pulses along circuits */}
-          {securityFeatures.map((_, index) => {
-            const baseAngle = (index / 4) * Math.PI * 2 - Math.PI / 2;
-            const angle = baseAngle + (orbitalRotation * Math.PI / 180);
-            const x = 50 + Math.cos(angle) * 35;
-            const y = 50 + Math.sin(angle) * 35;
-
-            return (
-              <motion.circle
-                key={`pulse-${index}`}
-                r="4"
-                fill="rgba(6, 182, 212, 0.8)"
-                cx={`${50 + (Math.cos(angle) * 35 * ((index * 0.75 * 1000) % 3000) / 3000)}%`}
-                cy={`${50 + (Math.sin(angle) * 35 * ((index * 0.75 * 1000) % 3000) / 3000)}%`}
-                style={{
-                  filter: 'drop-shadow(0 0 10px rgba(6, 182, 212, 1))',
-                }}
-                animate={{
-                  opacity: [0, 1, 1, 0],
-                }}
-                transition={{
-                  duration: 3,
-                  delay: index * 0.75,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-            );
-          })}
-        </svg>
-
-        {/* Floating 3D Cards */}
+      {/* Ultra-Modern Floating 3D Cards */}
+      <div
+        className="relative max-w-7xl mx-auto"
+        style={{
+          height: '1000px',
+          minHeight: '1000px',
+          perspective: '2500px',
+          perspectiveOrigin: 'center center',
+        }}
+      >
         {securityFeatures.map((feature, index) => (
-          <SecurityCard3D
+          <FloatingSecurityCard
             key={index}
             feature={feature}
             index={index}
             mousePosition={mousePosition}
             isInView={isInView}
-            orbitalRotation={orbitalRotation}
           />
         ))}
       </div>
@@ -606,19 +554,19 @@ export default function HostingPage() {
   const cloudProviders = [
     {
       name: 'AWS',
-      logo: '☁️',
+      image: '/images/hero/11.png',
       color: 'from-orange-500 to-yellow-500',
       description: 'Global infrastructure with 99.99% availability across multiple regions.'
     },
     {
       name: 'CloudFront',
-      logo: '🚀',
+      image: '/images/hero/12.png',
       color: 'from-blue-500 to-cyan-500',
       description: 'Content delivery network with edge locations worldwide for lightning-fast delivery.'
     },
     {
       name: 'Vercel',
-      logo: '▲',
+      image: '/images/hero/13.png',
       color: 'from-gray-700 to-black',
       description: 'Optimized for modern frameworks with automatic deployment and scaling.'
     },
@@ -784,21 +732,118 @@ export default function HostingPage() {
               {cloudProviders.map((provider, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ y: -10 }}
-                  className="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300 overflow-hidden"
+                  transition={{
+                    duration: 0.7,
+                    delay: index * 0.15,
+                    type: "spring",
+                    stiffness: 100
+                  }}
+                  whileHover={{ y: -15, scale: 1.02 }}
+                  className="group relative bg-white/5 backdrop-blur-xl rounded-3xl p-10 border border-white/10 hover:border-cyan-400/50 transition-all duration-500 overflow-hidden shadow-2xl hover:shadow-cyan-500/20"
                 >
-                  {/* Gradient background */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${provider.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                  {/* Animated gradient background */}
+                  <motion.div
+                    className={`absolute inset-0 bg-gradient-to-br ${provider.color} opacity-0 group-hover:opacity-15 transition-opacity duration-700`}
+                    animate={{
+                      backgroundPosition: ['0% 0%', '100% 100%'],
+                    }}
+                    transition={{
+                      duration: 8,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                    }}
+                  />
 
-                  <div className="relative z-10 text-center">
-                    <div className="text-6xl mb-4">{provider.logo}</div>
-                    <h3 className="text-2xl font-bold text-white mb-4">{provider.name}</h3>
-                    <p className="text-gray-400 leading-relaxed">{provider.description}</p>
+                  {/* Glow effect on hover */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-cyan-500/10 blur-xl" />
                   </div>
+
+                  <div className="relative z-10 flex flex-col items-center text-center">
+                    {/* Image with animations */}
+                    <motion.div
+                      className="mb-8 relative w-full h-64 flex items-center justify-center"
+                      animate={{
+                        y: [0, -10, 0],
+                      }}
+                      transition={{
+                        duration: 3 + index * 0.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    >
+                      {/* Glow behind image */}
+                      <motion.div
+                        className="absolute inset-0 blur-3xl opacity-30"
+                        animate={{
+                          scale: [1, 1.2, 1],
+                          opacity: [0.2, 0.4, 0.2],
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                        style={{
+                          background: `radial-gradient(circle, ${
+                            index === 0 ? 'rgba(251, 146, 60, 0.4)' :
+                            index === 1 ? 'rgba(59, 130, 246, 0.4)' :
+                            'rgba(148, 163, 184, 0.4)'
+                          }, transparent 70%)`
+                        }}
+                      />
+
+                      <motion.div
+                        whileHover={{ scale: 1.15, rotate: 2 }}
+                        transition={{ duration: 0.4, type: "spring" }}
+                      >
+                        <Image
+                          src={provider.image}
+                          alt={provider.name}
+                          width={350}
+                          height={256}
+                          className="object-contain drop-shadow-2xl"
+                          style={{ maxHeight: '256px', width: 'auto' }}
+                          unoptimized
+                        />
+                      </motion.div>
+                    </motion.div>
+
+                    {/* Text content with animations */}
+                    <motion.h3
+                      className="text-3xl font-black text-white mb-4 tracking-tight"
+                      style={{
+                        textShadow: '0 2px 20px rgba(0, 0, 0, 0.5)',
+                      }}
+                    >
+                      {provider.name}
+                    </motion.h3>
+                    <motion.p
+                      className="text-gray-300 leading-relaxed text-base"
+                      style={{
+                        textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)',
+                      }}
+                    >
+                      {provider.description}
+                    </motion.p>
+                  </div>
+
+                  {/* Bottom shine effect */}
+                  <motion.div
+                    className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
+                    animate={{
+                      opacity: [0, 1, 0],
+                      scaleX: [0.5, 1, 0.5],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
                 </motion.div>
               ))}
             </div>
@@ -850,8 +895,108 @@ export default function HostingPage() {
         </section>
 
         {/* Custom Dashboard */}
-        <section className="py-24">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <section className="py-24 relative overflow-hidden">
+          {/* Animated Snake Background */}
+          <div className="absolute inset-0 pointer-events-none opacity-30">
+            <svg
+              className="absolute w-full h-full"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 800"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="snakeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#06B6D4" stopOpacity="0.8" />
+                  <stop offset="50%" stopColor="#8B5CF6" stopOpacity="0.8" />
+                  <stop offset="100%" stopColor="#10B981" stopOpacity="0.8" />
+                </linearGradient>
+                <filter id="snakeGlow">
+                  <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+
+              {/* Main snake path */}
+              <motion.path
+                d="M-100,300 Q200,150 400,300 T800,300 Q1000,400 1200,300"
+                stroke="url(#snakeGradient)"
+                strokeWidth="3"
+                fill="none"
+                filter="url(#snakeGlow)"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{
+                  pathLength: [0, 1, 1, 0],
+                  opacity: [0, 1, 1, 0],
+                }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+
+              {/* Secondary snake path */}
+              <motion.path
+                d="M-100,500 Q300,550 600,400 T1200,500"
+                stroke="url(#snakeGradient)"
+                strokeWidth="2"
+                fill="none"
+                filter="url(#snakeGlow)"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{
+                  pathLength: [0, 1, 1, 0],
+                  opacity: [0, 0.6, 0.6, 0],
+                }}
+                transition={{
+                  duration: 10,
+                  delay: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+
+              {/* Flowing particles along the path */}
+              {[...Array(8)].map((_, i) => (
+                <motion.circle
+                  key={i}
+                  r="4"
+                  fill="#06B6D4"
+                  filter="url(#snakeGlow)"
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    cx: [
+                      -100 + (i * 150),
+                      200 + (i * 100),
+                      400 + (i * 80),
+                      600 + (i * 90),
+                      800 + (i * 100),
+                      1200
+                    ],
+                    cy: [
+                      300,
+                      150 + Math.sin(i) * 50,
+                      300 + Math.cos(i) * 40,
+                      300,
+                      400 + Math.sin(i) * 30,
+                      300
+                    ],
+                    opacity: [0, 1, 1, 1, 1, 0],
+                  }}
+                  transition={{
+                    duration: 6,
+                    delay: i * 0.3,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                />
+              ))}
+            </svg>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
             <SectionHeader
               title="Powerful"
               highlight="Dashboard"
@@ -907,9 +1052,50 @@ export default function HostingPage() {
           </div>
         </section>
 
-        {/* Testimonials */}
-        <section className="py-24">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        {/* Testimonials - Modern Dropdown Style */}
+        <section className="py-24 relative overflow-hidden">
+          {/* Deep Navy & Purple Gradient Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0A0E27] via-[#1A1B3D] to-[#2D1B69] opacity-90" />
+
+          {/* Animated purple glow orbs */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <motion.div
+              className="absolute w-96 h-96 rounded-full blur-3xl"
+              style={{
+                background: 'radial-gradient(circle, rgba(139, 92, 246, 0.3), transparent 70%)',
+                top: '10%',
+                left: '20%',
+              }}
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.5, 0.3],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            <motion.div
+              className="absolute w-96 h-96 rounded-full blur-3xl"
+              style={{
+                background: 'radial-gradient(circle, rgba(6, 182, 212, 0.3), transparent 70%)',
+                bottom: '20%',
+                right: '10%',
+              }}
+              animate={{
+                scale: [1.2, 1, 1.2],
+                opacity: [0.4, 0.6, 0.4],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </div>
+
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
             <SectionHeader
               title="Trusted by"
               highlight="Growing Companies"
@@ -917,28 +1103,338 @@ export default function HostingPage() {
               align="center"
             />
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, index) => (
+            {/* Two Column Layout: Dropdowns + Image */}
+            <div className="mt-16 grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left: Dropdowns */}
+              <div className="space-y-4">
+                {testimonials.map((testimonial, index) => {
+                  const [isExpanded, setIsExpanded] = useState(false);
+
+                  return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.15 }}
+                    className="relative group"
+                  >
+                    {/* Dropdown Tab */}
+                    <motion.button
+                      onClick={() => setIsExpanded(!isExpanded)}
+                      onHoverStart={() => !isExpanded && setIsExpanded(true)}
+                      className="w-full text-left"
+                      whileHover={{ scale: 1.01 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <motion.div
+                        className="relative bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 overflow-hidden cursor-pointer"
+                        style={{
+                          boxShadow: isExpanded
+                            ? '0 20px 60px rgba(139, 92, 246, 0.4), 0 0 40px rgba(6, 182, 212, 0.3)'
+                            : '0 10px 30px rgba(0, 0, 0, 0.3)',
+                        }}
+                        animate={{
+                          borderColor: isExpanded
+                            ? 'rgba(6, 182, 212, 0.8)'
+                            : 'rgba(255, 255, 255, 0.1)',
+                        }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {/* Neon glow accent line on hover/expand */}
+                        <motion.div
+                          className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl"
+                          style={{
+                            background: 'linear-gradient(90deg, #06B6D4, #8B5CF6, #10B981)',
+                          }}
+                          animate={{
+                            opacity: isExpanded ? 1 : 0,
+                            scaleX: isExpanded ? 1 : 0.5,
+                          }}
+                          transition={{ duration: 0.4 }}
+                        />
+
+                        {/* Floating particles */}
+                        {isExpanded && (
+                          <>
+                            {[...Array(6)].map((_, i) => (
+                              <motion.div
+                                key={i}
+                                className="absolute w-1 h-1 rounded-full bg-cyan-400"
+                                style={{
+                                  left: `${20 + i * 15}%`,
+                                  top: '50%',
+                                }}
+                                animate={{
+                                  y: [-20, -40, -20],
+                                  opacity: [0, 1, 0],
+                                  scale: [0, 1.5, 0],
+                                }}
+                                transition={{
+                                  duration: 2,
+                                  delay: i * 0.2,
+                                  repeat: Infinity,
+                                }}
+                              />
+                            ))}
+                          </>
+                        )}
+
+                        {/* Header with metric */}
+                        <div className="flex items-center gap-4 relative z-10">
+                          {/* Expand indicator - Left side */}
+                          <motion.div
+                            animate={{ rotate: isExpanded ? 180 : 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="text-cyan-400 text-2xl flex-shrink-0"
+                          >
+                            ▼
+                          </motion.div>
+
+                          {/* Metric */}
+                          <div className="flex-1">
+                            <motion.div
+                              className="text-3xl font-black bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent"
+                              style={{
+                                textShadow: '0 0 30px rgba(6, 182, 212, 0.5)',
+                              }}
+                            >
+                              {testimonial.stat.value}
+                            </motion.div>
+                            <div className="text-sm text-gray-400 font-medium">
+                              {testimonial.stat.label}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Expanded Content */}
+                        <motion.div
+                          initial={false}
+                          animate={{
+                            height: isExpanded ? 'auto' : 0,
+                            opacity: isExpanded ? 1 : 0,
+                          }}
+                          transition={{
+                            height: { duration: 0.4, ease: "easeInOut" },
+                            opacity: { duration: 0.3, delay: isExpanded ? 0.1 : 0 },
+                          }}
+                          style={{ overflow: 'hidden' }}
+                        >
+                          <motion.div
+                            className="mt-6 pt-6 border-t border-white/10"
+                            initial={{ y: -20 }}
+                            animate={{ y: isExpanded ? 0 : -20 }}
+                            transition={{ duration: 0.4 }}
+                          >
+                            {/* Testimonial quote */}
+                            <motion.p
+                              className="text-gray-300 leading-relaxed italic text-lg mb-6"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: isExpanded ? 1 : 0 }}
+                              transition={{ delay: 0.2 }}
+                            >
+                              "{testimonial.quote}"
+                            </motion.p>
+
+                            {/* Author info with glass panel effect */}
+                            <motion.div
+                              className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10"
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{
+                                opacity: isExpanded ? 1 : 0,
+                                x: isExpanded ? 0 : -20,
+                              }}
+                              transition={{ delay: 0.3 }}
+                            >
+                              {/* Avatar placeholder */}
+                              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center font-bold text-white">
+                                {testimonial.author.charAt(0)}
+                              </div>
+
+                              <div>
+                                <div className="font-bold text-white">{testimonial.author}</div>
+                                <div className="text-sm text-gray-400">
+                                  {testimonial.role} — <span className="text-cyan-400">{testimonial.company}</span>
+                                </div>
+                              </div>
+                            </motion.div>
+                          </motion.div>
+                        </motion.div>
+                      </motion.div>
+                    </motion.button>
+                  </motion.div>
+                );
+              })}
+              </div>
+
+              {/* Right: Animated 3D Image */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, type: "spring" }}
+                className="relative lg:block hidden"
+              >
+                {/* 3D Floating Container */}
                 <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300"
+                  className="relative"
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    perspective: '1000px',
+                  }}
+                  animate={{
+                    rotateY: [0, 10, 0, -10, 0],
+                    rotateX: [0, -5, 0, 5, 0],
+                  }}
+                  transition={{
+                    duration: 10,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                 >
-                  <div className="text-3xl font-bold text-blue-400 mb-2">{testimonial.stat.value}</div>
-                  <div className="text-sm text-gray-400 mb-6">{testimonial.stat.label}</div>
+                  {/* Glowing orb behind image */}
+                  <motion.div
+                    className="absolute inset-0 blur-3xl opacity-40"
+                    style={{
+                      background: 'radial-gradient(circle, rgba(6, 182, 212, 0.6), rgba(139, 92, 246, 0.4), transparent 70%)',
+                    }}
+                    animate={{
+                      scale: [1, 1.3, 1],
+                      opacity: [0.3, 0.6, 0.3],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
 
-                  <p className="text-gray-300 mb-6 leading-relaxed italic">"{testimonial.quote}"</p>
+                  {/* Floating Image with 3D effects */}
+                  <motion.div
+                    className="relative z-10"
+                    animate={{
+                      y: [0, -20, 0],
+                    }}
+                    transition={{
+                      duration: 5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <motion.div
+                      whileHover={{
+                        scale: 1.05,
+                        rotateY: 15,
+                        rotateX: -10,
+                      }}
+                      transition={{
+                        duration: 0.5,
+                        type: "spring",
+                      }}
+                      style={{
+                        transformStyle: 'preserve-3d',
+                      }}
+                    >
+                      <Image
+                        src="/images/hero/14.png"
+                        alt="Montrose Hosting Platform"
+                        width={600}
+                        height={600}
+                        className="rounded-3xl shadow-2xl"
+                        style={{
+                          filter: 'drop-shadow(0 25px 50px rgba(6, 182, 212, 0.3))',
+                        }}
+                        unoptimized
+                      />
+                    </motion.div>
+                  </motion.div>
 
-                  <div className="pt-6 border-t border-white/10">
-                    <div className="font-semibold text-white">{testimonial.author}</div>
-                    <div className="text-sm text-gray-400">{testimonial.role}</div>
-                    <div className="text-sm text-blue-400 mt-1">{testimonial.company}</div>
-                  </div>
+                  {/* Orbiting particles around image */}
+                  {[...Array(8)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-3 h-3 rounded-full"
+                      style={{
+                        background: i % 2 === 0 ? '#06B6D4' : '#8B5CF6',
+                        boxShadow: `0 0 20px ${i % 2 === 0 ? '#06B6D4' : '#8B5CF6'}`,
+                        left: '50%',
+                        top: '50%',
+                      }}
+                      animate={{
+                        x: [
+                          0,
+                          Math.cos((i * Math.PI * 2) / 8) * 280,
+                          0,
+                        ],
+                        y: [
+                          0,
+                          Math.sin((i * Math.PI * 2) / 8) * 280,
+                          0,
+                        ],
+                        opacity: [0, 1, 0],
+                        scale: [0, 1.5, 0],
+                      }}
+                      transition={{
+                        duration: 4,
+                        delay: i * 0.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+                  ))}
+
+                  {/* Rotating rings around image */}
+                  {[0, 1].map((ringIndex) => (
+                    <motion.div
+                      key={ringIndex}
+                      className="absolute inset-0 rounded-full border-2 pointer-events-none"
+                      style={{
+                        borderColor: ringIndex === 0 ? 'rgba(6, 182, 212, 0.3)' : 'rgba(139, 92, 246, 0.3)',
+                        boxShadow: `0 0 30px ${ringIndex === 0 ? 'rgba(6, 182, 212, 0.5)' : 'rgba(139, 92, 246, 0.5)'}`,
+                        transform: `scale(${1.1 + ringIndex * 0.1})`,
+                      }}
+                      animate={{
+                        rotate: ringIndex === 0 ? [0, 360] : [360, 0],
+                        scale: [1.1 + ringIndex * 0.1, 1.2 + ringIndex * 0.1, 1.1 + ringIndex * 0.1],
+                      }}
+                      transition={{
+                        rotate: {
+                          duration: 20 + ringIndex * 5,
+                          repeat: Infinity,
+                          ease: "linear",
+                        },
+                        scale: {
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        },
+                      }}
+                    />
+                  ))}
+
+                  {/* Corner accent lights */}
+                  {['top-0 left-0', 'top-0 right-0', 'bottom-0 left-0', 'bottom-0 right-0'].map((position, i) => (
+                    <motion.div
+                      key={i}
+                      className={`absolute ${position} w-20 h-20`}
+                      style={{
+                        background: `radial-gradient(circle, ${i % 2 === 0 ? 'rgba(6, 182, 212, 0.4)' : 'rgba(139, 92, 246, 0.4)'}, transparent 70%)`,
+                        filter: 'blur(20px)',
+                      }}
+                      animate={{
+                        opacity: [0.3, 0.7, 0.3],
+                        scale: [1, 1.2, 1],
+                      }}
+                      transition={{
+                        duration: 3,
+                        delay: i * 0.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+                  ))}
                 </motion.div>
-              ))}
+              </motion.div>
             </div>
           </div>
         </section>
