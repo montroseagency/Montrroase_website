@@ -224,51 +224,253 @@ export default function MarketingPage() {
               align="center"
             />
 
-            <FeatureGrid features={analyticsFeatures} columns={4} />
-
-            {/* Mock Analytics Dashboard */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="mt-16 relative"
-            >
-              <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <div className="aspect-video bg-gradient-to-br from-blue-900/50 to-purple-900/50 rounded-xl flex items-center justify-center relative overflow-hidden">
-                  {/* Animated gradient */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+              {[
+                {
+                  title: 'Real-Time Metrics',
+                  description: 'Track engagement, reach, and conversions as they happen with live dashboard updates.'
+                },
+                {
+                  title: 'Growth Tracking',
+                  description: 'Monitor follower growth, post performance, and audience demographics in one view.'
+                },
+                {
+                  title: 'ROI Calculator',
+                  description: 'Measure campaign profitability with automated cost-per-acquisition and revenue tracking.'
+                },
+                {
+                  title: 'Custom Reports',
+                  description: 'Generate beautiful, shareable reports for clients and stakeholders in seconds.'
+                }
+              ].map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 50, rotateX: -20, scale: 0.9 }}
+                  whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.7,
+                    delay: index * 0.1,
+                    type: "spring",
+                    stiffness: 120
+                  }}
+                  style={{ perspective: 1500 }}
+                  className="relative group"
+                >
                   <motion.div
                     animate={{
-                      backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                      rotateY: [0, 3, 0, -3, 0],
+                      rotateX: [0, -2, 0, 2, 0],
                     }}
                     transition={{
-                      duration: 10,
+                      duration: 6 + index,
                       repeat: Infinity,
-                      ease: 'linear',
+                      ease: "easeInOut"
                     }}
-                    className="absolute inset-0 opacity-30"
-                    style={{
-                      background: 'linear-gradient(90deg, rgba(59, 130, 246, 0.5), rgba(168, 85, 247, 0.5), rgba(59, 130, 246, 0.5))',
-                      backgroundSize: '200% 100%',
+                    whileHover={{
+                      scale: 1.05,
+                      rotateY: 8,
+                      rotateX: -5,
+                      z: 50,
+                      transition: { duration: 0.3 }
                     }}
-                  />
+                    style={{ transformStyle: 'preserve-3d' }}
+                    className="relative h-full"
+                  >
+                    <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 relative overflow-hidden h-full">
+                      {/* Animated snake border */}
+                      <div className="absolute -inset-0.5 rounded-2xl overflow-hidden">
+                        {/* Top snake */}
+                        <motion.div
+                          className="absolute top-0 left-0 right-0 h-0.5"
+                          style={{
+                            background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 1), rgba(168, 85, 247, 1), transparent)',
+                            boxShadow: '0 0 15px rgba(59, 130, 246, 0.6)',
+                          }}
+                          animate={{
+                            x: ['-100%', '200%'],
+                          }}
+                          transition={{
+                            duration: 2.5,
+                            repeat: Infinity,
+                            ease: "linear",
+                            delay: index * 0.3,
+                          }}
+                        />
 
-                  <div className="relative z-10 text-center">
-                    <motion.div
-                      animate={{ scale: [1, 1.1, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4"
-                    >
-                      <svg className="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                      </svg>
-                    </motion.div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Live Analytics Dashboard</h3>
-                    <p className="text-gray-400">Real-time data visualization and insights</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+                        {/* Right snake */}
+                        <motion.div
+                          className="absolute top-0 right-0 bottom-0 w-0.5"
+                          style={{
+                            background: 'linear-gradient(180deg, transparent, rgba(168, 85, 247, 1), rgba(6, 182, 212, 1), transparent)',
+                            boxShadow: '0 0 15px rgba(168, 85, 247, 0.6)',
+                          }}
+                          animate={{
+                            y: ['-100%', '200%'],
+                          }}
+                          transition={{
+                            duration: 2.5,
+                            repeat: Infinity,
+                            ease: "linear",
+                            delay: index * 0.3 + 0.6,
+                          }}
+                        />
+
+                        {/* Bottom snake */}
+                        <motion.div
+                          className="absolute bottom-0 left-0 right-0 h-0.5"
+                          style={{
+                            background: 'linear-gradient(270deg, transparent, rgba(6, 182, 212, 1), rgba(59, 130, 246, 1), transparent)',
+                            boxShadow: '0 0 15px rgba(6, 182, 212, 0.6)',
+                          }}
+                          animate={{
+                            x: ['200%', '-100%'],
+                          }}
+                          transition={{
+                            duration: 2.5,
+                            repeat: Infinity,
+                            ease: "linear",
+                            delay: index * 0.3 + 1.2,
+                          }}
+                        />
+
+                        {/* Left snake */}
+                        <motion.div
+                          className="absolute top-0 left-0 bottom-0 w-0.5"
+                          style={{
+                            background: 'linear-gradient(0deg, transparent, rgba(59, 130, 246, 1), rgba(168, 85, 247, 1), transparent)',
+                            boxShadow: '0 0 15px rgba(59, 130, 246, 0.6)',
+                          }}
+                          animate={{
+                            y: ['200%', '-100%'],
+                          }}
+                          transition={{
+                            duration: 2.5,
+                            repeat: Infinity,
+                            ease: "linear",
+                            delay: index * 0.3 + 1.8,
+                          }}
+                        />
+                      </div>
+
+                      {/* 3D floating particles */}
+                      {[...Array(4)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-60"
+                          style={{
+                            left: `${20 + i * 20}%`,
+                            top: `${30 + i * 15}%`,
+                            transform: `translateZ(${10 + i * 5}px)`,
+                            boxShadow: '0 0 10px rgba(59, 130, 246, 0.8)',
+                          }}
+                          animate={{
+                            y: [0, -20, 0],
+                            x: [0, Math.sin(i) * 10, 0],
+                            opacity: [0.3, 1, 0.3],
+                            scale: [1, 2, 1],
+                          }}
+                          transition={{
+                            duration: 2 + i * 0.5,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: i * 0.3,
+                          }}
+                        />
+                      ))}
+
+                      {/* Glowing orb on hover */}
+                      <motion.div
+                        className="absolute -top-10 -right-10 w-32 h-32 rounded-full opacity-0 group-hover:opacity-100"
+                        style={{
+                          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.4), transparent 70%)',
+                          filter: 'blur(20px)',
+                          transform: 'translateZ(20px)',
+                        }}
+                        animate={{
+                          rotate: 360,
+                        }}
+                        transition={{
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "linear"
+                        }}
+                      />
+
+                      {/* Content with 3D depth */}
+                      <div className="relative z-10" style={{ transform: 'translateZ(30px)', transformStyle: 'preserve-3d' }}>
+                        <motion.h3
+                          className="text-lg font-bold text-white mb-3"
+                          animate={{
+                            textShadow: [
+                              '0 0 10px rgba(59, 130, 246, 0.5)',
+                              '0 0 20px rgba(168, 85, 247, 0.5)',
+                              '0 0 10px rgba(59, 130, 246, 0.5)',
+                            ]
+                          }}
+                          transition={{
+                            duration: 3,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: index * 0.2,
+                          }}
+                        >
+                          {feature.title}
+                        </motion.h3>
+                        <p className="text-gray-400 text-sm leading-relaxed">
+                          {feature.description}
+                        </p>
+                      </div>
+
+                      {/* Rotating gradient overlay */}
+                      <motion.div
+                        className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl"
+                        animate={{
+                          background: [
+                            'linear-gradient(45deg, rgba(59, 130, 246, 0.3), transparent)',
+                            'linear-gradient(135deg, rgba(168, 85, 247, 0.3), transparent)',
+                            'linear-gradient(225deg, rgba(6, 182, 212, 0.3), transparent)',
+                            'linear-gradient(315deg, rgba(59, 130, 246, 0.3), transparent)',
+                            'linear-gradient(45deg, rgba(59, 130, 246, 0.3), transparent)',
+                          ]
+                        }}
+                        transition={{
+                          duration: 8,
+                          repeat: Infinity,
+                          ease: "linear"
+                        }}
+                      />
+
+                      {/* Corner accent lights */}
+                      {[0, 1].map((corner) => (
+                        <motion.div
+                          key={corner}
+                          className="absolute w-3 h-3 rounded-full"
+                          style={{
+                            top: corner === 0 ? '10px' : 'auto',
+                            bottom: corner === 1 ? '10px' : 'auto',
+                            right: '10px',
+                            background: 'radial-gradient(circle, rgba(59, 130, 246, 1), transparent)',
+                            boxShadow: '0 0 20px rgba(59, 130, 246, 0.8)',
+                            transform: `translateZ(${15 + corner * 5}px)`,
+                          }}
+                          animate={{
+                            scale: [1, 1.5, 1],
+                            opacity: [0.5, 1, 0.5],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            delay: corner * 0.5 + index * 0.1,
+                            ease: "easeInOut"
+                          }}
+                        />
+                      ))}
+                    </div>
+                  </motion.div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -282,7 +484,148 @@ export default function MarketingPage() {
               align="center"
             />
 
-            <FeatureGrid features={aiFeatures} columns={3} />
+            <div className="grid md:grid-cols-3 gap-8 mt-16">
+              {[
+                {
+                  title: 'Smart Scheduling',
+                  description: 'AI determines the optimal posting times for maximum engagement based on your audience behavior.'
+                },
+                {
+                  title: 'Content Suggestions',
+                  description: 'Get AI-powered content ideas, caption recommendations, and hashtag strategies that work.'
+                },
+                {
+                  title: 'Auto-Optimization',
+                  description: 'Campaigns automatically adjust budgets and targeting based on performance data in real-time.'
+                }
+              ].map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.6,
+                    delay: index * 0.15,
+                    type: "spring",
+                    stiffness: 100
+                  }}
+                  whileHover={{
+                    y: -10,
+                    transition: { duration: 0.3 }
+                  }}
+                  className="relative group"
+                >
+                  <motion.div
+                    className="relative bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm rounded-2xl p-8 border border-white/10 overflow-hidden h-full"
+                    whileHover={{ borderColor: 'rgba(255, 255, 255, 0.3)' }}
+                  >
+                    {/* Animated gradient background */}
+                    <motion.div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      animate={{
+                        background: [
+                          'radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.1), transparent 50%)',
+                          'radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.1), transparent 50%)',
+                          'radial-gradient(circle at 0% 100%, rgba(6, 182, 212, 0.1), transparent 50%)',
+                          'radial-gradient(circle at 100% 0%, rgba(59, 130, 246, 0.1), transparent 50%)',
+                          'radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.1), transparent 50%)',
+                        ]
+                      }}
+                      transition={{
+                        duration: 5,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                    />
+
+                    {/* Floating particles */}
+                    {[...Array(3)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className="absolute w-1 h-1 bg-blue-400/60 rounded-full"
+                        style={{
+                          left: `${20 + i * 30}%`,
+                          top: `${30 + i * 20}%`,
+                        }}
+                        animate={{
+                          y: [0, -30, 0],
+                          opacity: [0.3, 1, 0.3],
+                          scale: [1, 1.5, 1],
+                        }}
+                        transition={{
+                          duration: 3 + i,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: i * 0.5,
+                        }}
+                      />
+                    ))}
+
+                    {/* Glowing line accent */}
+                    <motion.div
+                      className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent"
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: index * 0.15 + 0.3 }}
+                    />
+
+                    {/* Content */}
+                    <div className="relative z-10">
+                      <motion.h3
+                        className="text-2xl font-bold text-white mb-4"
+                        animate={{
+                          backgroundImage: [
+                            'linear-gradient(90deg, #fff 0%, #fff 100%)',
+                            'linear-gradient(90deg, #3b82f6 0%, #a855f7 50%, #06b6d4 100%)',
+                            'linear-gradient(90deg, #fff 0%, #fff 100%)',
+                          ],
+                          backgroundClip: ['text', 'text', 'text'],
+                          WebkitBackgroundClip: ['text', 'text', 'text'],
+                          color: ['#fff', 'transparent', '#fff'],
+                        }}
+                        transition={{
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.5,
+                        }}
+                      >
+                        {feature.title}
+                      </motion.h3>
+
+                      <motion.p
+                        className="text-gray-400 leading-relaxed"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.15 + 0.4 }}
+                      >
+                        {feature.description}
+                      </motion.p>
+                    </div>
+
+                    {/* Corner glow effect */}
+                    <motion.div
+                      className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full opacity-0 group-hover:opacity-100"
+                      style={{
+                        background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3), transparent 70%)',
+                        filter: 'blur(20px)',
+                      }}
+                      animate={{
+                        scale: [1, 1.2, 1],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+                  </motion.div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -335,17 +678,117 @@ export default function MarketingPage() {
                 transition={{ duration: 0.8 }}
                 className="relative"
               >
-                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 relative overflow-hidden">
+                  {/* Snake border effect */}
+                  <motion.div
+                    className="absolute inset-0 rounded-2xl"
+                    style={{
+                      background: `
+                        linear-gradient(90deg,
+                          transparent 0%,
+                          rgba(59, 130, 246, 0.8) 25%,
+                          rgba(168, 85, 247, 0.8) 50%,
+                          rgba(6, 182, 212, 0.8) 75%,
+                          transparent 100%
+                        )
+                      `,
+                      backgroundSize: '200% 4px',
+                      backgroundRepeat: 'no-repeat',
+                    }}
+                    animate={{
+                      backgroundPosition: [
+                        '0% 0%, 100% 0%, 100% 100%, 0% 100%',
+                        '100% 0%, 100% 100%, 0% 100%, 0% 0%',
+                      ],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }}
+                  >
+                    {/* Top snake */}
+                    <motion.div
+                      className="absolute top-0 left-0 right-0 h-1 rounded-full"
+                      style={{
+                        background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.8), rgba(168, 85, 247, 0.8), transparent)',
+                        boxShadow: '0 0 20px rgba(59, 130, 246, 0.6)',
+                      }}
+                      animate={{
+                        x: ['-100%', '100%'],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "linear",
+                        delay: 0,
+                      }}
+                    />
+
+                    {/* Right snake */}
+                    <motion.div
+                      className="absolute top-0 right-0 bottom-0 w-1 rounded-full"
+                      style={{
+                        background: 'linear-gradient(180deg, transparent, rgba(168, 85, 247, 0.8), rgba(6, 182, 212, 0.8), transparent)',
+                        boxShadow: '0 0 20px rgba(168, 85, 247, 0.6)',
+                      }}
+                      animate={{
+                        y: ['-100%', '100%'],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "linear",
+                        delay: 0.75,
+                      }}
+                    />
+
+                    {/* Bottom snake */}
+                    <motion.div
+                      className="absolute bottom-0 left-0 right-0 h-1 rounded-full"
+                      style={{
+                        background: 'linear-gradient(270deg, transparent, rgba(6, 182, 212, 0.8), rgba(168, 85, 247, 0.8), transparent)',
+                        boxShadow: '0 0 20px rgba(6, 182, 212, 0.6)',
+                      }}
+                      animate={{
+                        x: ['100%', '-100%'],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "linear",
+                        delay: 1.5,
+                      }}
+                    />
+
+                    {/* Left snake */}
+                    <motion.div
+                      className="absolute top-0 left-0 bottom-0 w-1 rounded-full"
+                      style={{
+                        background: 'linear-gradient(0deg, transparent, rgba(59, 130, 246, 0.8), rgba(168, 85, 247, 0.8), transparent)',
+                        boxShadow: '0 0 20px rgba(59, 130, 246, 0.6)',
+                      }}
+                      animate={{
+                        y: ['100%', '-100%'],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "linear",
+                        delay: 2.25,
+                      }}
+                    />
+                  </motion.div>
+
                   <div className="aspect-square bg-gradient-to-br from-purple-900/50 to-blue-900/50 rounded-xl flex items-center justify-center relative overflow-hidden">
-                    <div className="relative z-10 text-center p-8">
-                      <div className="w-24 h-24 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                        </svg>
-                      </div>
-                      <h4 className="text-xl font-bold text-white mb-2">50+ Expert Courses</h4>
-                      <p className="text-gray-400 text-sm">Included with all plans</p>
-                    </div>
+                    {/* Image */}
+                    <motion.img
+                      src="/images/hero/aa.png"
+                      alt="Marketing Platform"
+                      className="w-full h-full object-cover rounded-xl relative z-10"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.3 }}
+                    />
                   </div>
                 </div>
               </motion.div>
