@@ -11,8 +11,72 @@ import FeatureGrid from '@/components/services/FeatureGrid';
 import CallToAction from '@/components/services/CallToAction';
 import AnimatedCounter from '@/components/services/AnimatedCounter';
 
-// Ultra-Modern Floating 3D Card Component
-const FloatingSecurityCard = ({
+// Floating Particles Background Component
+const FloatingParticles = ({ mousePosition }: { mousePosition: { x: number; y: number } }) => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {[...Array(30)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 bg-cyan-400 rounded-full"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            filter: 'blur(1px)',
+          }}
+          animate={{
+            y: [0, -30 - Math.random() * 50],
+            x: [0, (Math.random() - 0.5) * 50 + mousePosition.x * 30],
+            opacity: [0, 0.8, 0],
+            scale: [0, 1, 0],
+          }}
+          transition={{
+            duration: 3 + Math.random() * 2,
+            repeat: Infinity,
+            delay: Math.random() * 3,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+// Animated Orbs Background
+const AnimatedOrbs = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {[...Array(5)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full"
+          style={{
+            width: 200 + i * 100,
+            height: 200 + i * 100,
+            left: `${20 + i * 15}%`,
+            top: `${10 + i * 20}%`,
+            background: `radial-gradient(circle, ${
+              i % 2 === 0 ? 'rgba(6, 182, 212, 0.1)' : 'rgba(139, 92, 246, 0.1)'
+            }, transparent 70%)`,
+            filter: 'blur(40px)',
+          }}
+          animate={{
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 15 + i * 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+// 3D Parallax Card Component
+const ParallaxHostingCard = ({
   feature,
   index,
   mousePosition,
@@ -24,169 +88,124 @@ const FloatingSecurityCard = ({
   isInView: boolean;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [localMousePos, setLocalMousePos] = useState({ x: 0.5, y: 0.5 });
 
-  // Evenly spaced positions in a 2x2 grid with depth layers
-  const positions = [
-    { x: -400, y: -200, z: 30, delay: 0, floatOffset: 0, zIndex: 4, rotateZ: -2 },
-    { x: 400, y: -200, z: -20, delay: 0.2, floatOffset: 0.7, zIndex: 2, rotateZ: 2 },
-    { x: -400, y: 220, z: -30, delay: 0.4, floatOffset: 1.2, zIndex: 2, rotateZ: 1 },
-    { x: 400, y: 220, z: 40, delay: 0.6, floatOffset: 1.8, zIndex: 4, rotateZ: -1 },
-  ];
+  const rotateX = mousePosition.y * -10;
+  const rotateY = mousePosition.x * 10;
 
-  const pos = positions[index];
-
-  // Independent mouse parallax effect - each card responds differently
-  const parallaxX = mousePosition.x * (25 + index * 8);
-  const parallaxY = mousePosition.y * (25 + index * 8);
-
-  // 3D tilt based on mouse position - enhanced on hover
-  const tiltX = isHovered ? mousePosition.y * -20 : mousePosition.y * -8;
-  const tiltY = isHovered ? mousePosition.x * 20 : mousePosition.x * 8;
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    setLocalMousePos({ x, y });
+  };
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8, filter: 'blur(10px)', y: 50 }}
-      animate={
-        isInView
-          ? { opacity: 1, scale: 1, filter: 'blur(0px)', y: 0 }
-          : { opacity: 0, scale: 0.8, filter: 'blur(10px)', y: 50 }
-      }
-      transition={{
-        duration: 0.8,
-        delay: pos.delay,
-        type: 'spring',
-        stiffness: 80,
-        damping: 15,
-      }}
-      className="absolute"
-      style={{
-        left: '50%',
-        top: '50%',
-        zIndex: pos.zIndex,
-        transform: `
-          translate(-50%, -50%)
-          translate3d(${pos.x + parallaxX}px, ${pos.y + parallaxY}px, ${pos.z}px)
-          perspective(1500px)
-          rotateX(${tiltX}deg)
-          rotateY(${tiltY}deg)
-          rotateZ(${pos.rotateZ + (isHovered ? 0 : pos.rotateZ * 0.5)}deg)
-        `,
-        transformStyle: 'preserve-3d',
-        willChange: 'transform',
-      }}
+      ref={cardRef}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      transition={{ duration: 0.8, delay: 0.2 + index * 0.15 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onMouseMove={handleCardMouseMove}
+      className="relative group"
+      style={{
+        perspective: '1000px',
+      }}
     >
       <motion.div
-        className="relative w-72 p-8 rounded-3xl overflow-hidden"
+        className="relative p-8 rounded-2xl transition-all duration-300 overflow-hidden"
         style={{
-          background: isHovered
-            ? 'rgba(10, 25, 47, 0.9)'
-            : 'rgba(10, 25, 47, 0.75)',
-          backdropFilter: 'blur(30px) saturate(180%)',
-          border: `2px solid ${
-            isHovered ? 'rgba(6, 182, 212, 0.8)' : 'rgba(6, 182, 212, 0.4)'
-          }`,
+          background: 'rgba(255, 255, 255, 0.05)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
           boxShadow: isHovered
-            ? `
-                0 30px 90px rgba(6, 182, 212, 0.5),
-                0 0 80px rgba(139, 92, 246, 0.4),
-                inset 0 0 60px rgba(6, 182, 212, 0.1),
-                0 0 0 1px rgba(255, 255, 255, 0.1)
-              `
-            : `
-                0 ${15 + pos.z}px ${50 + Math.abs(pos.z)}px rgba(0, 0, 0, ${0.6 + Math.abs(pos.z) / 100}),
-                0 0 30px rgba(6, 182, 212, 0.2),
-                inset 0 0 30px rgba(6, 182, 212, 0.05)
-              `,
+            ? '0 20px 60px rgba(6, 182, 212, 0.3), 0 0 40px rgba(139, 92, 246, 0.2)'
+            : '0 8px 32px rgba(0, 0, 0, 0.3)',
+          transformStyle: 'preserve-3d',
         }}
         animate={{
-          y: isHovered ? 0 : [0, -18, 0],
-          scale: isHovered ? 1.08 : 1 + (pos.z / 800), // Closer cards appear slightly larger
-          rotate: isHovered ? 0 : [0, pos.rotateZ / 2, 0],
+          rotateX: isHovered ? rotateX : 0,
+          rotateY: isHovered ? rotateY : 0,
+          scale: isHovered ? 1.03 : 1,
         }}
         transition={{
-          y: {
-            duration: 3.5 + pos.floatOffset,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: pos.floatOffset * 0.5,
-          },
-          scale: { duration: 0.3 },
-          rotate: {
-            duration: 4 + pos.floatOffset,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: pos.floatOffset * 0.3,
-          },
+          duration: 0.3,
+          ease: [0.25, 0.46, 0.45, 0.94],
         }}
       >
-        {/* Animated gradient overlay */}
+        {/* Animated gradient background */}
         <motion.div
-          className="absolute inset-0 rounded-3xl pointer-events-none"
+          className="absolute inset-0 opacity-30"
           style={{
-            background: `linear-gradient(135deg,
-              rgba(6, 182, 212, ${isHovered ? 0.2 : 0}) 0%,
-              rgba(139, 92, 246, ${isHovered ? 0.15 : 0}) 100%)`,
+            background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1))',
           }}
           animate={{
-            backgroundPosition: ['0% 0%', '100% 100%'],
+            backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
           }}
           transition={{
-            duration: 3,
+            duration: 10,
             repeat: Infinity,
-            ease: 'linear',
+            ease: "linear",
           }}
         />
 
-        {/* Holographic scan effect */}
-        {isHovered && (
-          <motion.div
-            className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl"
-            initial={{ y: '-100%' }}
-            animate={{ y: '200%' }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-            style={{
-              background:
-                'linear-gradient(180deg, transparent, rgba(6, 182, 212, 0.3), transparent)',
-              height: '30%',
-            }}
-          />
-        )}
+        {/* Shimmer effect */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `linear-gradient(135deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%)`,
+            backgroundSize: '200% 200%',
+          }}
+          animate={{
+            backgroundPosition: isHovered ? ['0% 0%', '200% 200%'] : '0% 0%',
+          }}
+          transition={{
+            duration: 1.5,
+            ease: "easeInOut",
+          }}
+        />
 
-        {/* Neon glow corners */}
+        {/* Magnetic cursor spotlight */}
+        <motion.div
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            width: '200px',
+            height: '200px',
+            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.15), transparent 70%)',
+            filter: 'blur(30px)',
+            left: `${localMousePos.x * 100}%`,
+            top: `${localMousePos.y * 100}%`,
+            transform: 'translate(-50%, -50%)',
+            opacity: isHovered ? 1 : 0,
+          }}
+          transition={{ duration: 0.2 }}
+        />
+
+        {/* Pulsing corners */}
         {isHovered && (
           <>
-            {[
-              'top-2 left-2',
-              'top-2 right-2',
-              'bottom-2 left-2',
-              'bottom-2 right-2',
-            ].map((position, i) => (
+            {[[0, 0], [1, 0], [0, 1], [1, 1]].map(([x, y], i) => (
               <motion.div
                 key={i}
-                className={`absolute ${position} w-6 h-6`}
+                className="absolute w-2 h-2 rounded-full"
                 style={{
-                  borderTop:
-                    i < 2 ? '2px solid rgba(6, 182, 212, 1)' : 'none',
-                  borderBottom:
-                    i >= 2 ? '2px solid rgba(6, 182, 212, 1)' : 'none',
-                  borderLeft:
-                    i % 2 === 0 ? '2px solid rgba(6, 182, 212, 1)' : 'none',
-                  borderRight:
-                    i % 2 === 1 ? '2px solid rgba(6, 182, 212, 1)' : 'none',
-                  boxShadow: '0 0 20px rgba(6, 182, 212, 0.8)',
+                  [x === 0 ? 'left' : 'right']: 0,
+                  [y === 0 ? 'top' : 'bottom']: 0,
+                  background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)',
+                  boxShadow: '0 0 10px rgba(6, 182, 212, 0.8)',
                 }}
                 animate={{
+                  scale: [1, 1.5, 1],
                   opacity: [0.5, 1, 0.5],
                 }}
                 transition={{
-                  duration: 1.5,
-                  delay: i * 0.2,
+                  duration: 2,
+                  delay: i * 0.5,
                   repeat: Infinity,
                 }}
               />
@@ -194,67 +213,22 @@ const FloatingSecurityCard = ({
           </>
         )}
 
-        {/* Icon with AI energy glow */}
+        {/* Glow overlay on hover */}
         <motion.div
-          className="relative w-20 h-20 rounded-2xl flex items-center justify-center mb-6 mx-auto"
+          className="absolute inset-0 rounded-2xl pointer-events-none"
           style={{
-            background:
-              'linear-gradient(135deg, rgba(6, 182, 212, 0.3), rgba(139, 92, 246, 0.3))',
-            boxShadow: isHovered
-              ? '0 0 50px rgba(6, 182, 212, 1), 0 0 80px rgba(139, 92, 246, 0.8)'
-              : '0 0 30px rgba(6, 182, 212, 0.5)',
+            background: 'radial-gradient(circle at center, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.1), transparent 70%)',
+            opacity: isHovered ? 1 : 0,
           }}
-          animate={{
-            boxShadow: isHovered
-              ? [
-                  '0 0 50px rgba(6, 182, 212, 1)',
-                  '0 0 70px rgba(139, 92, 246, 1)',
-                  '0 0 50px rgba(6, 182, 212, 1)',
-                ]
-              : '0 0 30px rgba(6, 182, 212, 0.5)',
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-          }}
-        >
-          <div className="text-3xl">{feature.icon}</div>
+          transition={{ duration: 0.3 }}
+        />
 
-          {/* Orbiting particles */}
-          {isHovered &&
-            [...Array(4)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-2 h-2 rounded-full bg-cyan-400"
-                animate={{
-                  rotate: [0, 360],
-                }}
-                transition={{
-                  duration: 2,
-                  delay: i * 0.5,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
-                style={{
-                  left: '50%',
-                  top: '-8px',
-                  transformOrigin: '0 48px',
-                  boxShadow: '0 0 15px rgba(6, 182, 212, 1)',
-                }}
-              />
-            ))}
-        </motion.div>
-
-        {/* Title with futuristic font */}
+        {/* Title */}
         <h3
-          className="text-xl font-black text-center mb-4 tracking-wide"
+          className="text-2xl font-bold mb-4 relative z-10"
           style={{
-            color: '#F0FDFA',
-            textShadow: isHovered
-              ? '0 0 30px rgba(6, 182, 212, 1), 0 2px 10px rgba(0, 0, 0, 0.8)'
-              : '0 2px 10px rgba(0, 0, 0, 0.8)',
-            fontFamily: 'Inter, system-ui, sans-serif',
-            letterSpacing: '0.05em',
+            color: '#F5F7FA',
+            textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)',
           }}
         >
           {feature.title}
@@ -262,24 +236,22 @@ const FloatingSecurityCard = ({
 
         {/* Description */}
         <p
-          className="text-sm text-gray-300 text-center leading-relaxed"
+          className="text-gray-400 leading-relaxed relative z-10"
           style={{
-            textShadow: '0 1px 3px rgba(0, 0, 0, 0.8)',
+            textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)',
           }}
         >
           {feature.description}
         </p>
 
-        {/* Bottom glow bar */}
+        {/* Animated border on hover */}
         <motion.div
-          className="absolute bottom-0 left-0 right-0 h-1 rounded-b-3xl"
+          className="absolute inset-0 rounded-2xl pointer-events-none"
           style={{
-            background:
-              'linear-gradient(90deg, rgba(6, 182, 212, 0.8), rgba(139, 92, 246, 0.8))',
-            boxShadow: '0 -5px 30px rgba(6, 182, 212, 0.6)',
-          }}
-          animate={{
-            opacity: isHovered ? 1 : 0.5,
+            border: '2px solid transparent',
+            borderImage: isHovered
+              ? 'linear-gradient(135deg, rgba(6, 182, 212, 0.5), rgba(139, 92, 246, 0.5)) 1'
+              : 'none',
           }}
         />
       </motion.div>
@@ -287,218 +259,160 @@ const FloatingSecurityCard = ({
   );
 };
 
-// Floating Geometric Shapes
-const FloatingGeometry = () => {
-  const shapes = [
-    { type: 'hexagon', x: 10, y: 20, size: 40, duration: 15 },
-    { type: 'hexagon', x: 80, y: 70, size: 30, duration: 12 },
-    { type: 'hexagon', x: 20, y: 80, size: 35, duration: 18 },
-    { type: 'line', x: 40, y: 30, width: 100, duration: 10 },
-    { type: 'line', x: 60, y: 60, width: 80, duration: 14 },
-  ];
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {shapes.map((shape, i) => {
-        if (shape.type === 'hexagon') {
-          return (
-            <motion.div
-              key={i}
-              className="absolute"
-              style={{
-                left: `${shape.x}%`,
-                top: `${shape.y}%`,
-                width: shape.size,
-                height: shape.size,
-              }}
-              animate={{
-                y: [0, -50, 0],
-                rotate: [0, 360],
-                opacity: [0.2, 0.5, 0.2],
-              }}
-              transition={{
-                duration: shape.duration,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <svg viewBox="0 0 100 100" className="w-full h-full">
-                <polygon
-                  points="50 0, 95 25, 95 75, 50 100, 5 75, 5 25"
-                  fill="none"
-                  stroke="rgba(6, 182, 212, 0.4)"
-                  strokeWidth="2"
-                  style={{
-                    filter: 'drop-shadow(0 0 10px rgba(6, 182, 212, 0.6))',
-                  }}
-                />
-              </svg>
-            </motion.div>
-          );
-        }
-
-        return (
-          <motion.div
-            key={i}
-            className="absolute h-0.5"
-            style={{
-              left: `${shape.x}%`,
-              top: `${shape.y}%`,
-              width: shape.width,
-              background: 'linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.6), transparent)',
-              boxShadow: '0 0 10px rgba(139, 92, 246, 0.6)',
-            }}
-            animate={{
-              scaleX: [1, 1.5, 1],
-              opacity: [0.3, 0.7, 0.3],
-            }}
-            transition={{
-              duration: shape.duration,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        );
-      })}
-    </div>
-  );
-};
-
-
-// Main Ultra-Modern 3D Security Section
-const AISecuritySection3D = ({ securityFeatures }: { securityFeatures: any[] }) => {
+// Why Choose Montrose Hosting Section
+const WhyChooseHosting = ({ features }: { features: any[] }) => {
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
     const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
     setMousePosition({ x, y });
+    setCursorPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  const handleMouseLeave = () => {
+    setMousePosition({ x: 0, y: 0 });
   };
 
   return (
     <section
       ref={sectionRef}
       className="relative py-32 px-6 sm:px-8 lg:px-12 overflow-hidden"
-      onMouseMove={handleMouseMove}
       style={{
-        background: 'linear-gradient(180deg, #050A1E 0%, #0A1628 25%, #0D1B3A 50%, #0A152E 75%, #000000 100%)',
-        minHeight: '100vh',
+        background: 'linear-gradient(180deg, #040B1E 0%, #0A1F3E 100%)',
       }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
-      {/* Enhanced animated nebula background with particles */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Floating particles */}
-        {[...Array(80)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              width: Math.random() * 3 + 1.5,
-              height: Math.random() * 3 + 1.5,
-              background: i % 3 === 0 ? '#06B6D4' : i % 3 === 1 ? '#8B5CF6' : '#10B981',
-              boxShadow: `0 0 ${Math.random() * 25 + 15}px currentColor`,
-              filter: 'blur(0.5px)',
-            }}
-            animate={{
-              y: [0, Math.random() * -120 - 80],
-              x: [0, Math.random() * 40 - 20],
-              opacity: [0, 0.9, 0.9, 0],
-              scale: [0, 1.8, 1.8, 0],
-            }}
-            transition={{
-              duration: Math.random() * 12 + 8,
-              delay: Math.random() * 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
+      {/* Animated Background Elements */}
+      <AnimatedOrbs />
+      <FloatingParticles mousePosition={mousePosition} />
 
-        {/* Larger glowing orbs */}
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={`orb-${i}`}
-            className="absolute rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              width: Math.random() * 60 + 40,
-              height: Math.random() * 60 + 40,
-              background: `radial-gradient(circle, ${
-                i % 3 === 0
-                  ? 'rgba(6, 182, 212, 0.15)'
-                  : i % 3 === 1
-                  ? 'rgba(139, 92, 246, 0.15)'
-                  : 'rgba(16, 185, 129, 0.15)'
-              }, transparent 70%)`,
-              filter: 'blur(25px)',
-            }}
-            animate={{
-              scale: [1, 1.5, 1],
-              opacity: [0.3, 0.6, 0.3],
-              x: [0, Math.random() * 50 - 25],
-              y: [0, Math.random() * 50 - 25],
-            }}
-            transition={{
-              duration: Math.random() * 15 + 10,
-              delay: Math.random() * 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Floating geometric shapes */}
-      <FloatingGeometry />
-
-      {/* Section Header */}
+      {/* Radial gradient that follows cursor */}
       <motion.div
-        className="relative text-center mb-32 z-20"
-        initial={{ opacity: 0, y: 30 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-        transition={{ duration: 1 }}
-      >
-        <h2 className="text-5xl sm:text-6xl font-black mb-6">
-          <span className="text-white">Enterprise-Grade </span>
-          <span
-            className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-purple-500 bg-clip-text text-transparent"
-            style={{
-              textShadow: '0 0 40px rgba(6, 182, 212, 0.5)',
-            }}
-          >
-            AI Security
-          </span>
-        </h2>
-        <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-          Your data and applications are protected by multiple layers of security, monitoring, and backup systems powered by advanced AI.
-        </p>
-      </motion.div>
-
-      {/* Ultra-Modern Floating 3D Cards */}
-      <div
-        className="relative max-w-7xl mx-auto"
+        className="absolute w-96 h-96 rounded-full pointer-events-none"
         style={{
-          height: '1000px',
-          minHeight: '1000px',
-          perspective: '2500px',
-          perspectiveOrigin: 'center center',
+          background: 'radial-gradient(circle, rgba(6, 182, 212, 0.08), transparent 70%)',
+          filter: 'blur(40px)',
         }}
-      >
-        {securityFeatures.map((feature, index) => (
-          <FloatingSecurityCard
-            key={index}
-            feature={feature}
-            index={index}
-            mousePosition={mousePosition}
-            isInView={isInView}
-          />
-        ))}
+        animate={{
+          x: cursorPosition.x - 192,
+          y: cursorPosition.y - 192,
+        }}
+        transition={{
+          type: "spring",
+          damping: 30,
+          stiffness: 200,
+        }}
+      />
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        {/* Header */}
+        <motion.div
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-4xl sm:text-5xl font-black mb-6">
+            <span className="text-white">Why Choose </span>
+            <span className="bg-gradient-to-r from-cyan-400 to-violet-500 bg-clip-text text-transparent">
+              Montrose Hosting?
+            </span>
+          </h2>
+          <p className="text-xl text-gray-400">
+            We combine cutting-edge technology with proven strategies to deliver results that matter.
+          </p>
+        </motion.div>
+
+        {/* Cards Grid with Connecting Lines */}
+        <div className="relative">
+          {/* Connecting Lines SVG */}
+          <svg
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            style={{ zIndex: 0 }}
+          >
+            <defs>
+              <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#06B6D4" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.5" />
+              </linearGradient>
+            </defs>
+
+            {/* Horizontal line connecting top cards */}
+            <motion.line
+              x1="25%" y1="30%" x2="75%" y2="30%"
+              stroke="url(#lineGradient)"
+              strokeWidth="2"
+              strokeDasharray="5,5"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={isInView ? { pathLength: 1, opacity: 0.6 } : { pathLength: 0, opacity: 0 }}
+              transition={{ duration: 1.5, delay: 0.5 }}
+            />
+
+            {/* Horizontal line connecting bottom cards */}
+            <motion.line
+              x1="25%" y1="70%" x2="75%" y2="70%"
+              stroke="url(#lineGradient)"
+              strokeWidth="2"
+              strokeDasharray="5,5"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={isInView ? { pathLength: 1, opacity: 0.6 } : { pathLength: 0, opacity: 0 }}
+              transition={{ duration: 1.5, delay: 0.7 }}
+            />
+
+            {/* Vertical connecting lines */}
+            <motion.line
+              x1="25%" y1="35%" x2="25%" y2="65%"
+              stroke="url(#lineGradient)"
+              strokeWidth="2"
+              strokeDasharray="5,5"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={isInView ? { pathLength: 1, opacity: 0.6 } : { pathLength: 0, opacity: 0 }}
+              transition={{ duration: 1.5, delay: 0.9 }}
+            />
+            <motion.line
+              x1="75%" y1="35%" x2="75%" y2="65%"
+              stroke="url(#lineGradient)"
+              strokeWidth="2"
+              strokeDasharray="5,5"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={isInView ? { pathLength: 1, opacity: 0.6 } : { pathLength: 0, opacity: 0 }}
+              transition={{ duration: 1.5, delay: 1.1 }}
+            />
+
+            {/* Glowing dots at intersections */}
+            {[[25, 30], [75, 30], [25, 70], [75, 70]].map(([x, y], i) => (
+              <motion.circle
+                key={i}
+                cx={`${x}%`}
+                cy={`${y}%`}
+                r="4"
+                fill="url(#lineGradient)"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={isInView ? { scale: [0, 1.5, 1], opacity: [0, 1, 0.8] } : { scale: 0, opacity: 0 }}
+                transition={{ duration: 0.8, delay: 1.3 + i * 0.1 }}
+              />
+            ))}
+          </svg>
+
+          {/* Cards - 2x2 Grid */}
+          <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            {features.map((feature, index) => (
+              <ParallaxHostingCard
+                key={index}
+                feature={feature}
+                index={index}
+                mousePosition={mousePosition}
+                isInView={isInView}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -510,45 +424,6 @@ export default function HostingPage() {
     { value: 45, suffix: 'ms', label: 'Avg Response Time' },
     { value: 10, suffix: 'x', label: 'Speed Improvement' },
     { value: 24, suffix: '/7', label: 'Monitoring' },
-  ];
-
-  const securityFeatures = [
-    {
-      icon: (
-        <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-        </svg>
-      ),
-      title: 'SSL Certificates',
-      description: 'Free SSL certificates for all domains with automatic renewal and HTTPS enforcement.'
-    },
-    {
-      icon: (
-        <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-      ),
-      title: 'DDoS Protection',
-      description: 'Enterprise-grade protection against distributed denial-of-service attacks.'
-    },
-    {
-      icon: (
-        <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-      ),
-      title: 'Web Application Firewall',
-      description: 'Advanced firewall rules to block malicious traffic and prevent intrusions.'
-    },
-    {
-      icon: (
-        <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
-        </svg>
-      ),
-      title: 'Daily Backups',
-      description: 'Automated daily backups with one-click restore and 30-day retention.'
-    },
   ];
 
   const cloudProviders = [
@@ -636,6 +511,25 @@ export default function HostingPage() {
     },
   ];
 
+  const whyChooseFeatures = [
+    {
+      title: 'Lightning-Fast Performance',
+      description: 'Experience blazing-fast load times with our globally distributed CDN and optimized infrastructure. Your applications run 10x faster than traditional hosting.'
+    },
+    {
+      title: 'Enterprise Security',
+      description: 'Bank-level security with SSL certificates, DDoS protection, and automated daily backups. Your data is protected 24/7 with real-time monitoring.'
+    },
+    {
+      title: 'Seamless Scalability',
+      description: 'Automatically scale resources based on traffic demands. Handle sudden spikes effortlessly with our intelligent auto-scaling infrastructure.'
+    },
+    {
+      title: '24/7 Expert Support',
+      description: 'Get help whenever you need it with our round-the-clock support team. Fast response times and expert solutions to keep you running smoothly.'
+    },
+  ];
+
   return (
     <div className="relative min-h-screen overflow-hidden">
       <InteractiveGlowBackground />
@@ -715,8 +609,8 @@ export default function HostingPage() {
           </div>
         </section>
 
-        {/* 3D AI Security & Reliability */}
-        <AISecuritySection3D securityFeatures={securityFeatures} />
+        {/* Why Choose Montrose Hosting */}
+        <WhyChooseHosting features={whyChooseFeatures} />
 
         {/* Cloud Integration */}
         <section className="py-24">
@@ -848,207 +742,6 @@ export default function HostingPage() {
               ))}
             </div>
 
-            {/* World Map Visualization */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="mt-16"
-            >
-              <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-12 border border-white/10">
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-white mb-2">Global Edge Network</h3>
-                  <p className="text-gray-400">200+ locations worldwide for instant content delivery</p>
-                </div>
-
-                <div className="aspect-video bg-gradient-to-br from-blue-900/30 to-purple-900/30 rounded-xl flex items-center justify-center relative overflow-hidden">
-                  {/* Animated dots representing global locations */}
-                  {[...Array(20)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute w-3 h-3 bg-blue-400 rounded-full"
-                      style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                      }}
-                      animate={{
-                        scale: [1, 1.5, 1],
-                        opacity: [0.5, 1, 0.5],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: i * 0.1,
-                      }}
-                    />
-                  ))}
-
-                  <div className="relative z-10 text-center">
-                    <div className="text-5xl font-bold text-white mb-2">200+</div>
-                    <div className="text-gray-400">Global Edge Locations</div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Custom Dashboard */}
-        <section className="py-24 relative overflow-hidden">
-          {/* Animated Snake Background */}
-          <div className="absolute inset-0 pointer-events-none opacity-30">
-            <svg
-              className="absolute w-full h-full"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1200 800"
-              preserveAspectRatio="none"
-            >
-              <defs>
-                <linearGradient id="snakeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#06B6D4" stopOpacity="0.8" />
-                  <stop offset="50%" stopColor="#8B5CF6" stopOpacity="0.8" />
-                  <stop offset="100%" stopColor="#10B981" stopOpacity="0.8" />
-                </linearGradient>
-                <filter id="snakeGlow">
-                  <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-                  <feMerge>
-                    <feMergeNode in="coloredBlur"/>
-                    <feMergeNode in="SourceGraphic"/>
-                  </feMerge>
-                </filter>
-              </defs>
-
-              {/* Main snake path */}
-              <motion.path
-                d="M-100,300 Q200,150 400,300 T800,300 Q1000,400 1200,300"
-                stroke="url(#snakeGradient)"
-                strokeWidth="3"
-                fill="none"
-                filter="url(#snakeGlow)"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{
-                  pathLength: [0, 1, 1, 0],
-                  opacity: [0, 1, 1, 0],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-
-              {/* Secondary snake path */}
-              <motion.path
-                d="M-100,500 Q300,550 600,400 T1200,500"
-                stroke="url(#snakeGradient)"
-                strokeWidth="2"
-                fill="none"
-                filter="url(#snakeGlow)"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{
-                  pathLength: [0, 1, 1, 0],
-                  opacity: [0, 0.6, 0.6, 0],
-                }}
-                transition={{
-                  duration: 10,
-                  delay: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-
-              {/* Flowing particles along the path */}
-              {[...Array(8)].map((_, i) => (
-                <motion.circle
-                  key={i}
-                  r="4"
-                  fill="#06B6D4"
-                  filter="url(#snakeGlow)"
-                  initial={{ opacity: 0 }}
-                  animate={{
-                    cx: [
-                      -100 + (i * 150),
-                      200 + (i * 100),
-                      400 + (i * 80),
-                      600 + (i * 90),
-                      800 + (i * 100),
-                      1200
-                    ],
-                    cy: [
-                      300,
-                      150 + Math.sin(i) * 50,
-                      300 + Math.cos(i) * 40,
-                      300,
-                      400 + Math.sin(i) * 30,
-                      300
-                    ],
-                    opacity: [0, 1, 1, 1, 1, 0],
-                  }}
-                  transition={{
-                    duration: 6,
-                    delay: i * 0.3,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                />
-              ))}
-            </svg>
-          </div>
-
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-            <SectionHeader
-              title="Powerful"
-              highlight="Dashboard"
-              description="Manage your entire infrastructure from one intuitive control panel. No technical expertise required."
-              align="center"
-            />
-
-            <FeatureGrid features={dashboardFeatures} columns={4} />
-
-            {/* Dashboard Mockup */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="mt-16"
-            >
-              <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <div className="aspect-video bg-gradient-to-br from-gray-900 to-blue-900/50 rounded-xl flex items-center justify-center relative overflow-hidden">
-                  {/* Animated UI elements */}
-                  <div className="absolute inset-8 grid grid-cols-3 gap-4">
-                    {[...Array(9)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: [0.2, 0.5, 0.2] }}
-                        transition={{
-                          duration: 3,
-                          repeat: Infinity,
-                          delay: i * 0.3,
-                        }}
-                        className="bg-white/10 rounded-lg border border-white/20"
-                      />
-                    ))}
-                  </div>
-
-                  <div className="relative z-10 text-center">
-                    <motion.div
-                      animate={{ scale: [1, 1.1, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4"
-                    >
-                      <svg className="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
-                      </svg>
-                    </motion.div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Control Panel</h3>
-                    <p className="text-gray-400">Manage everything from one place</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
           </div>
         </section>
 
