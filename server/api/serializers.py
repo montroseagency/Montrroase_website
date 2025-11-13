@@ -5,7 +5,7 @@ from django.utils import timezone
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from .models import (
-    ContentImage, User, Client, Task, ContentPost, PerformanceData,
+    ContentImage, ContentRequest, ContentRequestImage, User, Client, Task, ContentPost, PerformanceData,
     Message, Invoice, TeamMember, Project, File, Notification,
     SocialMediaAccount, RealTimeMetrics, WebsiteProject, WebsitePhase,
     Course, CourseModule, CourseLesson, CourseProgress, CourseCertificate, CoursePurchase,
@@ -471,10 +471,84 @@ class ContentPostSerializer(serializers.ModelSerializer):
         
         return instance
 
+
+class ContentRequestImageSerializer(serializers.ModelSerializer):
+    """Content request image serializer"""
+    image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ContentRequestImage
+        fields = ['id', 'image', 'image_url', 'caption', 'order', 'created_at']
+        read_only_fields = ['id', 'created_at']
+
+    def get_image_url(self, obj):
+        request = self.context.get('request')
+        if obj.image and request:
+            return request.build_absolute_uri(obj.image.url)
+        elif obj.image:
+            return obj.image.url
+        return None
+
+
+class ContentRequestSerializer(serializers.ModelSerializer):
+    """Content request serializer"""
+    reference_images = ContentRequestImageSerializer(many=True, read_only=True)
+    client_name = serializers.CharField(source='client.name', read_only=True)
+    created_content_id = serializers.UUIDField(source='created_content.id', read_only=True, allow_null=True)
+    uploaded_images = serializers.ListField(
+        child=serializers.ImageField(),
+        write_only=True,
+        required=False
+    )
+
+    class Meta:
+        model = ContentRequest
+        fields = [
+            'id', 'client', 'client_name', 'platform', 'title',
+            'description', 'status', 'preferred_date', 'notes',
+            'agent_notes', 'created_content_id', 'reference_images', 'uploaded_images',
+            'created_at', 'updated_at', 'completed_at'
+        ]
+        read_only_fields = ['id', 'client_name', 'created_at', 'updated_at', 'completed_at', 'created_content_id']
+
+    def create(self, validated_data):
+        uploaded_images = validated_data.pop('uploaded_images', [])
+        content_request = ContentRequest.objects.create(**validated_data)
+
+        # Create reference images
+        for i, image in enumerate(uploaded_images):
+            ContentRequestImage.objects.create(
+                content_request=content_request,
+                image=image,
+                order=i
+            )
+
+        return content_request
+
+    def update(self, instance, validated_data):
+        uploaded_images = validated_data.pop('uploaded_images', None)
+
+        # Update content request
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+
+        # Handle new images if provided
+        if uploaded_images is not None:
+            for i, image in enumerate(uploaded_images):
+                ContentRequestImage.objects.create(
+                    content_request=instance,
+                    image=image,
+                    order=instance.reference_images.count() + i
+                )
+
+        return instance
+
+
 class PerformanceDataSerializer(serializers.ModelSerializer):
     """Performance data serializer"""
     client_name = serializers.CharField(source='client.name', read_only=True)
-    
+
     class Meta:
         model = PerformanceData
         fields = [

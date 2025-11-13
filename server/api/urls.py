@@ -10,7 +10,7 @@ from .views import (
     dashboard_stats_view, client_dashboard_stats_view,
 
     # ViewSets
-    ClientViewSet, TaskViewSet, ContentPostViewSet,
+    ClientViewSet, TaskViewSet, ContentPostViewSet, ContentRequestViewSet,
     PerformanceDataViewSet, MessageViewSet, InvoiceViewSet,
     FileViewSet, NotificationViewSet, SocialMediaAccountViewSet,
     AgentViewSet, WebsiteVersionViewSet, CampaignViewSet, ContentScheduleViewSet,
@@ -173,6 +173,7 @@ router = DefaultRouter()
 router.register(r'clients', ClientViewSet, basename='client')
 router.register(r'tasks', TaskViewSet, basename='task')
 router.register(r'content', ContentPostViewSet, basename='content')
+router.register(r'content-requests', ContentRequestViewSet, basename='content-request')
 router.register(r'performance', PerformanceDataViewSet, basename='performance')
 router.register(r'messages', MessageViewSet, basename='message')
 router.register(r'invoices', InvoiceViewSet, basename='invoice')

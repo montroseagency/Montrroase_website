@@ -41,12 +41,44 @@ class SocialMediaAccountViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
     
     def get_queryset(self):
-        if self.request.user.role == 'admin':
+        user = self.request.user
+
+        if user.role == 'admin':
             return SocialMediaAccount.objects.all()
+
+        elif user.role == 'agent':
+            # Agents can see accounts of their assigned clients
+            try:
+                from ...models import Agent
+                agent = Agent.objects.get(user=user)
+
+                # Filter by client query param if provided
+                client_id = self.request.query_params.get('client')
+                if client_id:
+                    # Check if this client is assigned to the agent
+                    client = Client.objects.filter(
+                        id=client_id
+                    ).filter(
+                        Q(assigned_agent=agent) | Q(marketing_agent=agent) | Q(website_agent=agent)
+                    ).first()
+
+                    if client:
+                        return SocialMediaAccount.objects.filter(client=client)
+                    return SocialMediaAccount.objects.none()
+
+                # Return all accounts for assigned clients
+                assigned_clients = Client.objects.filter(
+                    Q(assigned_agent=agent) | Q(marketing_agent=agent) | Q(website_agent=agent)
+                )
+                return SocialMediaAccount.objects.filter(client__in=assigned_clients)
+
+            except Agent.DoesNotExist:
+                return SocialMediaAccount.objects.none()
+
         else:
             # Clients can only see their own accounts
             try:
-                client = self.request.user.client_profile
+                client = user.client_profile
                 return SocialMediaAccount.objects.filter(client=client)
             except Client.DoesNotExist:
                 return SocialMediaAccount.objects.none()

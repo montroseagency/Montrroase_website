@@ -454,6 +454,74 @@ class ApiService {
     return await this.request(url);
   }
 
+  // ============ CONTENT REQUEST METHODS ============
+
+  async getContentRequests() {
+    const response = await this.request('/content-requests/');
+    return this.handlePaginatedResponse(response);
+  }
+
+  async getContentRequest(id: string) {
+    return await this.request(`/content-requests/${id}/`);
+  }
+
+  async createContentRequest(requestData: FormData | any) {
+    if (requestData instanceof FormData) {
+      const url = `${this.baseURL}/content-requests/`;
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          ...(this.token && { Authorization: `Token ${this.token}` }),
+        },
+        body: requestData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+      }
+
+      return await response.json();
+    }
+
+    return await this.request('/content-requests/', {
+      method: 'POST',
+      body: JSON.stringify(requestData),
+    });
+  }
+
+  async updateContentRequest(id: string, data: any) {
+    return await this.request(`/content-requests/${id}/`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteContentRequest(id: string) {
+    return await this.request(`/content-requests/${id}/`, {
+      method: 'DELETE',
+    });
+  }
+
+  async startContentRequestProgress(id: string) {
+    return await this.request(`/content-requests/${id}/start_progress/`, {
+      method: 'POST',
+    });
+  }
+
+  async markContentRequestCompleted(id: string) {
+    return await this.request(`/content-requests/${id}/mark_completed/`, {
+      method: 'POST',
+    });
+  }
+
+  async rejectContentRequest(id: string, reason: string) {
+    return await this.request(`/content-requests/${id}/reject/`, {
+      method: 'POST',
+      body: JSON.stringify({ reason }),
+    });
+  }
+
   // ============ PERFORMANCE & ANALYTICS METHODS ============
 
   async getPerformanceData(clientId?: string) {

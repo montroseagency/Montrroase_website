@@ -191,6 +191,22 @@ class Client(models.Model):
         related_name='assigned_clients',
         help_text='Agent assigned to manage this client'
     )
+    marketing_agent = models.ForeignKey(
+        'Agent',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='marketing_clients',
+        help_text='Marketing agent assigned to manage social media for this client'
+    )
+    website_agent = models.ForeignKey(
+        'Agent',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='website_clients',
+        help_text='Website agent assigned to manage website projects for this client'
+    )
     next_payment = models.DateField(null=True, blank=True)  # Allow null for no active subscription
     total_spent = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     notes = models.TextField(blank=True, null=True)
@@ -491,13 +507,85 @@ class ContentImage(models.Model):
     caption = models.CharField(max_length=255, blank=True)
     order = models.IntegerField(default=0)
     created_at = models.DateTimeField(default=timezone.now)
-    
+
     class Meta:
         ordering = ['order', 'created_at']
-    
+
     def __str__(self):
         return f"Image {self.order} for {self.content_post.title or self.content_post.id}"
-    
+
+    @property
+    def image_url(self):
+        """Get full URL of image"""
+        if self.image:
+            return self.image.url
+        return None
+
+
+class ContentRequest(models.Model):
+    """Content requests created by clients describing what content they want"""
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('in-progress', 'In Progress'),
+        ('completed', 'Completed'),
+        ('rejected', 'Rejected'),
+    ]
+
+    PLATFORM_CHOICES = [
+        ('instagram', 'Instagram'),
+        ('youtube', 'YouTube'),
+        ('tiktok', 'TikTok'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='content_requests')
+    platform = models.CharField(max_length=20, choices=PLATFORM_CHOICES)
+    title = models.CharField(max_length=255, help_text='Brief title for the request')
+    description = models.TextField(help_text='Detailed description of content wanted')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+
+    # Optional fields
+    preferred_date = models.DateField(blank=True, null=True, help_text='Preferred posting date')
+    notes = models.TextField(blank=True, help_text='Additional notes or requirements from client')
+
+    # Tracking
+    agent_notes = models.TextField(blank=True, help_text='Notes from agent')
+    created_content = models.OneToOneField(
+        ContentPost,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='source_request',
+        help_text='The content post created from this request'
+    )
+
+    # Timestamps
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+    completed_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.client.name} - {self.platform} - {self.title}"
+
+
+class ContentRequestImage(models.Model):
+    """Reference images for content requests"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    content_request = models.ForeignKey(ContentRequest, on_delete=models.CASCADE, related_name='reference_images')
+    image = models.ImageField(upload_to='content_request_images/%Y/%m/')
+    caption = models.CharField(max_length=255, blank=True)
+    order = models.IntegerField(default=0)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['order', 'created_at']
+
+    def __str__(self):
+        return f"Reference image {self.order} for {self.content_request.title}"
+
     @property
     def image_url(self):
         """Get full URL of image"""

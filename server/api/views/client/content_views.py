@@ -636,5 +636,171 @@ class ContentPostViewSet(ModelViewSet):
         self.perform_destroy(instance)
         
         logger.info(f"Admin {request.user.email} deleted content post: {post_title}")
-        
+
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# ==================== CONTENT REQUEST VIEWSET ====================
+
+from ...models import ContentRequest, ContentRequestImage
+from ...serializers import ContentRequestSerializer
+
+
+class ContentRequestViewSet(ModelViewSet):
+    """
+    ViewSet for content requests
+    - Clients can create requests for content they want
+    - Agents can see requests from their assigned clients
+    - Agents can update status and add notes
+    """
+    serializer_class = ContentRequestSerializer
+    permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if user.role == 'client':
+            # Clients see only their requests
+            try:
+                client = user.client_profile
+                return ContentRequest.objects.filter(client=client)
+            except Client.DoesNotExist:
+                return ContentRequest.objects.none()
+
+        elif user.role == 'agent':
+            # Agents see requests from their assigned clients
+            try:
+                from ...models import Agent
+                agent = Agent.objects.get(user=user)
+                assigned_clients = Client.objects.filter(
+                    Q(assigned_agent=agent) | Q(marketing_agent=agent) | Q(website_agent=agent)
+                )
+                return ContentRequest.objects.filter(client__in=assigned_clients)
+            except Agent.DoesNotExist:
+                return ContentRequest.objects.none()
+
+        elif user.role == 'admin':
+            # Admins see all
+            return ContentRequest.objects.all()
+
+        return ContentRequest.objects.none()
+
+    def create(self, request, *args, **kwargs):
+        """Create content request - Client only"""
+        try:
+            logger.info(f"Content request creation from {request.user.email}")
+
+            if request.user.role != 'client':
+                return Response(
+                    {'error': 'Only clients can create content requests'},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+
+            # Get the client
+            try:
+                client = request.user.client_profile
+            except Client.DoesNotExist:
+                return Response(
+                    {'error': 'Client profile not found'},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+
+            # Get uploaded images
+            uploaded_images = request.FILES.getlist('images')
+
+            # Create request data
+            request_data = {
+                'client': client.id,
+                'platform': request.data.get('platform'),
+                'title': request.data.get('title'),
+                'description': request.data.get('description'),
+                'preferred_date': request.data.get('preferred_date') or None,
+                'notes': request.data.get('notes', ''),
+            }
+
+            # Create the content request
+            serializer = self.get_serializer(data=request_data)
+            serializer.is_valid(raise_exception=True)
+            content_request = serializer.save()
+
+            # Create reference images
+            for i, image in enumerate(uploaded_images):
+                ContentRequestImage.objects.create(
+                    content_request=content_request,
+                    image=image,
+                    order=i
+                )
+
+            # Refresh to get images
+            content_request.refresh_from_db()
+            response_serializer = self.get_serializer(content_request)
+
+            logger.info(f"Content request created: {content_request.id}")
+
+            return Response(response_serializer.data, status=status.HTTP_201_CREATED)
+
+        except Exception as e:
+            logger.error(f"Error creating content request: {str(e)}")
+            return Response(
+                {'error': str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+    @action(detail=True, methods=['post'])
+    def start_progress(self, request, pk=None):
+        """Agent marks request as in-progress"""
+        if request.user.role not in ['agent', 'admin']:
+            return Response(
+                {'error': 'Only agents can update request status'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        content_request = self.get_object()
+        content_request.status = 'in-progress'
+        content_request.save()
+
+        logger.info(f"Request {content_request.id} marked as in-progress by {request.user.email}")
+
+        serializer = self.get_serializer(content_request)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['post'])
+    def mark_completed(self, request, pk=None):
+        """Mark request as completed"""
+        if request.user.role not in ['agent', 'admin']:
+            return Response(
+                {'error': 'Only agents can update request status'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        content_request = self.get_object()
+        content_request.status = 'completed'
+        content_request.completed_at = timezone.now()
+        content_request.save()
+
+        logger.info(f"Request {content_request.id} marked as completed by {request.user.email}")
+
+        serializer = self.get_serializer(content_request)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['post'])
+    def reject(self, request, pk=None):
+        """Reject a content request"""
+        if request.user.role not in ['agent', 'admin']:
+            return Response(
+                {'error': 'Only agents can reject requests'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        content_request = self.get_object()
+        reason = request.data.get('reason', '')
+
+        content_request.status = 'rejected'
+        content_request.agent_notes = f"Rejected: {reason}" if reason else "Rejected"
+        content_request.save()
+
+        logger.info(f"Request {content_request.id} rejected by {request.user.email}")
+
+        serializer = self.get_serializer(content_request)
+        return Response(serializer.data)

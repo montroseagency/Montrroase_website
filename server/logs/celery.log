@@ -1,0 +1,23 @@
+ERROR 2025-11-13 10:10:14,819 redis 18301 123145682468864 Connection to Redis lost: Retry (0/20) now.
+ERROR 2025-11-13 10:10:14,820 redis 18301 123145682468864 Connection to Redis lost: Retry (1/20) in 1.00 second.
+ERROR 2025-11-13 10:10:15,825 redis 18301 123145682468864 Connection to Redis lost: Retry (2/20) in 1.00 second.
+ERROR 2025-11-13 10:10:16,831 redis 18301 123145682468864 Connection to Redis lost: Retry (3/20) in 1.00 second.
+ERROR 2025-11-13 10:10:17,833 redis 18301 123145682468864 Connection to Redis lost: Retry (4/20) in 1.00 second.
+ERROR 2025-11-13 10:10:18,838 redis 18301 123145682468864 Connection to Redis lost: Retry (5/20) in 1.00 second.
+ERROR 2025-11-13 10:10:19,853 redis 18301 123145682468864 Connection to Redis lost: Retry (6/20) in 1.00 second.
+ERROR 2025-11-13 10:10:20,865 redis 18301 123145682468864 Connection to Redis lost: Retry (7/20) in 1.00 second.
+ERROR 2025-11-13 10:10:21,869 redis 18301 123145682468864 Connection to Redis lost: Retry (8/20) in 1.00 second.
+ERROR 2025-11-13 10:10:22,873 redis 18301 123145682468864 Connection to Redis lost: Retry (9/20) in 1.00 second.
+ERROR 2025-11-13 10:10:23,878 redis 18301 123145682468864 Connection to Redis lost: Retry (10/20) in 1.00 second.
+ERROR 2025-11-13 10:10:24,883 redis 18301 123145682468864 Connection to Redis lost: Retry (11/20) in 1.00 second.
+ERROR 2025-11-13 10:10:25,887 redis 18301 123145682468864 Connection to Redis lost: Retry (12/20) in 1.00 second.
+ERROR 2025-11-13 10:10:26,889 redis 18301 123145682468864 Connection to Redis lost: Retry (13/20) in 1.00 second.
+ERROR 2025-11-13 10:10:27,894 redis 18301 123145682468864 Connection to Redis lost: Retry (14/20) in 1.00 second.
+ERROR 2025-11-13 10:10:28,900 redis 18301 123145682468864 Connection to Redis lost: Retry (15/20) in 1.00 second.
+ERROR 2025-11-13 10:10:29,970 redis 18301 123145682468864 Connection to Redis lost: Retry (16/20) in 1.00 second.
+ERROR 2025-11-13 10:10:30,974 redis 18301 123145682468864 Connection to Redis lost: Retry (17/20) in 1.00 second.
+ERROR 2025-11-13 10:10:31,974 redis 18301 123145682468864 Connection to Redis lost: Retry (18/20) in 1.00 second.
+ERROR 2025-11-13 10:10:32,986 redis 18301 123145682468864 Connection to Redis lost: Retry (19/20) in 1.00 second.
+CRITICAL 2025-11-13 10:10:34,007 redis 18301 123145682468864 
+Retry limit exceeded while trying to reconnect to the Celery redis result store backend. The Celery application must be restarted.
+

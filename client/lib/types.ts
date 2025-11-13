@@ -154,6 +154,33 @@ export interface ContentPost {
   updated_at: string;
 }
 
+export interface ContentRequest {
+  id: string;
+  client: string; // Client ID
+  client_name: string;
+  platform: 'instagram' | 'youtube' | 'tiktok';
+  title: string;
+  description: string;
+  status: 'pending' | 'in-progress' | 'completed' | 'rejected';
+  preferred_date?: string;
+  notes?: string;
+  agent_notes?: string;
+  created_content_id?: string;
+  reference_images: ContentRequestImage[];
+  created_at: string;
+  updated_at: string;
+  completed_at?: string;
+}
+
+export interface ContentRequestImage {
+  id: string;
+  image: string;
+  image_url: string;
+  caption?: string;
+  order: number;
+  created_at: string;
+}
+
 export interface PerformanceData {
   id: string;
   client: string; // Client ID

@@ -31,7 +31,8 @@
       "Bash(python test_notification_system.py:*)",
       "Bash(sqlite3:*)",
       "Bash(npx tsc:*)",
-      "Bash(taskkill:*)"
+      "Bash(taskkill:*)",
+      "Bash(pkill:*)"
     ],
     "deny": [],
     "ask": []

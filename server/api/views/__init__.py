@@ -15,7 +15,7 @@ from .client.statistic_views import (
 # ============ MAIN VIEWSETS ============
 from .client.client_payment import ClientViewSet
 from .client.task_views import TaskViewSet
-from .client.content_views import ContentPostViewSet
+from .client.content_views import ContentPostViewSet, ContentRequestViewSet
 from .client.performance_views import PerformanceDataViewSet
 from .admin.invoice_views import InvoiceViewSet
 from .client.social_views import SocialMediaAccountViewSet, get_realtime_metrics
@@ -162,7 +162,7 @@ __all__ = [
     'dashboard_stats_view', 'client_dashboard_stats_view',
 
     # ViewSets
-    'ClientViewSet', 'TaskViewSet', 'ContentPostViewSet',
+    'ClientViewSet', 'TaskViewSet', 'ContentPostViewSet', 'ContentRequestViewSet',
     'PerformanceDataViewSet', 'MessageViewSet', 'InvoiceViewSet',
     'FileViewSet', 'NotificationViewSet', 'SocialMediaAccountViewSet',
     'AgentViewSet', 'WebsiteVersionViewSet', 'CampaignViewSet',

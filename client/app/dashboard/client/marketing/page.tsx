@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@/lib/hooks/useAuth';
 import ApiService from '@/lib/api';
 import Link from 'next/link';
-import { FileText, CheckSquare, TrendingUp, Users, ArrowRight, Calendar, MessageSquare } from 'lucide-react';
+import { FileText, CheckSquare, TrendingUp, Users, ArrowRight, Calendar, MessageSquare, User } from 'lucide-react';
 
 interface DashboardStats {
   total_followers: number;
@@ -14,17 +14,64 @@ interface DashboardStats {
   growth_rate: number;
 }
 
+interface MarketingAgent {
+  id: string;
+  user: {
+    id: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+    avatar?: string;
+  };
+  department: string;
+  specialization: string;
+  is_active: boolean;
+}
+
+interface ContentStats {
+  total: number;
+  pending_approval: number;
+  approved: number;
+  posted: number;
+}
+
 export default function MarketingOverviewPage() {
   const { user } = useAuth();
   const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [marketingAgent, setMarketingAgent] = useState<MarketingAgent | null>(null);
+  const [contentStats, setContentStats] = useState<ContentStats>({ total: 0, pending_approval: 0, approved: 0, posted: 0 });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadData = async () => {
       try {
         setLoading(true);
-        const statsData = await ApiService.getClientDashboardStats();
+        const [statsData, contentData] = await Promise.all([
+          ApiService.getClientDashboardStats(),
+          ApiService.getContent(),
+        ]);
+
         setStats(statsData);
+
+        // Calculate content stats
+        if (Array.isArray(contentData)) {
+          setContentStats({
+            total: contentData.length,
+            pending_approval: contentData.filter((c: any) => c.status === 'pending-approval').length,
+            approved: contentData.filter((c: any) => c.status === 'approved').length,
+            posted: contentData.filter((c: any) => c.status === 'posted').length,
+          });
+        }
+
+        // Fetch marketing agent info
+        try {
+          // Try to get client profile which should include assigned agent info
+          const clientProfile = await ApiService.getCurrentUser();
+          // If the backend provides agent info in the user profile, use it
+          // Otherwise, we'll need to fetch from a different endpoint
+        } catch (agentErr) {
+          console.error('Error loading agent info:', agentErr);
+        }
       } catch (err: any) {
         console.error('Error loading marketing stats:', err);
       } finally {
@@ -50,7 +97,7 @@ export default function MarketingOverviewPage() {
       icon: <FileText className="w-8 h-8" />,
       href: '/dashboard/client/marketing/content',
       color: 'from-purple-500 to-pink-500',
-      stat: { label: 'Posts This Month', value: stats?.posts_this_month || 0 }
+      stat: { label: 'Total Content', value: contentStats.total }
     },
     {
       title: 'Tasks',
@@ -86,7 +133,68 @@ export default function MarketingOverviewPage() {
         <p className="text-purple-100">Manage your social media presence and campaigns</p>
       </div>
 
-      {/* Key Metrics */}
+      {/* Marketing Agent Card */}
+      {marketingAgent ? (
+        <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg shadow-lg p-6 text-white">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-purple-600 font-bold text-2xl">
+                {marketingAgent.user.avatar ? (
+                  <img src={marketingAgent.user.avatar} alt="Agent" className="w-full h-full rounded-full object-cover" />
+                ) : (
+                  <User className="w-8 h-8" />
+                )}
+              </div>
+              <div>
+                <p className="text-sm opacity-90">Your Marketing Agent</p>
+                <p className="text-2xl font-bold">
+                  {marketingAgent.user.first_name} {marketingAgent.user.last_name}
+                </p>
+                <p className="text-sm opacity-90">{marketingAgent.specialization}</p>
+              </div>
+            </div>
+            <Link
+              href="/dashboard/client/marketing/messages"
+              className="flex items-center gap-2 px-4 py-2 bg-white text-purple-600 rounded-lg hover:bg-purple-50 transition-colors font-medium"
+            >
+              <MessageSquare className="w-4 h-4" />
+              Message Agent
+            </Link>
+          </div>
+        </div>
+      ) : (
+        <div className="bg-gray-100 rounded-lg shadow p-6 text-center">
+          <User className="w-12 h-12 text-gray-400 mx-auto mb-2" />
+          <p className="text-gray-600">No marketing agent assigned yet</p>
+        </div>
+      )}
+
+      {/* Content Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="bg-white rounded-lg shadow p-6">
+          <p className="text-sm text-gray-600 mb-1">Total Content</p>
+          <p className="text-3xl font-bold text-gray-900">{contentStats.total}</p>
+        </div>
+        <div className="bg-white rounded-lg shadow p-6">
+          <p className="text-sm text-gray-600 mb-1">Pending Approval</p>
+          <p className="text-3xl font-bold text-gray-900">{contentStats.pending_approval}</p>
+          {contentStats.pending_approval > 0 && (
+            <Link href="/dashboard/client/marketing/content" className="text-xs text-yellow-600 mt-1 hover:underline">
+              Review now →
+            </Link>
+          )}
+        </div>
+        <div className="bg-white rounded-lg shadow p-6">
+          <p className="text-sm text-gray-600 mb-1">Approved</p>
+          <p className="text-3xl font-bold text-gray-900">{contentStats.approved}</p>
+        </div>
+        <div className="bg-white rounded-lg shadow p-6">
+          <p className="text-sm text-gray-600 mb-1">Posted</p>
+          <p className="text-3xl font-bold text-gray-900">{contentStats.posted}</p>
+        </div>
+      </div>
+
+      {/* Social Media Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="bg-white rounded-lg shadow p-6">
           <p className="text-sm text-gray-600 mb-1">Total Followers</p>
