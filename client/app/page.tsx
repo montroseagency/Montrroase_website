@@ -305,22 +305,22 @@ const AboutSection = memo(() => {
   const isInView = useInView(sectionRef, { once: false, amount: 0.3 });
 
   return (
-    <section ref={sectionRef} className="relative py-40 sm:py-48 lg:py-56 px-6 sm:px-8 lg:px-12 overflow-hidden">
+    <section ref={sectionRef} className="relative py-20 sm:py-32 md:py-40 lg:py-56 px-4 sm:px-6 lg:px-12 overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-red-600/10 rounded-full blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-center">
           {/* Left Side - Text Content */}
-          <div className="space-y-12">
-            <p className="text-lg sm:text-xl text-gray-500 font-medium tracking-wider uppercase">
+          <div className="space-y-6 sm:space-y-8 lg:space-y-12">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-500 font-medium tracking-wider uppercase">
               We are
             </p>
 
             <h2
-              className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tighter leading-none"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-none"
               style={{
                 background: 'linear-gradient(135deg, #ffffff 0%, #e5e5e5 50%, #ffffff 100%)',
                 WebkitBackgroundClip: 'text',
@@ -331,62 +331,62 @@ const AboutSection = memo(() => {
               MONTROSE
             </h2>
 
-            <div className="flex justify-start py-4">
+            <div className="flex justify-start py-2 sm:py-4">
               <div
-                className="h-[1px] w-32"
+                className="h-[1px] w-24 sm:w-32"
                 style={{
                   background: 'linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.6), rgba(239, 68, 68, 0.6), transparent)',
                 }}
               />
             </div>
 
-            <div className="space-y-6">
-              <p className="text-xl sm:text-2xl lg:text-3xl text-white leading-relaxed font-light">
+            <div className="space-y-4 sm:space-y-6">
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white leading-relaxed font-light">
                 A multidisciplinary collective where creativity meets technology. We craft digital experiences that don't just exist—they resonate, inspire, and transform.
               </p>
 
-              <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 leading-relaxed font-light">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed font-light">
                 From visionary startups to established enterprises, we partner with ambitious brands ready to break boundaries. Our philosophy is simple: exceptional design paired with flawless execution creates unforgettable impact.
               </p>
 
-              <p className="text-lg sm:text-xl text-gray-400 leading-relaxed font-light">
+              <p className="text-base sm:text-lg lg:text-xl text-gray-400 leading-relaxed font-light">
                 We don't follow trends—we set them. Every project is an opportunity to push creative limits, challenge conventions, and deliver solutions that stand the test of time.
               </p>
             </div>
 
-            <div className="pt-8">
+            <div className="pt-4 sm:pt-8">
               <Link
                 href="/services"
-                className="group relative inline-flex items-center gap-3 px-10 py-5 overflow-hidden rounded-full transition-all duration-300"
+                className="group relative inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 overflow-hidden rounded-full transition-all duration-300"
               >
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600 via-red-600 to-purple-600 opacity-50 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />
                 <div className="absolute inset-[1px] rounded-full bg-black" />
 
-                <span className="relative text-lg font-semibold text-white z-10">
+                <span className="relative text-base sm:text-lg font-semibold text-white z-10">
                   Explore our services
                 </span>
-                <svg className="relative w-5 h-5 text-white z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="relative w-4 h-4 sm:w-5 sm:h-5 text-white z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
             </div>
           </div>
 
-          {/* Right Side - Animated Image */}
+          {/* Right Side - Animated Image - Now visible on mobile */}
           <motion.div
             ref={imageRef}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="relative lg:flex justify-center items-center hidden"
+            className="relative flex justify-center items-center mt-8 lg:mt-0"
           >
-            <div className="relative">
+            <div className="relative w-full max-w-md lg:max-w-none">
               {/* Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 via-cyan-400/10 to-transparent rounded-2xl blur-2xl" />
               <div className="absolute inset-0 bg-gradient-to-tl from-blue-500/15 via-transparent to-transparent rounded-2xl blur-xl" />
 
               {/* Image Container */}
-              <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                 <img
                   src="/images/hero/okar.png"
                   alt="Montrose Analytics"
@@ -401,8 +401,8 @@ const AboutSection = memo(() => {
               </div>
 
               {/* Additional Glow Accents */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-400/20 rounded-full blur-3xl" />
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-cyan-400/15 rounded-full blur-3xl" />
+              <div className="absolute -top-2 sm:-top-4 -right-2 sm:-right-4 w-16 h-16 sm:w-24 sm:h-24 bg-blue-400/20 rounded-full blur-3xl" />
+              <div className="absolute -bottom-2 sm:-bottom-4 -left-2 sm:-left-4 w-20 h-20 sm:w-32 sm:h-32 bg-cyan-400/15 rounded-full blur-3xl" />
             </div>
           </motion.div>
         </div>

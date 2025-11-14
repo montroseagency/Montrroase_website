@@ -765,7 +765,7 @@ export default function HostingPage() {
         </section>
 
         {/* Testimonials - Modern Dropdown Style */}
-        <section className="py-24 relative overflow-hidden">
+        <section className="py-16 sm:py-20 lg:py-24 relative overflow-hidden">
           {/* Deep Navy & Purple Gradient Background */}
           <div className="absolute inset-0 bg-gradient-to-br from-[#0A0E27] via-[#1A1B3D] to-[#2D1B69] opacity-90" />
 
@@ -807,7 +807,7 @@ export default function HostingPage() {
             />
           </div>
 
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
             <SectionHeader
               title="Trusted by"
               highlight="Growing Companies"
@@ -816,7 +816,7 @@ export default function HostingPage() {
             />
 
             {/* Two Column Layout: Dropdowns + Image */}
-            <div className="mt-16 grid lg:grid-cols-2 gap-12 items-center">
+            <div className="mt-12 sm:mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
               {/* Left: Dropdowns */}
               <div className="space-y-4">
                 {testimonials.map((testimonial, index) => {
@@ -840,7 +840,7 @@ export default function HostingPage() {
                       transition={{ duration: 0.2 }}
                     >
                       <motion.div
-                        className="relative bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 overflow-hidden cursor-pointer"
+                        className="relative bg-white/5 backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/10 overflow-hidden cursor-pointer"
                         style={{
                           boxShadow: isExpanded
                             ? '0 20px 60px rgba(139, 92, 246, 0.4), 0 0 40px rgba(6, 182, 212, 0.3)'
@@ -893,12 +893,12 @@ export default function HostingPage() {
                         )}
 
                         {/* Header with metric */}
-                        <div className="flex items-center gap-4 relative z-10">
+                        <div className="flex items-center gap-3 sm:gap-4 relative z-10">
                           {/* Expand indicator - Left side */}
                           <motion.div
                             animate={{ rotate: isExpanded ? 180 : 0 }}
                             transition={{ duration: 0.3 }}
-                            className="text-cyan-400 text-2xl flex-shrink-0"
+                            className="text-cyan-400 text-xl sm:text-2xl flex-shrink-0"
                           >
                             ▼
                           </motion.div>
@@ -906,14 +906,14 @@ export default function HostingPage() {
                           {/* Metric */}
                           <div className="flex-1">
                             <motion.div
-                              className="text-3xl font-black bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent"
+                              className="text-2xl sm:text-3xl font-black bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent"
                               style={{
                                 textShadow: '0 0 30px rgba(6, 182, 212, 0.5)',
                               }}
                             >
                               {testimonial.stat.value}
                             </motion.div>
-                            <div className="text-sm text-gray-400 font-medium">
+                            <div className="text-xs sm:text-sm text-gray-400 font-medium">
                               {testimonial.stat.label}
                             </div>
                           </div>
@@ -940,7 +940,7 @@ export default function HostingPage() {
                           >
                             {/* Testimonial quote */}
                             <motion.p
-                              className="text-gray-300 leading-relaxed italic text-lg mb-6"
+                              className="text-gray-300 leading-relaxed italic text-base sm:text-lg mb-4 sm:mb-6"
                               initial={{ opacity: 0 }}
                               animate={{ opacity: isExpanded ? 1 : 0 }}
                               transition={{ delay: 0.2 }}
@@ -950,7 +950,7 @@ export default function HostingPage() {
 
                             {/* Author info with glass panel effect */}
                             <motion.div
-                              className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10"
+                              className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-white/5 border border-white/10"
                               initial={{ opacity: 0, x: -20 }}
                               animate={{
                                 opacity: isExpanded ? 1 : 0,
@@ -959,13 +959,13 @@ export default function HostingPage() {
                               transition={{ delay: 0.3 }}
                             >
                               {/* Avatar placeholder */}
-                              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center font-bold text-white">
+                              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center font-bold text-white text-sm sm:text-base">
                                 {testimonial.author.charAt(0)}
                               </div>
 
                               <div>
-                                <div className="font-bold text-white">{testimonial.author}</div>
-                                <div className="text-sm text-gray-400">
+                                <div className="font-bold text-white text-sm sm:text-base">{testimonial.author}</div>
+                                <div className="text-xs sm:text-sm text-gray-400">
                                   {testimonial.role} — <span className="text-cyan-400">{testimonial.company}</span>
                                 </div>
                               </div>
@@ -979,17 +979,17 @@ export default function HostingPage() {
               })}
               </div>
 
-              {/* Right: Animated 3D Image */}
+              {/* Right: Animated 3D Image - Now visible on mobile */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, type: "spring" }}
-                className="relative lg:block hidden"
+                className="relative flex justify-center items-center mt-8 lg:mt-0"
               >
                 {/* 3D Floating Container */}
                 <motion.div
-                  className="relative"
+                  className="relative w-full max-w-md lg:max-w-none"
                   style={{
                     transformStyle: 'preserve-3d',
                     perspective: '1000px',
@@ -1006,7 +1006,7 @@ export default function HostingPage() {
                 >
                   {/* Glowing orb behind image */}
                   <motion.div
-                    className="absolute inset-0 blur-3xl opacity-40"
+                    className="absolute inset-0 blur-3xl opacity-30 sm:opacity-40"
                     style={{
                       background: 'radial-gradient(circle, rgba(6, 182, 212, 0.6), rgba(139, 92, 246, 0.4), transparent 70%)',
                     }}
@@ -1052,7 +1052,7 @@ export default function HostingPage() {
                         alt="Montrose Hosting Platform"
                         width={600}
                         height={600}
-                        className="rounded-3xl shadow-2xl"
+                        className="rounded-2xl sm:rounded-3xl shadow-2xl w-full h-auto"
                         style={{
                           filter: 'drop-shadow(0 25px 50px rgba(6, 182, 212, 0.3))',
                         }}
@@ -1061,11 +1061,11 @@ export default function HostingPage() {
                     </motion.div>
                   </motion.div>
 
-                  {/* Optimized orbiting particles */}
+                  {/* Optimized orbiting particles - Hidden on small screens for performance */}
                   {[...Array(4)].map((_, i) => (
                     <motion.div
                       key={i}
-                      className="absolute w-2 h-2 rounded-full"
+                      className="absolute w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full hidden sm:block"
                       style={{
                         background: i % 2 === 0 ? '#06B6D4' : '#8B5CF6',
                         boxShadow: `0 0 15px ${i % 2 === 0 ? '#06B6D4' : '#8B5CF6'}`,
@@ -1075,12 +1075,12 @@ export default function HostingPage() {
                       animate={{
                         x: [
                           0,
-                          Math.cos((i * Math.PI * 2) / 4) * 260,
+                          Math.cos((i * Math.PI * 2) / 4) * 200,
                           0,
                         ],
                         y: [
                           0,
-                          Math.sin((i * Math.PI * 2) / 4) * 260,
+                          Math.sin((i * Math.PI * 2) / 4) * 200,
                           0,
                         ],
                         opacity: [0, 0.8, 0],
@@ -1095,9 +1095,9 @@ export default function HostingPage() {
                     />
                   ))}
 
-                  {/* Simplified rotating ring */}
+                  {/* Simplified rotating ring - Hidden on mobile */}
                   <motion.div
-                    className="absolute inset-0 rounded-full border-2 pointer-events-none"
+                    className="absolute inset-0 rounded-full border-2 pointer-events-none hidden lg:block"
                     style={{
                       borderColor: 'rgba(6, 182, 212, 0.25)',
                       boxShadow: '0 0 25px rgba(6, 182, 212, 0.3)',
@@ -1117,7 +1117,7 @@ export default function HostingPage() {
                   {['top-0 left-0', 'top-0 right-0', 'bottom-0 left-0', 'bottom-0 right-0'].map((position, i) => (
                     <motion.div
                       key={i}
-                      className={`absolute ${position} w-20 h-20`}
+                      className={`absolute ${position} w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20`}
                       style={{
                         background: `radial-gradient(circle, ${i % 2 === 0 ? 'rgba(6, 182, 212, 0.4)' : 'rgba(139, 92, 246, 0.4)'}, transparent 70%)`,
                         filter: 'blur(20px)',
