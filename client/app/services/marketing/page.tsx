@@ -1,6 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+import Image from 'next/image';
 import Navigation from '@/components/marketing/navigation';
 import Footer from '@/components/marketing/footer';
 import InteractiveGlowBackground from '@/components/interactive-glow-background';
@@ -215,8 +217,32 @@ export default function MarketingPage() {
         </section>
 
         {/* Real-Time Analytics */}
-        <section className="py-24">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <section className="py-24 relative overflow-hidden">
+          {/* Animated background layer */}
+          <div className="absolute inset-0 opacity-20">
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1 h-1 bg-blue-400 rounded-full"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  y: [0, -100, 0],
+                  opacity: [0, 1, 0],
+                  scale: [0, 2, 0],
+                }}
+                transition={{
+                  duration: 3 + Math.random() * 2,
+                  repeat: Infinity,
+                  delay: Math.random() * 2,
+                }}
+              />
+            ))}
+          </div>
+
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
             <SectionHeader
               title="Real-Time"
               highlight="Analytics Panel"
@@ -224,248 +250,231 @@ export default function MarketingPage() {
               align="center"
             />
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16" style={{ perspective: 3000 }}>
               {[
                 {
                   title: 'Real-Time Metrics',
-                  description: 'Track engagement, reach, and conversions as they happen with live dashboard updates.'
+                  description: 'Track engagement, reach, and conversions as they happen with live dashboard updates.',
+                  color: 'from-blue-500 to-cyan-500',
                 },
                 {
                   title: 'Growth Tracking',
-                  description: 'Monitor follower growth, post performance, and audience demographics in one view.'
+                  description: 'Monitor follower growth, post performance, and audience demographics in one view.',
+                  color: 'from-purple-500 to-pink-500',
                 },
                 {
                   title: 'ROI Calculator',
-                  description: 'Measure campaign profitability with automated cost-per-acquisition and revenue tracking.'
+                  description: 'Measure campaign profitability with automated cost-per-acquisition and revenue tracking.',
+                  color: 'from-green-500 to-emerald-500',
                 },
                 {
                   title: 'Custom Reports',
-                  description: 'Generate beautiful, shareable reports for clients and stakeholders in seconds.'
+                  description: 'Generate beautiful, shareable reports for clients and stakeholders in seconds.',
+                  color: 'from-orange-500 to-red-500',
                 }
               ].map((feature, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 50, rotateX: -20, scale: 0.9 }}
-                  whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+                  initial={{ opacity: 0, y: 100, rotateX: -45, rotateY: -20, scale: 0.5 }}
+                  whileInView={{ opacity: 1, y: 0, rotateX: 0, rotateY: 0, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{
-                    duration: 0.7,
-                    delay: index * 0.1,
+                    duration: 1,
+                    delay: index * 0.15,
                     type: "spring",
-                    stiffness: 120
+                    stiffness: 80,
+                    damping: 15
                   }}
-                  style={{ perspective: 1500 }}
                   className="relative group"
+                  style={{ transformStyle: 'preserve-3d' }}
                 >
+                  {/* 3D Card Container */}
                   <motion.div
                     animate={{
-                      rotateY: [0, 3, 0, -3, 0],
-                      rotateX: [0, -2, 0, 2, 0],
+                      rotateY: [0, 5, 0, -5, 0],
+                      rotateX: [0, -3, 0, 3, 0],
+                      z: [0, 20, 0],
                     }}
                     transition={{
-                      duration: 6 + index,
+                      duration: 8 + index * 0.5,
                       repeat: Infinity,
                       ease: "easeInOut"
                     }}
                     whileHover={{
-                      scale: 1.05,
-                      rotateY: 8,
-                      rotateX: -5,
-                      z: 50,
-                      transition: { duration: 0.3 }
+                      scale: 1.1,
+                      rotateY: 12,
+                      rotateX: -8,
+                      z: 60,
+                      transition: { duration: 0.4, type: "spring", stiffness: 300 }
                     }}
                     style={{ transformStyle: 'preserve-3d' }}
                     className="relative h-full"
                   >
-                    <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 relative overflow-hidden h-full">
-                      {/* Animated snake border */}
-                      <div className="absolute -inset-0.5 rounded-2xl overflow-hidden">
-                        {/* Top snake */}
-                        <motion.div
-                          className="absolute top-0 left-0 right-0 h-0.5"
-                          style={{
-                            background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 1), rgba(168, 85, 247, 1), transparent)',
-                            boxShadow: '0 0 15px rgba(59, 130, 246, 0.6)',
-                          }}
-                          animate={{
-                            x: ['-100%', '200%'],
-                          }}
-                          transition={{
-                            duration: 2.5,
-                            repeat: Infinity,
-                            ease: "linear",
-                            delay: index * 0.3,
-                          }}
-                        />
-
-                        {/* Right snake */}
-                        <motion.div
-                          className="absolute top-0 right-0 bottom-0 w-0.5"
-                          style={{
-                            background: 'linear-gradient(180deg, transparent, rgba(168, 85, 247, 1), rgba(6, 182, 212, 1), transparent)',
-                            boxShadow: '0 0 15px rgba(168, 85, 247, 0.6)',
-                          }}
-                          animate={{
-                            y: ['-100%', '200%'],
-                          }}
-                          transition={{
-                            duration: 2.5,
-                            repeat: Infinity,
-                            ease: "linear",
-                            delay: index * 0.3 + 0.6,
-                          }}
-                        />
-
-                        {/* Bottom snake */}
-                        <motion.div
-                          className="absolute bottom-0 left-0 right-0 h-0.5"
-                          style={{
-                            background: 'linear-gradient(270deg, transparent, rgba(6, 182, 212, 1), rgba(59, 130, 246, 1), transparent)',
-                            boxShadow: '0 0 15px rgba(6, 182, 212, 0.6)',
-                          }}
-                          animate={{
-                            x: ['200%', '-100%'],
-                          }}
-                          transition={{
-                            duration: 2.5,
-                            repeat: Infinity,
-                            ease: "linear",
-                            delay: index * 0.3 + 1.2,
-                          }}
-                        />
-
-                        {/* Left snake */}
-                        <motion.div
-                          className="absolute top-0 left-0 bottom-0 w-0.5"
-                          style={{
-                            background: 'linear-gradient(0deg, transparent, rgba(59, 130, 246, 1), rgba(168, 85, 247, 1), transparent)',
-                            boxShadow: '0 0 15px rgba(59, 130, 246, 0.6)',
-                          }}
-                          animate={{
-                            y: ['200%', '-100%'],
-                          }}
-                          transition={{
-                            duration: 2.5,
-                            repeat: Infinity,
-                            ease: "linear",
-                            delay: index * 0.3 + 1.8,
-                          }}
-                        />
-                      </div>
-
-                      {/* 3D floating particles */}
-                      {[...Array(4)].map((_, i) => (
-                        <motion.div
-                          key={i}
-                          className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-60"
-                          style={{
-                            left: `${20 + i * 20}%`,
-                            top: `${30 + i * 15}%`,
-                            transform: `translateZ(${10 + i * 5}px)`,
-                            boxShadow: '0 0 10px rgba(59, 130, 246, 0.8)',
-                          }}
-                          animate={{
-                            y: [0, -20, 0],
-                            x: [0, Math.sin(i) * 10, 0],
-                            opacity: [0.3, 1, 0.3],
-                            scale: [1, 2, 1],
-                          }}
-                          transition={{
-                            duration: 2 + i * 0.5,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: i * 0.3,
-                          }}
-                        />
-                      ))}
-
-                      {/* Glowing orb on hover */}
+                    {/* Floating 3D geometric shapes in background */}
+                    <div className="absolute inset-0" style={{ transform: 'translateZ(-100px)', transformStyle: 'preserve-3d' }}>
                       <motion.div
-                        className="absolute -top-10 -right-10 w-32 h-32 rounded-full opacity-0 group-hover:opacity-100"
-                        style={{
-                          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.4), transparent 70%)',
-                          filter: 'blur(20px)',
-                          transform: 'translateZ(20px)',
-                        }}
+                        className={`absolute top-1/4 left-1/4 w-20 h-20 bg-gradient-to-br ${feature.color} opacity-20 blur-xl`}
                         animate={{
-                          rotate: 360,
+                          rotate: [0, 360],
+                          scale: [1, 1.5, 1],
                         }}
                         transition={{
-                          duration: 4,
+                          duration: 6,
+                          repeat: Infinity,
+                          ease: "linear"
+                        }}
+                      />
+                      <motion.div
+                        className={`absolute bottom-1/4 right-1/4 w-16 h-16 bg-gradient-to-br ${feature.color} opacity-20 blur-xl`}
+                        animate={{
+                          rotate: [360, 0],
+                          scale: [1, 1.3, 1],
+                        }}
+                        transition={{
+                          duration: 5,
+                          repeat: Infinity,
+                          ease: "linear"
+                        }}
+                      />
+                    </div>
+
+                    {/* Main Card */}
+                    <div
+                      className="relative bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md rounded-3xl p-8 border border-white/20 overflow-hidden h-full"
+                      style={{ transform: 'translateZ(0px)', transformStyle: 'preserve-3d' }}
+                    >
+                      {/* Holographic effect overlay */}
+                      <motion.div
+                        className="absolute inset-0 opacity-30"
+                        style={{
+                          background: 'linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%)',
+                          backgroundSize: '200% 200%',
+                        }}
+                        animate={{
+                          backgroundPosition: ['0% 0%', '100% 100%'],
+                        }}
+                        transition={{
+                          duration: 3,
                           repeat: Infinity,
                           ease: "linear"
                         }}
                       />
 
-                      {/* Content with 3D depth */}
-                      <div className="relative z-10" style={{ transform: 'translateZ(30px)', transformStyle: 'preserve-3d' }}>
+                      {/* Orbiting particles */}
+                      {[...Array(6)].map((_, i) => {
+                        const angle = (i / 6) * 360;
+                        return (
+                          <motion.div
+                            key={i}
+                            className="absolute w-2 h-2 rounded-full"
+                            style={{
+                              background: `radial-gradient(circle, rgba(59, 130, 246, 1), transparent)`,
+                              boxShadow: '0 0 15px rgba(59, 130, 246, 0.8)',
+                              left: '50%',
+                              top: '50%',
+                              transform: `translateZ(${40 + i * 5}px)`,
+                            }}
+                            animate={{
+                              x: [
+                                Math.cos((angle * Math.PI) / 180) * 60,
+                                Math.cos(((angle + 180) * Math.PI) / 180) * 60,
+                                Math.cos((angle * Math.PI) / 180) * 60,
+                              ],
+                              y: [
+                                Math.sin((angle * Math.PI) / 180) * 60,
+                                Math.sin(((angle + 180) * Math.PI) / 180) * 60,
+                                Math.sin((angle * Math.PI) / 180) * 60,
+                              ],
+                              opacity: [0.3, 1, 0.3],
+                            }}
+                            transition={{
+                              duration: 4,
+                              repeat: Infinity,
+                              delay: i * 0.2,
+                              ease: "linear"
+                            }}
+                          />
+                        );
+                      })}
+
+                      {/* Content with depth layers */}
+                      <div className="relative" style={{ transformStyle: 'preserve-3d' }}>
                         <motion.h3
-                          className="text-lg font-bold text-white mb-3"
+                          className="text-xl font-bold text-white mb-4 relative"
+                          style={{ transform: 'translateZ(30px)' }}
                           animate={{
                             textShadow: [
-                              '0 0 10px rgba(59, 130, 246, 0.5)',
-                              '0 0 20px rgba(168, 85, 247, 0.5)',
-                              '0 0 10px rgba(59, 130, 246, 0.5)',
+                              '0 0 20px rgba(59, 130, 246, 0.6)',
+                              '0 0 30px rgba(168, 85, 247, 0.8)',
+                              '0 0 20px rgba(59, 130, 246, 0.6)',
                             ]
                           }}
                           transition={{
-                            duration: 3,
+                            duration: 4,
                             repeat: Infinity,
                             ease: "easeInOut",
-                            delay: index * 0.2,
+                            delay: index * 0.3,
                           }}
                         >
                           {feature.title}
                         </motion.h3>
-                        <p className="text-gray-400 text-sm leading-relaxed">
+                        <p
+                          className="text-gray-300 text-sm leading-relaxed relative"
+                          style={{ transform: 'translateZ(20px)' }}
+                        >
                           {feature.description}
                         </p>
                       </div>
 
-                      {/* Rotating gradient overlay */}
-                      <motion.div
-                        className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl"
-                        animate={{
-                          background: [
-                            'linear-gradient(45deg, rgba(59, 130, 246, 0.3), transparent)',
-                            'linear-gradient(135deg, rgba(168, 85, 247, 0.3), transparent)',
-                            'linear-gradient(225deg, rgba(6, 182, 212, 0.3), transparent)',
-                            'linear-gradient(315deg, rgba(59, 130, 246, 0.3), transparent)',
-                            'linear-gradient(45deg, rgba(59, 130, 246, 0.3), transparent)',
-                          ]
-                        }}
-                        transition={{
-                          duration: 8,
-                          repeat: Infinity,
-                          ease: "linear"
-                        }}
-                      />
+                      {/* Depth grid lines */}
+                      <div className="absolute inset-0 opacity-10 pointer-events-none">
+                        <div className="absolute inset-0" style={{
+                          backgroundImage: `
+                            linear-gradient(rgba(59, 130, 246, 0.5) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(59, 130, 246, 0.5) 1px, transparent 1px)
+                          `,
+                          backgroundSize: '20px 20px',
+                          transform: 'translateZ(-20px)',
+                        }} />
+                      </div>
 
-                      {/* Corner accent lights */}
-                      {[0, 1].map((corner) => (
+                      {/* Floating data points */}
+                      {[...Array(3)].map((_, i) => (
                         <motion.div
-                          key={corner}
-                          className="absolute w-3 h-3 rounded-full"
+                          key={i}
+                          className={`absolute w-3 h-3 bg-gradient-to-br ${feature.color} rounded-full`}
                           style={{
-                            top: corner === 0 ? '10px' : 'auto',
-                            bottom: corner === 1 ? '10px' : 'auto',
-                            right: '10px',
-                            background: 'radial-gradient(circle, rgba(59, 130, 246, 1), transparent)',
-                            boxShadow: '0 0 20px rgba(59, 130, 246, 0.8)',
-                            transform: `translateZ(${15 + corner * 5}px)`,
+                            left: `${20 + i * 30}%`,
+                            bottom: `${20 + i * 10}%`,
+                            transform: `translateZ(${25 + i * 10}px)`,
+                            boxShadow: '0 0 20px currentColor',
                           }}
                           animate={{
+                            y: [0, -30, 0],
+                            opacity: [0.4, 1, 0.4],
                             scale: [1, 1.5, 1],
-                            opacity: [0.5, 1, 0.5],
                           }}
                           transition={{
-                            duration: 2,
+                            duration: 3 + i,
                             repeat: Infinity,
-                            delay: corner * 0.5 + index * 0.1,
-                            ease: "easeInOut"
+                            ease: "easeInOut",
+                            delay: i * 0.5,
                           }}
                         />
                       ))}
+
+                      {/* Pulse effect on hover */}
+                      <motion.div
+                        className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-20 rounded-3xl transition-opacity duration-500`}
+                        animate={{
+                          scale: [1, 1.05, 1],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                      />
                     </div>
                   </motion.div>
                 </motion.div>
@@ -672,125 +681,144 @@ export default function MarketingPage() {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, x: 40 }}
+                initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
+                transition={{ duration: 0.8, type: "spring" }}
                 className="relative"
               >
-                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 relative overflow-hidden">
-                  {/* Snake border effect */}
+                {/* 3D Floating Container */}
+                <motion.div
+                  className="relative"
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    perspective: '1000px',
+                  }}
+                  animate={{
+                    rotateY: [0, 10, 0, -10, 0],
+                    rotateX: [0, -5, 0, 5, 0],
+                  }}
+                  transition={{
+                    duration: 10,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  {/* Glowing orb behind image */}
                   <motion.div
-                    className="absolute inset-0 rounded-2xl"
+                    className="absolute inset-0 blur-3xl opacity-40"
                     style={{
-                      background: `
-                        linear-gradient(90deg,
-                          transparent 0%,
-                          rgba(59, 130, 246, 0.8) 25%,
-                          rgba(168, 85, 247, 0.8) 50%,
-                          rgba(6, 182, 212, 0.8) 75%,
-                          transparent 100%
-                        )
-                      `,
-                      backgroundSize: '200% 4px',
-                      backgroundRepeat: 'no-repeat',
+                      background: 'radial-gradient(circle, rgba(6, 182, 212, 0.6), rgba(139, 92, 246, 0.4), transparent 70%)',
                     }}
                     animate={{
-                      backgroundPosition: [
-                        '0% 0%, 100% 0%, 100% 100%, 0% 100%',
-                        '100% 0%, 100% 100%, 0% 100%, 0% 0%',
-                      ],
+                      scale: [1, 1.3, 1],
+                      opacity: [0.3, 0.6, 0.3],
                     }}
                     transition={{
                       duration: 4,
                       repeat: Infinity,
-                      ease: "linear"
+                      ease: "easeInOut",
+                    }}
+                  />
+
+                  {/* Floating Image with 3D effects */}
+                  <motion.div
+                    className="relative z-10"
+                    animate={{
+                      y: [0, -20, 0],
+                    }}
+                    transition={{
+                      duration: 5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
                     }}
                   >
-                    {/* Top snake */}
                     <motion.div
-                      className="absolute top-0 left-0 right-0 h-1 rounded-full"
-                      style={{
-                        background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.8), rgba(168, 85, 247, 0.8), transparent)',
-                        boxShadow: '0 0 20px rgba(59, 130, 246, 0.6)',
-                      }}
-                      animate={{
-                        x: ['-100%', '100%'],
+                      whileHover={{
+                        scale: 1.05,
+                        rotateY: 15,
+                        rotateX: -10,
                       }}
                       transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "linear",
-                        delay: 0,
+                        duration: 0.5,
+                        type: "spring",
                       }}
-                    />
-
-                    {/* Right snake */}
-                    <motion.div
-                      className="absolute top-0 right-0 bottom-0 w-1 rounded-full"
                       style={{
-                        background: 'linear-gradient(180deg, transparent, rgba(168, 85, 247, 0.8), rgba(6, 182, 212, 0.8), transparent)',
-                        boxShadow: '0 0 20px rgba(168, 85, 247, 0.6)',
+                        transformStyle: 'preserve-3d',
                       }}
-                      animate={{
-                        y: ['-100%', '100%'],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "linear",
-                        delay: 0.75,
-                      }}
-                    />
-
-                    {/* Bottom snake */}
-                    <motion.div
-                      className="absolute bottom-0 left-0 right-0 h-1 rounded-full"
-                      style={{
-                        background: 'linear-gradient(270deg, transparent, rgba(6, 182, 212, 0.8), rgba(168, 85, 247, 0.8), transparent)',
-                        boxShadow: '0 0 20px rgba(6, 182, 212, 0.6)',
-                      }}
-                      animate={{
-                        x: ['100%', '-100%'],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "linear",
-                        delay: 1.5,
-                      }}
-                    />
-
-                    {/* Left snake */}
-                    <motion.div
-                      className="absolute top-0 left-0 bottom-0 w-1 rounded-full"
-                      style={{
-                        background: 'linear-gradient(0deg, transparent, rgba(59, 130, 246, 0.8), rgba(168, 85, 247, 0.8), transparent)',
-                        boxShadow: '0 0 20px rgba(59, 130, 246, 0.6)',
-                      }}
-                      animate={{
-                        y: ['100%', '-100%'],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "linear",
-                        delay: 2.25,
-                      }}
-                    />
+                    >
+                      <Image
+                        src="/images/hero/jo.png"
+                        alt="Marketing Courses"
+                        width={600}
+                        height={600}
+                        className="rounded-3xl shadow-2xl"
+                        style={{
+                          filter: 'drop-shadow(0 25px 50px rgba(6, 182, 212, 0.3))',
+                        }}
+                        unoptimized
+                      />
+                    </motion.div>
                   </motion.div>
 
-                  <div className="aspect-square bg-gradient-to-br from-purple-900/50 to-blue-900/50 rounded-xl flex items-center justify-center relative overflow-hidden">
-                    {/* Image */}
-                    <motion.img
-                      src="/images/hero/aa.png"
-                      alt="Marketing Platform"
-                      className="w-full h-full object-cover rounded-xl relative z-10"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.3 }}
+                  {/* Orbiting particles around image */}
+                  {[...Array(8)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-3 h-3 rounded-full"
+                      style={{
+                        background: i % 2 === 0 ? '#06B6D4' : '#8B5CF6',
+                        boxShadow: `0 0 20px ${i % 2 === 0 ? '#06B6D4' : '#8B5CF6'}`,
+                        left: '50%',
+                        top: '50%',
+                      }}
+                      animate={{
+                        x: [
+                          0,
+                          Math.cos((i * Math.PI * 2) / 8) * 280,
+                          0,
+                        ],
+                        y: [
+                          0,
+                          Math.sin((i * Math.PI * 2) / 8) * 280,
+                          0,
+                        ],
+                        opacity: [0, 1, 0],
+                        scale: [0, 1.5, 0],
+                      }}
+                      transition={{
+                        duration: 4,
+                        delay: i * 0.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
                     />
-                  </div>
-                </div>
+                  ))}
+
+                  {/* Rotating rings around image */}
+                  {[0, 1].map((ringIndex) => (
+                    <motion.div
+                      key={ringIndex}
+                      className="absolute inset-0 rounded-full border-2 pointer-events-none"
+                      style={{
+                        borderColor: ringIndex === 0 ? 'rgba(6, 182, 212, 0.3)' : 'rgba(139, 92, 246, 0.3)',
+                        width: '110%',
+                        height: '110%',
+                        left: '-5%',
+                        top: '-5%',
+                      }}
+                      animate={{
+                        rotate: ringIndex === 0 ? [0, 360] : [360, 0],
+                        scale: [1, 1.05, 1],
+                      }}
+                      transition={{
+                        duration: ringIndex === 0 ? 20 : 15,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                    />
+                  ))}
+                </motion.div>
               </motion.div>
             </div>
           </div>
