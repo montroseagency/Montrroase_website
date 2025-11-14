@@ -55,7 +55,7 @@ export default function ClientRequestDetailPage() {
     try {
       setLoading(true);
       setError(null);
-      const data = await ApiService.getContentRequest(requestId);
+      const data = await ApiService.getContentRequest(requestId) as ContentRequest;
       setRequest(data);
     } catch (err: any) {
       setError(err.message || 'Failed to load request details');

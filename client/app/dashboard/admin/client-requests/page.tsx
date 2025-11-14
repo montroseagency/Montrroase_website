@@ -39,10 +39,11 @@ export default function ClientRequestsPage() {
       if (Array.isArray(response)) {
         requestsData = response;
       } else if (response && typeof response === 'object') {
-        if (response.results && Array.isArray(response.results)) {
-          requestsData = response.results;
-        } else if (response.data && Array.isArray(response.data)) {
-          requestsData = response.data;
+        const resp = response as any;
+        if (resp.results && Array.isArray(resp.results)) {
+          requestsData = resp.results;
+        } else if (resp.data && Array.isArray(resp.data)) {
+          requestsData = resp.data;
         }
       }
 

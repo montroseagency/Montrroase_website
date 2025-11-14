@@ -1,6 +1,15 @@
 // API Service for Montrroase Next.js Client
 // Singleton class that handles all HTTP communication with backend
 
+// Type definitions for API responses
+interface DashboardStats {
+  total_revenue: number | string;
+  active_clients: number | string;
+  total_followers_delivered: number | string;
+  pending_tasks: number | string;
+  [key: string]: any; // Allow additional properties
+}
+
 class ApiService {
   private baseURL: string;
   private token: string | null;
@@ -241,8 +250,8 @@ class ApiService {
 
   // ============ DASHBOARD STATS METHODS ============
 
-  async getDashboardStats() {
-    return await this.request('/dashboard/stats/');
+  async getDashboardStats(): Promise<DashboardStats> {
+    return await this.request<DashboardStats>('/dashboard/stats/');
   }
 
   async getClientDashboardStats() {
@@ -509,16 +518,20 @@ class ApiService {
     });
   }
 
-  async markContentRequestCompleted(id: string) {
+  async markContentRequestCompleted(id: string, data?: any) {
     return await this.request(`/content-requests/${id}/mark_completed/`, {
       method: 'POST',
+      body: data ? JSON.stringify(data) : undefined,
     });
   }
 
-  async rejectContentRequest(id: string, reason: string) {
+  async rejectContentRequest(id: string, reasonOrData: string | { agent_notes?: string; reason?: string }) {
+    const body = typeof reasonOrData === 'string'
+      ? { reason: reasonOrData }
+      : reasonOrData;
     return await this.request(`/content-requests/${id}/reject/`, {
       method: 'POST',
-      body: JSON.stringify({ reason }),
+      body: JSON.stringify(body),
     });
   }
 
@@ -639,6 +652,13 @@ class ApiService {
     });
   }
 
+  async updateInvoice(id: string, data: any) {
+    return await this.request(`/invoices/${id}/`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    });
+  }
+
   // ============ SOCIAL MEDIA ACCOUNT METHODS ============
 
   async getConnectedAccounts() {
@@ -648,6 +668,11 @@ class ApiService {
       return (response as any).accounts;
     }
     return this.handlePaginatedResponse(response);
+  }
+
+  async getSocialAccounts() {
+    // Alias for getConnectedAccounts
+    return await this.getConnectedAccounts();
   }
 
   async initiateOAuth(platform: string) {
@@ -1279,6 +1304,10 @@ class ApiService {
 
   // ============ AGENT MANAGEMENT METHODS ============
 
+  async getAgentClients() {
+    return await this.request('/agents/my-clients/');
+  }
+
   async getAgentsWithRequests() {
     return await this.request('/client-access-requests/agents_with_requests/');
   }
@@ -1338,6 +1367,13 @@ class ApiService {
     });
   }
 
+  async put(endpoint: string, data: any) {
+    return await this.request(endpoint, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
   async delete(endpoint: string) {
     return await this.request(endpoint, {
       method: 'DELETE',
@@ -1347,3 +1383,6 @@ class ApiService {
 
 // Export a singleton instance
 export default new ApiService();
+
+// Export types
+export type { DashboardStats };

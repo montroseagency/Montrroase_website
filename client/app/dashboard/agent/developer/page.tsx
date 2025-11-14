@@ -31,7 +31,7 @@ export default function DeveloperAgentDashboard() {
 
   const fetchDashboardStats = async () => {
     try {
-      const response = await ApiService.get('/dashboard/agent-stats/');
+      const response = await ApiService.get('/dashboard/agent-stats/') as any;
       setStats(response.data || response);
     } catch (error) {
       console.error('Error fetching dashboard stats:', error);

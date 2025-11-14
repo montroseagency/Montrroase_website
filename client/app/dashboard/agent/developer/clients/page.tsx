@@ -77,7 +77,7 @@ export default function AgentClientsPage() {
 
   const fetchAgentProfile = async () => {
     try {
-      const user = await ApiService.getMe();
+      const user = await ApiService.getMe() as any;
       if (user.agent_profile) {
         setAgentDepartment(user.agent_profile.department);
       }

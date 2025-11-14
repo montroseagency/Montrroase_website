@@ -48,8 +48,8 @@ export default function MarketingAnalyticsPage() {
         api.getCampaignAnalytics(),
         api.getMyCampaigns()
       ]);
-      setAnalytics(analyticsData);
-      setCampaigns(campaignsData);
+      setAnalytics(analyticsData as CampaignAnalytics);
+      setCampaigns(campaignsData as Campaign[]);
     } catch (err: any) {
       setError(err.message || 'Failed to load analytics');
     } finally {

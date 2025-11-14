@@ -1,6 +1,5 @@
 // Types for Montrroase Next.js Application
 import React from 'react';
-export * from './events';
 
 // Authentication & User Types
 export interface AuthUser {
@@ -215,6 +214,7 @@ export interface Invoice {
   amount: number;
   due_date: string;
   status: 'paid' | 'pending' | 'overdue';
+  payment_status: 'paid' | 'pending' | 'overdue';
   paid_at?: string;
   description?: string;
   created_at: string;

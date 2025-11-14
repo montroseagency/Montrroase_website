@@ -51,7 +51,7 @@ export default function MarketingOverviewPage() {
           ApiService.getContent(),
         ]);
 
-        setStats(statsData);
+        setStats(statsData as DashboardStats);
 
         // Calculate content stats
         if (Array.isArray(contentData)) {

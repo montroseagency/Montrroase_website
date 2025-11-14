@@ -33,7 +33,7 @@ export default function MyPurchasesPage() {
     try {
       setLoading(true);
       setError(null);
-      const data = await api.getMyCoursePurchases();
+      const data = await api.getMyCoursePurchases() as Purchase[];
       setPurchases(data);
     } catch (err: any) {
       console.error('Error fetching purchases:', err);

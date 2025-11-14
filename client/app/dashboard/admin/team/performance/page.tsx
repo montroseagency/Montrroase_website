@@ -49,16 +49,16 @@ export default function EmployeePerformancePage() {
         ApiService.get('/campaigns/').catch(() => ({ data: [] })),
       ]);
 
-      const agentsData = Array.isArray(agentsResponse.results)
-        ? agentsResponse.results
+      const agentsData = Array.isArray((agentsResponse as any)?.results)
+        ? (agentsResponse as any).results
         : Array.isArray(agentsResponse)
         ? agentsResponse
         : [];
 
       const clients = Array.isArray(clientsData) ? clientsData : [];
       const tasks = Array.isArray(tasksData) ? tasksData : [];
-      const projects = Array.isArray(projectsData.data) ? projectsData.data : [];
-      const campaigns = Array.isArray(campaignsData.data) ? campaignsData.data : [];
+      const projects = Array.isArray((projectsData as any)?.data) ? (projectsData as any).data : (Array.isArray(projectsData) ? projectsData : []);
+      const campaigns = Array.isArray((campaignsData as any)?.data) ? (campaignsData as any).data : (Array.isArray(campaignsData) ? campaignsData : []);
 
       // Calculate performance metrics for each agent
       const performanceData: AgentPerformance[] = agentsData.map((agent: any) => {

@@ -84,7 +84,7 @@ export default function WalletPage() {
         ApiService.getMyRedeemedCodes()
       ]);
 
-      setWallet(walletData);
+      setWallet(walletData as WalletData);
       setTransactions(Array.isArray(transactionsData) ? transactionsData : []);
       setGiveaways(Array.isArray(giveawaysData) ? giveawaysData : []);
       setWins(Array.isArray(winsData) ? winsData : []);

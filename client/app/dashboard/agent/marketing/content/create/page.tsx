@@ -534,7 +534,7 @@ export default function CreateContentPage() {
           <h2 className="text-xl font-bold text-gray-900 mb-4">Create Content</h2>
           <div className="mb-6 flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <span className="text-2xl">{PLATFORM_ICONS[selectedAccount?.platform || '']}</span>
+              <span className="text-2xl">{selectedAccount?.platform ? PLATFORM_ICONS[selectedAccount.platform as keyof typeof PLATFORM_ICONS] : ''}</span>
               <div>
                 <p className="font-semibold text-gray-900">
                   {selectedClient?.name} - {selectedAccount?.platform}

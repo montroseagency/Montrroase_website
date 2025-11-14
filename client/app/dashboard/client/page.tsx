@@ -39,7 +39,7 @@ export default function ClientDashboardPage() {
           ApiService.getClientDashboardStats(),
           ApiService.getNotifications()
         ]);
-        setStats(statsData);
+        setStats(statsData as DashboardStats);
         setNotifications(Array.isArray(notificationsData) ? notificationsData.slice(0, 5) : []);
       } catch (err: any) {
         console.error('Error loading dashboard:', err);

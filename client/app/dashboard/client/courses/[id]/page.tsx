@@ -75,15 +75,16 @@ export default function CourseDetailPage() {
         ).catch(() => null)
       ]);
 
-      setCourse(courseData);
-      setModules(contentData.modules || []);
-      setProgress(progressData);
+      setCourse(courseData as Course);
+      const typedContentData = contentData as any;
+      setModules(typedContentData.modules || []);
+      setProgress(progressData as CourseProgress | null);
 
       // Expand first module and set first lesson by default
-      if (contentData.modules && contentData.modules.length > 0) {
-        setExpandedModules(new Set([contentData.modules[0].id]));
-        if (contentData.modules[0].lessons && contentData.modules[0].lessons.length > 0) {
-          setCurrentLesson(contentData.modules[0].lessons[0]);
+      if (typedContentData.modules && typedContentData.modules.length > 0) {
+        setExpandedModules(new Set([typedContentData.modules[0].id]));
+        if (typedContentData.modules[0].lessons && typedContentData.modules[0].lessons.length > 0) {
+          setCurrentLesson(typedContentData.modules[0].lessons[0]);
         }
       }
     } catch (err: any) {
@@ -107,7 +108,7 @@ export default function CourseDetailPage() {
 
   const handleMarkComplete = async (lessonId: string) => {
     try {
-      const response = await ApiService.post(`/lessons/${lessonId}/mark_complete/`, {});
+      const response = await ApiService.post(`/lessons/${lessonId}/mark_complete/`, {}) as CourseProgress;
       setProgress(response);
     } catch (err: any) {
       console.error('Error marking complete:', err);

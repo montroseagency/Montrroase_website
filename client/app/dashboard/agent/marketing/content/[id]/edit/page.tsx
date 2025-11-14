@@ -68,7 +68,7 @@ export default function EditContentPage() {
     try {
       setLoading(true);
       // Use the content endpoint with ID
-      const data = await ApiService.request(`/content/${contentId}/`);
+      const data = await ApiService.get(`/content/${contentId}/`) as any;
       setContent(data);
       setTitle(data.title || '');
       setCaption(data.content || '');

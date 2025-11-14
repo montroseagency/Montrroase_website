@@ -64,8 +64,8 @@ export default function CampaignsPage() {
         api.getMyCampaigns(),
         api.getAgentClients()
       ]);
-      setCampaigns(campaignsData);
-      setClients(clientsData);
+      setCampaigns(campaignsData as Campaign[]);
+      setClients(clientsData as any[]);
     } catch (err: any) {
       setError(err.message || 'Failed to load campaigns');
     } finally {

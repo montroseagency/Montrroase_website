@@ -33,7 +33,7 @@ export function Sidebar() {
     if (user?.role === 'agent') {
       const fetchAgentInfo = async () => {
         try {
-          const userData = await ApiService.getMe();
+          const userData = await ApiService.getMe() as any;
           if (userData.agent_profile?.department) {
             setAgentDepartment(userData.agent_profile.department);
           }

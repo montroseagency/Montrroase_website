@@ -66,8 +66,8 @@ export default function WebsiteUploadsPage() {
         api.getMyWebsiteUploads(),
         api.get('/website-projects/')
       ]);
-      setVersions(versionsData);
-      setProjects(projectsData);
+      setVersions(versionsData as WebsiteVersion[]);
+      setProjects(projectsData as WebsiteProject[]);
     } catch (err: any) {
       setError(err.message || 'Failed to load data');
     } finally {

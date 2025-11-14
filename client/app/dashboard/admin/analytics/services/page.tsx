@@ -43,8 +43,8 @@ export default function ServiceAnalyticsPage() {
 
       const clientsData = Array.isArray(clients) ? clients : [];
       const invoicesData = Array.isArray(invoices) ? invoices : [];
-      const projectsData = Array.isArray(projects.data) ? projects.data : [];
-      const campaignsData = Array.isArray(campaigns.data) ? campaigns.data : [];
+      const projectsData = Array.isArray((projects as any)?.data) ? (projects as any).data : (Array.isArray(projects) ? projects : []);
+      const campaignsData = Array.isArray((campaigns as any)?.data) ? (campaigns as any).data : (Array.isArray(campaigns) ? campaigns : []);
       const coursesData = Array.isArray(courses) ? courses : [];
 
       // Calculate marketing service analytics

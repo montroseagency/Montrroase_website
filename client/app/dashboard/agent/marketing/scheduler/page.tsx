@@ -90,10 +90,10 @@ export default function ContentSchedulerPage() {
         api.getMyCampaigns(),
         api.getSocialAccounts()
       ]);
-      setScheduledContent(contentData);
-      setClients(clientsData);
-      setCampaigns(campaignsData);
-      setSocialAccounts(accountsData);
+      setScheduledContent(contentData as ScheduledContent[]);
+      setClients(clientsData as Client[]);
+      setCampaigns(campaignsData as Campaign[]);
+      setSocialAccounts(accountsData as SocialAccount[]);
     } catch (err: any) {
       setError(err.message || 'Failed to load scheduled content');
     } finally {

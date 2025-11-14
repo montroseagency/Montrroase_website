@@ -67,11 +67,13 @@ export default function WalletSettingsPage() {
       ]);
 
       // Handle wallet response
-      const walletInfo = walletData.results?.[0] || walletData[0] || walletData;
+      const typedWalletData = walletData as any;
+      const walletInfo = typedWalletData.results?.[0] || typedWalletData[0] || typedWalletData;
       setWallet(walletInfo);
 
       // Handle auto-recharge response
-      const autoRechargeInfo = autoRechargeData.results?.[0] || autoRechargeData[0] || autoRechargeData;
+      const typedAutoRechargeData = autoRechargeData as any;
+      const autoRechargeInfo = typedAutoRechargeData.results?.[0] || typedAutoRechargeData[0] || typedAutoRechargeData;
       setAutoRecharge(autoRechargeInfo);
 
       if (autoRechargeInfo) {
@@ -84,7 +86,8 @@ export default function WalletSettingsPage() {
       }
 
       // Handle transactions response
-      const txList = transactionsData.transactions || transactionsData.results || transactionsData;
+      const typedTransactionsData = transactionsData as any;
+      const txList = typedTransactionsData.transactions || typedTransactionsData.results || typedTransactionsData;
       setTransactions(txList);
     } catch (err: any) {
       setError(err.message || 'Failed to load wallet data');

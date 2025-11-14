@@ -11,7 +11,7 @@ export default function AgentDashboardRedirect() {
     const redirectToDepartmentDashboard = async () => {
       try {
         // Get user info with agent_profile
-        const user = await ApiService.getMe();
+        const user = await ApiService.getMe() as any;
 
         if (user.agent_profile) {
           const department = user.agent_profile.department;

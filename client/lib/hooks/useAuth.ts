@@ -7,7 +7,7 @@ import type { AuthContextType } from '@/lib/types';
  * Must be used within AuthProvider
  */
 export function useAuth(): AuthContextType {
-  const context = useContext(AuthContext as any);
+  const context = useContext(AuthContext);
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');
   }

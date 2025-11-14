@@ -4,7 +4,7 @@ import { useEffect, useRef, memo } from 'react';
 
 const InteractiveGlowBackground = memo(() => {
   const glowRef = useRef<HTMLDivElement>(null);
-  const rafRef = useRef<number>();
+  const rafRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {

@@ -35,7 +35,7 @@ export default function AdminSettingsPage() {
         last_name: profile.last_name,
         company: profile.company,
         bio: profile.bio,
-      });
+      }) as AuthUser;
       setProfile(updated);
       alert('Profile updated successfully!');
     } catch (err) {

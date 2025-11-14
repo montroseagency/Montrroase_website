@@ -41,7 +41,7 @@ export default function ClientContentDetailPage() {
   const fetchContent = async () => {
     try {
       setLoading(true);
-      const data = await ApiService.request(`/content/${contentId}/`);
+      const data = await ApiService.get(`/content/${contentId}/`) as ContentPost;
       setContent(data);
     } catch (err: any) {
       setError(err.message || 'Failed to load content');
