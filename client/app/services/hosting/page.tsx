@@ -1,39 +1,58 @@
 'use client';
 
-import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { useState, useRef, useEffect } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import Navigation from '@/components/marketing/navigation';
 import Footer from '@/components/marketing/footer';
 import InteractiveGlowBackground from '@/components/interactive-glow-background';
 import SectionHeader from '@/components/services/SectionHeader';
-import FeatureGrid from '@/components/services/FeatureGrid';
 import CallToAction from '@/components/services/CallToAction';
 import AnimatedCounter from '@/components/services/AnimatedCounter';
 
+// Generate particle data outside component to avoid impure function calls during render
+const generateParticles = () =>
+  [...Array(12)].map(() => ({
+    left: Math.random() * 100,
+    top: Math.random() * 100,
+    yOffset: Math.random() * 40,
+    xOffset: (Math.random() - 0.5) * 40,
+    duration: 2.5 + Math.random() * 1.5,
+    delay: Math.random() * 2,
+  }));
+
+const particlesData = generateParticles();
+
+// Type definitions
+interface Feature {
+  title: string;
+  description: string;
+}
+
 // Floating Particles Background Component
 const FloatingParticles = ({ mousePosition }: { mousePosition: { x: number; y: number } }) => {
+  const particles = particlesData;
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(30)].map((_, i) => (
+      {particles.map((particle, i) => (
         <motion.div
           key={i}
           className="absolute w-1 h-1 bg-cyan-400 rounded-full"
           style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
+            left: `${particle.left}%`,
+            top: `${particle.top}%`,
             filter: 'blur(1px)',
           }}
           animate={{
-            y: [0, -30 - Math.random() * 50],
-            x: [0, (Math.random() - 0.5) * 50 + mousePosition.x * 30],
-            opacity: [0, 0.8, 0],
-            scale: [0, 1, 0],
+            y: [0, -30 - particle.yOffset],
+            x: [0, particle.xOffset + mousePosition.x * 20],
+            opacity: [0, 0.7, 0],
           }}
           transition={{
-            duration: 3 + Math.random() * 2,
+            duration: particle.duration,
             repeat: Infinity,
-            delay: Math.random() * 3,
+            delay: particle.delay,
           }}
         />
       ))}
@@ -45,23 +64,23 @@ const FloatingParticles = ({ mousePosition }: { mousePosition: { x: number; y: n
 const AnimatedOrbs = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(5)].map((_, i) => (
+      {[...Array(3)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute rounded-full"
           style={{
-            width: 200 + i * 100,
-            height: 200 + i * 100,
-            left: `${20 + i * 15}%`,
-            top: `${10 + i * 20}%`,
+            width: 250 + i * 100,
+            height: 250 + i * 100,
+            left: `${25 + i * 20}%`,
+            top: `${15 + i * 25}%`,
             background: `radial-gradient(circle, ${
-              i % 2 === 0 ? 'rgba(6, 182, 212, 0.1)' : 'rgba(139, 92, 246, 0.1)'
+              i % 2 === 0 ? 'rgba(6, 182, 212, 0.08)' : 'rgba(139, 92, 246, 0.08)'
             }, transparent 70%)`,
             filter: 'blur(40px)',
           }}
           animate={{
-            x: [0, 50, 0],
-            y: [0, 30, 0],
+            x: [0, 40, 0],
+            y: [0, 25, 0],
             scale: [1, 1.2, 1],
           }}
           transition={{
@@ -82,7 +101,7 @@ const ParallaxHostingCard = ({
   mousePosition,
   isInView,
 }: {
-  feature: any;
+  feature: Feature;
   index: number;
   mousePosition: { x: number; y: number };
   isInView: boolean;
@@ -260,7 +279,7 @@ const ParallaxHostingCard = ({
 };
 
 // Why Choose Montrose Hosting Section
-const WhyChooseHosting = ({ features }: { features: any[] }) => {
+const WhyChooseHosting = ({ features }: { features: Feature[] }) => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -1042,68 +1061,57 @@ export default function HostingPage() {
                     </motion.div>
                   </motion.div>
 
-                  {/* Orbiting particles around image */}
-                  {[...Array(8)].map((_, i) => (
+                  {/* Optimized orbiting particles */}
+                  {[...Array(4)].map((_, i) => (
                     <motion.div
                       key={i}
-                      className="absolute w-3 h-3 rounded-full"
+                      className="absolute w-2 h-2 rounded-full"
                       style={{
                         background: i % 2 === 0 ? '#06B6D4' : '#8B5CF6',
-                        boxShadow: `0 0 20px ${i % 2 === 0 ? '#06B6D4' : '#8B5CF6'}`,
+                        boxShadow: `0 0 15px ${i % 2 === 0 ? '#06B6D4' : '#8B5CF6'}`,
                         left: '50%',
                         top: '50%',
                       }}
                       animate={{
                         x: [
                           0,
-                          Math.cos((i * Math.PI * 2) / 8) * 280,
+                          Math.cos((i * Math.PI * 2) / 4) * 260,
                           0,
                         ],
                         y: [
                           0,
-                          Math.sin((i * Math.PI * 2) / 8) * 280,
+                          Math.sin((i * Math.PI * 2) / 4) * 260,
                           0,
                         ],
-                        opacity: [0, 1, 0],
-                        scale: [0, 1.5, 0],
+                        opacity: [0, 0.8, 0],
+                        scale: [0, 1.2, 0],
                       }}
                       transition={{
-                        duration: 4,
-                        delay: i * 0.5,
+                        duration: 3.5,
+                        delay: i * 0.4,
                         repeat: Infinity,
                         ease: "easeInOut",
                       }}
                     />
                   ))}
 
-                  {/* Rotating rings around image */}
-                  {[0, 1].map((ringIndex) => (
-                    <motion.div
-                      key={ringIndex}
-                      className="absolute inset-0 rounded-full border-2 pointer-events-none"
-                      style={{
-                        borderColor: ringIndex === 0 ? 'rgba(6, 182, 212, 0.3)' : 'rgba(139, 92, 246, 0.3)',
-                        boxShadow: `0 0 30px ${ringIndex === 0 ? 'rgba(6, 182, 212, 0.5)' : 'rgba(139, 92, 246, 0.5)'}`,
-                        transform: `scale(${1.1 + ringIndex * 0.1})`,
-                      }}
-                      animate={{
-                        rotate: ringIndex === 0 ? [0, 360] : [360, 0],
-                        scale: [1.1 + ringIndex * 0.1, 1.2 + ringIndex * 0.1, 1.1 + ringIndex * 0.1],
-                      }}
-                      transition={{
-                        rotate: {
-                          duration: 20 + ringIndex * 5,
-                          repeat: Infinity,
-                          ease: "linear",
-                        },
-                        scale: {
-                          duration: 3,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        },
-                      }}
-                    />
-                  ))}
+                  {/* Simplified rotating ring */}
+                  <motion.div
+                    className="absolute inset-0 rounded-full border-2 pointer-events-none"
+                    style={{
+                      borderColor: 'rgba(6, 182, 212, 0.25)',
+                      boxShadow: '0 0 25px rgba(6, 182, 212, 0.3)',
+                      transform: 'scale(1.1)',
+                    }}
+                    animate={{
+                      rotate: [0, 360],
+                    }}
+                    transition={{
+                      duration: 20,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
 
                   {/* Corner accent lights */}
                   {['top-0 left-0', 'top-0 right-0', 'bottom-0 left-0', 'bottom-0 right-0'].map((position, i) => (

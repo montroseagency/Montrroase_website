@@ -227,24 +227,23 @@ export default function SEOPage() {
                       }}
                     />
 
-                    {/* Floating particles */}
-                    {[...Array(4)].map((_, i) => (
+                    {/* Optimized floating particles */}
+                    {[...Array(2)].map((_, i) => (
                       <motion.div
                         key={i}
-                        className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100"
+                        className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-0 group-hover:opacity-70"
                         style={{
-                          left: `${25 + i * 20}%`,
-                          top: `${30 + i * 10}%`,
+                          left: `${30 + i * 30}%`,
+                          top: `${35 + i * 15}%`,
                         }}
                         animate={{
-                          y: [0, -30, 0],
-                          opacity: [0, 1, 0],
-                          scale: [0, 1.5, 0],
+                          y: [0, -25, 0],
+                          opacity: [0, 0.7, 0],
                         }}
                         transition={{
-                          duration: 2 + i * 0.3,
+                          duration: 2,
                           repeat: Infinity,
-                          delay: i * 0.2,
+                          delay: i * 0.3,
                           ease: "easeInOut"
                         }}
                       />
@@ -269,24 +268,9 @@ export default function SEOPage() {
 
                     {/* Content */}
                     <div className="relative z-10">
-                      <motion.h3
-                        className="text-lg font-bold text-white mb-3"
-                        animate={{
-                          textShadow: [
-                            '0 0 10px rgba(59, 130, 246, 0)',
-                            '0 0 20px rgba(59, 130, 246, 0.6)',
-                            '0 0 10px rgba(59, 130, 246, 0)',
-                          ]
-                        }}
-                        transition={{
-                          duration: 3,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: index * 0.3,
-                        }}
-                      >
+                      <h3 className="text-lg font-bold text-white mb-3">
                         {feature.title}
-                      </motion.h3>
+                      </h3>
                       <p className="text-gray-400 text-sm leading-relaxed">
                         {feature.description}
                       </p>
@@ -525,25 +509,24 @@ export default function SEOPage() {
                           </motion.span>
                         </div>
 
-                        {/* Floating particles around circle */}
-                        {[...Array(3)].map((_, i) => (
+                        {/* Simplified floating particles */}
+                        {[...Array(2)].map((_, i) => (
                           <motion.div
                             key={i}
-                            className="absolute w-2 h-2 bg-blue-400 rounded-full opacity-0 group-hover/card:opacity-100"
+                            className="absolute w-1.5 h-1.5 bg-blue-400 rounded-full opacity-0 group-hover/card:opacity-80"
                             style={{
                               left: '50%',
                               top: '50%',
                             }}
                             animate={{
-                              x: [0, Math.cos((i * 120) * Math.PI / 180) * 60, 0],
-                              y: [0, Math.sin((i * 120) * Math.PI / 180) * 60, 0],
-                              opacity: [0, 1, 0],
-                              scale: [0, 1.5, 0],
+                              x: [0, Math.cos((i * 180) * Math.PI / 180) * 50, 0],
+                              y: [0, Math.sin((i * 180) * Math.PI / 180) * 50, 0],
+                              opacity: [0, 0.8, 0],
                             }}
                             transition={{
-                              duration: 2,
+                              duration: 1.8,
                               repeat: Infinity,
-                              delay: i * 0.3,
+                              delay: i * 0.4,
                               ease: "easeInOut"
                             }}
                           />
@@ -857,117 +840,46 @@ export default function SEOPage() {
                           }}
                           transition={{ duration: 0.4 }}
                         >
-                          {/* Animated gradient background */}
+                          {/* Subtle gradient background */}
                           <motion.div
-                            className={`absolute inset-0 bg-gradient-to-br ${strategy.color} opacity-0`}
+                            className={`absolute inset-0 bg-gradient-to-br ${strategy.color}`}
                             animate={{
-                              opacity: isExpanded ? 0.15 : 0,
+                              opacity: isExpanded ? 0.05 : 0,
                             }}
-                            transition={{ duration: 0.5 }}
+                            transition={{ duration: 0.3 }}
                           />
 
-                          {/* Ripple effect on expand */}
-                          {isExpanded && (
-                            <motion.div
-                              className="absolute inset-0 border-2 border-purple-400/30 rounded-2xl"
-                              initial={{ scale: 0.8, opacity: 1 }}
-                              animate={{
-                                scale: [1, 1.15, 1.3],
-                                opacity: [0.5, 0.2, 0],
-                              }}
-                              transition={{
-                                duration: 1.5,
-                                repeat: Infinity,
-                              }}
-                            />
-                          )}
-
-                          {/* Orbiting particles */}
-                          {isExpanded && (
-                            <>
-                              {[...Array(6)].map((_, i) => {
-                                const angle = (i / 6) * 360;
-                                return (
-                                  <motion.div
-                                    key={i}
-                                    className="absolute w-2 h-2 rounded-full bg-purple-400"
-                                    style={{
-                                      left: '50%',
-                                      top: '50%',
-                                      boxShadow: '0 0 15px rgba(168, 85, 247, 0.8)',
-                                    }}
-                                    animate={{
-                                      x: [
-                                        0,
-                                        Math.cos((angle * Math.PI) / 180) * 100,
-                                        0,
-                                      ],
-                                      y: [
-                                        0,
-                                        Math.sin((angle * Math.PI) / 180) * 100,
-                                        0,
-                                      ],
-                                      opacity: [0, 1, 0],
-                                      scale: [0, 1.5, 0],
-                                    }}
-                                    transition={{
-                                      duration: 3,
-                                      delay: i * 0.2,
-                                      repeat: Infinity,
-                                      ease: "easeInOut"
-                                    }}
-                                  />
-                                );
-                              })}
-                            </>
-                          )}
-
-                          {/* Side accent bars */}
+                          {/* Left accent bar */}
                           <motion.div
                             className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${strategy.color}`}
+                            initial={{ scaleY: 0, originY: 0 }}
                             animate={{
                               scaleY: isExpanded ? 1 : 0,
                             }}
-                            transition={{ duration: 0.4 }}
+                            transition={{ duration: 0.4, ease: "easeOut" }}
                           />
 
                           {/* Header */}
-                          <div className="flex items-center gap-4 relative z-10">
-                            {/* Plus/Minus indicator */}
-                            <motion.div
-                              className="flex-shrink-0 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center"
+                          <div className="flex items-center justify-between relative z-10">
+                            {/* Title */}
+                            <h3 className="text-xl font-bold text-white">
+                              {strategy.title}
+                            </h3>
+
+                            {/* Chevron indicator */}
+                            <motion.svg
+                              className="w-6 h-6 text-gray-400 flex-shrink-0"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
                               animate={{
-                                backgroundColor: isExpanded
-                                  ? 'rgba(168, 85, 247, 0.3)'
-                                  : 'rgba(255, 255, 255, 0.1)',
                                 rotate: isExpanded ? 180 : 0,
+                                color: isExpanded ? '#a855f7' : '#9ca3af',
                               }}
                               transition={{ duration: 0.3 }}
                             >
-                              <motion.div
-                                className="text-purple-400 text-2xl font-bold"
-                                animate={{ rotate: isExpanded ? 45 : 0 }}
-                                transition={{ duration: 0.3 }}
-                              >
-                                +
-                              </motion.div>
-                            </motion.div>
-
-                            {/* Title */}
-                            <motion.h3
-                              className="text-2xl font-bold flex-1"
-                              animate={{
-                                background: isExpanded
-                                  ? `linear-gradient(90deg, #a855f7, #ec4899)`
-                                  : 'linear-gradient(90deg, #ffffff, #ffffff)',
-                                backgroundClip: 'text',
-                                WebkitBackgroundClip: 'text',
-                                color: isExpanded ? 'transparent' : '#ffffff',
-                              }}
-                              transition={{ duration: 0.4 }}
-                            >
-                              {strategy.title}
-                            </motion.h3>
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </motion.svg>
                           </div>
 
                           {/* Expandable content */}
@@ -977,61 +889,13 @@ export default function SEOPage() {
                               height: isExpanded ? 'auto' : 0,
                               opacity: isExpanded ? 1 : 0,
                             }}
-                            transition={{ duration: 0.5, ease: "easeInOut" }}
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
                             className="overflow-hidden"
                           >
-                            <motion.p
-                              className="text-gray-300 leading-relaxed mt-6 pl-12"
-                              initial={{ opacity: 0, x: -20 }}
-                              animate={{
-                                opacity: isExpanded ? 1 : 0,
-                                x: isExpanded ? 0 : -20,
-                              }}
-                              transition={{ delay: 0.2, duration: 0.4 }}
-                            >
+                            <p className="text-gray-300 leading-relaxed mt-4">
                               {strategy.description}
-                            </motion.p>
+                            </p>
                           </motion.div>
-
-                          {/* Glowing line animation */}
-                          <motion.div
-                            className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${strategy.color}`}
-                            animate={{
-                              scaleX: isExpanded ? 1 : 0,
-                              opacity: isExpanded ? 1 : 0,
-                            }}
-                            transition={{ duration: 0.5 }}
-                          />
-
-                          {/* Corner sparkles */}
-                          {isExpanded && (
-                            <>
-                              {[
-                                { top: '10px', right: '10px' },
-                                { top: '10px', left: '10px' },
-                                { bottom: '10px', right: '10px' },
-                                { bottom: '10px', left: '10px' }
-                              ].map((pos, i) => (
-                                <motion.div
-                                  key={i}
-                                  className="absolute w-3 h-3"
-                                  style={pos}
-                                  animate={{
-                                    scale: [0, 1.5, 0],
-                                    opacity: [0, 1, 0],
-                                    rotate: [0, 180, 360],
-                                  }}
-                                  transition={{
-                                    duration: 2,
-                                    delay: i * 0.2,
-                                    repeat: Infinity,
-                                  }}
-                                >
-                                  <div className={`w-full h-full bg-gradient-to-br ${strategy.color} rounded-full`} />
-                                </motion.div>
-                              ))}
-                            </>
-                          )}
                         </motion.div>
                       </motion.button>
                     </motion.div>

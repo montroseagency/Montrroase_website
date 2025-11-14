@@ -360,68 +360,45 @@ export default function MarketingPage() {
                         }}
                       />
 
-                      {/* Orbiting particles */}
-                      {[...Array(6)].map((_, i) => {
-                        const angle = (i / 6) * 360;
+                      {/* Reduced particles for performance */}
+                      {[...Array(3)].map((_, i) => {
+                        const angle = (i / 3) * 360;
                         return (
                           <motion.div
                             key={i}
-                            className="absolute w-2 h-2 rounded-full"
+                            className="absolute w-2 h-2 rounded-full bg-blue-400"
                             style={{
-                              background: `radial-gradient(circle, rgba(59, 130, 246, 1), transparent)`,
-                              boxShadow: '0 0 15px rgba(59, 130, 246, 0.8)',
+                              boxShadow: '0 0 10px rgba(59, 130, 246, 0.6)',
                               left: '50%',
                               top: '50%',
-                              transform: `translateZ(${40 + i * 5}px)`,
                             }}
                             animate={{
                               x: [
                                 Math.cos((angle * Math.PI) / 180) * 60,
                                 Math.cos(((angle + 180) * Math.PI) / 180) * 60,
-                                Math.cos((angle * Math.PI) / 180) * 60,
                               ],
                               y: [
                                 Math.sin((angle * Math.PI) / 180) * 60,
                                 Math.sin(((angle + 180) * Math.PI) / 180) * 60,
-                                Math.sin((angle * Math.PI) / 180) * 60,
                               ],
-                              opacity: [0.3, 1, 0.3],
+                              opacity: [0.4, 0.8],
                             }}
                             transition={{
-                              duration: 4,
+                              duration: 3,
                               repeat: Infinity,
-                              delay: i * 0.2,
+                              delay: i * 0.3,
                               ease: "linear"
                             }}
                           />
                         );
                       })}
 
-                      {/* Content with depth layers */}
-                      <div className="relative" style={{ transformStyle: 'preserve-3d' }}>
-                        <motion.h3
-                          className="text-xl font-bold text-white mb-4 relative"
-                          style={{ transform: 'translateZ(30px)' }}
-                          animate={{
-                            textShadow: [
-                              '0 0 20px rgba(59, 130, 246, 0.6)',
-                              '0 0 30px rgba(168, 85, 247, 0.8)',
-                              '0 0 20px rgba(59, 130, 246, 0.6)',
-                            ]
-                          }}
-                          transition={{
-                            duration: 4,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: index * 0.3,
-                          }}
-                        >
+                      {/* Content */}
+                      <div className="relative">
+                        <h3 className="text-xl font-bold text-white mb-4">
                           {feature.title}
-                        </motion.h3>
-                        <p
-                          className="text-gray-300 text-sm leading-relaxed relative"
-                          style={{ transform: 'translateZ(20px)' }}
-                        >
+                        </h3>
+                        <p className="text-gray-300 text-sm leading-relaxed">
                           {feature.description}
                         </p>
                       </div>
@@ -582,37 +559,13 @@ export default function MarketingPage() {
 
                     {/* Content */}
                     <div className="relative z-10">
-                      <motion.h3
-                        className="text-2xl font-bold text-white mb-4"
-                        animate={{
-                          backgroundImage: [
-                            'linear-gradient(90deg, #fff 0%, #fff 100%)',
-                            'linear-gradient(90deg, #3b82f6 0%, #a855f7 50%, #06b6d4 100%)',
-                            'linear-gradient(90deg, #fff 0%, #fff 100%)',
-                          ],
-                          backgroundClip: ['text', 'text', 'text'],
-                          WebkitBackgroundClip: ['text', 'text', 'text'],
-                          color: ['#fff', 'transparent', '#fff'],
-                        }}
-                        transition={{
-                          duration: 4,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: index * 0.5,
-                        }}
-                      >
+                      <h3 className="text-2xl font-bold text-white mb-4">
                         {feature.title}
-                      </motion.h3>
+                      </h3>
 
-                      <motion.p
-                        className="text-gray-400 leading-relaxed"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: index * 0.15 + 0.4 }}
-                      >
+                      <p className="text-gray-400 leading-relaxed">
                         {feature.description}
-                      </motion.p>
+                      </p>
                     </div>
 
                     {/* Corner glow effect */}
@@ -761,63 +714,59 @@ export default function MarketingPage() {
                     </motion.div>
                   </motion.div>
 
-                  {/* Orbiting particles around image */}
-                  {[...Array(8)].map((_, i) => (
+                  {/* Optimized orbiting particles */}
+                  {[...Array(4)].map((_, i) => (
                     <motion.div
                       key={i}
-                      className="absolute w-3 h-3 rounded-full"
+                      className="absolute w-2 h-2 rounded-full"
                       style={{
                         background: i % 2 === 0 ? '#06B6D4' : '#8B5CF6',
-                        boxShadow: `0 0 20px ${i % 2 === 0 ? '#06B6D4' : '#8B5CF6'}`,
+                        boxShadow: `0 0 15px ${i % 2 === 0 ? '#06B6D4' : '#8B5CF6'}`,
                         left: '50%',
                         top: '50%',
                       }}
                       animate={{
                         x: [
                           0,
-                          Math.cos((i * Math.PI * 2) / 8) * 280,
+                          Math.cos((i * Math.PI * 2) / 4) * 260,
                           0,
                         ],
                         y: [
                           0,
-                          Math.sin((i * Math.PI * 2) / 8) * 280,
+                          Math.sin((i * Math.PI * 2) / 4) * 260,
                           0,
                         ],
-                        opacity: [0, 1, 0],
-                        scale: [0, 1.5, 0],
+                        opacity: [0, 0.8, 0],
+                        scale: [0, 1.2, 0],
                       }}
                       transition={{
-                        duration: 4,
-                        delay: i * 0.5,
+                        duration: 3.5,
+                        delay: i * 0.4,
                         repeat: Infinity,
                         ease: "easeInOut",
                       }}
                     />
                   ))}
 
-                  {/* Rotating rings around image */}
-                  {[0, 1].map((ringIndex) => (
-                    <motion.div
-                      key={ringIndex}
-                      className="absolute inset-0 rounded-full border-2 pointer-events-none"
-                      style={{
-                        borderColor: ringIndex === 0 ? 'rgba(6, 182, 212, 0.3)' : 'rgba(139, 92, 246, 0.3)',
-                        width: '110%',
-                        height: '110%',
-                        left: '-5%',
-                        top: '-5%',
-                      }}
-                      animate={{
-                        rotate: ringIndex === 0 ? [0, 360] : [360, 0],
-                        scale: [1, 1.05, 1],
-                      }}
-                      transition={{
-                        duration: ringIndex === 0 ? 20 : 15,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
-                    />
-                  ))}
+                  {/* Simplified rotating ring */}
+                  <motion.div
+                    className="absolute inset-0 rounded-full border-2 pointer-events-none"
+                    style={{
+                      borderColor: 'rgba(6, 182, 212, 0.25)',
+                      width: '110%',
+                      height: '110%',
+                      left: '-5%',
+                      top: '-5%',
+                    }}
+                    animate={{
+                      rotate: [0, 360],
+                    }}
+                    transition={{
+                      duration: 20,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
                 </motion.div>
               </motion.div>
             </div>
