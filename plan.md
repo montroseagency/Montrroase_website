@@ -426,3 +426,4 @@ CLIENT Reviews
 - Consider adding real-time updates using WebSocket (optional)
 - Add image editing tools (crop, filter) for better UX (optional)
 - Integrate with actual social media APIs for posting (future enhancement)
+kjjj
