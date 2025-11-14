@@ -377,18 +377,63 @@ def handle_youtube_callback(request):
 def get_connected_accounts(request):
     """Get all connected social media accounts for current user"""
     try:
-        if request.user.role != 'client':
-            return Response({'error': 'Only clients can view social accounts'}, 
+        user = request.user
+
+        # Handle different user roles
+        if user.role == 'client':
+            client = user.client_profile
+            accounts = SocialMediaAccount.objects.filter(client=client)
+
+        elif user.role == 'agent':
+            # Agents can view accounts for their assigned clients
+            from ..models import Agent, Client
+            from django.db.models import Q
+
+            try:
+                agent = Agent.objects.get(user=user)
+
+                # Filter by client query param if provided
+                client_id = request.GET.get('client')
+                if client_id:
+                    # Check if this client is assigned to the agent
+                    client = Client.objects.filter(
+                        id=client_id
+                    ).filter(
+                        Q(assigned_agent=agent) | Q(service_settings__assigned_agent=agent)
+                    ).distinct().first()
+
+                    if not client:
+                        return Response({'error': 'Access denied to this client'},
+                                      status=status.HTTP_403_FORBIDDEN)
+
+                    accounts = SocialMediaAccount.objects.filter(client=client)
+                else:
+                    # Return accounts for all assigned clients
+                    assigned_clients = Client.objects.filter(
+                        Q(assigned_agent=agent) | Q(service_settings__assigned_agent=agent)
+                    ).distinct()
+                    accounts = SocialMediaAccount.objects.filter(client__in=assigned_clients)
+
+            except Agent.DoesNotExist:
+                return Response({'error': 'Agent profile not found'},
+                              status=status.HTTP_404_NOT_FOUND)
+
+        elif user.role == 'admin':
+            # Admins can view all accounts
+            client_id = request.GET.get('client')
+            if client_id:
+                accounts = SocialMediaAccount.objects.filter(client_id=client_id)
+            else:
+                accounts = SocialMediaAccount.objects.all()
+        else:
+            return Response({'error': 'Access denied'},
                           status=status.HTTP_403_FORBIDDEN)
-        
-        client = request.user.client_profile
-        accounts = SocialMediaAccount.objects.filter(client=client)
-        
+
         account_data = []
         for account in accounts:
             # Get latest metrics
             latest_metrics = account.metrics.order_by('-date').first()
-            
+
             account_info = {
                 'id': str(account.id),
                 'platform': account.platform,
@@ -401,15 +446,13 @@ def get_connected_accounts(request):
                 'posts_count': latest_metrics.posts_count if latest_metrics else 0,
             }
             account_data.append(account_info)
-        
-        return Response({
-            'accounts': account_data,
-            'total_count': len(account_data)
-        })
-        
+
+        # Return array directly to match frontend expectation
+        return Response(account_data)
+
     except Exception as e:
         logger.error(f"Failed to get connected accounts: {str(e)}")
-        return Response({'error': 'Internal server error'}, 
+        return Response({'error': 'Internal server error'},
                       status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['POST'])

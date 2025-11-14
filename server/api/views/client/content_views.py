@@ -673,9 +673,10 @@ class ContentRequestViewSet(ModelViewSet):
             try:
                 from ...models import Agent
                 agent = Agent.objects.get(user=user)
+                # Find clients assigned to this agent either directly or through service settings
                 assigned_clients = Client.objects.filter(
-                    Q(assigned_agent=agent) | Q(marketing_agent=agent) | Q(website_agent=agent)
-                )
+                    Q(assigned_agent=agent) | Q(service_settings__assigned_agent=agent)
+                ).distinct()
                 return ContentRequest.objects.filter(client__in=assigned_clients)
             except Agent.DoesNotExist:
                 return ContentRequest.objects.none()
@@ -706,13 +707,28 @@ class ContentRequestViewSet(ModelViewSet):
                     status=status.HTTP_404_NOT_FOUND
                 )
 
+            # Validate that client has a connected account for the requested platform
+            platform = request.data.get('platform')
+            if platform:
+                has_account = SocialMediaAccount.objects.filter(
+                    client=client,
+                    platform=platform.lower(),
+                    is_active=True
+                ).exists()
+
+                if not has_account:
+                    return Response(
+                        {'error': f'You need to connect a {platform} account before creating content requests for this platform.'},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
             # Get uploaded images
             uploaded_images = request.FILES.getlist('images')
 
             # Create request data
             request_data = {
                 'client': client.id,
-                'platform': request.data.get('platform'),
+                'platform': platform,
                 'title': request.data.get('title'),
                 'description': request.data.get('description'),
                 'preferred_date': request.data.get('preferred_date') or None,

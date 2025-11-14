@@ -34,14 +34,57 @@ from ...models import (
     SocialMediaAccount, RealTimeMetrics
 )
 
+# Custom Permission for Social Media Accounts
+class SocialAccountPermission(permissions.BasePermission):
+    """
+    Custom permission to only allow users to access social accounts they have rights to.
+    """
+    def has_permission(self, request, view):
+        # All authenticated users can list/retrieve
+        return request.user and request.user.is_authenticated
+
+    def has_object_permission(self, request, view, obj):
+        user = request.user
+
+        # Admins can access all
+        if user.role == 'admin':
+            return True
+
+        # Agents can access accounts of their assigned clients
+        if user.role == 'agent':
+            try:
+                from ...models import Agent
+                agent = Agent.objects.get(user=user)
+                client = obj.client
+
+                # Check if client is assigned to agent
+                is_assigned = Client.objects.filter(
+                    id=client.id
+                ).filter(
+                    Q(assigned_agent=agent) | Q(service_settings__assigned_agent=agent)
+                ).distinct().exists()
+
+                return is_assigned
+            except Agent.DoesNotExist:
+                return False
+
+        # Clients can only access their own accounts
+        try:
+            client = user.client_profile
+            return obj.client == client
+        except Client.DoesNotExist:
+            return False
+
 # Social Media Account ViewSet
 class SocialMediaAccountViewSet(ModelViewSet):
     """Social Media Account management viewset"""
     serializer_class = SocialMediaAccountSerializer
     permission_classes = [IsAuthenticated]
-    
+    queryset = SocialMediaAccount.objects.all()  # Required for DRF schema generation
+
     def get_queryset(self):
         user = self.request.user
+        logger.info(f"SocialMediaAccountViewSet.get_queryset called for user: {user.email}, role: {user.role}")
 
         if user.role == 'admin':
             return SocialMediaAccount.objects.all()
@@ -51,28 +94,37 @@ class SocialMediaAccountViewSet(ModelViewSet):
             try:
                 from ...models import Agent
                 agent = Agent.objects.get(user=user)
+                logger.info(f"Agent found: {agent.id}")
 
                 # Filter by client query param if provided
                 client_id = self.request.query_params.get('client')
+                logger.info(f"Client ID from params: {client_id}")
+
                 if client_id:
                     # Check if this client is assigned to the agent
                     client = Client.objects.filter(
                         id=client_id
                     ).filter(
-                        Q(assigned_agent=agent) | Q(marketing_agent=agent) | Q(website_agent=agent)
-                    ).first()
+                        Q(assigned_agent=agent) | Q(service_settings__assigned_agent=agent)
+                    ).distinct().first()
 
+                    logger.info(f"Client found: {client.id if client else None}")
                     if client:
-                        return SocialMediaAccount.objects.filter(client=client)
+                        accounts = SocialMediaAccount.objects.filter(client=client)
+                        logger.info(f"Returning {accounts.count()} social accounts for client")
+                        return accounts
+                    logger.warning(f"Client {client_id} not assigned to agent {agent.id}")
                     return SocialMediaAccount.objects.none()
 
                 # Return all accounts for assigned clients
                 assigned_clients = Client.objects.filter(
-                    Q(assigned_agent=agent) | Q(marketing_agent=agent) | Q(website_agent=agent)
-                )
+                    Q(assigned_agent=agent) | Q(service_settings__assigned_agent=agent)
+                ).distinct()
+                logger.info(f"Agent has {assigned_clients.count()} assigned clients")
                 return SocialMediaAccount.objects.filter(client__in=assigned_clients)
 
             except Agent.DoesNotExist:
+                logger.error(f"Agent profile not found for user {user.email}")
                 return SocialMediaAccount.objects.none()
 
         else:
