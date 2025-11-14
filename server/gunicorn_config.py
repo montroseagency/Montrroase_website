@@ -13,8 +13,8 @@ timeout = 120
 keepalive = 5
 
 # Logging
-accesslog = "/var/www/montrose/Montrroase_website/server/logs/gunicorn_access.log"
-errorlog = "/var/www/montrose/Montrroase_website/server/logs/gunicorn_error.log"
+accesslog = "/var/www/montrose/server/logs/gunicorn_access.log"
+errorlog = "/var/www/montrose/server/logs/gunicorn_error.log"
 loglevel = "info"
 access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
 
