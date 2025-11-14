@@ -8,12 +8,12 @@ import Link from 'next/link';
 import type { ContentPost } from '@/lib/types';
 
 const PLATFORM_ICONS = {
-  instagram: '=¯',
-  youtube: '<•',
-  tiktok: '<µ',
-  twitter: '=&',
-  linkedin: '=º',
-  facebook: '=ÿ',
+  instagram: 'üì∏',
+  youtube: 'üé•',
+  tiktok: 'üéµ',
+  twitter: 'üê¶',
+  linkedin: 'üîó',
+  facebook: 'üìò',
 };
 
 export default function ClientContentDetailPage() {
@@ -120,7 +120,7 @@ export default function ClientContentDetailPage() {
             href="/dashboard/client/marketing/content"
             className="text-purple-600 hover:text-purple-700 font-medium mt-4 inline-block"
           >
-            ê Back to Content List
+            ÔøΩ Back to Content List
           </Link>
         </div>
       </div>
